@@ -29,6 +29,6 @@
 	</environments>
 	
 	<mappers>
-		<!-- <mapper resource="kr/or/dgit/it_3st_1team/mappers/StudentMapper.xml"/> -->
+		<!-- <mapper resource="kr/or/dgit/it_3st_1team/mappers/UsersMapper.xml"/> -->
 	</mappers>
 </configuration>
