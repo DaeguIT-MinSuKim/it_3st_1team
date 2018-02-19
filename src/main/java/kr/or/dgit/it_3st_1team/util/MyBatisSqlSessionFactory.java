@@ -1,0 +1,30 @@
+package kr.or.dgit.it_3st_1team.util;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.annotation.Resources;
+
+public class MyBatisSqlSessionFactory {
+private static SqlSessionFactory sqlSessionFactory;
+    
+    public static SqlSessionFactory getSqlSessionFactory(){
+        if (sqlSessionFactory == null){
+            InputStream inputStream;
+            try {
+                inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e.getCause());
+            }
+            
+        }
+        return sqlSessionFactory;
+    }
+    
+    public static SqlSession openSession(){
+        return getSqlSessionFactory().openSession();
+    }
+
+}
