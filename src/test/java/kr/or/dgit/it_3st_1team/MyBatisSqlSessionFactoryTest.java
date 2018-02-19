@@ -2,6 +2,7 @@ package kr.or.dgit.it_3st_1team;
 
 import java.sql.Connection;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;

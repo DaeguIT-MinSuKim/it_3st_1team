@@ -3,7 +3,10 @@ package kr.or.dgit.it_3st_1team.util;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.annotation.Resources;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MyBatisSqlSessionFactory {
 private static SqlSessionFactory sqlSessionFactory;
