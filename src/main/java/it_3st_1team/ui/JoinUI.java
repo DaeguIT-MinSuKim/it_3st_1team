@@ -1,20 +1,20 @@
 package it_3st_1team.ui;
 
-
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class JoinUI extends JFrame {
 
@@ -35,6 +35,19 @@ public class JoinUI extends JFrame {
 	private JLabel label;
 	private JLabel label_1;
 	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JoinUI frame = new JoinUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 	public JoinUI() {
 		initComponents();
 	}

@@ -1,6 +1,5 @@
 package it_3st_1team.ui;
 
-
 import java.awt.Color;
 import java.awt.Font;
 
@@ -26,7 +25,7 @@ public class VisitorUI extends JPanel {
 		JButton btnBookSearch = new JButton("도서 검색");
 		btnBookSearch.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookSearch.setForeground(new Color(255, 255, 255));
-		btnBookSearch.setBackground(new Color(158,158,158));
+		btnBookSearch.setBackground(new Color(127,127,127));
 		btnBookSearch.setBounds(0, 50, 250, 45);
 		panel.add(btnBookSearch);
 		
@@ -51,7 +50,7 @@ public class VisitorUI extends JPanel {
 		btnNews.setBounds(0, 230, 250, 45);
 		panel.add(btnNews);
 		
-		JButton btnlogout = new JButton("로그아웃");
+		JButton btnlogout = new JButton("로그인");
 		btnlogout.setBorder(null);
 		btnlogout.setBackground(new Color(224,224,224));
 		btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -65,9 +64,9 @@ public class VisitorUI extends JPanel {
 		btnJoin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		panel.add(btnJoin);
 		
-		JPanel showpanel = new JPanel();
+		SearchBookUI showpanel = new SearchBookUI();
 		showpanel.setBounds(250, 0, 1150, 800);
-		showpanel.setBackground(Color.pink);
+		showpanel.setBackground(Color.WHITE);
 		add(showpanel);
 	}
 }
