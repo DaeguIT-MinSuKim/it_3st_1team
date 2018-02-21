@@ -1,5 +1,6 @@
 package it_3st_1team.ui;
 
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;

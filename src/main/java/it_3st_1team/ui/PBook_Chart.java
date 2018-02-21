@@ -1,9 +1,9 @@
 package it_3st_1team.ui;
 
-import java.awt.BorderLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
 
 public class PBook_Chart extends JPanel {
 

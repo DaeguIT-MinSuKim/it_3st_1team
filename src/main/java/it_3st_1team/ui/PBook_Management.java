@@ -1,19 +1,21 @@
 package it_3st_1team.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTable;
+
+import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PBook_Management extends JPanel implements ActionListener {
 	private JTextField textField;
@@ -29,8 +31,8 @@ public class PBook_Management extends JPanel implements ActionListener {
 		initComponents();
 	}
 	private void initComponents() {
-		setBackground(new Color(0, 128, 128));
 		setLayout(new BorderLayout(0, 0));
+		setBounds(0, 0, 1150, 800);
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.NORTH);

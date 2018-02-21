@@ -1,18 +1,22 @@
-package kr.or.dgit.it_3st_1team.ui;
+package it_3st_1team.ui;
+
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class VisitorUI extends JPanel {
-
-	public VisitorUI() {
+public class UserUI extends JPanel implements ActionListener {
+	private JButton btnBookSearch;
+	private JPanel show;
+	
+	public UserUI() {
 		initComponents();
 	}
-
 	private void initComponents() {
 		setLayout(null);
 		
@@ -22,7 +26,8 @@ public class VisitorUI extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JButton btnBookSearch = new JButton("도서 검색");
+		btnBookSearch = new JButton("도서 검색");
+		btnBookSearch.addActionListener(this);
 		btnBookSearch.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookSearch.setForeground(new Color(255, 255, 255));
 		btnBookSearch.setBackground(new Color(158,158,158));
@@ -50,23 +55,34 @@ public class VisitorUI extends JPanel {
 		btnNews.setBounds(0, 230, 250, 45);
 		panel.add(btnNews);
 		
+		JButton btnUserUpdate = new JButton("개인 정보 수정");
+		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnUserUpdate.setForeground(new Color(255, 255, 255));
+		btnUserUpdate.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBounds(0, 290, 250, 45);
+		panel.add(btnUserUpdate);
+		
 		JButton btnlogout = new JButton("로그아웃");
 		btnlogout.setBorder(null);
 		btnlogout.setBackground(new Color(224,224,224));
 		btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnlogout.setBounds(15, 650, 100, 30);
-		panel.add(btnlogout);
+		btnlogout.setBounds(70, 650, 100, 30);
+		panel.add(btnlogout);	
 		
-		JButton btnJoin = new JButton("회원가입");
-		btnJoin.setBounds(135, 650, 100, 30);
-		btnJoin.setBorder(null);
-		btnJoin.setBackground(new Color(224,224,224));
-		btnJoin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		panel.add(btnJoin);
-		
-		JPanel showpanel = new JPanel();
-		showpanel.setBounds(250, 0, 1150, 800);
-		showpanel.setBackground(Color.pink);
-		add(showpanel);
+		show = new JPanel();
+		show.setBounds(250, 0, 1150, 800);
+		add(show);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBookSearch) {
+			actionPerformedBtnBookSearch(e);
+		}
+	}
+	protected void actionPerformedBtnBookSearch(ActionEvent e) {
+		btnBookSearch.setBackground(new Color(127,127,127));
+		show.repaint();
+		SearchBookUI search = new SearchBookUI();
+		search.setBounds(0, 0, 1150, 800);
+		show.add(search);
 	}
 }

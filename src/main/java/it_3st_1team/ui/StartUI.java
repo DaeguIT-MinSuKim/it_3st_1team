@@ -1,4 +1,5 @@
-package kr.or.dgit.it_3st_1team.ui;
+package it_3st_1team.ui;
+
 
 import java.awt.Color;
 import java.awt.Font;
