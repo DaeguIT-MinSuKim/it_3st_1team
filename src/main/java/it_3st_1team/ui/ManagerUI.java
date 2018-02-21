@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class ManagerUI extends JPanel implements ActionListener {
 	private JPanel showpanel;
 	private JButton btnBookSearch;
@@ -109,10 +110,6 @@ public class ManagerUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnlogout(ActionEvent e) {
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent e) {
-		showpanel.repaint();
-		PBook_Management mana = new PBook_Management();
-		mana.setBounds(0, 0, 1150, 800);
-		showpanel.add(mana);
 	}
 	protected void actionPerformedBtnNews(ActionEvent e) {
 	}

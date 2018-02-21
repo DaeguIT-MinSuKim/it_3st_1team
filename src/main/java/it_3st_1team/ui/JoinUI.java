@@ -35,19 +35,6 @@ public class JoinUI extends JFrame {
 	private JLabel label;
 	private JLabel label_1;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JoinUI frame = new JoinUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public JoinUI() {
 		initComponents();
 	}
