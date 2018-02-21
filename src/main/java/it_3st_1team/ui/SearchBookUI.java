@@ -4,30 +4,31 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.Vector;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import java.awt.Rectangle;
-import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel {
 	private JTextField tfbookname;
 	private SearchBtn btnSearch = new SearchBtn();
 	private JTable table;
+	private JScrollPane scrollPane;
 
 	public SearchBookUI() {
 
@@ -64,6 +65,20 @@ public class SearchBookUI extends JPanel {
 		btnSearch.setBounds(880, 50, 45, 45);
 		btnSearch.setBackground(null);
 		btnSearch.setBorder(null);
+		btnSearch.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JCheckBox cblistview = new JCheckBox();
+				JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
+				cblistview.setBounds(900, 110, 30, 30);
+				cblistview.setBackground(Color.WHITE);
+				lblListview.setBounds(930, 110, 200, 30);
+				lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+				add(lblListview);
+				add(cblistview);
+				scrollPane.setBounds(10, 150, 1110, 542);
+			}			
+		});
 		add(btnSearch);
 		
 		JButton btnSearchDe = new JButton("상세검색");
@@ -74,7 +89,7 @@ public class SearchBookUI extends JPanel {
 		btnSearchDe.setBounds(950, 55, 90, 40);
 		add(btnSearchDe);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBackground(new Color(255, 255, 255));
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		scrollPane.setBounds(10, 120, 1110, 542);
