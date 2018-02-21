@@ -2,10 +2,13 @@ package it_3st_1team.ui;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class UserUI extends JPanel implements ActionListener {
@@ -15,11 +18,13 @@ public class UserUI extends JPanel implements ActionListener {
 	private JButton btnHistory;
 	private JButton btnNews;
 	private JButton btnUserUpdate;
+	private RequestBookUI request;
 	
 	public UserUI() {
 		initComponents();
 	}
 	private void initComponents() {
+		setBounds(new Rectangle(0, 0, 1450, 800));
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -73,6 +78,7 @@ public class UserUI extends JPanel implements ActionListener {
 		panel.add(btnlogout);	
 		
 		show = new JPanel();
+		show.setBounds(new Rectangle(0, 0, 1150, 800));
 		show.setBounds(250, 0, 1150, 800);
 		add(show);
 	}
@@ -85,27 +91,30 @@ public class UserUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent e) {
-		show.removeAll();
-		btnBookSearch.setBackground(new Color(127,127,127));
+		changeBtn(btnBookSearch);
+		SearchBookUI search = new SearchBookUI();
+		changePanel(search);
+	}
+	protected void actionPerformedBtnBookRequest(ActionEvent e) {
+		changeBtn(btnBookRequest);
+		request = new RequestBookUI();
+		changePanel(request);
+	}
+	
+	private void changeBtn(JButton btn) {
+		btnBookSearch.setBackground(new Color(158,158,158));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
 		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		show.repaint();
-		SearchBookUI search = new SearchBookUI();
-		search.setBounds(0, 0, 1150, 800);
-		show.add(search);
+		btn.setBackground(new Color(127,127,127));
 	}
-	protected void actionPerformedBtnBookRequest(ActionEvent e) {
+	private void changePanel(JPanel jpanel) {
+		jpanel.setPreferredSize(new Dimension(1150, 800));
 		show.removeAll();
-		btnBookRequest.setBackground(new Color(127,127,127));
-		btnBookSearch.setBackground(new Color(158,158,158));
-		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
-		btnUserUpdate.setBackground(new Color(158,158,158));
+		show.add(jpanel);
 		show.repaint();
-		RequestBookUI request = new RequestBookUI();
-		request.setBounds(0, 0, 1150, 800);
-		show.add(request);
+		show.revalidate();
 	}
+	
 }

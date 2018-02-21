@@ -1,6 +1,7 @@
 package it_3st_1team.ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnHistory;
 	private JButton btnNews;
 	private JPanel showpanel;
+	private ManagementBookUI manager;
 	public ManagerUI() {
 		initComponents();
 	}
@@ -47,7 +49,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnBookRequest.setBounds(0, 110, 250, 45);
 		panel.add(btnBookRequest);
 		
-		btnHistory = new JButton("대출/반납 이력");
+		btnHistory = new JButton("대출/반납");
 		btnHistory.addActionListener(this);
 		btnHistory.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnHistory.setForeground(new Color(255, 255, 255));
@@ -111,16 +113,18 @@ public class ManagerUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnUserUpdate(ActionEvent arg0) {
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent arg0) {
-		ManagementBookUI manager = new ManagementBookUI();
-		manager.setBounds(0,0,1150,800);
+		manager = new ManagementBookUI();
 		changePanel(manager);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent arg0) {
+		InoutBookUI iob = new InoutBookUI();
+		changePanel(iob);
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
 	}
 	
 	private void changePanel(JPanel jpanel) {
+		jpanel.setPreferredSize(new Dimension(1150, 800));
 		showpanel.removeAll();
 		showpanel.add(jpanel);
 		showpanel.repaint();

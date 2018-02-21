@@ -2,6 +2,7 @@ package it_3st_1team.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -38,7 +39,7 @@ public class StartUI extends JFrame implements ActionListener {
 	private void initComponents() {
 		setTitle("도서 관리 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1400, 800);
+		setBounds(100, 100, 1420, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -155,14 +156,14 @@ public class StartUI extends JFrame implements ActionListener {
 	protected void actionPerformedBtnUserLogin(ActionEvent e) {
 		contentPane.removeAll();
 		UserUI user = new UserUI();
-		user.setBounds(0, 0, 1400, 800);
+		user.setBounds(0, 0, 1500, 800);
 		contentPane.add(user);
 		contentPane.repaint();
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
 		contentPane.removeAll();
 		ManagerUI mng = new ManagerUI();
-		mng.setBounds(0, 0, 1400, 800);
+		mng.setBounds(0, 0, 1500, 800);
 		contentPane.add(mng);
 		contentPane.repaint();
 	}
@@ -176,5 +177,6 @@ public class StartUI extends JFrame implements ActionListener {
 		vis.setBounds(0, 0, 1400, 800);
 		contentPane.add(vis);
 		contentPane.repaint();
+		contentPane.revalidate();
 	}
 }

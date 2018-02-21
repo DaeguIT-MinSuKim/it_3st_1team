@@ -98,7 +98,7 @@ public class ManagementBookUI extends JPanel {
 		scrollPane.setBackground(new Color(255, 255, 255));
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		table = new JTable();
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		table.setRowHeight(30);
 		table.setBackground(new Color(255,255,255));
 		table.getTableHeader().setBackground(new Color(245,245,245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
@@ -120,6 +120,11 @@ public class ManagementBookUI extends JPanel {
 	
 	private Object[][] getRow() {
 		Object[][] rows = new Object[][] {
+			{null, null, null, null, null, null, null, null, null},
+			{null, null, null, null, null, null, null, null, null},
+			{null, null, null, null, null, null, null, null, null},
+			{null, null, null, null, null, null, null, null, null},
+			{null, null, null, null, null, null, null, null, null},
 			{null, null, null, null, null, null, null, null, null},
 			{null, null, null, null, null, null, null, null, null},
 			{null, null, null, null, null, null, null, null, null},

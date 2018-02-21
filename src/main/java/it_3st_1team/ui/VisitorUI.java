@@ -1,11 +1,11 @@
 package it_3st_1team.ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class VisitorUI extends JPanel {
@@ -15,7 +15,8 @@ public class VisitorUI extends JPanel {
 	}
 
 	private void initComponents() {
-		setBounds(new Rectangle(0, 0, 1150, 800));
+		setPreferredSize(new Dimension(1150, 800));
+//		setBounds(new Rectangle(0, 0, 1150, 800));
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -66,9 +67,13 @@ public class VisitorUI extends JPanel {
 		btnJoin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		panel.add(btnJoin);
 		
+		
 		SearchBookUI showpanel = new SearchBookUI();
 		showpanel.setBounds(250, 0, 1150, 800);
 		showpanel.setBackground(Color.WHITE);
+		repaint();
+		revalidate();
+		showpanel.revalidate();
 		add(showpanel);
 	}
 }
