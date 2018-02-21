@@ -31,6 +31,7 @@ public class PBook_Management extends JPanel implements ActionListener {
 	}
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
+		setBounds(0, 0, 1150, 800);
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.NORTH);
