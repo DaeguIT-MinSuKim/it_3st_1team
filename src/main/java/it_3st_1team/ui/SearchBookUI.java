@@ -24,12 +24,19 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 @SuppressWarnings("serial")
-public class SearchBookUI extends JPanel {
+public class SearchBookUI extends JPanel implements ActionListener {
 	private JTextField tfbookname;
 	private SearchBtn btnSearch = new SearchBtn();
 	private JTable table;
 	private JScrollPane scrollPane;
-
+	private JButton btnSearchDe;
+	private JPanel panel;
+	private SearchBookDetailUI search;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JPanel panel_1;
+	int flag = 1;
+	
 	public SearchBookUI() {
 
 		initComponents();
@@ -65,23 +72,10 @@ public class SearchBookUI extends JPanel {
 		btnSearch.setBounds(880, 50, 45, 45);
 		btnSearch.setBackground(null);
 		btnSearch.setBorder(null);
-		btnSearch.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JCheckBox cblistview = new JCheckBox();
-				JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
-				cblistview.setBounds(900, 110, 30, 30);
-				cblistview.setBackground(Color.WHITE);
-				lblListview.setBounds(930, 110, 200, 30);
-				lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-				add(lblListview);
-				add(cblistview);
-				scrollPane.setBounds(10, 150, 1110, 542);
-			}			
-		});
 		add(btnSearch);
 		
-		JButton btnSearchDe = new JButton("상세검색");
+		btnSearchDe = new JButton("상세검색");
+		btnSearchDe.addActionListener(this);
 		btnSearchDe.setBorder(null);
 		btnSearchDe.setBackground(new Color(52,152,219));
 		btnSearchDe.setForeground(new Color(255, 255, 255));
@@ -89,11 +83,17 @@ public class SearchBookUI extends JPanel {
 		btnSearchDe.setBounds(950, 55, 90, 40);
 		add(btnSearchDe);
 		
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBounds(10, 120, 1110, 542);
+		add(panel_1);
+		panel_1.setLayout(null);
+		
 		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 30, 1110, 542);
+		panel_1.add(scrollPane);
 		scrollPane.setBackground(new Color(255, 255, 255));
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		scrollPane.setBounds(10, 120, 1110, 542);
-		add(scrollPane);
 		
 		table = new JTable();
 		table.setRowHeight(30);
@@ -110,6 +110,15 @@ public class SearchBookUI extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(130); //비치수/보유수
 		table.getColumnModel().getColumn(6).setPreferredWidth(130); //대여가능여부
 		scrollPane.setViewportView(table);
+		
+		JCheckBox cblistview = new JCheckBox();
+		cblistview.setBounds(870, 0, 21, 21);
+		panel_1.add(cblistview);
+		cblistview.setBackground(Color.WHITE);
+		JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
+		lblListview.setBounds(900, 0, 178, 22);
+		panel_1.add(lblListview);
+		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 	}
 	private Object[][] getRow() {
 		Object[][] rows = new Object[][] {
@@ -153,6 +162,27 @@ public class SearchBookUI extends JPanel {
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+		}
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearchDe) {
+			actionPerformedBtnSearchDe(e);
+		}
+	}
+	protected void actionPerformedBtnSearchDe(ActionEvent e) {
+		
+		if(flag == 1) {
+			search = new SearchBookDetailUI();
+			search.setBounds(20,120,1080,250);
+			add(search);
+			panel_1.setBounds(10, 380, 1110, 542);
+			flag = 0;
+			repaint();
+		}else {
+			remove(search);
+			panel_1.setBounds(10, 120, 1110, 542);
+			repaint();
+			flag = 1;
 		}
 	}
 }
