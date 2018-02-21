@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class VisitorUI extends JPanel {
@@ -14,6 +15,7 @@ public class VisitorUI extends JPanel {
 	}
 
 	private void initComponents() {
+		setBounds(new Rectangle(0, 0, 1150, 800));
 		setLayout(null);
 		
 		JPanel panel = new JPanel();

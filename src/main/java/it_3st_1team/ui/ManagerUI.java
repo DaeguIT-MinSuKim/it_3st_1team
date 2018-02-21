@@ -5,13 +5,24 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.Rectangle;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ManagerUI extends JPanel {
+public class ManagerUI extends JPanel implements ActionListener {
+	private JButton btnlogout;
+	private JButton btnBookRequest;
+	private JButton btnUserUpdate;
+	private JButton btnBookSearch;
+	private JButton btnHistory;
+	private JButton btnNews;
+	private JPanel showpanel;
 	public ManagerUI() {
 		initComponents();
 	}
 
 	private void initComponents() {
+		setBounds(new Rectangle(0, 0, 1150, 800));
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -20,51 +31,99 @@ public class ManagerUI extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JButton btnBookSearch = new JButton("도서 검색");
+		btnBookSearch = new JButton("도서 검색");
+		btnBookSearch.addActionListener(this);
 		btnBookSearch.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookSearch.setForeground(new Color(255, 255, 255));
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnBookSearch.setBounds(0, 50, 250, 45);
 		panel.add(btnBookSearch);
 		
-		JButton btnBookRequest = new JButton("도서 신청");
+		btnBookRequest = new JButton("도서 신청");
+		btnBookRequest.addActionListener(this);
 		btnBookRequest.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookRequest.setForeground(new Color(255, 255, 255));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		btnBookRequest.setBounds(0, 110, 250, 45);
 		panel.add(btnBookRequest);
 		
-		JButton btnHistory = new JButton("대출/반납 이력");
+		btnHistory = new JButton("대출/반납 이력");
+		btnHistory.addActionListener(this);
 		btnHistory.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnHistory.setForeground(new Color(255, 255, 255));
 		btnHistory.setBackground(new Color(158,158,158));
 		btnHistory.setBounds(0, 170, 250, 45);
 		panel.add(btnHistory);
 		
-		JButton btnNews = new JButton("공지 사항");
+		btnNews = new JButton("공지 사항");
+		btnNews.addActionListener(this);
 		btnNews.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnNews.setForeground(new Color(255, 255, 255));
 		btnNews.setBackground(new Color(158,158,158));
 		btnNews.setBounds(0, 230, 250, 45);
 		panel.add(btnNews);
 		
-		JButton btnUserUpdate = new JButton("개인 정보 수정");
+		btnUserUpdate = new JButton("개인 정보 수정");
+		btnUserUpdate.addActionListener(this);
 		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUserUpdate.setForeground(new Color(255, 255, 255));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBounds(0, 290, 250, 45);
 		panel.add(btnUserUpdate);
 		
-		JButton btnlogout = new JButton("로그아웃");
+		btnlogout = new JButton("로그아웃");
+		btnlogout.addActionListener(this);
 		btnlogout.setBorder(null);
 		btnlogout.setBackground(new Color(224,224,224));
 		btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		btnlogout.setBounds(70, 650, 100, 30);
 		panel.add(btnlogout);
 		
-		JPanel showpanel = new JPanel();
+		showpanel = new JPanel();
 		showpanel.setBounds(250, 0, 1150, 800);
 		showpanel.setBackground(Color.pink);
 		add(showpanel);
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnNews) {
+			actionPerformedBtnNews(arg0);
+		}
+		if (arg0.getSource() == btnHistory) {
+			actionPerformedBtnHistory(arg0);
+		}
+		if (arg0.getSource() == btnBookSearch) {
+			actionPerformedBtnBookSearch(arg0);
+		}
+		if (arg0.getSource() == btnUserUpdate) {
+			actionPerformedBtnUserUpdate(arg0);
+		}
+		if (arg0.getSource() == btnBookRequest) {
+			actionPerformedBtnBookRequest(arg0);
+		}
+		if (arg0.getSource() == btnlogout) {
+			actionPerformedBtnlogout(arg0);
+		}
+	}
+	protected void actionPerformedBtnlogout(ActionEvent arg0) {
+	}
+	protected void actionPerformedBtnBookRequest(ActionEvent arg0) {
+	}
+	protected void actionPerformedBtnUserUpdate(ActionEvent arg0) {
+	}
+	protected void actionPerformedBtnBookSearch(ActionEvent arg0) {
+		ManagementBookUI manager = new ManagementBookUI();
+		manager.setBounds(0,0,1150,800);
+		changePanel(manager);
+	}
+	protected void actionPerformedBtnHistory(ActionEvent arg0) {
+	}
+	protected void actionPerformedBtnNews(ActionEvent arg0) {
+	}
+	
+	private void changePanel(JPanel jpanel) {
+		showpanel.removeAll();
+		showpanel.add(jpanel);
+		showpanel.repaint();
+		revalidate();
 	}
 }

@@ -22,6 +22,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel implements ActionListener {
@@ -42,6 +43,7 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		initComponents();
 	}
 	private void initComponents() {
+		setBounds(new Rectangle(0, 0, 1150, 800));
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
