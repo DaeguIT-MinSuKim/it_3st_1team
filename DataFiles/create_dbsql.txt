@@ -184,7 +184,8 @@ CREATE TABLE `bookmanagement`.`history` (
 	`his_no`     INT(100)    NOT NULL COMMENT '번호', -- 번호
 	`code`       VARCHAR(20) NULL     COMMENT '회원코드', -- 회원코드
 	`realreturn` DATE        NULL     COMMENT '실반납일', -- 실반납일
-	`delay`      INT(10)     NULL     COMMENT '연체일수' -- 연체일수
+	`delay`      INT(10)     NULL     COMMENT '연체일수', -- 연체일수
+	`bkcode`     VARCHAR(20) NULL     COMMENT '도서코드' -- 도서코드
 )
 COMMENT '출납history';
 
@@ -285,4 +286,14 @@ ALTER TABLE `bookmanagement`.`history`
 		)
 		REFERENCES `bookmanagement`.`users` ( -- 회원
 			`code` -- 회원코드
+		);
+
+-- 출납history
+ALTER TABLE `bookmanagement`.`history`
+	ADD CONSTRAINT `FK_book_TO_history` -- 도서 -> 출납history
+		FOREIGN KEY (
+			`bkcode` -- 도서코드
+		)
+		REFERENCES `bookmanagement`.`book` ( -- 도서
+			`bkcode` -- 도서코드
 		);
