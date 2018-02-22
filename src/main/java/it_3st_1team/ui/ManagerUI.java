@@ -16,6 +16,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnUserUpdate;
 	private JButton btnBookSearch;
 	private JButton btnHistory;
+	private JButton btnEmpManage;
 	private JButton btnNews;
 	private JPanel showpanel;
 	private ManagementBookUI manager;
@@ -33,7 +34,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		add(panel);
 		panel.setLayout(null);
 		
-		btnBookSearch = new JButton("도서 검색");
+		btnBookSearch = new JButton("자료 관리");
 		btnBookSearch.addActionListener(this);
 		btnBookSearch.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookSearch.setForeground(new Color(255, 255, 255));
@@ -41,7 +42,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnBookSearch.setBounds(0, 50, 250, 45);
 		panel.add(btnBookSearch);
 		
-		btnBookRequest = new JButton("도서 신청");
+		btnBookRequest = new JButton("도서 출납 관리");
 		btnBookRequest.addActionListener(this);
 		btnBookRequest.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookRequest.setForeground(new Color(255, 255, 255));
@@ -49,7 +50,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnBookRequest.setBounds(0, 110, 250, 45);
 		panel.add(btnBookRequest);
 		
-		btnHistory = new JButton("대출/반납");
+		btnHistory = new JButton("도서 출납 통계");
 		btnHistory.addActionListener(this);
 		btnHistory.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnHistory.setForeground(new Color(255, 255, 255));
@@ -65,13 +66,21 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnNews.setBounds(0, 230, 250, 45);
 		panel.add(btnNews);
 		
-		btnUserUpdate = new JButton("개인 정보 수정");
+		btnUserUpdate = new JButton("회원 정보 수정");
 		btnUserUpdate.addActionListener(this);
 		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUserUpdate.setForeground(new Color(255, 255, 255));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBounds(0, 290, 250, 45);
 		panel.add(btnUserUpdate);
+		
+		btnEmpManage = new JButton("사원 관리");
+		btnEmpManage.addActionListener(this);
+		btnEmpManage.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnEmpManage.setForeground(new Color(255, 255, 255));
+		btnEmpManage.setBackground(new Color(158,158,158));
+		btnEmpManage.setBounds(0, 350, 250, 45);
+		panel.add(btnEmpManage);
 		
 		btnlogout = new JButton("로그아웃");
 		btnlogout.addActionListener(this);
