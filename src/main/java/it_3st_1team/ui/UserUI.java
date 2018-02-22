@@ -128,16 +128,4 @@ public class UserUI extends JPanel implements ActionListener {
 		update.setBounds(0, 0, 1150, 800);
 		show.add(update);
 	}
-	protected void actionPerformedBtnHistory(ActionEvent e) {
-		show.removeAll();
-		btnHistory.setBackground(new Color(127,127,127));
-		btnBookSearch.setBackground(new Color(158,158,158));
-		btnUserUpdate.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
-		btnBookRequest.setBackground(new Color(158,158,158));
-		show.repaint();
-		LoanUI loan = new LoanUI();
-		loan.setBounds(0, 0, 1150, 800);
-		show.add(loan);
-	}
 }
