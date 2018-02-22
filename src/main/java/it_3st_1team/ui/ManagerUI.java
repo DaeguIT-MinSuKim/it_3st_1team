@@ -118,16 +118,16 @@ public class ManagerUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnlogout(ActionEvent arg0) {
 	}
 	protected void actionPerformedBtnBookRequest(ActionEvent arg0) {
-		manager = new ManagementBookUI();
-		changePanel(manager);
+		InoutBookUI iob = new InoutBookUI();
+		changePanel(iob);
 	}
 	protected void actionPerformedBtnUserUpdate(ActionEvent arg0) {
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent arg0) {
+		manager = new ManagementBookUI();
+		changePanel(manager);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent arg0) {
-		InoutBookUI iob = new InoutBookUI();
-		changePanel(iob);
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
 	}
