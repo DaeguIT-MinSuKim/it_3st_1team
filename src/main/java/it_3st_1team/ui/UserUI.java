@@ -108,8 +108,8 @@ public class UserUI extends JPanel implements ActionListener {
 	
 	protected void actionPerformedBtnHistory(ActionEvent e) {
 		changeBtn(btnHistory);
-		loan = new Loan();
-		changePanel(loan);
+		HistoryUI his = new HistoryUI();
+		changePanel(his);
 	}
 	
 	private void changeBtn(JButton btn) {
