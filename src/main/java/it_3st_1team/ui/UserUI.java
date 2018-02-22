@@ -59,6 +59,7 @@ public class UserUI extends JPanel implements ActionListener {
 		panel.add(btnNews);
 		
 		btnUserUpdate = new JButton("개인 정보 수정");
+		btnUserUpdate.addActionListener(this);
 		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUserUpdate.setForeground(new Color(255, 255, 255));
 		btnUserUpdate.setBackground(new Color(158,158,158));
@@ -77,6 +78,9 @@ public class UserUI extends JPanel implements ActionListener {
 		add(show);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnUserUpdate) {
+			actionPerformedBtnUserUpdate(e);
+		}
 		if (e.getSource() == btnBookRequest) {
 			actionPerformedBtnBookRequest(e);
 		}
@@ -107,5 +111,17 @@ public class UserUI extends JPanel implements ActionListener {
 		RequestBookUI request = new RequestBookUI();
 		request.setBounds(0, 0, 1150, 800);
 		show.add(request);
+	}
+	protected void actionPerformedBtnUserUpdate(ActionEvent e) {
+		show.removeAll();
+		btnUserUpdate.setBackground(new Color(127,127,127));
+		btnBookSearch.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnBookRequest.setBackground(new Color(158,158,158));
+		show.repaint();
+		UserInfoUpdateUI update = new UserInfoUpdateUI();
+		update.setBounds(0, 0, 1150, 800);
+		show.add(update);
 	}
 }

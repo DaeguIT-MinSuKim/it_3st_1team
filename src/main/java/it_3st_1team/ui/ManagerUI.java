@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class ManagerUI extends JPanel {
 	public ManagerUI() {
 		initComponents();
