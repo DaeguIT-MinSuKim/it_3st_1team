@@ -19,7 +19,6 @@ public class UserUI extends JPanel implements ActionListener {
 	private JButton btnNews;
 	private JButton btnUserUpdate;
 	private RequestBookUI request;
-	private Loan loan;
 	
 	public UserUI() {
 		initComponents();
