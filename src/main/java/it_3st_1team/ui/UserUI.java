@@ -79,6 +79,9 @@ public class UserUI extends JPanel implements ActionListener {
 		add(show);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnHistory) {
+			actionPerformedBtnHistory(e);
+		}
 		if (e.getSource() == btnUserUpdate) {
 			actionPerformedBtnUserUpdate(e);
 		}
@@ -124,5 +127,17 @@ public class UserUI extends JPanel implements ActionListener {
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
 		update.setBounds(0, 0, 1150, 800);
 		show.add(update);
+	}
+	protected void actionPerformedBtnHistory(ActionEvent e) {
+		show.removeAll();
+		btnHistory.setBackground(new Color(127,127,127));
+		btnBookSearch.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnBookRequest.setBackground(new Color(158,158,158));
+		show.repaint();
+		HistoryUI history = new HistoryUI();
+		history.setBounds(0, 0, 1150, 800);
+		show.add(history);
 	}
 }

@@ -190,4 +190,8 @@ public class UserInfoUpdateUI extends JPanel {
 		panel.add(btnSearchAddr);
 		
 	}
+	
+	public void tfName() {
+		tfName.setEditable(false);
+	}
 }

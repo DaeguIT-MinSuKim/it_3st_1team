@@ -30,10 +30,7 @@ public class SearchBookUI extends JPanel implements ActionListener {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JButton btnSearchDe;
-	private JPanel panel;
 	private SearchBookDetailUI search;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
 	private JPanel panel_1;
 	int flag = 1;
 	

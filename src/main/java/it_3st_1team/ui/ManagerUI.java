@@ -92,7 +92,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		
 		showpanel = new JPanel();
 		showpanel.setBounds(250, 0, 1150, 800);
-		showpanel.setBackground(Color.pink);
+		showpanel.setBackground(Color.WHITE);
 		add(showpanel);
 	}
 	public void actionPerformed(ActionEvent arg0) {
@@ -122,6 +122,9 @@ public class ManagerUI extends JPanel implements ActionListener {
 		changePanel(iob);
 	}
 	protected void actionPerformedBtnUserUpdate(ActionEvent arg0) {
+		UserInfoUpdateUI update = new UserInfoUpdateUI();
+		update.tfName();
+		changePanel(update);
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent arg0) {
 		manager = new ManagementBookUI();

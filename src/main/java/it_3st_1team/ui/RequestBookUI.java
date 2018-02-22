@@ -112,6 +112,7 @@ public class RequestBookUI extends JPanel {
 		panel.add(textField);
 		
 		btnSave = new JButton("저장");
+		btnSave.setBorder(null);
 		btnSave.setBackground(new Color(52,152,219));
 		btnSave.setForeground(Color.WHITE);
 		btnSave.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -119,6 +120,7 @@ public class RequestBookUI extends JPanel {
 		panel.add(btnSave);
 		
 		btnCancel = new JButton("취소");
+		btnCancel.setBorder(null);
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		btnCancel.setBackground(new Color(128, 128, 128));

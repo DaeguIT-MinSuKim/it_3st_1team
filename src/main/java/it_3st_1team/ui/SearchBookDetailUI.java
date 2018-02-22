@@ -99,6 +99,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		tfisbn.setColumns(10);
 		
 		btnSearch = new JButton("검색");
+		btnSearch.setBorder(null);
 		btnSearch.addActionListener(this);
 		btnSearch.setBackground(new Color(52,152,219));
 		btnSearch.setForeground(Color.WHITE);
@@ -107,6 +108,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		panel.add(btnSearch);
 		
 		btnReset = new JButton("초기화");
+		btnReset.setBorder(null);
 		btnReset.addActionListener(this);
 		btnReset.setForeground(Color.WHITE);
 		btnReset.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
