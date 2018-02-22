@@ -19,6 +19,7 @@ public class UserUI extends JPanel implements ActionListener {
 	private JButton btnNews;
 	private JButton btnUserUpdate;
 	private RequestBookUI request;
+	private Loan loan;
 	
 	public UserUI() {
 		initComponents();
@@ -50,6 +51,7 @@ public class UserUI extends JPanel implements ActionListener {
 		panel.add(btnBookRequest);
 		
 		btnHistory = new JButton("대출/반납 이력");
+		btnHistory.addActionListener(this);
 		btnHistory.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnHistory.setForeground(new Color(255, 255, 255));
 		btnHistory.setBackground(new Color(158,158,158));
@@ -83,6 +85,9 @@ public class UserUI extends JPanel implements ActionListener {
 		add(show);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnHistory) {
+			actionPerformedBtnHistory(e);
+		}
 		if (e.getSource() == btnBookRequest) {
 			actionPerformedBtnBookRequest(e);
 		}
@@ -101,6 +106,12 @@ public class UserUI extends JPanel implements ActionListener {
 		changePanel(request);
 	}
 	
+	protected void actionPerformedBtnHistory(ActionEvent e) {
+		changeBtn(btnHistory);
+		loan = new Loan();
+		changePanel(loan);
+	}
+	
 	private void changeBtn(JButton btn) {
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnBookRequest.setBackground(new Color(158,158,158));
@@ -116,5 +127,4 @@ public class UserUI extends JPanel implements ActionListener {
 		show.repaint();
 		show.revalidate();
 	}
-	
 }
