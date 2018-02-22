@@ -1,0 +1,299 @@
+-- 회원
+DROP TABLE IF EXISTS `bookmanagement`.`users` RESTRICT;
+
+-- 사원
+DROP TABLE IF EXISTS `bookmanagement`.`employee` RESTRICT;
+
+-- 직책
+DROP TABLE IF EXISTS `bookmanagement`.`title` RESTRICT;
+
+-- 도서
+DROP TABLE IF EXISTS `bookmanagement`.`book` RESTRICT;
+
+-- 출납
+DROP TABLE IF EXISTS `bookmanagement`.`takeinout` RESTRICT;
+
+-- 예약
+DROP TABLE IF EXISTS `bookmanagement`.`reserve` RESTRICT;
+
+-- 도서분류
+DROP TABLE IF EXISTS `bookmanagement`.`category` RESTRICT;
+
+-- 위치
+DROP TABLE IF EXISTS `bookmanagement`.`location` RESTRICT;
+
+-- 출납history
+DROP TABLE IF EXISTS `bookmanagement`.`history` RESTRICT;
+
+-- 신청
+DROP TABLE IF EXISTS `bookmanagement`.`request` RESTRICT;
+
+-- 우편번호
+DROP TABLE IF EXISTS `bookmanagement`.`post` RESTRICT;
+
+-- 내 스키마
+DROP SCHEMA IF EXISTS `bookmanagement`;
+
+-- 내 스키마
+CREATE SCHEMA `bookmanagement`;
+
+-- 회원
+CREATE TABLE `bookmanagement`.`users` (
+	`code`     VARCHAR(20) NOT NULL COMMENT '회원코드', -- 회원코드
+	`name`     VARCHAR(20) NOT NULL COMMENT '이름', -- 이름
+	`id`       VARCHAR(20) NOT NULL COMMENT '아이디', -- 아이디
+	`pw`       VARCHAR(50) NOT NULL COMMENT '비밀번호', -- 비밀번호
+	`tel`      VARCHAR(20) NULL     COMMENT '연락처', -- 연락처
+	`email`    VARCHAR(50) NULL     COMMENT '메일', -- 메일
+	`addr_id`  INT(11)     NULL     COMMENT '주소', -- 주소
+	`blacktf`  BOOLEAN     NULL     COMMENT '블랙여부', -- 블랙여부
+	`entryday` DATE        NULL     COMMENT '가입일자', -- 가입일자
+	`freeday`  DATE        NULL     COMMENT '대여가능날짜' -- 대여가능날짜
+)
+COMMENT '회원';
+
+-- 회원
+ALTER TABLE `bookmanagement`.`users`
+	ADD CONSTRAINT `PK_users` -- 회원 기본키
+		PRIMARY KEY (
+			`code` -- 회원코드
+		);
+
+-- 사원
+CREATE TABLE `bookmanagement`.`employee` (
+	`code`    VARCHAR(20) NOT NULL COMMENT '사원코드', -- 사원코드
+	`name`    VARCHAR(20) NOT NULL COMMENT '이름', -- 이름
+	`id`      VARCHAR(20) NOT NULL COMMENT '아이디', -- 아이디
+	`pw`      VARCHAR(50) NOT NULL COMMENT '비밀번호', -- 비밀번호
+	`tel`     VARCHAR(20) NULL     COMMENT '연락처', -- 연락처
+	`email`   VARCHAR(50) NULL     COMMENT '메일', -- 메일
+	`addr_id` INT(11)     NULL     COMMENT '주소', -- 주소
+	`titleno` INT(10)     NOT NULL COMMENT '직책코드' -- 직책코드
+)
+COMMENT '사원';
+
+-- 사원
+ALTER TABLE `bookmanagement`.`employee`
+	ADD CONSTRAINT `PK_employee` -- 사원 기본키
+		PRIMARY KEY (
+			`code` -- 사원코드
+		);
+
+-- 직책
+CREATE TABLE `bookmanagement`.`title` (
+	`titleno` INT(10)     NOT NULL COMMENT '직책코드', -- 직책코드
+	`name`    VARCHAR(20) NULL     COMMENT '직책명', -- 직책명
+	`power`   VARCHAR(20) NULL     COMMENT '권한' -- 권한
+)
+COMMENT '직책';
+
+-- 직책
+ALTER TABLE `bookmanagement`.`title`
+	ADD CONSTRAINT `PK_title` -- 직책 기본키
+		PRIMARY KEY (
+			`titleno` -- 직책코드
+		);
+
+-- 도서
+CREATE TABLE `bookmanagement`.`book` (
+	`bkcode`   VARCHAR(20) NOT NULL COMMENT '도서코드', -- 도서코드
+	`isbn`     VARCHAR(20) NOT NULL COMMENT 'ISBN', -- ISBN
+	`rentable` BOOLEAN     NULL     COMMENT '대여가능여부', -- 대여가능여부
+	`bkname`   VARCHAR(50) NULL     COMMENT '도서명', -- 도서명
+	`author`   VARCHAR(50) NULL     COMMENT '저자', -- 저자
+	`publish`  VARCHAR(50) NULL     COMMENT '출판사', -- 출판사
+	`pubyear`  INT(4)      NULL     COMMENT '출판년도', -- 출판년도
+	`info`     LONGTEXT    NULL     COMMENT '도서정보', -- 도서정보
+	`loca_num` VARCHAR(6)  NULL     COMMENT '분류번호' -- 분류번호
+)
+COMMENT '도서';
+
+-- 도서
+ALTER TABLE `bookmanagement`.`book`
+	ADD CONSTRAINT `PK_book` -- 도서 기본키
+		PRIMARY KEY (
+			`bkcode` -- 도서코드
+		);
+
+-- 출납
+CREATE TABLE `bookmanagement`.`takeinout` (
+	`inout_no`  INT(10)     NOT NULL COMMENT '번호', -- 번호
+	`code`      VARCHAR(20) NULL     COMMENT '회원코드', -- 회원코드
+	`bkcode`    VARCHAR(20) NULL     COMMENT '도서코드', -- 도서코드
+	`rentday`   DATE        NULL     COMMENT '대여일', -- 대여일
+	`returnday` DATE        NULL     COMMENT '반납예정일' -- 반납예정일
+)
+COMMENT '출납';
+
+-- 출납
+ALTER TABLE `bookmanagement`.`takeinout`
+	ADD CONSTRAINT `PK_takeinout` -- 출납 기본키
+		PRIMARY KEY (
+			`inout_no` -- 번호
+		);
+
+-- 예약
+CREATE TABLE `bookmanagement`.`reserve` (
+	`re_no`   INT(10)     NOT NULL COMMENT '예약순서', -- 예약순서
+	`code`    VARCHAR(20) NULL     COMMENT '회원코드', -- 회원코드
+	`bkcode`  VARCHAR(20) NULL     COMMENT '도서코드', -- 도서코드
+	`reserve` BOOLEAN     NULL     COMMENT '예약여부', -- 예약여부
+	`isbn`    VARCHAR(20) NULL     COMMENT 'ISBN' -- ISBN
+)
+COMMENT '예약';
+
+-- 예약
+ALTER TABLE `bookmanagement`.`reserve`
+	ADD CONSTRAINT `PK_reserve` -- 예약 기본키
+		PRIMARY KEY (
+			`re_no` -- 예약순서
+		);
+
+-- 도서분류
+CREATE TABLE `bookmanagement`.`category` (
+	`num`       INT(3)      NOT NULL COMMENT '분류번호', -- 분류번호
+	`catename`  VARCHAR(10) NULL     COMMENT '분류명', -- 분류명
+	`catesize`  CHAR(1)     NULL     COMMENT '크기', -- 크기
+	`parentnum` INT(10)     NULL     COMMENT '상위카테고리' -- 상위카테고리
+)
+COMMENT '도서분류';
+
+-- 도서분류
+ALTER TABLE `bookmanagement`.`category`
+	ADD CONSTRAINT `PK_category` -- 도서분류 기본키
+		PRIMARY KEY (
+			`num` -- 분류번호
+		);
+
+-- 위치
+CREATE TABLE `bookmanagement`.`location` (
+	`loca_num`     VARCHAR(6) NOT NULL COMMENT '분류번호', -- 분류번호
+	`loca_section` VARCHAR(2) NOT NULL COMMENT '구역' -- 구역
+)
+COMMENT '위치';
+
+-- 위치
+ALTER TABLE `bookmanagement`.`location`
+	ADD CONSTRAINT `PK_location` -- 위치 기본키
+		PRIMARY KEY (
+			`loca_num` -- 분류번호
+		);
+
+-- 출납history
+CREATE TABLE `bookmanagement`.`history` (
+	`his_no`     INT(100)    NOT NULL COMMENT '번호', -- 번호
+	`code`       VARCHAR(20) NULL     COMMENT '회원코드', -- 회원코드
+	`realreturn` DATE        NULL     COMMENT '실반납일', -- 실반납일
+	`delay`      INT(10)     NULL     COMMENT '연체일수', -- 연체일수
+	`bkcode`     VARCHAR(20) NULL     COMMENT '도서코드' -- 도서코드
+)
+COMMENT '출납history';
+
+-- 출납history
+ALTER TABLE `bookmanagement`.`history`
+	ADD CONSTRAINT `PK_history` -- 출납history 기본키
+		PRIMARY KEY (
+			`his_no` -- 번호
+		);
+
+-- 신청
+CREATE TABLE `bookmanagement`.`request` (
+	`bkname`  VARCHAR(50) NULL     COMMENT '도서명', -- 도서명
+	`author`  VARCHAR(50) NULL     COMMENT '저자', -- 저자
+	`publish` VARCHAR(50) NULL     COMMENT '출판사', -- 출판사
+	`pubyear` INT(4)      NULL     COMMENT '출판년도', -- 출판년도
+	`isbn`    VARCHAR(20) NOT NULL COMMENT 'ISBN', -- ISBN
+	`price`   INT(10)     NULL     COMMENT '가격' -- 가격
+)
+COMMENT '신청';
+
+-- 우편번호
+CREATE TABLE `bookmanagement`.`post` (
+	`zipcode`   CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
+	`sido`      VARCHAR(20) NULL COMMENT '시도', -- 시도
+	`sigungu`   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
+	`doro`      VARCHAR(80) NULL COMMENT '도로', -- 도로
+	`building1` INT(5)      NULL COMMENT '건물번호1', -- 건물번호1
+	`building2` INT(5)      NULL COMMENT '건물번호2' -- 건물번호2
+)
+COMMENT '우편번호';
+
+-- 사원
+ALTER TABLE `bookmanagement`.`employee`
+	ADD CONSTRAINT `FK_title_TO_employee` -- 직책 -> 사원
+		FOREIGN KEY (
+			`titleno` -- 직책코드
+		)
+		REFERENCES `bookmanagement`.`title` ( -- 직책
+			`titleno` -- 직책코드
+		);
+
+-- 도서
+ALTER TABLE `bookmanagement`.`book`
+	ADD CONSTRAINT `FK_location_TO_book` -- 위치 -> 도서
+		FOREIGN KEY (
+			`loca_num` -- 분류번호
+		)
+		REFERENCES `bookmanagement`.`location` ( -- 위치
+			`loca_num` -- 분류번호
+		);
+
+-- 출납
+ALTER TABLE `bookmanagement`.`takeinout`
+	ADD CONSTRAINT `FK_users_TO_takeinout` -- 회원 -> 출납
+		FOREIGN KEY (
+			`code` -- 회원코드
+		)
+		REFERENCES `bookmanagement`.`users` ( -- 회원
+			`code` -- 회원코드
+		);
+
+-- 출납
+ALTER TABLE `bookmanagement`.`takeinout`
+	ADD CONSTRAINT `FK_book_TO_takeinout` -- 도서 -> 출납
+		FOREIGN KEY (
+			`bkcode` -- 도서코드
+		)
+		REFERENCES `bookmanagement`.`book` ( -- 도서
+			`bkcode` -- 도서코드
+		);
+
+-- 예약
+ALTER TABLE `bookmanagement`.`reserve`
+	ADD CONSTRAINT `FK_users_TO_reserve` -- 회원 -> 예약
+		FOREIGN KEY (
+			`code` -- 회원코드
+		)
+		REFERENCES `bookmanagement`.`users` ( -- 회원
+			`code` -- 회원코드
+		);
+
+-- 예약
+ALTER TABLE `bookmanagement`.`reserve`
+	ADD CONSTRAINT `FK_book_TO_reserve` -- 도서 -> 예약
+		FOREIGN KEY (
+			`bkcode` -- 도서코드
+		)
+		REFERENCES `bookmanagement`.`book` ( -- 도서
+			`bkcode` -- 도서코드
+		);
+
+-- 출납history
+ALTER TABLE `bookmanagement`.`history`
+	ADD CONSTRAINT `FK_users_TO_history` -- 회원 -> 출납history
+		FOREIGN KEY (
+			`code` -- 회원코드
+		)
+		REFERENCES `bookmanagement`.`users` ( -- 회원
+			`code` -- 회원코드
+		);
+
+-- 출납history
+ALTER TABLE `bookmanagement`.`history`
+	ADD CONSTRAINT `FK_book_TO_history` -- 도서 -> 출납history
+		FOREIGN KEY (
+			`bkcode` -- 도서코드
+		)
+		REFERENCES `bookmanagement`.`book` ( -- 도서
+			`bkcode` -- 도서코드
+		);
