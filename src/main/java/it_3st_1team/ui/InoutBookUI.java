@@ -175,7 +175,7 @@ public class InoutBookUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 5, 1150, 400);
 		pTable.add(scrollPane);
-		scrollPane.setBackground(new Color(255, 255, 255));
+		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		table = new JTable();
 		table.setRowHeight(30);

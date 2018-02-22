@@ -26,7 +26,7 @@ public class ManagementBookUI extends JPanel {
 	}
 	private void initComponents() {
 		setBounds(new Rectangle(0, 0, 1150, 800));
-		setBackground(new Color(255,255,255));
+		setBackground(Color.WHITE);
 		setLayout(null);
 		
 		JPanel pNorth = new JPanel();
