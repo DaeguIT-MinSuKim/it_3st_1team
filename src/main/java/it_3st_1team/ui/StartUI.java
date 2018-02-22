@@ -159,6 +159,7 @@ public class StartUI extends JFrame implements ActionListener {
 		user.setBounds(0, 0, 1500, 800);
 		contentPane.add(user);
 		contentPane.repaint();
+		contentPane.revalidate();
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
 		contentPane.removeAll();
@@ -166,6 +167,7 @@ public class StartUI extends JFrame implements ActionListener {
 		mng.setBounds(0, 0, 1500, 800);
 		contentPane.add(mng);
 		contentPane.repaint();
+		contentPane.revalidate();
 	}
 	protected void actionPerformedBtnjoin(ActionEvent e) {
 		JoinUI frame = new JoinUI();
