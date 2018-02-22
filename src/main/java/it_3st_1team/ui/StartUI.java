@@ -199,7 +199,9 @@ public class StartUI extends JFrame implements ActionListener, MouseListener {
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
-	protected void mouseClickedLblNewLabel(MouseEvent e) {
+	protected void mouseClickedLblNewLabel(MouseEvent e) {		
 		
+		IDPWsearchUI idpwsearch = new IDPWsearchUI();
+		idpwsearch.setVisible(true);
 	}
 }
