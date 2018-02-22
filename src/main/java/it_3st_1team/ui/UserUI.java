@@ -2,6 +2,8 @@ package it_3st_1team.ui;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -101,8 +103,7 @@ public class UserUI extends JPanel implements ActionListener {
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		show.repaint();
 		SearchBookUI search = new SearchBookUI();
-		search.setBounds(0, 0, 1150, 800);
-		show.add(search);
+		changePanel(search);
 	}
 	protected void actionPerformedBtnBookRequest(ActionEvent e) {
 		show.removeAll();
@@ -113,8 +114,7 @@ public class UserUI extends JPanel implements ActionListener {
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		show.repaint();
 		RequestBookUI request = new RequestBookUI();
-		request.setBounds(0, 0, 1150, 800);
-		show.add(request);
+		changePanel(request);
 	}
 	protected void actionPerformedBtnUserUpdate(ActionEvent e) {
 		show.removeAll();
@@ -125,8 +125,7 @@ public class UserUI extends JPanel implements ActionListener {
 		btnBookRequest.setBackground(new Color(158,158,158));
 		show.repaint();
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
-		update.setBounds(0, 0, 1150, 800);
-		show.add(update);
+		changePanel(update);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent e) {
 		show.removeAll();
@@ -137,7 +136,14 @@ public class UserUI extends JPanel implements ActionListener {
 		btnBookRequest.setBackground(new Color(158,158,158));
 		show.repaint();
 		HistoryUI history = new HistoryUI();
-		history.setBounds(0, 0, 1150, 800);
-		show.add(history);
+		changePanel(history);
+	}
+	
+	private void changePanel(JPanel jpanel) {
+		jpanel.setPreferredSize(new Dimension(1150, 800));
+		show.removeAll();
+		show.add(jpanel);
+		show.repaint();
+		revalidate();
 	}
 }
