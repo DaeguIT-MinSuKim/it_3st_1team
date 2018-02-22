@@ -215,6 +215,7 @@ public class InoutBookUI extends JPanel {
 	private Object[] getColunmNames() {
 		return new String[] {"NO", "도서코드", "도서명", "저자", "출판사", "출판년도","대여일","반납일"};
 	}
+	
 	private void cellAlign(int align, int...idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(align);
