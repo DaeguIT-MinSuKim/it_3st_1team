@@ -79,9 +79,6 @@ public class UserUI extends JPanel implements ActionListener {
 		add(show);
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnHistory) {
-			actionPerformedBtnHistory(e);
-		}
 		if (e.getSource() == btnUserUpdate) {
 			actionPerformedBtnUserUpdate(e);
 		}
