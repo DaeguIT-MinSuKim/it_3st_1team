@@ -60,10 +60,4 @@ jar {
         attributes 'Title': baseName, 'Version': version, 'Main-Class': mainClassName
     }
     dependsOn configurations.runtime// 실행 가능한jar 파일설정
-<<<<<<< HEAD
 }
-=======
-}
-
-
->>>>>>> refs/heads/hotFix
