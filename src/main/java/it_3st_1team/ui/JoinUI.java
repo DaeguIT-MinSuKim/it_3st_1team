@@ -23,7 +23,7 @@ public class JoinUI extends JFrame {
 	private JTextField tfId;
 	private JPasswordField pwfPw;
 	private JPasswordField pwfPwc;
-	private JTextField tfPhone;
+	private JTextField tfPhone1;
 	private JTextField tfMail;
 	private JButton btnJoin;
 	private JButton btnCancel;
@@ -34,6 +34,8 @@ public class JoinUI extends JFrame {
 	private JButton btnSearchAddr;
 	private JLabel lblAddr;
 	private JLabel lblAddrDe;
+	private JTextField tfPhone2;
+	private JTextField tfPhone3;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -141,12 +143,26 @@ public class JoinUI extends JFrame {
 		pwfPwc.setBounds(150, 150, 150, 30);
 		contentPane.add(pwfPwc);
 		
-		tfPhone = new JTextField();
-		tfPhone.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		tfPhone.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfPhone.setBounds(150, 190, 120, 30);
-		contentPane.add(tfPhone);
-		tfPhone.setColumns(10);
+		tfPhone1 = new JTextField();
+		tfPhone1.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfPhone1.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfPhone1.setBounds(150, 190, 50, 30);
+		contentPane.add(tfPhone1);
+		tfPhone1.setColumns(10);
+		
+		tfPhone2 = new JTextField();
+		tfPhone2.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfPhone2.setColumns(10);
+		tfPhone2.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfPhone2.setBounds(220, 190, 50, 30);
+		contentPane.add(tfPhone2);
+		
+		tfPhone3 = new JTextField();
+		tfPhone3.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfPhone3.setColumns(10);
+		tfPhone3.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfPhone3.setBounds(290, 190, 50, 30);
+		contentPane.add(tfPhone3);
 		
 		tfMail = new JTextField();
 		tfMail.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
@@ -203,5 +219,6 @@ public class JoinUI extends JFrame {
 		btnSearchAddr.setBackground(new Color(190,190,190));
 		btnSearchAddr.setBounds(280, 270, 90, 30);
 		contentPane.add(btnSearchAddr);
+
 	}
 }
