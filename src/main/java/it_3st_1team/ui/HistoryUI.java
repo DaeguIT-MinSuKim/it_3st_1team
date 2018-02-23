@@ -2,10 +2,11 @@ package it_3st_1team.ui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Rectangle;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,27 +19,28 @@ public class HistoryUI extends JPanel {
 	private JScrollPane scrollPane;
 
 	public HistoryUI() {
-
 		initComponents();
 	}
+	
 	private void initComponents() {
-		setBounds(new Rectangle(0, 0, 1150, 800));
+		setBackground(Color.white);
 		setLayout(null);
 		
 		JPanel pTableHistory = new JPanel();
-		pTableHistory.setBounds(0, 0, 1150, 680);
+		pTableHistory.setBackground(Color.WHITE);
+		pTableHistory.setBounds(0, 0, 1140, 542);
 		add(pTableHistory);
 		pTableHistory.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 30, 1150, 680);
-		scrollPane.setBackground(new Color(255, 255, 255));
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setBounds(0, 35, 1110, 542);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		pTableHistory.add(scrollPane);
 		
 		table = new JTable();
 		table.setRowHeight(30);
-		table.setBackground(new Color(255,255,255));
+		table.setBackground(Color.WHITE);
 		table.getTableHeader().setBackground(new Color(245,245,245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		table.setModel(new DefaultTableModel(getRow(),getColunmNames()));
@@ -46,48 +48,48 @@ public class HistoryUI extends JPanel {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
 		table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
-		table.getColumnModel().getColumn(2).setPreferredWidth(100); //저자
+		table.getColumnModel().getColumn(2).setPreferredWidth(110); //저자
 		table.getColumnModel().getColumn(3).setPreferredWidth(130);  //대출일
 		table.getColumnModel().getColumn(4).setPreferredWidth(130);  //반납예정일
 		table.getColumnModel().getColumn(5).setPreferredWidth(100); //연체일수
 		table.getColumnModel().getColumn(6).setPreferredWidth(100); //상태
-		table.getColumnModel().getColumn(7).setPreferredWidth(100); //연기
+		table.getColumnModel().getColumn(7).setPreferredWidth(80); //연기
 		scrollPane.setViewportView(table);
 		
+		JButton btnDelay = new JButton("반납연기");
+		btnDelay.setBorder(null);
+		btnDelay.setBounds(1010, 0, 100, 30);
+		pTableHistory.add(btnDelay);
+		btnDelay.setBackground(new Color(51,152,219));
+		btnDelay.setForeground(Color.WHITE);
+		btnDelay.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		
 		JPanel pPage = new JPanel();
-		pPage.setBounds(0, 680, 1150, 80);
+		pPage.setBackground(Color.WHITE);
+		pPage.setBounds(5, 611, 1150, 80);
 		add(pPage);
 		pPage.setLayout(null);
 		
-		JButton btnPrev = new JButton("<");
-		btnPrev.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnPrev.setBounds(350, 10, 50, 50);
-		pPage.add(btnPrev);
+		ButtonGroup group = new ButtonGroup();
 		
-		JButton btnFirst = new JButton("1");
-		btnFirst.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnFirst.setBounds(440, 10, 50, 50);
-		pPage.add(btnFirst);
+		JRadioButton rdbtnAll = new JRadioButton("모두보기");
+		rdbtnAll.setBackground(Color.WHITE);
+		rdbtnAll.setBounds(0, 0, 80, 30);
+		pTableHistory.add(rdbtnAll);
+		group.add(rdbtnAll);
 		
-		JButton btnSecond = new JButton("2");
-		btnSecond.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnSecond.setBounds(530, 10, 50, 50);
-		pPage.add(btnSecond);
+		JRadioButton rdbtnout = new JRadioButton("대출");
+		rdbtnout.setBackground(Color.WHITE);
+		rdbtnout.setBounds(80, 0, 60, 30);
+		pTableHistory.add(rdbtnout);
+		group.add(rdbtnout);
 		
-		JButton btnThird = new JButton("3");
-		btnThird.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnThird.setBounds(620, 10, 50, 50);
-		pPage.add(btnThird);
+		JRadioButton rdbtnin = new JRadioButton("반납");
+		rdbtnin.setBackground(Color.WHITE);
+		rdbtnin.setBounds(140, 0, 80, 30);
+		pTableHistory.add(rdbtnin);
+		group.add(rdbtnin);
 		
-		JButton btnNext = new JButton(">");
-		btnNext.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnNext.setBounds(710, 10, 50, 50);
-		pPage.add(btnNext);
-		
-		JButton btnDelay = new JButton("반납연기");
-		btnDelay.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		btnDelay.setBounds(1000, 10, 100, 50);
-		pPage.add(btnDelay);
 	}
 	
 	private Object[][] getRow() {
@@ -97,6 +99,7 @@ public class HistoryUI extends JPanel {
 			{  "4", "하루 10분 내 인생의 재발견", "리이언 홀리데이", "2018-02-07","2018-02-14","0","반납",null },
 			{  "5", "언어의 온도", "이기주", "2018-02-05","2018-02-12","0","반납",null },
 			{  "6", "인생극장", "노명우", "2018-02-01","2018-02-08","0","반납",null },
+			{  null, null, null, null, null, null, null,null },
 			{  null, null, null, null, null, null, null,null },
 			{  null, null, null, null, null, null, null,null },
 			{  null, null, null, null, null, null, null,null },

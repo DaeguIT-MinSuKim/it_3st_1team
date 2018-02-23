@@ -1,27 +1,27 @@
 package it_3st_1team.ui;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.CompoundBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class StartUI extends JFrame implements ActionListener {
+public class StartUI extends JFrame implements ActionListener, MouseListener{
 	private JPanel contentPane;
 	private MyPanel bgpanel = new MyPanel();
 	private IDPanel idpanel = new IDPanel();
@@ -32,6 +32,7 @@ public class StartUI extends JFrame implements ActionListener {
 	private JButton btnMngLogin;
 	private JButton btnjoin;
 	private JButton btnSearch;
+	private JLabel lblNewLabel;
 
 	public StartUI() {
 		initComponents();
@@ -87,7 +88,7 @@ public class StartUI extends JFrame implements ActionListener {
 		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		btnSearch.setBackground(new Color(94, 94, 94));
 		btnSearch.setForeground(new Color(255, 255, 255));
-		btnSearch.setBounds(1029, 400, 318, 30);
+		btnSearch.setBounds(1031, 427, 318, 30);
 		contentPane.add(btnSearch);
 		
 		passwordField = new JPasswordField();
@@ -102,8 +103,15 @@ public class StartUI extends JFrame implements ActionListener {
 		btnjoin.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		btnjoin.setBorder(null);
 		btnjoin.setBackground(new Color(204, 51, 102));
-		btnjoin.setBounds(1120, 450, 130, 30);
+		btnjoin.setBounds(1122, 477, 130, 30);
 		contentPane.add(btnjoin);
+		
+		lblNewLabel = new JLabel("아이디 / 비밀번호 찾기");
+		lblNewLabel.addMouseListener(this);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		lblNewLabel.setBounds(1175, 390, 174, 27);
+		contentPane.add(lblNewLabel);
 	}
 	
 	class MyPanel extends JPanel{
@@ -156,18 +164,16 @@ public class StartUI extends JFrame implements ActionListener {
 	protected void actionPerformedBtnUserLogin(ActionEvent e) {
 		contentPane.removeAll();
 		UserUI user = new UserUI();
-		user.setBounds(0, 0, 1500, 800);
+		user.setBounds(0, 0, 1400, 800);
 		contentPane.add(user);
 		contentPane.repaint();
-		contentPane.revalidate();
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
 		contentPane.removeAll();
 		ManagerUI mng = new ManagerUI();
-		mng.setBounds(0, 0, 1500, 800);
+		mng.setBounds(0, 0, 1400, 800);
 		contentPane.add(mng);
 		contentPane.repaint();
-		contentPane.revalidate();
 	}
 	protected void actionPerformedBtnjoin(ActionEvent e) {
 		JoinUI frame = new JoinUI();
@@ -180,5 +186,22 @@ public class StartUI extends JFrame implements ActionListener {
 		contentPane.add(vis);
 		contentPane.repaint();
 		contentPane.revalidate();
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == lblNewLabel) {
+			mouseClickedLblNewLabel(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedLblNewLabel(MouseEvent e) {		
+		IDPWsearchUI idpwsearch = new IDPWsearchUI();
+		idpwsearch.setVisible(true);
 	}
 }
