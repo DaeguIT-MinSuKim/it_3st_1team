@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class VisitorUI extends JPanel implements ActionListener {
 	private JButton btnlogout;
+	private JButton btnJoin;
 
 	public VisitorUI() {
 		initComponents();
@@ -61,7 +62,8 @@ public class VisitorUI extends JPanel implements ActionListener {
 		btnlogout.setBounds(15, 650, 100, 30);
 		panel.add(btnlogout);
 		
-		JButton btnJoin = new JButton("회원가입");
+		btnJoin = new JButton("회원가입");
+		btnJoin.addActionListener(this);
 		btnJoin.setBounds(135, 650, 100, 30);
 		btnJoin.setBorder(null);
 		btnJoin.setBackground(new Color(224,224,224));
@@ -74,6 +76,9 @@ public class VisitorUI extends JPanel implements ActionListener {
 		add(showpanel);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnJoin) {
+			actionPerformedBtnJoin(e);
+		}
 		if (e.getSource() == btnlogout) {
 			actionPerformedBtnlogout(e);
 		}
@@ -81,5 +86,9 @@ public class VisitorUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnlogout(ActionEvent e) {
 		LoginUI login = new LoginUI();
 		login.setVisible(true);
+	}
+	protected void actionPerformedBtnJoin(ActionEvent e) {
+		JoinUI join = new JoinUI();
+		join.setVisible(true);
 	}
 }

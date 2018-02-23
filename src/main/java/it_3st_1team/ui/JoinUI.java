@@ -53,7 +53,7 @@ public class JoinUI extends JFrame {
 	}
 	private void initComponents() {
 		setTitle("회원 가입");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(400, 250, 630, 500);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
