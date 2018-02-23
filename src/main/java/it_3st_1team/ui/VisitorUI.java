@@ -5,9 +5,12 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class VisitorUI extends JPanel {
+public class VisitorUI extends JPanel implements ActionListener {
+	private JButton btnlogout;
 
 	public VisitorUI() {
 		initComponents();
@@ -50,7 +53,8 @@ public class VisitorUI extends JPanel {
 		btnNews.setBounds(0, 230, 250, 45);
 		panel.add(btnNews);
 		
-		JButton btnlogout = new JButton("로그인");
+		btnlogout = new JButton("로그인");
+		btnlogout.addActionListener(this);
 		btnlogout.setBorder(null);
 		btnlogout.setBackground(new Color(224,224,224));
 		btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -68,5 +72,14 @@ public class VisitorUI extends JPanel {
 		showpanel.setBounds(250, 0, 1150, 800);
 		showpanel.setBackground(Color.WHITE);
 		add(showpanel);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnlogout) {
+			actionPerformedBtnlogout(e);
+		}
+	}
+	protected void actionPerformedBtnlogout(ActionEvent e) {
+		LoginUI login = new LoginUI();
+		login.setVisible(true);
 	}
 }
