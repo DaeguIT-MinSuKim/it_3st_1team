@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,10 +30,7 @@ public class SearchBookUI extends JPanel implements ActionListener {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JButton btnSearchDe;
-	private JPanel panel;
 	private SearchBookDetailUI search;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
 	private JPanel panel_1;
 	int flag = 1;
 	
@@ -43,7 +39,6 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		initComponents();
 	}
 	private void initComponents() {
-		setBounds(new Rectangle(0, 0, 1150, 800));
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		

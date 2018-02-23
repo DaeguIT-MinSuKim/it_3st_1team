@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -30,7 +31,7 @@ public class ManagementBookUI extends JPanel {
 		setLayout(null);
 		
 		JPanel pNorth = new JPanel();
-		pNorth.setBounds(0, 0, 1150, 150);
+		pNorth.setBounds(0, 0, 1150, 135);
 		pNorth.setBackground(new Color(255,255,255));
 		add(pNorth);
 		pNorth.setLayout(new GridLayout(2, 0, 0, 0));
@@ -53,8 +54,12 @@ public class ManagementBookUI extends JPanel {
 		pSearch.add(tfSearch);
 		tfSearch.setColumns(10);
 		
-		JButton btnSearch = new JButton("검    색");
-		btnSearch.setBounds(950, 15, 90, 40);
+		JButton btnSearch = new JButton("검색");
+		btnSearch.setBorder(null);
+		btnSearch.setBackground(new Color(52,152,219));
+		btnSearch.setForeground(new Color(255, 255, 255));
+		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		btnSearch.setBounds(890, 15, 90, 40);
 		pSearch.add(btnSearch);
 		
 		JPanel pState = new JPanel();
@@ -62,38 +67,59 @@ public class ManagementBookUI extends JPanel {
 		pNorth.add(pState);
 		pState.setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("전 체 현 황");
-		rdbtnNewRadioButton.setBounds(125, 20, 120, 30);
-		pState.add(rdbtnNewRadioButton);
+		ButtonGroup group = new ButtonGroup();
 		
-		JRadioButton radioButton = new JRadioButton("대 여 현 황");
-		radioButton.setBounds(289, 20, 120, 30);
-		pState.add(radioButton);
+		JRadioButton rdbtnAll = new JRadioButton("모두보기");
+		rdbtnAll.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		rdbtnAll.setBackground(Color.WHITE);
+		rdbtnAll.setBounds(10, 30, 100, 30);
+		rdbtnAll.setSelected(true);
+		group.add(rdbtnAll);
+		pState.add(rdbtnAll);
 		
-		JRadioButton radioButton_1 = new JRadioButton("반 납 현 황");
-		radioButton_1.setBounds(464, 20, 120, 30);
-		pState.add(radioButton_1);
+		JRadioButton rdbtnOut = new JRadioButton("대여");
+		rdbtnOut.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		rdbtnOut.setBackground(Color.WHITE);
+		rdbtnOut.setBounds(110, 30, 70, 30);
+		group.add(rdbtnOut);
+		pState.add(rdbtnOut);
 		
-		JRadioButton radioButton_2 = new JRadioButton("무 슨 현 황");
-		radioButton_2.setBounds(627, 20, 120, 30);
-		pState.add(radioButton_2);
+		JRadioButton rdbtnIn = new JRadioButton("반납");
+		rdbtnIn.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		rdbtnIn.setBackground(Color.WHITE);
+		rdbtnIn.setBounds(180, 30, 100, 30);
+		group.add(rdbtnIn);
+		pState.add(rdbtnIn);
 		
-		JButton btnNewButton = new JButton("추  가");
-		btnNewButton.setBounds(826, 15, 90, 40);
-		pState.add(btnNewButton);
+		/*JRadioButton radioButton_2 = new JRadioButton("무 슨 현 황");
+		radioButton_2.setBackground(Color.WHITE);
+		radioButton_2.setBounds(425, 20, 100, 30);
+		pState.add(radioButton_2);*/
 		
-		JButton btnNewButton_1 = new JButton("삭  제");
-		btnNewButton_1.setBounds(948, 15, 90, 40);
-		pState.add(btnNewButton_1);
+		JButton btnAddbook = new JButton("도서추가");
+		btnAddbook.setBorder(null);
+		btnAddbook.setBackground(new Color(94,94,94));
+		btnAddbook.setForeground(new Color(255, 255, 255));
+		btnAddbook.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		btnAddbook.setBounds(905, 15, 90, 40);
+		pState.add(btnAddbook);
+		
+		JButton btnDeleteBook = new JButton("도서삭제");
+		btnDeleteBook.setBorder(null);
+		btnDeleteBook.setBackground(new Color(94,94,94));
+		btnDeleteBook.setForeground(new Color(255, 255, 255));
+		btnDeleteBook.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		btnDeleteBook.setBounds(1007, 15, 90, 40);
+		pState.add(btnDeleteBook);
 		
 		JPanel pCenter = new JPanel();
 		pCenter.setBackground(new Color(255,255,255));
-		pCenter.setBounds(0, 150, 1150, 650);
+		pCenter.setBounds(0, 140, 1150, 650);
 		add(pCenter);
 		pCenter.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 0, 1145, 650);
+		scrollPane.setBounds(10, 0, 1110, 542);
 		pCenter.add(scrollPane);
 		scrollPane.setBackground(new Color(255, 255, 255));
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
@@ -110,8 +136,8 @@ public class ManagementBookUI extends JPanel {
 		table.getColumnModel().getColumn(2).setPreferredWidth(100); //회원ID
 		table.getColumnModel().getColumn(3).setPreferredWidth(400);  //도서명
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);  //저자
-		table.getColumnModel().getColumn(5).setPreferredWidth(130); //출판사
-		table.getColumnModel().getColumn(6).setPreferredWidth(80); //출판년도
+		table.getColumnModel().getColumn(5).setPreferredWidth(140); //출판사
+		table.getColumnModel().getColumn(6).setPreferredWidth(90); //출판년도
 		table.getColumnModel().getColumn(7).setPreferredWidth(100); //대여일
 		table.getColumnModel().getColumn(8).setPreferredWidth(100); //반납일
 		scrollPane.setViewportView(table);

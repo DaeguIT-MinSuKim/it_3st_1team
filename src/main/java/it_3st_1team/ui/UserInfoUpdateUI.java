@@ -1,11 +1,10 @@
 package it_3st_1team.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -16,9 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
-public class JoinUI extends JFrame {
-
-	private JPanel contentPane;
+public class UserInfoUpdateUI extends JPanel {
 	private JTextField tfName;
 	private JTextField tfId;
 	private JPasswordField pwfPw;
@@ -27,181 +24,174 @@ public class JoinUI extends JFrame {
 	private JTextField tfMail;
 	private JButton btnJoin;
 	private JButton btnCancel;
-	private JButton btnIdc;
 	private JTextField tfpostnum;
 	private JTextField tfAddr;
 	private JTextField tfAddrDe;
 	private JButton btnSearchAddr;
 	private JLabel lblAddr;
 	private JLabel lblAddrDe;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JoinUI frame = new JoinUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JLabel label;
 
-	public JoinUI() {
+	public UserInfoUpdateUI() {
+
 		initComponents();
 	}
 	private void initComponents() {
-		setTitle("회원 가입");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(400, 250, 630, 500);
-		contentPane = new JPanel();
-		contentPane.setForeground(new Color(255, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBackground(new Color(224,224,224));
+		
+		setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(224,224,224));
+		panel.setBounds(130, 100, 950, 528);
+		add(panel);
+		panel.setLayout(null);
+		
+		label = new JLabel("회원 정보");
+		label.setFont(new Font("맑은 고딕", Font.BOLD, 36));
+		label.setBounds(173, 21, 360, 53);
+		panel.add(label);
 		
 		JLabel lblName = new JLabel("이름");
-		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblName.setHorizontalAlignment(SwingConstants.LEFT);
 		lblName.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblName.setBounds(20, 25, 120, 40);
-		contentPane.add(lblName);
+		lblName.setBounds(173, 84, 120, 40);
+		panel.add(lblName);
 		
 		JLabel lblId = new JLabel("아이디");
-		lblId.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblId.setHorizontalAlignment(SwingConstants.LEFT);
 		lblId.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblId.setBounds(20, 65, 120, 40);
-		contentPane.add(lblId);
+		lblId.setBounds(173, 124, 120, 40);
+		panel.add(lblId);
 		
 		JLabel lblPw = new JLabel("비밀번호");
-		lblPw.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPw.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPw.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblPw.setBounds(20, 105, 120, 40);
-		contentPane.add(lblPw);
+		lblPw.setBounds(173, 164, 120, 40);
+		panel.add(lblPw);
 		
 		JLabel lblPwc = new JLabel("비밀번호 확인");
-		lblPwc.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPwc.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPwc.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblPwc.setBounds(20, 145, 120, 40);
-		contentPane.add(lblPwc);
+		lblPwc.setBounds(173, 204, 120, 40);
+		panel.add(lblPwc);
 		
 		JLabel lblPhone = new JLabel("전화번호");
-		lblPhone.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPhone.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPhone.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblPhone.setBounds(20, 185, 120, 40);
-		contentPane.add(lblPhone);
+		lblPhone.setBounds(173, 244, 120, 40);
+		panel.add(lblPhone);
 		
 		JLabel lblMail = new JLabel("이메일");
-		lblMail.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblMail.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMail.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblMail.setBounds(20, 225, 120, 40);
-		contentPane.add(lblMail);
+		lblMail.setBounds(173, 284, 120, 40);
+		panel.add(lblMail);
 		
 		JLabel lblPostnum = new JLabel("우편번호");
-		lblPostnum.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPostnum.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPostnum.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblPostnum.setBounds(20, 265, 120, 40);
-		contentPane.add(lblPostnum);
+		lblPostnum.setBounds(173, 324, 120, 40);
+		panel.add(lblPostnum);
 		
 		lblAddr = new JLabel("주소");
-		lblAddr.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAddr.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAddr.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblAddr.setBounds(20, 305, 120, 40);
-		contentPane.add(lblAddr);
+		lblAddr.setBounds(173, 364, 120, 40);
+		panel.add(lblAddr);
 		
 		lblAddrDe = new JLabel("상세주소");
-		lblAddrDe.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAddrDe.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAddrDe.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		lblAddrDe.setBounds(20, 345, 120, 40);
-		contentPane.add(lblAddrDe);
+		lblAddrDe.setBounds(173, 404, 120, 40);
+		panel.add(lblAddrDe);
 		
 		tfName = new JTextField();
 		tfName.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfName.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfName.setBounds(150, 30, 120, 30);
-		contentPane.add(tfName);
+		tfName.setBounds(294, 89, 120, 30);
+		panel.add(tfName);
 		tfName.setColumns(10);
 		
 		tfId = new JTextField();
+		tfId.setEditable(false);
 		tfId.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfId.setBounds(150, 70, 150, 30);
-		contentPane.add(tfId);
+		tfId.setBounds(294, 129, 150, 30);
+		panel.add(tfId);
 		tfId.setColumns(10);
 		
 		pwfPw = new JPasswordField();
 		pwfPw.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		pwfPw.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		pwfPw.setBounds(150, 110, 150, 30);
-		contentPane.add(pwfPw);
+		pwfPw.setBounds(294, 169, 150, 30);
+		panel.add(pwfPw);
 		
 		pwfPwc = new JPasswordField();
 		pwfPwc.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		pwfPwc.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		pwfPwc.setBounds(150, 150, 150, 30);
-		contentPane.add(pwfPwc);
+		pwfPwc.setBounds(294, 209, 150, 30);
+		panel.add(pwfPwc);
 		
 		tfPhone = new JTextField();
 		tfPhone.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfPhone.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfPhone.setBounds(150, 190, 120, 30);
-		contentPane.add(tfPhone);
+		tfPhone.setBounds(294, 249, 120, 30);
+		panel.add(tfPhone);
 		tfPhone.setColumns(10);
 		
 		tfMail = new JTextField();
 		tfMail.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfMail.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfMail.setBounds(150, 230, 200, 30);
-		contentPane.add(tfMail);
+		tfMail.setBounds(294, 289, 200, 30);
+		panel.add(tfMail);
 		tfMail.setColumns(10);
 		
 		tfpostnum = new JTextField();
 		tfpostnum.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfpostnum.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfpostnum.setBounds(150, 270, 120, 30);
-		contentPane.add(tfpostnum);
+		tfpostnum.setBounds(294, 329, 120, 30);
+		panel.add(tfpostnum);
 		tfpostnum.setColumns(10);
 		
 		tfAddr = new JTextField();
 		tfAddr.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfAddr.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfAddr.setBounds(150, 310, 400, 30);
-		contentPane.add(tfAddr);
+		tfAddr.setBounds(294, 369, 400, 30);
+		panel.add(tfAddr);
 		tfAddr.setColumns(10);
 		
 		tfAddrDe = new JTextField();
 		tfAddrDe.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfAddrDe.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfAddrDe.setColumns(10);
-		tfAddrDe.setBounds(150, 350, 400, 30);
-		contentPane.add(tfAddrDe);
+		tfAddrDe.setBounds(294, 409, 400, 30);
+		panel.add(tfAddrDe);
 		
-		btnJoin = new JButton("회원가입");
+		btnJoin = new JButton("수정");
 		btnJoin.setBorder(null);
-		btnJoin.setForeground(new Color(64,64,64));
-		btnJoin.setBackground(new Color(190,190,190));
-		btnJoin.setBounds(170, 410, 97, 30);
-		contentPane.add(btnJoin);
+		btnJoin.setForeground(Color.WHITE);
+		btnJoin.setBackground(new Color(52,152,219));
+		btnJoin.setBounds(343, 469, 97, 30);
+		panel.add(btnJoin);
 		
 		btnCancel = new JButton("취소");
 		btnCancel.setBorder(null);
-		btnCancel.setForeground(new Color(64,64,64));
-		btnCancel.setBackground(new Color(190,190,190));
-		btnCancel.setBounds(310, 410, 97, 30);
-		contentPane.add(btnCancel);
-		
-		btnIdc = new JButton("중복확인");
-		btnIdc.setBorder(null);
-		btnIdc.setForeground(new Color(64,64,64));
-		btnIdc.setBackground(new Color(190,190,190));
-		btnIdc.setBounds(310, 70, 80, 30);
-		contentPane.add(btnIdc);
+		btnCancel.setForeground(Color.WHITE);
+		btnCancel.setBackground(new Color(94,94,94));
+		btnCancel.setBounds(483, 469, 97, 30);
+		panel.add(btnCancel);
 		
 		btnSearchAddr = new JButton("주소찾기");
 		btnSearchAddr.setBorder(null);
 		btnSearchAddr.setForeground(new Color(64,64,64));
 		btnSearchAddr.setBackground(new Color(190,190,190));
-		btnSearchAddr.setBounds(280, 270, 90, 30);
-		contentPane.add(btnSearchAddr);
+		btnSearchAddr.setBounds(424, 329, 90, 30);
+		panel.add(btnSearchAddr);
+		
+	}
+	
+	public void tfName() {
+		tfName.setEditable(false);
 	}
 }

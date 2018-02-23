@@ -1,14 +1,13 @@
 package it_3st_1team.ui;
 
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Rectangle;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class UserUI extends JPanel implements ActionListener {
@@ -18,13 +17,11 @@ public class UserUI extends JPanel implements ActionListener {
 	private JButton btnHistory;
 	private JButton btnNews;
 	private JButton btnUserUpdate;
-	private RequestBookUI request;
 	
 	public UserUI() {
 		initComponents();
 	}
 	private void initComponents() {
-		setBounds(new Rectangle(0, 0, 1450, 800));
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -65,6 +62,7 @@ public class UserUI extends JPanel implements ActionListener {
 		panel.add(btnNews);
 		
 		btnUserUpdate = new JButton("개인 정보 수정");
+		btnUserUpdate.addActionListener(this);
 		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUserUpdate.setForeground(new Color(255, 255, 255));
 		btnUserUpdate.setBackground(new Color(158,158,158));
@@ -79,13 +77,15 @@ public class UserUI extends JPanel implements ActionListener {
 		panel.add(btnlogout);	
 		
 		show = new JPanel();
-		show.setBounds(new Rectangle(0, 0, 1150, 800));
 		show.setBounds(250, 0, 1150, 800);
 		add(show);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnHistory) {
 			actionPerformedBtnHistory(e);
+		}
+		if (e.getSource() == btnUserUpdate) {
+			actionPerformedBtnUserUpdate(e);
 		}
 		if (e.getSource() == btnBookRequest) {
 			actionPerformedBtnBookRequest(e);
@@ -95,35 +95,55 @@ public class UserUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent e) {
-		changeBtn(btnBookSearch);
-		SearchBookUI search = new SearchBookUI();
-		changePanel(search);
-	}
-	protected void actionPerformedBtnBookRequest(ActionEvent e) {
-		changeBtn(btnBookRequest);
-		request = new RequestBookUI();
-		changePanel(request);
-	}
-	
-	protected void actionPerformedBtnHistory(ActionEvent e) {
-		changeBtn(btnHistory);
-		HistoryUI his = new HistoryUI();
-		changePanel(his);
-	}
-	
-	private void changeBtn(JButton btn) {
-		btnBookSearch.setBackground(new Color(158,158,158));
+		show.removeAll();
+		btnBookSearch.setBackground(new Color(127,127,127));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
 		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		btn.setBackground(new Color(127,127,127));
+		show.repaint();
+		SearchBookUI search = new SearchBookUI();
+		changePanel(search);
 	}
+	protected void actionPerformedBtnBookRequest(ActionEvent e) {
+		show.removeAll();
+		btnBookRequest.setBackground(new Color(127,127,127));
+		btnBookSearch.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(158,158,158));
+		show.repaint();
+		RequestBookUI request = new RequestBookUI();
+		changePanel(request);
+	}
+	protected void actionPerformedBtnUserUpdate(ActionEvent e) {
+		show.removeAll();
+		btnUserUpdate.setBackground(new Color(127,127,127));
+		btnBookSearch.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnBookRequest.setBackground(new Color(158,158,158));
+		show.repaint();
+		UserInfoUpdateUI update = new UserInfoUpdateUI();
+		changePanel(update);
+	}
+	protected void actionPerformedBtnHistory(ActionEvent e) {
+		show.removeAll();
+		btnHistory.setBackground(new Color(127,127,127));
+		btnBookSearch.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnBookRequest.setBackground(new Color(158,158,158));
+		show.repaint();
+		HistoryUI history = new HistoryUI();
+		changePanel(history);
+	}
+	
 	private void changePanel(JPanel jpanel) {
 		jpanel.setPreferredSize(new Dimension(1150, 800));
 		show.removeAll();
 		show.add(jpanel);
 		show.repaint();
-		show.revalidate();
+		revalidate();
 	}
 }
