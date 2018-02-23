@@ -185,6 +185,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		vis.setBounds(0, 0, 1400, 800);
 		contentPane.add(vis);
 		contentPane.repaint();
+		contentPane.revalidate();
 	}
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == lblNewLabel) {
