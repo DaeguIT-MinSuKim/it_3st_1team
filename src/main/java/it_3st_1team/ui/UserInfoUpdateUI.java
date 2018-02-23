@@ -20,7 +20,7 @@ public class UserInfoUpdateUI extends JPanel {
 	private JTextField tfId;
 	private JPasswordField pwfPw;
 	private JPasswordField pwfPwc;
-	private JTextField tfPhone;
+	private JTextField tfPhone1;
 	private JTextField tfMail;
 	private JButton btnJoin;
 	private JButton btnCancel;
@@ -31,6 +31,10 @@ public class UserInfoUpdateUI extends JPanel {
 	private JLabel lblAddr;
 	private JLabel lblAddrDe;
 	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JTextField tfPhone2;
+	private JTextField tfPhone3;
 
 	public UserInfoUpdateUI() {
 
@@ -133,12 +137,26 @@ public class UserInfoUpdateUI extends JPanel {
 		pwfPwc.setBounds(294, 209, 150, 30);
 		panel.add(pwfPwc);
 		
-		tfPhone = new JTextField();
-		tfPhone.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		tfPhone.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfPhone.setBounds(294, 249, 120, 30);
-		panel.add(tfPhone);
-		tfPhone.setColumns(10);
+		tfPhone1 = new JTextField();
+		tfPhone1.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfPhone1.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfPhone1.setBounds(294, 249, 50, 30);
+		panel.add(tfPhone1);
+		tfPhone1.setColumns(10);
+		
+		tfPhone2 = new JTextField();
+		tfPhone2.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfPhone2.setColumns(10);
+		tfPhone2.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfPhone2.setBounds(364, 249, 50, 30);
+		panel.add(tfPhone2);
+		
+		tfPhone3 = new JTextField();
+		tfPhone3.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfPhone3.setColumns(10);
+		tfPhone3.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfPhone3.setBounds(434, 249, 50, 30);
+		panel.add(tfPhone3);
 		
 		tfMail = new JTextField();
 		tfMail.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
@@ -188,6 +206,18 @@ public class UserInfoUpdateUI extends JPanel {
 		btnSearchAddr.setBackground(new Color(190,190,190));
 		btnSearchAddr.setBounds(424, 329, 90, 30);
 		panel.add(btnSearchAddr);
+		
+		label_1 = new JLabel("-");
+		label_1.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(344, 256, 20, 15);
+		panel.add(label_1);
+		
+		label_2 = new JLabel("-");
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		label_2.setBounds(414, 256, 20, 15);
+		panel.add(label_2);
 		
 	}
 	

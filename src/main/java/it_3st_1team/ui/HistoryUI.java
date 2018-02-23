@@ -89,7 +89,6 @@ public class HistoryUI extends JPanel {
 		rdbtnin.setBounds(140, 0, 80, 30);
 		pTableHistory.add(rdbtnin);
 		group.add(rdbtnin);
-		
 	}
 	
 	private Object[][] getRow() {

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -17,9 +19,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class ManagementBookUI extends JPanel {
+public class ManagementBookUI extends JPanel implements ActionListener{
 	private JTextField tfSearch;
 	private JTable table;
+	private JButton btnAddbook;
 
 	public ManagementBookUI() {
 
@@ -96,7 +99,8 @@ public class ManagementBookUI extends JPanel {
 		radioButton_2.setBounds(425, 20, 100, 30);
 		pState.add(radioButton_2);*/
 		
-		JButton btnAddbook = new JButton("도서추가");
+		btnAddbook = new JButton("도서추가");
+		btnAddbook.addActionListener(this);
 		btnAddbook.setBorder(null);
 		btnAddbook.setBackground(new Color(94,94,94));
 		btnAddbook.setForeground(new Color(255, 255, 255));
@@ -178,6 +182,17 @@ public class ManagementBookUI extends JPanel {
 		TableColumnModel model = table.getColumnModel();
 		for(int i=0; i<idx.length; i++) {
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
+		}
+	}
+
+	protected void actionPerformedBtnAddbook(ActionEvent e) {
+		AddBook frame = new AddBook();
+		frame.setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAddbook) {
+			actionPerformedBtnAddbook(e);
 		}
 	}
 }
