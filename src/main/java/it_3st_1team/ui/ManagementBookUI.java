@@ -16,10 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ManagementBookUI extends JPanel {
+public class ManagementBookUI extends JPanel implements ActionListener {
 	private JTextField tfSearch;
 	private JTable table;
+	private JButton btnAddbook;
 
 	public ManagementBookUI() {
 
@@ -96,7 +99,8 @@ public class ManagementBookUI extends JPanel {
 		radioButton_2.setBounds(425, 20, 100, 30);
 		pState.add(radioButton_2);*/
 		
-		JButton btnAddbook = new JButton("도서추가");
+		btnAddbook = new JButton("도서추가");
+		btnAddbook.addActionListener(this);
 		btnAddbook.setBorder(null);
 		btnAddbook.setBackground(new Color(94,94,94));
 		btnAddbook.setForeground(new Color(255, 255, 255));
@@ -179,5 +183,14 @@ public class ManagementBookUI extends JPanel {
 		for(int i=0; i<idx.length; i++) {
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
 		}
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAddbook) {
+			actionPerformedBtnAddbook(e);
+		}
+	}
+	protected void actionPerformedBtnAddbook(ActionEvent e) {
+		AddBook frame = new AddBook();
+		frame.setVisible(true);
 	}
 }
