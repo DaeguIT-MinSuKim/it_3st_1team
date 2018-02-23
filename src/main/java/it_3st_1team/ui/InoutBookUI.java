@@ -18,9 +18,12 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import java.awt.Color;
+import javax.swing.border.EmptyBorder;
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class InoutBookUI extends JPanel {
+	private JTable table;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -28,7 +31,6 @@ public class InoutBookUI extends JPanel {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
-	private JTable table;
 
 	public InoutBookUI() {
 		
@@ -43,128 +45,108 @@ public class InoutBookUI extends JPanel {
 		pUser.setBackground(Color.WHITE);
 		pUser.setBounds(0, 0, 1150, 400);
 		add(pUser);
-		pUser.setLayout(new GridLayout(0, 2, 0, 0));
+		pUser.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
+		panel.setBounds(new Rectangle(0, 0, 800, 400));
 		pUser.add(panel);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		panel.setLayout(null);
 		
-		JLabel label = new JLabel("회원코드");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lblNewLabel = new JLabel("회  원  코  드");
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		lblNewLabel.setBounds(40, 43, 106, 15);
+		panel.add(lblNewLabel);
+		
+		JLabel label = new JLabel("이           름");
+		label.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		label.setBounds(40, 89, 106, 15);
 		panel.add(label);
 		
+		JLabel label_1 = new JLabel("아    이    디");
+		label_1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		label_1.setBounds(40, 133, 106, 15);
+		panel.add(label_1);
+		
+		JLabel label_2 = new JLabel("연    락    처");
+		label_2.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		label_2.setBounds(40, 179, 106, 15);
+		panel.add(label_2);
+		
+		JLabel label_3 = new JLabel("이    메    일");
+		label_3.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		label_3.setBounds(40, 225, 106, 15);
+		panel.add(label_3);
+		
+		JLabel label_4 = new JLabel("주           소");
+		label_4.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		label_4.setBounds(40, 289, 106, 15);
+		panel.add(label_4);
+		
+		JLabel label_5 = new JLabel("도  서  코  드");
+		label_5.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		label_5.setBounds(40, 356, 106, 15);
+		panel.add(label_5);
+		
 		textField = new JTextField();
-		textField.setColumns(10);
+		textField.setBounds(170, 40, 580, 21);
 		panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(170, 86, 580, 21);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(170, 130, 580, 21);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(170, 176, 580, 21);
+		panel.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(170, 222, 580, 21);
+		panel.add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(170, 267, 580, 60);
+		panel.add(textField_5);
+		textField_5.setColumns(10);
+		
+		textField_6 = new JTextField();
+		textField_6.setBounds(170, 353, 580, 21);
+		panel.add(textField_6);
+		textField_6.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(800, 0, 350, 400);
+		panel_1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		pUser.add(panel_1);
-		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+		panel_1.setLayout(null);
 		
-		JLabel label_1 = new JLabel("아이디");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(label_1);
+		JButton btnOut = new JButton("대 여");
+		btnOut.setFont(new Font("맑은 고딕", Font.PLAIN, 99));
+		btnOut.setForeground(Color.WHITE);
+		btnOut.setBounds(16, 39, 300, 160);
+		btnOut.setBackground(new Color(94,94,94));
+		btnOut.setBorder(null);
+		btnOut.setMaximumSize(new Dimension(150, 150));
+		btnOut.setMinimumSize(new Dimension(150, 150));
+		panel_1.add(btnOut);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panel_1.add(textField_1);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		pUser.add(panel_2);
-		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel label_2 = new JLabel("이름");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(label_2);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panel_2.add(textField_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.WHITE);
-		pUser.add(panel_3);
-		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel label_3 = new JLabel("연락처");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(label_3);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		panel_3.add(textField_3);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(Color.WHITE);
-		pUser.add(panel_4);
-		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel label_4 = new JLabel("이메일");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(label_4);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		panel_4.add(textField_4);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBackground(Color.WHITE);
-		pUser.add(panel_5);
-		panel_5.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBackground(Color.WHITE);
-		pUser.add(panel_6);
-		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel label_5 = new JLabel("주소");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_6.add(label_5);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		panel_6.add(textField_5);
-		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(Color.WHITE);
-		pUser.add(panel_7);
-		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JPanel panel_8 = new JPanel();
-		panel_8.setBackground(Color.WHITE);
-		pUser.add(panel_8);
-		panel_8.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel label_6 = new JLabel("도서코드");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_8.add(label_6);
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		panel_8.add(textField_6);
-		
-		JPanel panel_9 = new JPanel();
-		panel_9.setBackground(Color.WHITE);
-		pUser.add(panel_9);
-		panel_9.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JPanel panel_10 = new JPanel();
-		panel_10.setBackground(Color.WHITE);
-		pUser.add(panel_10);
-		panel_10.setLayout(null);
-		
-		JButton btnOut = new JButton("대여");
-		btnOut.setBackground(new Color(158,158,158));
-		btnOut.setBounds(new Rectangle(124, 16, 90, 40));
-		panel_10.add(btnOut);
-		
-		JButton btnIn = new JButton("반납");
-		btnIn.setBackground(new Color(158,158,158));
-		btnIn.setBounds(356, 16, 90, 40);
-		panel_10.add(btnIn);
+		JButton btnIn = new JButton("반 납");
+		btnIn.setBorder(null);
+		btnIn.setFont(new Font("맑은 고딕", Font.PLAIN, 99));
+		btnIn.setForeground(Color.WHITE);
+		btnIn.setBounds(16, 220, 300, 160);
+		btnIn.setBackground(new Color(94,94,94));
+		panel_1.add(btnIn);
 		
 		JPanel pTable = new JPanel();
 		pTable.setBackground(Color.WHITE);
@@ -173,7 +155,7 @@ public class InoutBookUI extends JPanel {
 		pTable.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 5, 1150, 400);
+		scrollPane.setBounds(0, 0, 1150, 400);
 		pTable.add(scrollPane);
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
