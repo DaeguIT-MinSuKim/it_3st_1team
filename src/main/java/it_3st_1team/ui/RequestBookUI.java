@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class RequestBookUI extends JPanel {
@@ -29,6 +30,7 @@ public class RequestBookUI extends JPanel {
 		initComponents();
 	}
 	private void initComponents() {
+		setBounds(new Rectangle(0, 0, 1150, 800));
 		setBackground(new Color(224,224,224));
 		setLayout(null);
 		
