@@ -1,0 +1,28 @@
+-- Ãâ³³ Å×ÀÌºí delete ½Ã history ¿¡ update trigger
+
+create trigger tri_takeinout_after_delete_history
+after delete
+on bookmanagement.takeinout
+for each row
+begin
+	update history set realreturn = adddate(curdate(),-2), delay = curdate() - realreturn where bkcode = old.bkcode and realreturn is null;  
+end;
+
+
+-- Ãâ³³ Å×ÀÌºí insert ½Ã history ¿¡ insert trigger
+
+create trigger tri_takeinout_after_insert_history
+after insert
+on bookmanagement.takeinout
+for each row
+begin
+	insert into history(code,realreturn,delay,bkcode)
+	values(new.code,null,null,new.bkcode);
+end;
+
+-- Ãâ³³ ´ë¿©
+insert into takeinout values
+(8, 5,'122008em0000333331',curdate(),adddate(curdate(), 7));
+
+-- Ãâ³³ ¹İ³³
+delete from takeinout where bkcode = '122008em0000333331' and code = '5';
