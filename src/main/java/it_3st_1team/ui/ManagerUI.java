@@ -135,8 +135,11 @@ public class ManagerUI extends JPanel implements ActionListener {
 		changePanel(manager);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent arg0) {
+		
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
+		NoticeUI no = new NoticeUI();
+		changePanel(no);
 	}
 	protected void actionPerformedBtnEmpManage(ActionEvent arg0) {
 		EmployeeUI emp = new EmployeeUI();
