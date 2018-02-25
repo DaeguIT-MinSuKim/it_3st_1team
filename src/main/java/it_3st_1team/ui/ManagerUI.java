@@ -95,7 +95,11 @@ public class ManagerUI extends JPanel implements ActionListener {
 		showpanel.setBackground(Color.WHITE);
 		add(showpanel);
 	}
+	
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnEmpManage) {
+			actionPerformedBtnEmpManage(arg0);
+		}
 		if (arg0.getSource() == btnNews) {
 			actionPerformedBtnNews(arg0);
 		}
@@ -133,6 +137,10 @@ public class ManagerUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnHistory(ActionEvent arg0) {
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
+	}
+	protected void actionPerformedBtnEmpManage(ActionEvent arg0) {
+		EmployeeUI emp = new EmployeeUI();
+		changePanel(emp);
 	}
 	
 	private void changePanel(JPanel jpanel) {
