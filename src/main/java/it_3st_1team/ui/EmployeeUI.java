@@ -16,20 +16,23 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class EmployeeUI extends JPanel {
+public class EmployeeUI extends JPanel implements ActionListener {
 	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
+	private JTextField tfEmpNo;
+	private JTextField tfEmpName;
+	private JTextField tfEmpID;
+	private JTextField tfEmpPW;
+	private JTextField tfEmpTel1;
+	private JTextField tfEmpEmail;
+	private JTextField tfEmpAddr1;
+	private JTextField tfEmpTel2;
+	private JTextField tfEmpTel3;
+	private JTextField tdEmpAddr2;
+	private JTextField tfEmpZipCode;
+	private JButton btnSearchAddr;
 
 	public EmployeeUI() {
 
@@ -46,173 +49,187 @@ public class EmployeeUI extends JPanel {
 		add(pNorth);
 		pNorth.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("사 원 번 호");
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel.setBounds(432, 23, 105, 30);
-		pNorth.add(lblNewLabel);
+		JLabel lblEmpNo = new JLabel("사 원 번 호");
+		lblEmpNo.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpNo.setBounds(432, 23, 105, 30);
+		pNorth.add(lblEmpNo);
 		
-		JLabel lblNewLabel_1 = new JLabel("이         름");
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(432, 58, 105, 30);
-		pNorth.add(lblNewLabel_1);
+		JLabel lblEmpName = new JLabel("이         름");
+		lblEmpName.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpName.setBounds(432, 58, 105, 30);
+		pNorth.add(lblEmpName);
 		
-		JLabel lblNewLabel_2 = new JLabel("아   이   디");
-		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_2.setBounds(432, 93, 105, 30);
-		pNorth.add(lblNewLabel_2);
+		JLabel lblEmpID = new JLabel("아   이   디");
+		lblEmpID.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpID.setBounds(432, 93, 105, 30);
+		pNorth.add(lblEmpID);
 		
-		JLabel lblNewLabel_3 = new JLabel("비 밀 번 호");
-		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_3.setBounds(432, 128, 105, 30);
-		pNorth.add(lblNewLabel_3);
+		JLabel lblEmpPW = new JLabel("비 밀 번 호");
+		lblEmpPW.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpPW.setBounds(432, 128, 105, 30);
+		pNorth.add(lblEmpPW);
 		
-		JLabel lblNewLabel_4 = new JLabel("연   락   처");
-		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_4.setBounds(432, 163, 105, 30);
-		pNorth.add(lblNewLabel_4);
+		JLabel lblEmpTel = new JLabel("연   락   처");
+		lblEmpTel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpTel.setBounds(432, 163, 105, 30);
+		pNorth.add(lblEmpTel);
 		
-		JLabel lblNewLabel_5 = new JLabel("메         일");
-		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_5.setBounds(432, 198, 105, 30);
-		pNorth.add(lblNewLabel_5);
+		JLabel lblEmpEmail = new JLabel("메         일");
+		lblEmpEmail.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpEmail.setBounds(432, 198, 105, 30);
+		pNorth.add(lblEmpEmail);
 		
-		JLabel lblNewLabel_6 = new JLabel("주         소");
-		lblNewLabel_6.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_6.setBounds(432, 270, 105, 30);
-		pNorth.add(lblNewLabel_6);
+		JLabel lblEmpAddr = new JLabel("주         소");
+		lblEmpAddr.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpAddr.setBounds(432, 270, 105, 30);
+		pNorth.add(lblEmpAddr);
 		
-		JLabel lblNewLabel_7 = new JLabel("직         책");
-		lblNewLabel_7.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_7.setBounds(432, 340, 105, 30);
-		pNorth.add(lblNewLabel_7);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField.setBounds(562, 20, 515, 30);
-		pNorth.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_1.setBounds(562, 55, 515, 30);
-		pNorth.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_2.setBounds(562, 90, 515, 30);
-		pNorth.add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_3.setBounds(562, 125, 515, 30);
-		pNorth.add(textField_3);
-		textField_3.setColumns(10);
-		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_4.setBounds(562, 160, 90, 30);
-		pNorth.add(textField_4);
-		textField_4.setColumns(10);
-		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_5.setBounds(562, 195, 515, 30);
-		pNorth.add(textField_5);
-		textField_5.setColumns(10);
-		
-		textField_6 = new JTextField();
-		textField_6.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_6.setBounds(562, 267, 515, 30);
-		pNorth.add(textField_6);
-		textField_6.setColumns(10);
-		
-		textField_7 = new JTextField();
-		textField_7.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_7.setColumns(10);
-		textField_7.setBounds(701, 160, 90, 30);
-		pNorth.add(textField_7);
-		
-		textField_8 = new JTextField();
-		textField_8.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_8.setColumns(10);
-		textField_8.setBounds(843, 160, 90, 30);
-		pNorth.add(textField_8);
-		
-		textField_9 = new JTextField();
-		textField_9.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_9.setColumns(10);
-		textField_9.setBounds(562, 302, 515, 30);
-		pNorth.add(textField_9);
+		JLabel lblEmpTitle = new JLabel("직         책");
+		lblEmpTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpTitle.setBounds(432, 340, 105, 30);
+		pNorth.add(lblEmpTitle);
 		
 		JLabel label = new JLabel("우 편 번 호");
 		label.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		label.setBounds(432, 234, 105, 30);
 		pNorth.add(label);
 		
-		textField_10 = new JTextField();
-		textField_10.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		textField_10.setColumns(10);
-		textField_10.setBounds(562, 231, 370, 30);
-		pNorth.add(textField_10);
+		tfEmpNo = new JTextField();
+		tfEmpNo.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpNo.setBounds(562, 20, 515, 30);
+		pNorth.add(tfEmpNo);
+		tfEmpNo.setColumns(10);
 		
-		JButton button = new JButton("주소찾기");
-		button.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		button.setBounds(944, 231, 133, 30);
-		pNorth.add(button);
+		tfEmpName = new JTextField();
+		tfEmpName.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpName.setBounds(562, 55, 515, 30);
+		pNorth.add(tfEmpName);
+		tfEmpName.setColumns(10);
+		
+		tfEmpID = new JTextField();
+		tfEmpID.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpID.setBounds(562, 90, 515, 30);
+		pNorth.add(tfEmpID);
+		tfEmpID.setColumns(10);
+		
+		tfEmpPW = new JTextField();
+		tfEmpPW.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpPW.setBounds(562, 125, 515, 30);
+		pNorth.add(tfEmpPW);
+		tfEmpPW.setColumns(10);
+		
+		tfEmpTel1 = new JTextField();
+		tfEmpTel1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpTel1.setBounds(562, 160, 90, 30);
+		pNorth.add(tfEmpTel1);
+		tfEmpTel1.setColumns(10);
+		
+		tfEmpTel2 = new JTextField();
+		tfEmpTel2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpTel2.setColumns(10);
+		tfEmpTel2.setBounds(701, 160, 90, 30);
+		pNorth.add(tfEmpTel2);
+		
+		tfEmpTel3 = new JTextField();
+		tfEmpTel3.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpTel3.setColumns(10);
+		tfEmpTel3.setBounds(843, 160, 90, 30);
+		pNorth.add(tfEmpTel3);
+		
+		tfEmpEmail = new JTextField();
+		tfEmpEmail.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpEmail.setBounds(562, 195, 515, 30);
+		pNorth.add(tfEmpEmail);
+		tfEmpEmail.setColumns(10);
+		
+		tfEmpZipCode = new JTextField();
+		tfEmpZipCode.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpZipCode.setColumns(10);
+		tfEmpZipCode.setBounds(562, 231, 370, 30);
+		pNorth.add(tfEmpZipCode);
+		
+		tfEmpAddr1 = new JTextField();
+		tfEmpAddr1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpAddr1.setBounds(562, 267, 515, 30);
+		pNorth.add(tfEmpAddr1);
+		tfEmpAddr1.setColumns(10);
+		
+		tdEmpAddr2 = new JTextField();
+		tdEmpAddr2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tdEmpAddr2.setColumns(10);
+		tdEmpAddr2.setBounds(562, 302, 515, 30);
+		pNorth.add(tdEmpAddr2);
+		
+		btnSearchAddr = new JButton("주소찾기");
+		btnSearchAddr.addActionListener(this);
+		btnSearchAddr.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnSearchAddr.setForeground(new Color(64,64,64));
+		btnSearchAddr.setBackground(new Color(190, 190, 190));
+		btnSearchAddr.setBounds(944, 231, 133, 30);
+		
+		pNorth.add(btnSearchAddr);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		comboBox.setBounds(562, 337, 515, 30);
 		pNorth.add(comboBox);
 		
-		JLabel lblNewLabel_8 = new JLabel("-");
-		lblNewLabel_8.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_8.setBounds(649, 163, 57, 30);
-		pNorth.add(lblNewLabel_8);
+		JLabel lblBar1 = new JLabel("-");
+		lblBar1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblBar1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBar1.setBounds(649, 163, 57, 30);
+		pNorth.add(lblBar1);
 		
-		JLabel lblNewLabel_9 = new JLabel("-");
-		lblNewLabel_9.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9.setBounds(788, 163, 57, 30);
-		pNorth.add(lblNewLabel_9);
+		JLabel lblBar2 = new JLabel("-");
+		lblBar2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblBar2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBar2.setBounds(788, 163, 57, 30);
+		pNorth.add(lblBar2);
 		
 		JButton btnAdd = new JButton("추  가");
 		btnAdd.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnAdd.setBounds(594, 388, 90, 40);
+		btnAdd.setForeground(Color.WHITE);
+		btnAdd.setBackground(new Color(94,94,94));
 		pNorth.add(btnAdd);
 		
 		JButton btnUpdate = new JButton("수  정");
 		btnUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUpdate.setBounds(774, 388, 90, 40);
+		btnUpdate.setForeground(Color.WHITE);
+		btnUpdate.setBackground(new Color(94,94,94));
 		pNorth.add(btnUpdate);
 		
 		JButton btnCancel = new JButton("취  소");
 		btnCancel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnCancel.setBounds(951, 388, 90, 40);
+		btnCancel.setForeground(Color.WHITE);
+		btnCancel.setBackground(new Color(94,94,94));
 		pNorth.add(btnCancel);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(65, 20, 300, 350);
-		pNorth.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		JPanel pPicture = new JPanel();
+		pPicture.setBounds(65, 20, 300, 350);
+		pNorth.add(pPicture);
+		pPicture.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_10 = new JLabel("No Image");
 		lblNewLabel_10.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		lblNewLabel_10.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel_10, BorderLayout.CENTER);
+		pPicture.add(lblNewLabel_10, BorderLayout.CENTER);
 		
-		JButton button_1 = new JButton("사진추가");
-		button_1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		button_1.setBounds(75, 388, 120, 40);
-		pNorth.add(button_1);
+		JButton btnPicAdd = new JButton("사진추가");
+		btnPicAdd.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnPicAdd.setBounds(75, 388, 120, 40);
+		btnPicAdd.setForeground(Color.WHITE);
+		btnPicAdd.setBackground(new Color(94,94,94));
+		pNorth.add(btnPicAdd);
 		
-		JButton button_2 = new JButton("사진삭제");
-		button_2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		button_2.setBounds(230, 388, 120, 40);
-		pNorth.add(button_2);
+		JButton btnPicDel = new JButton("사진삭제");
+		btnPicDel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnPicDel.setBounds(230, 388, 120, 40);
+		btnPicDel.setForeground(Color.WHITE);
+		btnPicDel.setBackground(new Color(94,94,94));
+		pNorth.add(btnPicDel);
 		
 		JPanel pTable = new JPanel();
 		pTable.setBackground(Color.WHITE);
@@ -276,5 +293,14 @@ public class EmployeeUI extends JPanel {
 		for(int i=0; i<idx.length; i++) {
 			model.getColumn(idx[i]).setCellRenderer(dtcr);
 		}
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearchAddr) {
+			actionPerformedButton(e);
+		}
+	}
+	protected void actionPerformedButton(ActionEvent e) {
+		SearchAddrdetailUI addr = new SearchAddrdetailUI();
+		addr.setVisible(true);
 	}
 }

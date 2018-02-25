@@ -14,9 +14,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class JoinUI extends JFrame {
+public class JoinUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField tfName;
@@ -214,11 +216,21 @@ public class JoinUI extends JFrame {
 		contentPane.add(btnIdc);
 		
 		btnSearchAddr = new JButton("주소찾기");
+		btnSearchAddr.addActionListener(this);
 		btnSearchAddr.setBorder(null);
 		btnSearchAddr.setForeground(new Color(64,64,64));
 		btnSearchAddr.setBackground(new Color(190,190,190));
 		btnSearchAddr.setBounds(280, 270, 90, 30);
 		contentPane.add(btnSearchAddr);
 
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearchAddr) {
+			actionPerformedBtnSearchAddr(e);
+		}
+	}
+	protected void actionPerformedBtnSearchAddr(ActionEvent e) {
+		SearchAddrdetailUI addr = new SearchAddrdetailUI();
+		addr.setVisible(true);
 	}
 }

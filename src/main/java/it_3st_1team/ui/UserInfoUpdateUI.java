@@ -13,9 +13,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
-public class UserInfoUpdateUI extends JPanel {
+public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JTextField tfName;
 	private JTextField tfId;
 	private JPasswordField pwfPw;
@@ -41,6 +44,7 @@ public class UserInfoUpdateUI extends JPanel {
 		initComponents();
 	}
 	private void initComponents() {
+		setBounds(new Rectangle(0, 0, 1150, 800));
 		setBackground(new Color(224,224,224));
 		
 		setLayout(null);
@@ -201,6 +205,7 @@ public class UserInfoUpdateUI extends JPanel {
 		panel.add(btnCancel);
 		
 		btnSearchAddr = new JButton("주소찾기");
+		btnSearchAddr.addActionListener(this);
 		btnSearchAddr.setBorder(null);
 		btnSearchAddr.setForeground(new Color(64,64,64));
 		btnSearchAddr.setBackground(new Color(190,190,190));
@@ -223,5 +228,14 @@ public class UserInfoUpdateUI extends JPanel {
 	
 	public void tfName() {
 		tfName.setEditable(false);
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnSearchAddr) {
+			actionPerformedBtnSearchAddr(arg0);
+		}
+	}
+	protected void actionPerformedBtnSearchAddr(ActionEvent arg0) {
+		SearchAddrdetailUI addr = new SearchAddrdetailUI();
+		addr.setVisible(true);
 	}
 }
