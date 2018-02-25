@@ -177,13 +177,13 @@ public class EmployeeUI extends JPanel implements ActionListener {
 		JLabel lblBar1 = new JLabel("-");
 		lblBar1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lblBar1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBar1.setBounds(649, 163, 57, 30);
+		lblBar1.setBounds(649, 160, 57, 30);
 		pNorth.add(lblBar1);
 		
 		JLabel lblBar2 = new JLabel("-");
 		lblBar2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lblBar2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBar2.setBounds(788, 163, 57, 30);
+		lblBar2.setBounds(789, 160, 57, 30);
 		pNorth.add(lblBar2);
 		
 		JButton btnAdd = new JButton("추  가");

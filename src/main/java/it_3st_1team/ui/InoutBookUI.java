@@ -31,6 +31,7 @@ public class InoutBookUI extends JPanel {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
+	private JTextField textField_7;
 
 	public InoutBookUI() {
 		
@@ -55,73 +56,78 @@ public class InoutBookUI extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("회  원  코  드");
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		lblNewLabel.setBounds(40, 43, 106, 15);
+		lblNewLabel.setBounds(40, 37, 106, 30);
 		panel.add(lblNewLabel);
 		
 		JLabel label = new JLabel("이           름");
 		label.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		label.setBounds(40, 89, 106, 15);
+		label.setBounds(40, 83, 106, 30);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("아    이    디");
 		label_1.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		label_1.setBounds(40, 133, 106, 15);
+		label_1.setBounds(40, 129, 106, 30);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("연    락    처");
 		label_2.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		label_2.setBounds(40, 179, 106, 15);
+		label_2.setBounds(40, 173, 106, 30);
 		panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("이    메    일");
 		label_3.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		label_3.setBounds(40, 225, 106, 15);
+		label_3.setBounds(40, 219, 106, 30);
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("주           소");
 		label_4.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		label_4.setBounds(40, 289, 106, 15);
+		label_4.setBounds(40, 265, 106, 30);
 		panel.add(label_4);
 		
 		JLabel label_5 = new JLabel("도  서  코  드");
 		label_5.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		label_5.setBounds(40, 356, 106, 15);
+		label_5.setBounds(40, 350, 106, 30);
 		panel.add(label_5);
 		
 		textField = new JTextField();
-		textField.setBounds(170, 40, 580, 21);
+		textField.setBounds(170, 40, 580, 30);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(170, 86, 580, 21);
+		textField_1.setBounds(170, 86, 580, 30);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(170, 130, 580, 21);
+		textField_2.setBounds(170, 130, 580, 30);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(170, 176, 580, 21);
+		textField_3.setBounds(170, 176, 580, 30);
 		panel.add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(170, 222, 580, 21);
+		textField_4.setBounds(170, 222, 580, 30);
 		panel.add(textField_4);
 		textField_4.setColumns(10);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(170, 267, 580, 60);
+		textField_5.setBounds(170, 267, 580, 30);
 		panel.add(textField_5);
 		textField_5.setColumns(10);
 		
 		textField_6 = new JTextField();
-		textField_6.setBounds(170, 353, 580, 21);
+		textField_6.setBounds(170, 353, 580, 30);
 		panel.add(textField_6);
 		textField_6.setColumns(10);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(170, 307, 580, 30);
+		panel.add(textField_7);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
