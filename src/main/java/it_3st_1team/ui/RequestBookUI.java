@@ -2,18 +2,27 @@ package it_3st_1team.ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import it_3st_1team.ui.StartUI.MyPanel;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class RequestBookUI extends JPanel {
+public class RequestBookUI extends JPanel implements ActionListener {
 	private JTextField tfBookcode;
 	private JTextField tfauthor;
 	private JTextField tfpublish;
@@ -25,6 +34,10 @@ public class RequestBookUI extends JPanel {
 	private JLabel lblprice;
 	private JTextField textField;
 	private JLabel label;
+	private JButton btnKyobo;
+	private JButton btnYes24;
+	private JButton btnAladin;
+	private JButton btnBandinlunis;
 
 	public RequestBookUI() {
 		initComponents();
@@ -36,7 +49,7 @@ public class RequestBookUI extends JPanel {
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(224,224,224));
-		panel.setBounds(130, 100, 950, 400);
+		panel.setBounds(130, 100, 950, 385);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -130,6 +143,89 @@ public class RequestBookUI extends JPanel {
 		label.setFont(new Font("맑은 고딕", Font.BOLD, 36));
 		label.setBounds(173, 21, 360, 53);
 		panel.add(label);
+		
+		String imgPath = System.getProperty("user.dir") + "/images/";		
+		
+		btnKyobo = new JButton("");
+		btnKyobo.addActionListener(this);
+		btnKyobo.setIcon(new ImageIcon(imgPath +"logo_kyobo.png"));
+		btnKyobo.setBounds(88, 566, 200, 100);
+		add(btnKyobo);
+		
+		btnYes24 = new JButton("");
+		btnYes24.addActionListener(this);
+		btnYes24.setIcon(new ImageIcon(imgPath + "logo_yes24.png"));
+		btnYes24.setBounds(350, 566, 200, 100);
+		add(btnYes24);
+		
+		btnAladin = new JButton("");
+		btnAladin.addActionListener(this);
+		btnAladin.setIcon(new ImageIcon(imgPath + "aladinlogo_kor_len.png"));
+		btnAladin.setBounds(612, 566, 200, 100);
+		add(btnAladin);
+		
+		
+		btnBandinlunis = new JButton("");
+		btnBandinlunis.addActionListener(this);
+		btnBandinlunis.setIcon(new ImageIcon(imgPath + "interpark_01.png"));
+		btnBandinlunis.setBounds(880, 566, 200, 100);
+		add(btnBandinlunis);
 	}
-
+	
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAladin) {
+			actionPerformedBtnAladin(e);
+		}
+		if (e.getSource() == btnKyobo) {
+			actionPerformedBtnKyobo(e);
+		}
+		if (e.getSource() == btnYes24) {
+			actionPerformedBtnYes24(e);
+		}
+		if (e.getSource() == btnBandinlunis) {
+			actionPerformedBtnBandinlunis(e);
+		}
+	}
+	protected void actionPerformedBtnBandinlunis(ActionEvent e) {
+		// interpark
+				String url = "http://www.interpark.com";
+				String[] cmds = {"CMD.EXE","/C","explorer", url};
+				try {
+					Process process = Runtime.getRuntime().exec(cmds);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+	}
+	protected void actionPerformedBtnYes24(ActionEvent e) {
+		// yes24
+				String url = "http://www.yes24.com";
+				String[] cmds = {"CMD.EXE","/C","explorer", url};
+				try {
+					Process process = Runtime.getRuntime().exec(cmds);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+	}
+	protected void actionPerformedBtnKyobo(ActionEvent e) {
+		// kyobo
+		String url = "http://www.kyobobook.co.kr";
+		String[] cmds = {"CMD.EXE","/C","explorer", url};
+		try {
+			Process process = Runtime.getRuntime().exec(cmds);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+	}
+	protected void actionPerformedBtnAladin(ActionEvent e) {
+		// aladin
+				String url = "http://www.aladin.co.kr";
+				String[] cmds = {"CMD.EXE","/C","explorer", url};
+				try {
+					Process process = Runtime.getRuntime().exec(cmds);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+	}
 }
