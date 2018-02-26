@@ -10,7 +10,7 @@ import kr.or.dgit.it_3st_1team.dao.BookDao;
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 
-public class StudentService {
+public class BookService {
 	private static final Log log = LogFactory.getLog(BookDao.class);
 	
 	public List<Book> findStudentByAll(){
