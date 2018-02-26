@@ -5,7 +5,7 @@ import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.it_3st_1team.dto.User;
-import kr.or.dgit.mybatis_sample.util.MyBatisSqlSessionFactory;
+import it_3st_1team.util.MyBatisSqlSessionFactory;
 
 public class UserService {
 	private static final Log log = LogFactory.getLog(UserService.class);
