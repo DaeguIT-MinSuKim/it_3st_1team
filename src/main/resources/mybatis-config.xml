@@ -12,9 +12,9 @@
 		<package name="kr.or.dgit.it_3st_1team.dto"/>
 	</typeAliases>
 	
-<!-- 	<typeHandlers>
-		<package name="it_3st_1team.typehandlers"/>
-	</typeHandlers> -->
+	<typeHandlers>
+		<package name="kr.or.dgit.it_3st_1team.typehandlers"/>
+	</typeHandlers>
 	
 	<environments default="development">
 		<environment id="development">
@@ -30,5 +30,6 @@
 	
 	<mappers>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/BookMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/UserMapper.xml"/>
 	</mappers>
 </configuration>

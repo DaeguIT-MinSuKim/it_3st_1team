@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.UserDao">
+
+	<sql id="insertUsersql">
+		insert into users(code, name, id, pw, tel, email, addr_id, entryday) 
+		values (#{code},#{name},#{id},#{pw},#{tel},#{email},#{addr_id.total},#{entryday})
+	</sql>
+	
+	<sql id="deleteSql">
+		delete from users where code = #{code}
+	</sql>
+	
+	<resultMap type="User" id="UserResult">
+		<id property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="id" column="id"/>
+		<result property="tel" column="tel"/>
+		<result property="email" column="email"/>
+		<result property="addr_id.total" column="addr_id"/>
+	</resultMap>
+	
+<!-- 	<resultMap type="User" id="Userwithphone" extends="UserResult">
+		<association property="tel" resultMap="kr.or.dgit.it.it_3st_1team.dao.PhoneDao.PhoneResult"/>
+	</resultMap> -->
+	
+	<insert id="insertUser" parameterType="User">
+		<include refid="insertUsersql"/>
+	</insert>
+	
+	<delete id="deleteUser" parameterType="int">
+		<include refid="deleteSql"/>
+	</delete>
+	
+	<update id="updateUser" parameterType="User">
+		update users
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="pw != null">
+				pw = #{pw},
+			</if>
+			<if test="tel != null">
+				tel = #{tel},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="addr_id != null">
+				addr_id = #{addr_id.total},
+			</if>
+		</set>
+		where id= #{id}
+	</update>
+	
+	<select id="selectAllUser" parameterType="User" resultMap="UserResult">
+		select * from users
+	</select>
+	
+	<select id="selectUserById" parameterType="User" resultMap="UserResult">
+		select * from users where id = #{id}
+	</select>
+	
+</mapper>

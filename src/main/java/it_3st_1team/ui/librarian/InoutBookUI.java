@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;

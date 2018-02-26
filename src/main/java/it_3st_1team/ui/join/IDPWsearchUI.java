@@ -32,6 +32,7 @@ public class IDPWsearchUI extends JFrame {
 	}
 	private void initComponents() {
 		setBounds(new Rectangle(0, 0, 600, 500));
+
 		setTitle("아이디/비밀번호 찾기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(600, 300, 500, 300);
