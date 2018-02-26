@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it_3st_1team.dao.UserDao">
+
+	<sql id="insertUser">
+		insert into users(code, name, id, pw, tel, email, addr_id, entryday) 
+		values (#{code},#{name},#{id},#{pw},#{tel},#{email},#{addr_id},#{entryday})
+	</sql>
+	
+	<insert id="insertUser" parameterType="User">
+		<include refid="insertUser"/>
+	</insert>
+	
+	
+	
+</mapper>
