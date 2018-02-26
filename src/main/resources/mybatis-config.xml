@@ -31,5 +31,6 @@
 	<mappers>
 		<!-- <mapper resource="kr/or/dgit/it_3st_1team/mappers/StudentMapper.xml"/> -->
 		<mapper resource="it_3st_1team/main/mappers/PostMapper.xml"/>
+		<mapper resource="it_3st_1team/main/mappers/IDPWsearchMapper.xml"/>
 	</mappers>
 </configuration>

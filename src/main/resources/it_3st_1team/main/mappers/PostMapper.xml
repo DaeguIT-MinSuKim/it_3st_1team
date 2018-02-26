@@ -10,11 +10,11 @@
 		<where>
 			<if test="sigungu != null">
 				sigungu = #{sigungu}
-			</if>
+			</if>			
 		</where>
 	</sql>
 
-	<select id="selectPostByAll" resultType="post">
+	<select id="selectPostByAll"  parameterType="post" resultType="post">
 		<include refid="selectSql" />		
 	</select>
 
