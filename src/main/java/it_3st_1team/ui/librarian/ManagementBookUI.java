@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package it_3st_1team.ui.librarian;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -186,7 +186,7 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 	}
 
 	protected void actionPerformedBtnAddbook(ActionEvent e) {
-		AddBook frame = new AddBook();
+		AddBookUI frame = new AddBookUI();
 		frame.setVisible(true);
 	}
 	@Override

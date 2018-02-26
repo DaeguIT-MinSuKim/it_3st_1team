@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package it_3st_1team.ui.join;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

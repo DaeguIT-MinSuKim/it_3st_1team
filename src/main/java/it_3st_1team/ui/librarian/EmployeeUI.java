@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package it_3st_1team.ui.librarian;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,6 +10,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import it_3st_1team.ui.join.SearchAddrdetailUI;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;

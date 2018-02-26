@@ -1,10 +1,14 @@
-package it_3st_1team.ui;
+package it_3st_1team.ui.user;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import it_3st_1team.ui.LoginUI;
+import it_3st_1team.ui.join.JoinUI;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

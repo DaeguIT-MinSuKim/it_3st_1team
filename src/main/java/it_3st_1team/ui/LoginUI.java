@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import it_3st_1team.ui.join.IDPWsearchUI;
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 

@@ -1,22 +1,20 @@
-package it_3st_1team.ui;
+package it_3st_1team.ui.join;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class SearchAddrdetailUI extends JFrame {
