@@ -12,6 +12,8 @@ public class Post {
 	private String heangjeong_name;
 	private int bunji_num1;
 	private int bunji_num2;
+	private String total;
+		
 	public Post() {
 		// TODO Auto-generated constructor stub
 	}
@@ -80,6 +82,20 @@ public class Post {
 	}
 	public void setBunji_num2(int bunji_num2) {
 		this.bunji_num2 = bunji_num2;
+	}
+	
+	
+	public String getTotal() {
+		return String.format(
+				"%s %s %s %s %s %s %s %s %s %s %s",
+				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
+				bunji_num2);
+	}
+	public void setTotal(String total) {
+		this.total = String.format(
+				"%s %s %s %s %s %s %s %s %s %s %s",
+				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
+				bunji_num2);
 	}
 	@Override
 	public String toString() {

@@ -9,11 +9,11 @@
 	</settings>
 
 	<typeAliases>
-		<package name="it_3st_1team.dto"/>
+		<package name="kr.or.dgit.it_3st_1team.dto"/>
 	</typeAliases>
 	
 	<typeHandlers>
-		<package name="it_3st_1team.typehandlers"/>
+		<package name="kr.or.dgit.it_3st_1team.typehandlers"/>
 	</typeHandlers>
 	
 	<environments default="development">
@@ -29,6 +29,6 @@
 	</environments>
 	
 	<mappers>
-		<!-- <mapper resource="kr/or/dgit/it_3st_1team/mappers/StudentMapper.xml"/> -->
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/UserMapper.xml"/>
 	</mappers>
 </configuration>
