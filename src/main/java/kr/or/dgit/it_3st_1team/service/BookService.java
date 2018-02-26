@@ -13,11 +13,11 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 public class BookService {
 	private static final Log log = LogFactory.getLog(BookDao.class);
 	
-	public List<Book> findBookByAll(){
-		log.debug("selectBookByAll()");
+	public List<Book> findBookWithTakeInoutByAll(){
+		log.debug("selectBookWithTakeInoutByAll()");
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
 			BookDao bookDao = sqlSession.getMapper(BookDao.class);
-			return bookDao.selectBookByAll();
+			return bookDao.selectBookWithTakeInoutByAll();
 		}
 	}
 	

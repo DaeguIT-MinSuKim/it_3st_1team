@@ -4,7 +4,7 @@ import java.util.List;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
 
-public interface BookDao {
+public interface TakeinoutDao {
 	//select
 	List<Book> selectBookWithTakeInoutByAll();
 }

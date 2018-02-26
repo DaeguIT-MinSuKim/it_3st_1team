@@ -28,7 +28,7 @@ public class BookServiceTest {
 
 	@Test
 	public void test1FindBookByAll() {
-		List<Book> listStd = service.findBookByAll();
+		List<Book> listStd = service.findBookWithTakeInoutByAll();
 		Assert.assertNotNull(listStd);
 		for(Book std : listStd) {
 			System.out.println(std);

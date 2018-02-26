@@ -2,21 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.BookDao">
 
-	<sql id="selectSql">
-		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book
+	<!-- resultmap -->
+	<resultMap type="Book" id="BookResult">
+		<id property="bkCode" column="bkcode"/>
+		<result property="bkname" column="name"/>
+		<result property="author" column="author" />
+		<result property="publish" column="publish"/>
+		<result property="pubyear" column="pubyear"/>		
+	</resultMap>
+	
+	<resultMap type="Book" id="BookWithInoutHashMap" extends="BookResult">
+		<result property="inout.rentday" column="rentday"/>
+		<result property="inout.returnday" column="returnday"/>
+	</resultMap>
+	
+	<sql id="selectWithTakeinoutSql">
+		select b.bkcode, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday
+		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
 	</sql>
 	
 	<sql id="whereSql">
 		<where>
-			<if test="studId != null">
-				stud_id = #{studId}
+			<if test="rentday != null">
+				rentday = #{rentday}
 			</if>
 		</where>
 	</sql>
 	
-	<select id="selectBookByAll" resultType="Book">
-		<include refid="selectSql" />
+	<select id="selectBookWithTakeInoutByAll" resultMap="BookWithInoutHashMap" parameterType="Book">
+		<include refid="selectWithTakeinoutSql" />
 	</select>
+	
+	
 
 </mapper>
 

@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -18,6 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.service.BookService;
 
 public class ManagementBookUI extends JPanel implements ActionListener{
 	private JTextField tfSearch;
@@ -136,44 +141,29 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
-		table.getColumnModel().getColumn(1).setPreferredWidth(100); //도서코드
-		table.getColumnModel().getColumn(2).setPreferredWidth(100); //회원ID
-		table.getColumnModel().getColumn(3).setPreferredWidth(400);  //도서명
-		table.getColumnModel().getColumn(4).setPreferredWidth(100);  //저자
-		table.getColumnModel().getColumn(5).setPreferredWidth(140); //출판사
-		table.getColumnModel().getColumn(6).setPreferredWidth(90); //출판년도
-		table.getColumnModel().getColumn(7).setPreferredWidth(100); //대여일
-		table.getColumnModel().getColumn(8).setPreferredWidth(100); //반납일
+		table.getColumnModel().getColumn(1).setPreferredWidth(150); //도서코드
+		table.getColumnModel().getColumn(2).setPreferredWidth(400);  //도서명
+		table.getColumnModel().getColumn(3).setPreferredWidth(150);  //저자
+		table.getColumnModel().getColumn(4).setPreferredWidth(140); //출판사
+		table.getColumnModel().getColumn(5).setPreferredWidth(90); //출판년도
+		table.getColumnModel().getColumn(6).setPreferredWidth(100); //대여일
+		table.getColumnModel().getColumn(7).setPreferredWidth(100); //반납일
 		scrollPane.setViewportView(table);
 		
 	}
 	
 	private Object[][] getRow() {
-		Object[][] rows = new Object[][] {
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null, null, null}
-		};
+		Object[][] rows = null;
+		BookService service = new BookService();
+		List<Book> list = service.findBookWithTakeInoutByAll();
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++) {
+			rows[i] = list.get(i).toArray(i);
+		}
 		return rows;
 	}
 	private Object[] getColunmNames() {
-		return new String[] {"NO", "도서코드", "회원ID", "도서명", "저자", "출판사", "출판년도","대여일","반납일"};
+		return new String[] {"NO", "도서코드", "도서명", "저자", "출판사", "출판년도","대여일","반납일"};
 	}
 	private void cellAlign(int align, int...idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();

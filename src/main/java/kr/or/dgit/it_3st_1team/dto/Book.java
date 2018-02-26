@@ -10,6 +10,7 @@ public class Book {
 	private int pubyear;
 	private String info;
 	private Location loca_num;
+	private Takeinout inout;
 
 	public Book() {
 	}
@@ -86,11 +87,22 @@ public class Book {
 		this.loca_num = loca_num;
 	}
 
+	public Takeinout getInout() {
+		return inout;
+	}
+
+	public void setInout(Takeinout inout) {
+		this.inout = inout;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
 				"Book [bkCode=%s, isbn=%s, rentable=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, info=%s, loca_num=%s]",
 				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num);
+	}
+	public Object[] toArray(int i) {
+		return new Object[] {i, bkCode, bkname, author, publish, pubyear, null, null};
 	}
 
 }

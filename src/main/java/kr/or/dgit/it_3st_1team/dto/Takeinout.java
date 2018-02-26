@@ -29,7 +29,7 @@ public class Takeinout {
 	public void setBkcode(Book bkcode) {
 		this.bkcode = bkcode;
 	}
-	public Date getRentdey() {
+	public String getRentdey() {
 		return rentdey;
 	}
 	public void setRentdey(Date rentdey) {
@@ -41,11 +41,11 @@ public class Takeinout {
 	public void setReturnday(Date returnday) {
 		this.returnday = returnday;
 	}
+	
 	@Override
 	public String toString() {
 		return String.format("Takeinout [inout_no=%s, code=%s, bkcode=%s, rentdey=%s, returnday=%s]", inout_no, code,
 				bkcode, rentdey, returnday);
 	}
-	
 	
 }
