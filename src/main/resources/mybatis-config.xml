@@ -30,5 +30,6 @@
 	
 	<mappers>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/BookMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/EmployeeMapper.xml"/>
 	</mappers>
 </configuration>
