@@ -1,299 +1,299 @@
--- È¸¿ø
+-- íšŒì›
 DROP TABLE IF EXISTS `bookmanagement`.`users` RESTRICT;
 
--- »ç¿ø
+-- ì‚¬ì›
 DROP TABLE IF EXISTS `bookmanagement`.`employee` RESTRICT;
 
--- Á÷Ã¥
+-- ì§ì±…
 DROP TABLE IF EXISTS `bookmanagement`.`title` RESTRICT;
 
--- µµ¼­
+-- ë„ì„œ
 DROP TABLE IF EXISTS `bookmanagement`.`book` RESTRICT;
 
--- Ãâ³³
+-- ì¶œë‚©
 DROP TABLE IF EXISTS `bookmanagement`.`takeinout` RESTRICT;
 
--- ¿¹¾à
+-- ì˜ˆì•½
 DROP TABLE IF EXISTS `bookmanagement`.`reserve` RESTRICT;
 
--- µµ¼­ºĞ·ù
+-- ë„ì„œë¶„ë¥˜
 DROP TABLE IF EXISTS `bookmanagement`.`category` RESTRICT;
 
--- À§Ä¡
+-- ìœ„ì¹˜
 DROP TABLE IF EXISTS `bookmanagement`.`location` RESTRICT;
 
--- Ãâ³³history
+-- ì¶œë‚©history
 DROP TABLE IF EXISTS `bookmanagement`.`history` RESTRICT;
 
--- ½ÅÃ»
+-- ì‹ ì²­
 DROP TABLE IF EXISTS `bookmanagement`.`request` RESTRICT;
 
--- ¿ìÆí¹øÈ£
+-- ìš°í¸ë²ˆí˜¸
 DROP TABLE IF EXISTS `bookmanagement`.`post` RESTRICT;
 
--- ³» ½ºÅ°¸¶
+-- ë‚´ ìŠ¤í‚¤ë§ˆ
 DROP SCHEMA IF EXISTS `bookmanagement`;
 
--- ³» ½ºÅ°¸¶
+-- ë‚´ ìŠ¤í‚¤ë§ˆ
 CREATE SCHEMA `bookmanagement`;
 
--- È¸¿ø
+-- íšŒì›
 CREATE TABLE `bookmanagement`.`users` (
-	`code`     VARCHAR(20) NOT NULL COMMENT 'È¸¿øÄÚµå', -- È¸¿øÄÚµå
-	`name`     VARCHAR(20) NOT NULL COMMENT 'ÀÌ¸§', -- ÀÌ¸§
-	`id`       VARCHAR(20) NOT NULL COMMENT '¾ÆÀÌµğ', -- ¾ÆÀÌµğ
-	`pw`       VARCHAR(50) NOT NULL COMMENT 'ºñ¹Ğ¹øÈ£', -- ºñ¹Ğ¹øÈ£
-	`tel`      VARCHAR(20) NULL     COMMENT '¿¬¶ôÃ³', -- ¿¬¶ôÃ³
-	`email`    VARCHAR(50) NULL     COMMENT '¸ŞÀÏ', -- ¸ŞÀÏ
-	`addr_id`  INT(11)     NULL     COMMENT 'ÁÖ¼Ò', -- ÁÖ¼Ò
-	`blacktf`  BOOLEAN     NULL     COMMENT 'ºí·¢¿©ºÎ', -- ºí·¢¿©ºÎ
-	`entryday` DATE        NULL     COMMENT '°¡ÀÔÀÏÀÚ', -- °¡ÀÔÀÏÀÚ
-	`freeday`  DATE        NULL     COMMENT '´ë¿©°¡´É³¯Â¥' -- ´ë¿©°¡´É³¯Â¥
+	`code`     VARCHAR(20) NOT NULL COMMENT 'íšŒì›ì½”ë“œ', -- íšŒì›ì½”ë“œ
+	`name`     VARCHAR(20) NOT NULL COMMENT 'ì´ë¦„', -- ì´ë¦„
+	`id`       VARCHAR(20) NOT NULL COMMENT 'ì•„ì´ë””', -- ì•„ì´ë””
+	`pw`       VARCHAR(50) NOT NULL COMMENT 'ë¹„ë°€ë²ˆí˜¸', -- ë¹„ë°€ë²ˆí˜¸
+	`tel`      VARCHAR(20) NULL     COMMENT 'ì—°ë½ì²˜', -- ì—°ë½ì²˜
+	`email`    VARCHAR(50) NULL     COMMENT 'ë©”ì¼', -- ë©”ì¼
+	`addr_id`  INT(11)     NULL     COMMENT 'ì£¼ì†Œ', -- ì£¼ì†Œ
+	`blacktf`  BOOLEAN     NULL     COMMENT 'ë¸”ë™ì—¬ë¶€', -- ë¸”ë™ì—¬ë¶€
+	`entryday` DATE        NULL     COMMENT 'ê°€ì…ì¼ì', -- ê°€ì…ì¼ì
+	`freeday`  DATE        NULL     COMMENT 'ëŒ€ì—¬ê°€ëŠ¥ë‚ ì§œ' -- ëŒ€ì—¬ê°€ëŠ¥ë‚ ì§œ
 )
-COMMENT 'È¸¿ø';
+COMMENT 'íšŒì›';
 
--- È¸¿ø
+-- íšŒì›
 ALTER TABLE `bookmanagement`.`users`
-	ADD CONSTRAINT `PK_users` -- È¸¿ø ±âº»Å°
+	ADD CONSTRAINT `PK_users` -- íšŒì› ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`code` -- È¸¿øÄÚµå
+			`code` -- íšŒì›ì½”ë“œ
 		);
 
--- »ç¿ø
+-- ì‚¬ì›
 CREATE TABLE `bookmanagement`.`employee` (
-	`code`    VARCHAR(20) NOT NULL COMMENT '»ç¿øÄÚµå', -- »ç¿øÄÚµå
-	`name`    VARCHAR(20) NOT NULL COMMENT 'ÀÌ¸§', -- ÀÌ¸§
-	`id`      VARCHAR(20) NOT NULL COMMENT '¾ÆÀÌµğ', -- ¾ÆÀÌµğ
-	`pw`      VARCHAR(50) NOT NULL COMMENT 'ºñ¹Ğ¹øÈ£', -- ºñ¹Ğ¹øÈ£
-	`tel`     VARCHAR(20) NULL     COMMENT '¿¬¶ôÃ³', -- ¿¬¶ôÃ³
-	`email`   VARCHAR(50) NULL     COMMENT '¸ŞÀÏ', -- ¸ŞÀÏ
-	`addr_id` INT(11)     NULL     COMMENT 'ÁÖ¼Ò', -- ÁÖ¼Ò
-	`titleno` INT(10)     NOT NULL COMMENT 'Á÷Ã¥ÄÚµå' -- Á÷Ã¥ÄÚµå
+	`code`    VARCHAR(20) NOT NULL COMMENT 'ì‚¬ì›ì½”ë“œ', -- ì‚¬ì›ì½”ë“œ
+	`name`    VARCHAR(20) NOT NULL COMMENT 'ì´ë¦„', -- ì´ë¦„
+	`id`      VARCHAR(20) NOT NULL COMMENT 'ì•„ì´ë””', -- ì•„ì´ë””
+	`pw`      VARCHAR(50) NOT NULL COMMENT 'ë¹„ë°€ë²ˆí˜¸', -- ë¹„ë°€ë²ˆí˜¸
+	`tel`     VARCHAR(20) NULL     COMMENT 'ì—°ë½ì²˜', -- ì—°ë½ì²˜
+	`email`   VARCHAR(50) NULL     COMMENT 'ë©”ì¼', -- ë©”ì¼
+	`addr_id` INT(11)     NULL     COMMENT 'ì£¼ì†Œ', -- ì£¼ì†Œ
+	`titleno` INT(10)     NOT NULL COMMENT 'ì§ì±…ì½”ë“œ' -- ì§ì±…ì½”ë“œ
 )
-COMMENT '»ç¿ø';
+COMMENT 'ì‚¬ì›';
 
--- »ç¿ø
+-- ì‚¬ì›
 ALTER TABLE `bookmanagement`.`employee`
-	ADD CONSTRAINT `PK_employee` -- »ç¿ø ±âº»Å°
+	ADD CONSTRAINT `PK_employee` -- ì‚¬ì› ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`code` -- »ç¿øÄÚµå
+			`code` -- ì‚¬ì›ì½”ë“œ
 		);
 
--- Á÷Ã¥
+-- ì§ì±…
 CREATE TABLE `bookmanagement`.`title` (
-	`titleno` INT(10)     NOT NULL COMMENT 'Á÷Ã¥ÄÚµå', -- Á÷Ã¥ÄÚµå
-	`name`    VARCHAR(20) NULL     COMMENT 'Á÷Ã¥¸í', -- Á÷Ã¥¸í
-	`power`   VARCHAR(20) NULL     COMMENT '±ÇÇÑ' -- ±ÇÇÑ
+	`titleno` INT(10)     NOT NULL COMMENT 'ì§ì±…ì½”ë“œ', -- ì§ì±…ì½”ë“œ
+	`name`    VARCHAR(20) NULL     COMMENT 'ì§ì±…ëª…', -- ì§ì±…ëª…
+	`power`   VARCHAR(20) NULL     COMMENT 'ê¶Œí•œ' -- ê¶Œí•œ
 )
-COMMENT 'Á÷Ã¥';
+COMMENT 'ì§ì±…';
 
--- Á÷Ã¥
+-- ì§ì±…
 ALTER TABLE `bookmanagement`.`title`
-	ADD CONSTRAINT `PK_title` -- Á÷Ã¥ ±âº»Å°
+	ADD CONSTRAINT `PK_title` -- ì§ì±… ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`titleno` -- Á÷Ã¥ÄÚµå
+			`titleno` -- ì§ì±…ì½”ë“œ
 		);
 
--- µµ¼­
+-- ë„ì„œ
 CREATE TABLE `bookmanagement`.`book` (
-	`bkcode`   VARCHAR(20) NOT NULL COMMENT 'µµ¼­ÄÚµå', -- µµ¼­ÄÚµå
+	`bkcode`   VARCHAR(20) NOT NULL COMMENT 'ë„ì„œì½”ë“œ', -- ë„ì„œì½”ë“œ
 	`isbn`     VARCHAR(20) NOT NULL COMMENT 'ISBN', -- ISBN
-	`rentable` BOOLEAN     NULL     COMMENT '´ë¿©°¡´É¿©ºÎ', -- ´ë¿©°¡´É¿©ºÎ
-	`bkname`   VARCHAR(50) NULL     COMMENT 'µµ¼­¸í', -- µµ¼­¸í
-	`author`   VARCHAR(50) NULL     COMMENT 'ÀúÀÚ', -- ÀúÀÚ
-	`publish`  VARCHAR(50) NULL     COMMENT 'ÃâÆÇ»ç', -- ÃâÆÇ»ç
-	`pubyear`  INT(4)      NULL     COMMENT 'ÃâÆÇ³âµµ', -- ÃâÆÇ³âµµ
-	`info`     LONGTEXT    NULL     COMMENT 'µµ¼­Á¤º¸', -- µµ¼­Á¤º¸
-	`loca_num` VARCHAR(6)  NULL     COMMENT 'ºĞ·ù¹øÈ£' -- ºĞ·ù¹øÈ£
+	`rentable` BOOLEAN     NULL     COMMENT 'ëŒ€ì—¬ê°€ëŠ¥ì—¬ë¶€', -- ëŒ€ì—¬ê°€ëŠ¥ì—¬ë¶€
+	`bkname`   VARCHAR(50) NULL     COMMENT 'ë„ì„œëª…', -- ë„ì„œëª…
+	`author`   VARCHAR(50) NULL     COMMENT 'ì €ì', -- ì €ì
+	`publish`  VARCHAR(50) NULL     COMMENT 'ì¶œíŒì‚¬', -- ì¶œíŒì‚¬
+	`pubyear`  INT(4)      NULL     COMMENT 'ì¶œíŒë…„ë„', -- ì¶œíŒë…„ë„
+	`info`     LONGTEXT    NULL     COMMENT 'ë„ì„œì •ë³´', -- ë„ì„œì •ë³´
+	`loca_num` VARCHAR(6)  NULL     COMMENT 'ë¶„ë¥˜ë²ˆí˜¸' -- ë¶„ë¥˜ë²ˆí˜¸
 )
-COMMENT 'µµ¼­';
+COMMENT 'ë„ì„œ';
 
--- µµ¼­
+-- ë„ì„œ
 ALTER TABLE `bookmanagement`.`book`
-	ADD CONSTRAINT `PK_book` -- µµ¼­ ±âº»Å°
+	ADD CONSTRAINT `PK_book` -- ë„ì„œ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`bkcode` -- µµ¼­ÄÚµå
+			`bkcode` -- ë„ì„œì½”ë“œ
 		);
 
--- Ãâ³³
+-- ì¶œë‚©
 CREATE TABLE `bookmanagement`.`takeinout` (
-	`inout_no`  INT(10)     NOT NULL COMMENT '¹øÈ£', -- ¹øÈ£
-	`code`      VARCHAR(20) NULL     COMMENT 'È¸¿øÄÚµå', -- È¸¿øÄÚµå
-	`bkcode`    VARCHAR(20) NULL     COMMENT 'µµ¼­ÄÚµå', -- µµ¼­ÄÚµå
-	`rentday`   DATE        NULL     COMMENT '´ë¿©ÀÏ', -- ´ë¿©ÀÏ
-	`returnday` DATE        NULL     COMMENT '¹İ³³¿¹Á¤ÀÏ' -- ¹İ³³¿¹Á¤ÀÏ
+	`inout_no`  INT(10)     NOT NULL COMMENT 'ë²ˆí˜¸', -- ë²ˆí˜¸
+	`code`      VARCHAR(20) NULL     COMMENT 'íšŒì›ì½”ë“œ', -- íšŒì›ì½”ë“œ
+	`bkcode`    VARCHAR(20) NULL     COMMENT 'ë„ì„œì½”ë“œ', -- ë„ì„œì½”ë“œ
+	`rentday`   DATE        NULL     COMMENT 'ëŒ€ì—¬ì¼', -- ëŒ€ì—¬ì¼
+	`returnday` DATE        NULL     COMMENT 'ë°˜ë‚©ì˜ˆì •ì¼' -- ë°˜ë‚©ì˜ˆì •ì¼
 )
-COMMENT 'Ãâ³³';
+COMMENT 'ì¶œë‚©';
 
--- Ãâ³³
+-- ì¶œë‚©
 ALTER TABLE `bookmanagement`.`takeinout`
-	ADD CONSTRAINT `PK_takeinout` -- Ãâ³³ ±âº»Å°
+	ADD CONSTRAINT `PK_takeinout` -- ì¶œë‚© ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`inout_no` -- ¹øÈ£
+			`inout_no` -- ë²ˆí˜¸
 		);
 
--- ¿¹¾à
+-- ì˜ˆì•½
 CREATE TABLE `bookmanagement`.`reserve` (
-	`re_no`   INT(10)     NOT NULL COMMENT '¿¹¾à¼ø¼­', -- ¿¹¾à¼ø¼­
-	`code`    VARCHAR(20) NULL     COMMENT 'È¸¿øÄÚµå', -- È¸¿øÄÚµå
-	`bkcode`  VARCHAR(20) NULL     COMMENT 'µµ¼­ÄÚµå', -- µµ¼­ÄÚµå
-	`reserve` BOOLEAN     NULL     COMMENT '¿¹¾à¿©ºÎ', -- ¿¹¾à¿©ºÎ
+	`re_no`   INT(10)     NOT NULL COMMENT 'ì˜ˆì•½ìˆœì„œ', -- ì˜ˆì•½ìˆœì„œ
+	`code`    VARCHAR(20) NULL     COMMENT 'íšŒì›ì½”ë“œ', -- íšŒì›ì½”ë“œ
+	`bkcode`  VARCHAR(20) NULL     COMMENT 'ë„ì„œì½”ë“œ', -- ë„ì„œì½”ë“œ
+	`reserve` BOOLEAN     NULL     COMMENT 'ì˜ˆì•½ì—¬ë¶€', -- ì˜ˆì•½ì—¬ë¶€
 	`isbn`    VARCHAR(20) NULL     COMMENT 'ISBN' -- ISBN
 )
-COMMENT '¿¹¾à';
+COMMENT 'ì˜ˆì•½';
 
--- ¿¹¾à
+-- ì˜ˆì•½
 ALTER TABLE `bookmanagement`.`reserve`
-	ADD CONSTRAINT `PK_reserve` -- ¿¹¾à ±âº»Å°
+	ADD CONSTRAINT `PK_reserve` -- ì˜ˆì•½ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`re_no` -- ¿¹¾à¼ø¼­
+			`re_no` -- ì˜ˆì•½ìˆœì„œ
 		);
 
--- µµ¼­ºĞ·ù
+-- ë„ì„œë¶„ë¥˜
 CREATE TABLE `bookmanagement`.`category` (
-	`num`       INT(3)      NOT NULL COMMENT 'ºĞ·ù¹øÈ£', -- ºĞ·ù¹øÈ£
-	`catename`  VARCHAR(10) NULL     COMMENT 'ºĞ·ù¸í', -- ºĞ·ù¸í
-	`catesize`  CHAR(1)     NULL     COMMENT 'Å©±â', -- Å©±â
-	`parentnum` INT(10)     NULL     COMMENT '»óÀ§Ä«Å×°í¸®' -- »óÀ§Ä«Å×°í¸®
+	`num`       INT(3)      NOT NULL COMMENT 'ë¶„ë¥˜ë²ˆí˜¸', -- ë¶„ë¥˜ë²ˆí˜¸
+	`catename`  VARCHAR(10) NULL     COMMENT 'ë¶„ë¥˜ëª…', -- ë¶„ë¥˜ëª…
+	`catesize`  CHAR(1)     NULL     COMMENT 'í¬ê¸°', -- í¬ê¸°
+	`parentnum` INT(10)     NULL     COMMENT 'ìƒìœ„ì¹´í…Œê³ ë¦¬' -- ìƒìœ„ì¹´í…Œê³ ë¦¬
 )
-COMMENT 'µµ¼­ºĞ·ù';
+COMMENT 'ë„ì„œë¶„ë¥˜';
 
--- µµ¼­ºĞ·ù
+-- ë„ì„œë¶„ë¥˜
 ALTER TABLE `bookmanagement`.`category`
-	ADD CONSTRAINT `PK_category` -- µµ¼­ºĞ·ù ±âº»Å°
+	ADD CONSTRAINT `PK_category` -- ë„ì„œë¶„ë¥˜ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`num` -- ºĞ·ù¹øÈ£
+			`num` -- ë¶„ë¥˜ë²ˆí˜¸
 		);
 
--- À§Ä¡
+-- ìœ„ì¹˜
 CREATE TABLE `bookmanagement`.`location` (
-	`loca_num`     VARCHAR(6) NOT NULL COMMENT 'ºĞ·ù¹øÈ£', -- ºĞ·ù¹øÈ£
-	`loca_section` VARCHAR(2) NOT NULL COMMENT '±¸¿ª' -- ±¸¿ª
+	`loca_num`     VARCHAR(6) NOT NULL COMMENT 'ë¶„ë¥˜ë²ˆí˜¸', -- ë¶„ë¥˜ë²ˆí˜¸
+	`loca_section` VARCHAR(2) NOT NULL COMMENT 'êµ¬ì—­' -- êµ¬ì—­
 )
-COMMENT 'À§Ä¡';
+COMMENT 'ìœ„ì¹˜';
 
--- À§Ä¡
+-- ìœ„ì¹˜
 ALTER TABLE `bookmanagement`.`location`
-	ADD CONSTRAINT `PK_location` -- À§Ä¡ ±âº»Å°
+	ADD CONSTRAINT `PK_location` -- ìœ„ì¹˜ ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`loca_num` -- ºĞ·ù¹øÈ£
+			`loca_num` -- ë¶„ë¥˜ë²ˆí˜¸
 		);
 
--- Ãâ³³history
+-- ì¶œë‚©history
 CREATE TABLE `bookmanagement`.`history` (
-	`his_no`     INT(100)    NOT NULL COMMENT '¹øÈ£', -- ¹øÈ£
-	`code`       VARCHAR(20) NULL     COMMENT 'È¸¿øÄÚµå', -- È¸¿øÄÚµå
-	`realreturn` DATE        NULL     COMMENT '½Ç¹İ³³ÀÏ', -- ½Ç¹İ³³ÀÏ
-	`delay`      INT(10)     NULL     COMMENT '¿¬Ã¼ÀÏ¼ö', -- ¿¬Ã¼ÀÏ¼ö
-	`bkcode`     VARCHAR(20) NULL     COMMENT 'µµ¼­ÄÚµå' -- µµ¼­ÄÚµå
+	`his_no`     INT(100)    NOT NULL COMMENT 'ë²ˆí˜¸', -- ë²ˆí˜¸
+	`code`       VARCHAR(20) NULL     COMMENT 'íšŒì›ì½”ë“œ', -- íšŒì›ì½”ë“œ
+	`realreturn` DATE        NULL     COMMENT 'ì‹¤ë°˜ë‚©ì¼', -- ì‹¤ë°˜ë‚©ì¼
+	`delay`      INT(10)     NULL     COMMENT 'ì—°ì²´ì¼ìˆ˜', -- ì—°ì²´ì¼ìˆ˜
+	`bkcode`     VARCHAR(20) NULL     COMMENT 'ë„ì„œì½”ë“œ' -- ë„ì„œì½”ë“œ
 )
-COMMENT 'Ãâ³³history';
+COMMENT 'ì¶œë‚©history';
 
--- Ãâ³³history
+-- ì¶œë‚©history
 ALTER TABLE `bookmanagement`.`history`
-	ADD CONSTRAINT `PK_history` -- Ãâ³³history ±âº»Å°
+	ADD CONSTRAINT `PK_history` -- ì¶œë‚©history ê¸°ë³¸í‚¤
 		PRIMARY KEY (
-			`his_no` -- ¹øÈ£
+			`his_no` -- ë²ˆí˜¸
 		);
 
--- ½ÅÃ»
+-- ì‹ ì²­
 CREATE TABLE `bookmanagement`.`request` (
-	`bkname`  VARCHAR(50) NULL     COMMENT 'µµ¼­¸í', -- µµ¼­¸í
-	`author`  VARCHAR(50) NULL     COMMENT 'ÀúÀÚ', -- ÀúÀÚ
-	`publish` VARCHAR(50) NULL     COMMENT 'ÃâÆÇ»ç', -- ÃâÆÇ»ç
-	`pubyear` INT(4)      NULL     COMMENT 'ÃâÆÇ³âµµ', -- ÃâÆÇ³âµµ
+	`bkname`  VARCHAR(50) NULL     COMMENT 'ë„ì„œëª…', -- ë„ì„œëª…
+	`author`  VARCHAR(50) NULL     COMMENT 'ì €ì', -- ì €ì
+	`publish` VARCHAR(50) NULL     COMMENT 'ì¶œíŒì‚¬', -- ì¶œíŒì‚¬
+	`pubyear` INT(4)      NULL     COMMENT 'ì¶œíŒë…„ë„', -- ì¶œíŒë…„ë„
 	`isbn`    VARCHAR(20) NOT NULL COMMENT 'ISBN', -- ISBN
-	`price`   INT(10)     NULL     COMMENT '°¡°İ' -- °¡°İ
+	`price`   INT(10)     NULL     COMMENT 'ê°€ê²©' -- ê°€ê²©
 )
-COMMENT '½ÅÃ»';
+COMMENT 'ì‹ ì²­';
 
--- ¿ìÆí¹øÈ£
+-- ìš°í¸ë²ˆí˜¸
 CREATE TABLE `bookmanagement`.`post` (
-	`zipcode`   CHAR(5)     NULL COMMENT '¿ìÆí¹øÈ£', -- ¿ìÆí¹øÈ£
-	`sido`      VARCHAR(20) NULL COMMENT '½Ãµµ', -- ½Ãµµ
-	`sigungu`   VARCHAR(20) NULL COMMENT '½Ã±º±¸', -- ½Ã±º±¸
-	`doro`      VARCHAR(80) NULL COMMENT 'µµ·Î', -- µµ·Î
-	`building1` INT(5)      NULL COMMENT '°Ç¹°¹øÈ£1', -- °Ç¹°¹øÈ£1
-	`building2` INT(5)      NULL COMMENT '°Ç¹°¹øÈ£2' -- °Ç¹°¹øÈ£2
+	`zipcode`   CHAR(5)     NULL COMMENT 'ìš°í¸ë²ˆí˜¸', -- ìš°í¸ë²ˆí˜¸
+	`sido`      VARCHAR(20) NULL COMMENT 'ì‹œë„', -- ì‹œë„
+	`sigungu`   VARCHAR(20) NULL COMMENT 'ì‹œêµ°êµ¬', -- ì‹œêµ°êµ¬
+	`doro`      VARCHAR(80) NULL COMMENT 'ë„ë¡œ', -- ë„ë¡œ
+	`building1` INT(5)      NULL COMMENT 'ê±´ë¬¼ë²ˆí˜¸1', -- ê±´ë¬¼ë²ˆí˜¸1
+	`building2` INT(5)      NULL COMMENT 'ê±´ë¬¼ë²ˆí˜¸2' -- ê±´ë¬¼ë²ˆí˜¸2
 )
-COMMENT '¿ìÆí¹øÈ£';
+COMMENT 'ìš°í¸ë²ˆí˜¸';
 
--- »ç¿ø
+-- ì‚¬ì›
 ALTER TABLE `bookmanagement`.`employee`
-	ADD CONSTRAINT `FK_title_TO_employee` -- Á÷Ã¥ -> »ç¿ø
+	ADD CONSTRAINT `FK_title_TO_employee` -- ì§ì±… -> ì‚¬ì›
 		FOREIGN KEY (
-			`titleno` -- Á÷Ã¥ÄÚµå
+			`titleno` -- ì§ì±…ì½”ë“œ
 		)
-		REFERENCES `bookmanagement`.`title` ( -- Á÷Ã¥
-			`titleno` -- Á÷Ã¥ÄÚµå
+		REFERENCES `bookmanagement`.`title` ( -- ì§ì±…
+			`titleno` -- ì§ì±…ì½”ë“œ
 		);
 
--- µµ¼­
+-- ë„ì„œ
 ALTER TABLE `bookmanagement`.`book`
-	ADD CONSTRAINT `FK_location_TO_book` -- À§Ä¡ -> µµ¼­
+	ADD CONSTRAINT `FK_location_TO_book` -- ìœ„ì¹˜ -> ë„ì„œ
 		FOREIGN KEY (
-			`loca_num` -- ºĞ·ù¹øÈ£
+			`loca_num` -- ë¶„ë¥˜ë²ˆí˜¸
 		)
-		REFERENCES `bookmanagement`.`location` ( -- À§Ä¡
-			`loca_num` -- ºĞ·ù¹øÈ£
+		REFERENCES `bookmanagement`.`location` ( -- ìœ„ì¹˜
+			`loca_num` -- ë¶„ë¥˜ë²ˆí˜¸
 		);
 
--- Ãâ³³
+-- ì¶œë‚©
 ALTER TABLE `bookmanagement`.`takeinout`
-	ADD CONSTRAINT `FK_users_TO_takeinout` -- È¸¿ø -> Ãâ³³
+	ADD CONSTRAINT `FK_users_TO_takeinout` -- íšŒì› -> ì¶œë‚©
 		FOREIGN KEY (
-			`code` -- È¸¿øÄÚµå
+			`code` -- íšŒì›ì½”ë“œ
 		)
-		REFERENCES `bookmanagement`.`users` ( -- È¸¿ø
-			`code` -- È¸¿øÄÚµå
+		REFERENCES `bookmanagement`.`users` ( -- íšŒì›
+			`code` -- íšŒì›ì½”ë“œ
 		);
 
--- Ãâ³³
+-- ì¶œë‚©
 ALTER TABLE `bookmanagement`.`takeinout`
-	ADD CONSTRAINT `FK_book_TO_takeinout` -- µµ¼­ -> Ãâ³³
+	ADD CONSTRAINT `FK_book_TO_takeinout` -- ë„ì„œ -> ì¶œë‚©
 		FOREIGN KEY (
-			`bkcode` -- µµ¼­ÄÚµå
+			`bkcode` -- ë„ì„œì½”ë“œ
 		)
-		REFERENCES `bookmanagement`.`book` ( -- µµ¼­
-			`bkcode` -- µµ¼­ÄÚµå
+		REFERENCES `bookmanagement`.`book` ( -- ë„ì„œ
+			`bkcode` -- ë„ì„œì½”ë“œ
 		);
 
--- ¿¹¾à
+-- ì˜ˆì•½
 ALTER TABLE `bookmanagement`.`reserve`
-	ADD CONSTRAINT `FK_users_TO_reserve` -- È¸¿ø -> ¿¹¾à
+	ADD CONSTRAINT `FK_users_TO_reserve` -- íšŒì› -> ì˜ˆì•½
 		FOREIGN KEY (
-			`code` -- È¸¿øÄÚµå
+			`code` -- íšŒì›ì½”ë“œ
 		)
-		REFERENCES `bookmanagement`.`users` ( -- È¸¿ø
-			`code` -- È¸¿øÄÚµå
+		REFERENCES `bookmanagement`.`users` ( -- íšŒì›
+			`code` -- íšŒì›ì½”ë“œ
 		);
 
--- ¿¹¾à
+-- ì˜ˆì•½
 ALTER TABLE `bookmanagement`.`reserve`
-	ADD CONSTRAINT `FK_book_TO_reserve` -- µµ¼­ -> ¿¹¾à
+	ADD CONSTRAINT `FK_book_TO_reserve` -- ë„ì„œ -> ì˜ˆì•½
 		FOREIGN KEY (
-			`bkcode` -- µµ¼­ÄÚµå
+			`bkcode` -- ë„ì„œì½”ë“œ
 		)
-		REFERENCES `bookmanagement`.`book` ( -- µµ¼­
-			`bkcode` -- µµ¼­ÄÚµå
+		REFERENCES `bookmanagement`.`book` ( -- ë„ì„œ
+			`bkcode` -- ë„ì„œì½”ë“œ
 		);
 
--- Ãâ³³history
+-- ì¶œë‚©history
 ALTER TABLE `bookmanagement`.`history`
-	ADD CONSTRAINT `FK_users_TO_history` -- È¸¿ø -> Ãâ³³history
+	ADD CONSTRAINT `FK_users_TO_history` -- íšŒì› -> ì¶œë‚©history
 		FOREIGN KEY (
-			`code` -- È¸¿øÄÚµå
+			`code` -- íšŒì›ì½”ë“œ
 		)
-		REFERENCES `bookmanagement`.`users` ( -- È¸¿ø
-			`code` -- È¸¿øÄÚµå
+		REFERENCES `bookmanagement`.`users` ( -- íšŒì›
+			`code` -- íšŒì›ì½”ë“œ
 		);
 
--- Ãâ³³history
+-- ì¶œë‚©history
 ALTER TABLE `bookmanagement`.`history`
-	ADD CONSTRAINT `FK_book_TO_history` -- µµ¼­ -> Ãâ³³history
+	ADD CONSTRAINT `FK_book_TO_history` -- ë„ì„œ -> ì¶œë‚©history
 		FOREIGN KEY (
-			`bkcode` -- µµ¼­ÄÚµå
+			`bkcode` -- ë„ì„œì½”ë“œ
 		)
-		REFERENCES `bookmanagement`.`book` ( -- µµ¼­
-			`bkcode` -- µµ¼­ÄÚµå
+		REFERENCES `bookmanagement`.`book` ( -- ë„ì„œ
+			`bkcode` -- ë„ì„œì½”ë“œ
 		);

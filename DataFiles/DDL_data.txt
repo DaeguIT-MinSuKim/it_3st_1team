@@ -1,4 +1,4 @@
--- Ãâ³³ Å×ÀÌºí delete ½Ã history ¿¡ update trigger
+-- ì¶œë‚© í…Œì´ë¸” delete ì‹œ history ì— update trigger
 
 create trigger tri_takeinout_after_delete_history
 after delete
@@ -9,7 +9,7 @@ begin
 end;
 
 
--- Ãâ³³ Å×ÀÌºí insert ½Ã history ¿¡ insert trigger
+-- ì¶œë‚© í…Œì´ë¸” insert ì‹œ history ì— insert trigger
 
 create trigger tri_takeinout_after_insert_history
 after insert
@@ -20,9 +20,9 @@ begin
 	values(new.code,null,null,new.bkcode);
 end;
 
--- Ãâ³³ ´ë¿©
+-- ì¶œë‚© ëŒ€ì—¬
 insert into takeinout values
 (8, 5,'122008em0000333331',curdate(),adddate(curdate(), 7));
 
--- Ãâ³³ ¹İ³³
+-- ì¶œë‚© ë°˜ë‚©
 delete from takeinout where bkcode = '122008em0000333331' and code = '5';
