@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package it_3st_1team.ui.user;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

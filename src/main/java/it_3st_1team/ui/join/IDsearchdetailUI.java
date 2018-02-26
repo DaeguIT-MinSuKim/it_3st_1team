@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package it_3st_1team.ui.join;
 
 import java.awt.Font;
 

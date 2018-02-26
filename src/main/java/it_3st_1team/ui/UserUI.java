@@ -1,6 +1,12 @@
 package it_3st_1team.ui;
 
 import javax.swing.JPanel;
+
+import it_3st_1team.ui.user.HistoryUI;
+import it_3st_1team.ui.user.RequestBookUI;
+import it_3st_1team.ui.user.SearchBookUI;
+import it_3st_1team.ui.user.UserInfoUpdateUI;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
