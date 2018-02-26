@@ -2,7 +2,7 @@ package kr.or.dgit.it_3st_1team.dto;
 
 public class Book {
 	private String bkCode;
-	private int isbn;
+	private String isbn;
 	private boolean rentable;
 	private String bkname;
 	private String author;
@@ -22,11 +22,11 @@ public class Book {
 		this.bkCode = bkCode;
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
