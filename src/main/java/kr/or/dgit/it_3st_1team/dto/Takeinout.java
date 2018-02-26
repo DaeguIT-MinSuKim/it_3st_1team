@@ -29,7 +29,7 @@ public class Takeinout {
 	public void setBkcode(Book bkcode) {
 		this.bkcode = bkcode;
 	}
-	public String getRentdey() {
+	public Date getRentdey() {
 		return rentdey;
 	}
 	public void setRentdey(Date rentdey) {
