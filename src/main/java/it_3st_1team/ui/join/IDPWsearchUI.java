@@ -15,9 +15,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class IDPWsearchUI extends JFrame {
+public class IDPWsearchUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField tfName;
@@ -25,6 +27,8 @@ public class IDPWsearchUI extends JFrame {
 	private JTextField tfName2;
 	private JTextField tfId2;
 	private JTextField tfMail2;
+	private JButton btnIdfind;
+	private JButton btnPwfind;
 
 	
 	public IDPWsearchUI() {
@@ -75,7 +79,8 @@ public class IDPWsearchUI extends JFrame {
 		tfMail.setBounds(140, 85, 250, 30);
 		panelID.add(tfMail);
 		
-		JButton btnIdfind = new JButton("찾기");
+		btnIdfind = new JButton("찾기");
+		btnIdfind.addActionListener(this);
 		btnIdfind.setForeground(Color.DARK_GRAY);
 		btnIdfind.setBorder(null);
 		btnIdfind.setBackground(new Color(190, 190, 190));
@@ -125,11 +130,28 @@ public class IDPWsearchUI extends JFrame {
 		tfMail2.setBounds(140, 125, 250, 30);
 		panelPw.add(tfMail2);
 		
-		JButton btnPwfind = new JButton("찾기");
+		btnPwfind = new JButton("찾기");
+		btnPwfind.addActionListener(this);
 		btnPwfind.setForeground(Color.DARK_GRAY);
 		btnPwfind.setBorder(null);
 		btnPwfind.setBackground(new Color(190, 190, 190));
 		btnPwfind.setBounds(359, 170, 85, 30);
 		panelPw.add(btnPwfind);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnPwfind) {
+			actionPerformedBtnPwfind(e);
+		}
+		if (e.getSource() == btnIdfind) {
+			actionPerformedBtnIdfind(e);
+		}
+	}
+	protected void actionPerformedBtnIdfind(ActionEvent e) {
+		IDsearchdetailUI searchId = new IDsearchdetailUI();
+		searchId.setVisible(true);
+	}
+	protected void actionPerformedBtnPwfind(ActionEvent e) {
+		PWsearchdetailUI searchPw = new PWsearchdetailUI();
+		searchPw.setVisible(true);
 	}
 }
