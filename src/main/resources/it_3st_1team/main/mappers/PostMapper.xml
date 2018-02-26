@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.PostDao">
+
+	<sql id="selectSql">
+		SELECT zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1, bunji_num2
+		FROM post
+	</sql>
+	<sql id="whereSql">
+		<where>
+			<if test="sigungu != null">
+				sigungu = #{sigungu}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectPostByAll" resultType="post">
+		<include refid="selectSql" />		
+	</select>
+
+
+
+
+</mapper>
