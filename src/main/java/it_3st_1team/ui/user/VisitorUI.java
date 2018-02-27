@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+
 import it_3st_1team.ui.LoginUI;
 import it_3st_1team.ui.join.JoinUI;
 
@@ -94,5 +95,6 @@ public class VisitorUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnJoin(ActionEvent e) {
 		JoinUI join = new JoinUI();
 		join.setVisible(true);
+
 	}
 }

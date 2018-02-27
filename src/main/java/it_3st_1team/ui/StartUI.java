@@ -24,6 +24,7 @@ import it_3st_1team.ui.join.IDPWsearchUI;
 import it_3st_1team.ui.join.JoinUI;
 import it_3st_1team.ui.user.VisitorUI;
 
+
 @SuppressWarnings("serial")
 public class StartUI extends JFrame implements ActionListener, MouseListener{
 	private JPanel contentPane;

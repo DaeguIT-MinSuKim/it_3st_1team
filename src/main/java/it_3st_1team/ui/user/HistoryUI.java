@@ -1,6 +1,7 @@
 package it_3st_1team.ui.user;
 
 import java.awt.Color;
+
 import java.awt.Font;
 
 import javax.swing.ButtonGroup;
@@ -89,6 +90,31 @@ public class HistoryUI extends JPanel {
 		rdbtnin.setBounds(140, 0, 80, 30);
 		pTableHistory.add(rdbtnin);
 		group.add(rdbtnin);
+		
+		/*JButton btnPrev = new JButton("<");
+		btnPrev.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnPrev.setBounds(350, 10, 50, 50);
+		pPage.add(btnPrev);
+		
+		JButton btnFirst = new JButton("1");
+		btnFirst.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnFirst.setBounds(440, 10, 50, 50);
+		pPage.add(btnFirst);
+		
+		JButton btnSecond = new JButton("2");
+		btnSecond.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnSecond.setBounds(530, 10, 50, 50);
+		pPage.add(btnSecond);
+		
+		JButton btnThird = new JButton("3");
+		btnThird.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnThird.setBounds(620, 10, 50, 50);
+		pPage.add(btnThird);
+		
+		JButton btnNext = new JButton(">");
+		btnNext.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		btnNext.setBounds(710, 10, 50, 50);
+		pPage.add(btnNext);*/
 	}
 	
 	private Object[][] getRow() {

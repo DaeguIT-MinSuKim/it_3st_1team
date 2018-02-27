@@ -13,9 +13,35 @@ public class User {
 	private boolean blacktf;
 	private Date entryday;
 	private Date freeday;
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public User(String name, String pw, Phone tel, String email, Post addr_id) {
+		super();
+		this.name = name;
+		this.pw = pw;
+		this.tel = tel;
+		this.email = email;
+		this.addr_id = addr_id;
+	}
+
+
+	public User(int code, String name, String id, String pw, Phone tel, String email, Post addr_id, Date entryday) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.id = id;
+		this.pw = pw;
+		this.tel = tel;
+		this.email = email;
+		this.addr_id = addr_id;
+		this.entryday = entryday;
+	}
+
+
 	public int getCode() {
 		return code;
 	}
@@ -79,8 +105,8 @@ public class User {
 	@Override
 	public String toString() {
 		return String.format(
-				"User [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, addr_id=%s, blacktf=%s, entryday=%s, freeday=%s]",
-				code, name, id, pw, tel, email, addr_id, blacktf, entryday, freeday);
+				"code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, blacktf=%s, entryday=%s, freeday=%s",
+				code, name, id, pw, tel, email,  blacktf, entryday, freeday);
 	}
 	
 	
