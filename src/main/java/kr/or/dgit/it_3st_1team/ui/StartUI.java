@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package kr.or.dgit.it_3st_1team.ui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,9 +20,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-import it_3st_1team.ui.join.IDPWsearchUI;
-import it_3st_1team.ui.join.JoinUI;
-import it_3st_1team.ui.user.VisitorUI;
+import kr.or.dgit.it_3st_1team.ui.join.IDPWsearchUI;
+import kr.or.dgit.it_3st_1team.ui.join.JoinUI;
+import kr.or.dgit.it_3st_1team.ui.user.VisitorUI;
 
 
 @SuppressWarnings("serial")

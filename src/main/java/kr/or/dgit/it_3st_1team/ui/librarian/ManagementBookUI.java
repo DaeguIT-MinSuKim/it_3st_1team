@@ -1,14 +1,12 @@
-package it_3st_1team.ui.librarian;
+package kr.or.dgit.it_3st_1team.ui.librarian;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -100,11 +98,6 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		group.add(rdbtnIn);
 		pState.add(rdbtnIn);
 		
-		/*JRadioButton radioButton_2 = new JRadioButton("무 슨 현 황");
-		radioButton_2.setBackground(Color.WHITE);
-		radioButton_2.setBounds(425, 20, 100, 30);
-		pState.add(radioButton_2);*/
-		
 		btnAddbook = new JButton("도서추가");
 		btnAddbook.addActionListener(this);
 		btnAddbook.setBorder(null);
@@ -138,9 +131,9 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		table.setBackground(new Color(255,255,255));
 		table.getTableHeader().setBackground(new Color(245,245,245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		table.setModel(new DefaultTableModel(getRow(),getColunmNames()));
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		table.setModel(new DefaultTableModel(getRow(),getColunmNames()));
 		table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
 		table.getColumnModel().getColumn(1).setPreferredWidth(150); //도서코드
 		table.getColumnModel().getColumn(2).setPreferredWidth(400);  //도서명
@@ -157,6 +150,7 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		Object[][] rows = null;
 		BookService service = new BookService();
 		List<Book> list = service.findBookWithTakeInoutByAll();
+		System.out.println(list);
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++) {
 			rows[i] = list.get(i).toArray(i);

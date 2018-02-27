@@ -6,6 +6,17 @@ public class Location {
 	public Location() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Location(String str) {
+		if(str != null) {
+			String[] parts = str.split(",");
+			
+			if(parts.length >0) this.loca_num = parts[0];
+			if(parts.length >1) this.loca_section = parts[1];
+		
+		}
+	}
+	
 	public String getLoca_num() {
 		return loca_num;
 	}
@@ -20,7 +31,7 @@ public class Location {
 	}
 	@Override
 	public String toString() {
-		return String.format("Location [loca_num=%s, loca_section=%s]", loca_num, loca_section);
+		return String.format("%s, %s", loca_num, loca_section);
 	}
 	
 	

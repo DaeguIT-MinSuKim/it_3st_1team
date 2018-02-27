@@ -3,7 +3,7 @@ package kr.or.dgit.it_3st_1team.dto;
 public class Book {
 	private String bkCode;
 	private String isbn;
-	private boolean rentable;
+	private String rentable;
 	private String bkname;
 	private String author;
 	private String publish;
@@ -12,7 +12,24 @@ public class Book {
 	private Location loca_num;
 	private Takeinout inout;
 
-	public Book() {
+	public Book() {}
+	
+	public Book(String str) {
+		if(str != null) {
+			String[] parts = str.split(",");
+			
+			if(parts.length >0) this.bkCode = parts[0];
+			if(parts.length >1) this.isbn = parts[1];
+			if(parts.length >2) this.rentable = parts[2];
+			if(parts.length >3) this.bkname = parts[3];
+			if(parts.length >4) this.author = parts[4];
+			if(parts.length >5) this.publish = parts[5];
+			if(parts.length >6) this.pubyear = Integer.parseInt(parts[6]);
+			if(parts.length >7) this.info = parts[7];
+			if(parts.length >8) this.loca_num = new Location(parts[8]);
+			if(parts.length >9) this.inout = new Takeinout(parts[9]);
+		}
+		
 	}
 
 	public String getBkCode() {
@@ -31,11 +48,11 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public boolean isRentable() {
+	public String isRentable() {
 		return rentable;
 	}
 
-	public void setRentable(boolean rentable) {
+	public void setRentable(String rentable) {
 		this.rentable = rentable;
 	}
 
@@ -95,14 +112,16 @@ public class Book {
 		this.inout = inout;
 	}
 
+	
 	@Override
 	public String toString() {
 		return String.format(
-				"Book [bkCode=%s, isbn=%s, rentable=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, info=%s, loca_num=%s]",
-				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num);
+				"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
+				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num, inout);
 	}
+
 	public Object[] toArray(int i) {
-		return new Object[] {i, bkCode, bkname, author, publish, pubyear, null, null};
+		return new Object[] {i, bkCode, bkname, author, publish, pubyear, inout.getRentdey(), inout.getReturnday()};
 	}
 
 }

@@ -5,7 +5,9 @@
 	<!-- resultmap -->
 	<resultMap type="Book" id="BookResult">
 		<id property="bkCode" column="bkcode"/>
-		<result property="bkname" column="name"/>
+		<result property="isbn" column="isbn"/>
+		<result property="rentable" column="rentable"/>
+		<result property="bkname" column="bkname"/>
 		<result property="author" column="author" />
 		<result property="publish" column="publish"/>
 		<result property="pubyear" column="pubyear"/>
@@ -13,11 +15,10 @@
 	</resultMap>
 	
 	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
-		<result property="inout.inout_no" column="inout_no"/>
 		<result property="inout.rentday" column="rentday"/>
 		<result property="inout.returnday" column="returnday"/>
 	</resultMap>
-	
+		
 	<sql id="selectWithTakeinoutSql">
 		select b.bkcode, bkname, author, publish, pubyear, rentday, returnday
 		from book b left outer join takeinout t on b.bkcode = t.bkcode

@@ -1,19 +1,10 @@
 package kr.or.dgit.it_3st_1team;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import kr.or.dgit.it_3st_1team.dto.Phone;
-import kr.or.dgit.it_3st_1team.dto.Post;
-import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -51,7 +42,7 @@ public class UserServiceTest {
 		Assert.assertSame(1, deleteUser);
 	}*/
 	
-	@Test
+	/*@Test
 	public void test3UpdateUser() {
 		User user = new User();
 		user.setId("juhyun");
@@ -82,5 +73,5 @@ public class UserServiceTest {
 		User selectUser = service.selectUserById(user);
 		Assert.assertEquals(user.getId(), selectUser.getId());
 		System.out.println(selectUser);
-	}
+	}*/
 }

@@ -1,4 +1,4 @@
-package it_3st_1team.ui.user;
+package kr.or.dgit.it_3st_1team.ui.user;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,8 +14,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-
-import it_3st_1team.ui.join.SearchAddrdetailUI;
+import kr.or.dgit.it_3st_1team.ui.join.SearchAddrdetailUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

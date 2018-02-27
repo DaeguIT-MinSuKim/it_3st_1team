@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package kr.or.dgit.it_3st_1team.ui;
 
 
 import java.awt.Color;
@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import it_3st_1team.ui.user.HistoryUI;
-import it_3st_1team.ui.user.RequestBookUI;
-import it_3st_1team.ui.user.SearchBookUI;
-import it_3st_1team.ui.user.UserInfoUpdateUI;
+import kr.or.dgit.it_3st_1team.ui.user.HistoryUI;
+import kr.or.dgit.it_3st_1team.ui.user.RequestBookUI;
+import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI;
+import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 
 @SuppressWarnings("serial")
 public class UserUI extends JPanel implements ActionListener {

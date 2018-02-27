@@ -25,7 +25,7 @@ public class EmployeeServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		service = null;
 	}
-
+/*
 	@Test
 	public void test1FindEmployeeByAll() {
 		List<Employee> listEmp = service.findEmployeeByAll();
@@ -33,5 +33,5 @@ public class EmployeeServiceTest {
 		for(Employee emp : listEmp) {
 			System.out.println(emp);
 		}
-	}
+	}*/
 }

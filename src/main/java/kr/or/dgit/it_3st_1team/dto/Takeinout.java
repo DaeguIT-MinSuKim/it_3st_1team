@@ -2,8 +2,8 @@ package kr.or.dgit.it_3st_1team.dto;
 
 public class Takeinout {
 	private int inout_no;
-	private User code;
-	private Book bkcode;
+	private User user;
+	private Book book;
 	private String rentdey;
 	private String returnday;
 	public Takeinout() {
@@ -32,16 +32,16 @@ public class Takeinout {
 		this.inout_no = inout_no;
 	}
 	public User getCode() {
-		return code;
+		return user;
 	}
 	public void setCode(User code) {
-		this.code = code;
+		this.user = code;
 	}
 	public Book getBkcode() {
-		return bkcode;
+		return book;
 	}
 	public void setBkcode(Book bkcode) {
-		this.bkcode = bkcode;
+		this.book = bkcode;
 	}
 	public String getRentdey() {
 		return rentdey;
@@ -55,10 +55,11 @@ public class Takeinout {
 	public void setReturnday(String returnday) {
 		this.returnday = returnday;
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("%s-%s", rentdey,returnday);
+		return String.format("Takeinout [inout_no=%s, user=%s, book=%s, rentdey=%s, returnday=%s]", inout_no, user,
+				book, rentdey, returnday);
 	}
-	
+		
 }

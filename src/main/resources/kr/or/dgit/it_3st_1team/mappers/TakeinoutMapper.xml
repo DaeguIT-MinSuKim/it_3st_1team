@@ -5,11 +5,23 @@
 	<!-- resultmap -->
 	<resultMap type="Takeinout" id="TakeinoutResult">
 		<id property="inout_no" column="inout_no"/>
+		<result property="user" column="code" />
+		<result property="book" column="bkcode" />
 		<result property="rentday" column="rentday"/>
 		<result property="returnday" column="returnday"/>
 	</resultMap>
+	
+	<resultMap type="Takeinout" id="UserResult" extends="TakeinoutResult">
+		<id property="user.code" column="code"/>
+		<result property="user.name" column="name"/>
+		<result property="user.id" column="id"/>
+		<result property="user.tel" column="tel"/>
+		<result property="user.email" column="email"/>
+		<result property="addr_id.total" column="addr_id"/>
+	</resultMap>
 
 </mapper>
+
 
 
 
