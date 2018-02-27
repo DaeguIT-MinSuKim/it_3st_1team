@@ -1,6 +1,7 @@
 package it_3st_1team.ui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -22,18 +24,26 @@ import javax.swing.border.EmptyBorder;
 
 import it_3st_1team.ui.join.IDPWsearchUI;
 import it_3st_1team.ui.join.JoinUI;
+import it_3st_1team.ui.user.SearchBookUI;
+import it_3st_1team.ui.user.UserInfoUpdateUI;
 import it_3st_1team.ui.user.VisitorUI;
+import kr.or.dgit.it_3st_1team.dto.User;
+import kr.or.dgit.it_3st_1team.service.UserService;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
 
 
 @SuppressWarnings("serial")
-public class StartUI extends JFrame implements ActionListener, MouseListener{
+public class StartUI extends JFrame implements ActionListener, MouseListener, FocusListener{
 	private JPanel contentPane;
 	private MyPanel bgpanel = new MyPanel();
 	private IDPanel idpanel = new IDPanel();
 	private PwPanel pwpanel = new PwPanel();
-	private JTextField tfId;
+	public JTextField tfId;
 	private JButton btnUserLogin;
-	private JPasswordField passwordField;
+	public JPasswordField pwtf;
 	private JButton btnMngLogin;
 	private JButton btnjoin;
 	private JButton btnSearch;
@@ -57,15 +67,6 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		idpanel.setBounds(1050, 200, 50, 50);
 		contentPane.add(idpanel);
 		
-		tfId = new JTextField();
-		tfId.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
-		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfId.setForeground(new Color(94,94,94));
-		tfId.setBounds(1100, 200, 200, 50);
-		tfId.setText("User Id");
-		contentPane.add(tfId);
-		tfId.setColumns(10);
-		
 		pwpanel.setBounds(1050, 270, 50, 50);
 		contentPane.add(pwpanel);
 		
@@ -80,6 +81,17 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		
 		btnMngLogin = new JButton("관리자 로그인");
 		btnMngLogin.addActionListener(this);
+		
+		tfId = new JTextField();
+		tfId.addMouseListener(this);
+		tfId.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
+		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfId.setForeground(new Color(94,94,94));
+		tfId.setBounds(1100, 200, 200, 50);
+		contentPane.add(tfId);
+		tfId.setColumns(10);
+		
+		
 		btnMngLogin.setBorder(null);
 		btnMngLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		btnMngLogin.setForeground(new Color(64,64,64));
@@ -96,11 +108,13 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		btnSearch.setBounds(1031, 427, 318, 30);
 		contentPane.add(btnSearch);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
-		passwordField.setText("****");
-		passwordField.setBounds(1100, 270, 200, 50);
-		contentPane.add(passwordField);
+		pwtf = new JPasswordField();
+		pwtf.addActionListener(this);
+		pwtf.addFocusListener(this);
+		pwtf.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
+		pwtf.setText("bomi");
+		pwtf.setBounds(1100, 270, 200, 50);
+		contentPane.add(pwtf);
 		
 		btnjoin = new JButton("회원가입");
 		btnjoin.addActionListener(this);
@@ -153,6 +167,9 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == pwtf) {
+			actionPerformedPwtf(e);
+		}
 		if (e.getSource() == btnSearch) {
 			actionPerformedBtnSearch(e);
 		}
@@ -167,11 +184,24 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		}
 	}
 	protected void actionPerformedBtnUserLogin(ActionEvent e) {
-		contentPane.removeAll();
-		UserUI user = new UserUI();
-		user.setBounds(0, 0, 1400, 800);
-		contentPane.add(user);
-		contentPane.repaint();
+		UserService service = new UserService();
+		User user = new User();
+		user.setId(tfId.getText());
+		user.setPw(pwtf.getText());
+		User selectUser = service.selectIdPw(user);
+		if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
+			contentPane.removeAll();
+			UserUI userui = new UserUI(selectUser);
+			userui.setBounds(0, 0, 1400, 800);
+			userui.lblname.setText((selectUser.getName()));
+			contentPane.add(userui);
+			contentPane.repaint();
+			contentPane.revalidate();
+			repaint();
+			revalidate();
+		}else {
+			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
+		}
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
 		contentPane.removeAll();
@@ -193,6 +223,9 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		contentPane.revalidate();
 	}
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tfId) {
+			mouseClickedTfId(e);
+		}
 		if (e.getSource() == lblNewLabel) {
 			mouseClickedLblNewLabel(e);
 		}
@@ -208,5 +241,21 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 	protected void mouseClickedLblNewLabel(MouseEvent e) {		
 		IDPWsearchUI idpwsearch = new IDPWsearchUI();
 		idpwsearch.setVisible(true);
+	}
+	protected void mouseClickedTfId(MouseEvent e) {
+		tfId.setText("");
+	}
+	public void focusGained(FocusEvent e) {
+		if (e.getSource() == pwtf) {
+			focusGainedPwdBomi(e);
+		}
+	}
+	public void focusLost(FocusEvent e) {
+	}
+	protected void focusGainedPwdBomi(FocusEvent e) {
+		pwtf.setText("");
+	}
+	protected void actionPerformedPwtf(ActionEvent e) {
+		actionPerformedBtnUserLogin(e);
 	}
 }

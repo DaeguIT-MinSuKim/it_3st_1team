@@ -10,6 +10,7 @@ public class User {
 	private Phone tel;
 	private String email;
 	private Post addr_id;
+	private String addr_de;
 	private boolean blacktf;
 	private Date entryday;
 	private Date freeday;
@@ -40,8 +41,30 @@ public class User {
 		this.addr_id = addr_id;
 		this.entryday = entryday;
 	}
+	
+	public User(int code, String name, String id, String pw, Phone tel, String email, Post addr_id, String addr_de,
+			boolean blacktf, Date entryday, Date freeday) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.id = id;
+		this.pw = pw;
+		this.tel = tel;
+		this.email = email;
+		this.addr_id = addr_id;
+		this.addr_de = addr_de;
+		this.blacktf = blacktf;
+		this.entryday = entryday;
+		this.freeday = freeday;
+	}
 
 
+	public synchronized String getAddr_de() {
+		return addr_de;
+	}
+	public synchronized void setAddr_de(String addr_de) {
+		this.addr_de = addr_de;
+	}
 	public int getCode() {
 		return code;
 	}
@@ -105,11 +128,8 @@ public class User {
 	@Override
 	public String toString() {
 		return String.format(
-				"code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, blacktf=%s, entryday=%s, freeday=%s",
-				code, name, id, pw, tel, email,  blacktf, entryday, freeday);
+				"code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, addr_id=%s, addr_de=%s, "
+				+ "blacktf=%s, entryday=%s, freeday=%s",
+				code, name, id, pw, tel, email, addr_id, addr_de, blacktf, entryday, freeday);
 	}
-	
-	
-	
-	
 }

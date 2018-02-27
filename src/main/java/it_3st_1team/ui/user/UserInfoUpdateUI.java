@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -14,8 +15,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-
+import it_3st_1team.ui.StartUI;
 import it_3st_1team.ui.join.SearchAddrdetailUI;
+import kr.or.dgit.it_3st_1team.dto.Phone;
+import kr.or.dgit.it_3st_1team.dto.Post;
+import kr.or.dgit.it_3st_1team.dto.User;
+import kr.or.dgit.it_3st_1team.service.UserService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -42,9 +47,11 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JLabel label_2;
 	private JTextField tfPhone2;
 	private JTextField tfPhone3;
+	private JPanel panel;
+	private User user;
 
-	public UserInfoUpdateUI() {
-
+	public UserInfoUpdateUI(User user) {
+		this.user = user;
 		initComponents();
 	}
 	private void initComponents() {
@@ -53,7 +60,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		
 		setLayout(null);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(new Color(224,224,224));
 		panel.setBounds(130, 100, 950, 528);
 		add(panel);
@@ -76,7 +83,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		lblId.setBounds(173, 124, 120, 40);
 		panel.add(lblId);
 		
-		JLabel lblPw = new JLabel("비밀번호");
+		JLabel lblPw = new JLabel("비밀번호 수정");
 		lblPw.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPw.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		lblPw.setBounds(173, 164, 120, 40);
@@ -195,6 +202,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		panel.add(tfAddrDe);
 		
 		btnJoin = new JButton("수정");
+		btnJoin.addActionListener(this);
 		btnJoin.setBorder(null);
 		btnJoin.setForeground(Color.WHITE);
 		btnJoin.setBackground(new Color(52,152,219));
@@ -202,6 +210,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		panel.add(btnJoin);
 		
 		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		btnCancel.setBorder(null);
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setBackground(new Color(94,94,94));
@@ -228,12 +237,32 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		label_2.setBounds(414, 256, 20, 15);
 		panel.add(label_2);
 		
+		userinfo();
 	}
 	
-	public void tfName() {
-		tfName.setEditable(false);
+	private void userinfo() {
+		tfName.setText(user.getName());
+		tfId.setText(user.getId());
+		tfMail.setText(user.getEmail());
+		Phone tel = user.getTel();
+		tfPhone1.setText(tel.getPhone1());
+		tfPhone2.setText(tel.getPhone2());
+		tfPhone3.setText(tel.getPhone3());
+		Post post = user.getAddr_id();
+		//tfpostnum.setText(post.getZipcode());
+		//tfAddr.setText(post.getWithoutZipcode());
+		tfAddrDe.setText(user.getAddr_de());
+		/*Post post = user.getAddr_id();
+		tfpostnum.setText(post.getZipcode());*/
+		
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCancel) {
+			actionPerformedBtnCancel(arg0);
+		}
+		if (arg0.getSource() == btnJoin) {
+			actionPerformedBtnJoin(arg0);
+		}
 		if (arg0.getSource() == btnSearchAddr) {
 			actionPerformedBtnSearchAddr(arg0);
 		}
@@ -241,5 +270,35 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnSearchAddr(ActionEvent arg0) {
 		SearchAddrdetailUI addr = new SearchAddrdetailUI();
 		addr.setVisible(true);
+	}
+	protected void actionPerformedBtnJoin(ActionEvent arg0) {		UserService service = new UserService();
+		String pw = new String(pwfPw.getPassword());
+		String pwc = new String(pwfPwc.getPassword());
+		
+		user.setName(tfName.getText());
+		user.setPw(pw);
+		//phone 수정
+		Phone phone = new Phone();
+		phone.setPhone1(tfPhone1.getText());
+		phone.setPhone2(tfPhone2.getText());
+		phone.setPhone3(tfPhone3.getText());
+		user.setTel(phone);
+		user.setEmail(tfMail.getText());
+		//post 수정
+		user.setAddr_de(tfAddrDe.getText());
+		
+		if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
+			JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
+		}else {
+			service.updateUser(user);
+			JOptionPane.showMessageDialog(null, ("회원정보가 수정되었습니다."));	
+			userinfo();
+			pwfPw.setText("");
+			pwfPwc.setText("");
+		}
+	}
+	protected void actionPerformedBtnCancel(ActionEvent arg0) {		userinfo();
+		pwfPw.setText("");
+		pwfPwc.setText("");
 	}
 }
