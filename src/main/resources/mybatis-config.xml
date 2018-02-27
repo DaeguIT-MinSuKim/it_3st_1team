@@ -31,8 +31,8 @@
 	<mappers>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/BookMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/EmployeeMapper.xml"/>
-		<mapper resource="kr/or/dgit/it_3st_1team/mappers/TakeinoutMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/PhoneMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/TakeinoutMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/UserMapper.xml"/>
 	</mappers>
 </configuration>
