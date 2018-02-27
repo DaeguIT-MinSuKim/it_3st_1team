@@ -26,15 +26,9 @@ public class EmployeeServiceTest {
 	public void test1findSelectEmployeeIdByNo() {
 		Employee employee = new Employee();
 		employee.setId("namju");
+		employee.setPw("namju");
 		Employee findemployeeId = service.findSelectEmployeeIdByNo(employee);
 		Assert.assertNotNull(findemployeeId);
 	}
 	
-	@Test
-	public void test2findSelectEmployeePwByNo() {
-		Employee employee = new Employee();
-		employee.setPw("namju");
-		Employee findemployeePw = service.findSelectEmployeePwByNo(employee);
-		Assert.assertNotNull(findemployeePw);
-	}
 }

@@ -6,8 +6,7 @@ import kr.or.dgit.it_3st_1team.dto.Post;
 
 public interface PostDao {
 	//select
-	List<Post> selectPostByAll();
-	
-	
+	List<Post> selectPostByAll1();	
+	List<Post> selectPostByAll2();
 	
 }

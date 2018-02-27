@@ -23,12 +23,5 @@ public class EmployeeService {
 		}
 	}
 	
-	public Employee findSelectEmployeePwByNo(Employee employee) {
-		log.debug("selectEmployeePwByNo()");
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
-			return employeeDao.selectEmployeePwByNo(employee);
-		}
-	}
 	
 }

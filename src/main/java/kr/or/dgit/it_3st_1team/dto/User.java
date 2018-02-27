@@ -13,6 +13,7 @@ public class User {
 	private boolean blacktf;
 	private Date entryday;
 	private Date freeday;
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}

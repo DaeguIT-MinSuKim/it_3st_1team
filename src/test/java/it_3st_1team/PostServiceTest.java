@@ -28,8 +28,13 @@ public class PostServiceTest {
 	}
 	
 	@Test
-	public void test1selectPostByAll() {
-		List<Post> listPost = service.selectPostByAll();
+	public void test1SelectPostByAll1() {
+		List<Post> listPost = service.selectPostByAll1();
+		Assert.assertNotNull(listPost);
+	}
+	@Test
+	public void test2SelectPostByAll2() {
+		List<Post> listPost = service.selectPostByAll2();
 		Assert.assertNotNull(listPost);
 		for(Post post : listPost) {
 			System.out.println(post);

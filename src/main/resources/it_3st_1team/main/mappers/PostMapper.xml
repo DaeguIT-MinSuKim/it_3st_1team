@@ -2,22 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.PostDao">
 
-	<sql id="selectSql">
-		SELECT zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1, bunji_num2
+	<sql id="selectSql1">
+		SELECT zipcode, sido, sigungu, bubjung_name, heangjeong_name, bunji_num1, bunji_num2
 		FROM post
 	</sql>
-	<sql id="whereSql">
+	<sql id="selectSql2">
+		SELECT zipcode, sido, sigungu, doro, build_num1, build_num2
+		FROM post
+	</sql>
+	
+	<sql id="whereSql1">
 		<where>
 			<if test="sigungu != null">
 				sigungu = #{sigungu}
+			</if>
+			<if test="bubjung_name != null">
+				and bubjung_name = #{bubjung_name}
+			</if>			
+		</where>
+	</sql>
+	
+	<sql id="whereSql2">
+		<where>
+			<if test="sigungu != null">
+				sigungu = #{sigungu}
+			</if>
+			<if test="doro != null">
+				and doro = #{doro}
 			</if>			
 		</where>
 	</sql>
 
-	<select id="selectPostByAll"  parameterType="post" resultType="post">
-		<include refid="selectSql" />		
+	<select id="selectPostByAll1"  parameterType="post" resultType="post">
+		<include refid="selectSql1" />		
+		<include refid="whereSql1" />		
 	</select>
-
+	
+	<select id="selectPostByAll2"  parameterType="post" resultType="post">
+		<include refid="selectSql2" />		
+		<include refid="whereSql2" />		
+	</select>
 
 
 

@@ -15,11 +15,19 @@ import kr.or.dgit.it_3st_1team.dto.Post;
 public class PostService {
 	private static final Log log = LogFactory.getLog(PostDao.class);
 
-	public List<Post> selectPostByAll() {
-		log.debug("selectPostByAll()");
+	public List<Post> selectPostByAll1() {
+		log.debug("selectPostByAll1()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			PostDao postDao = sqlSession.getMapper(PostDao.class);
-			return postDao.selectPostByAll();
+			return postDao.selectPostByAll1();
+		}
+	}
+	
+	public List<Post> selectPostByAll2() {
+		log.debug("selectPostByAll2()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			PostDao postDao = sqlSession.getMapper(PostDao.class);
+			return postDao.selectPostByAll2();
 		}
 	}
 }

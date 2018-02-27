@@ -23,7 +23,9 @@ import javax.swing.border.EmptyBorder;
 
 import it_3st_1team.ui.join.IDPWsearchUI;
 import it_3st_1team.ui.join.JoinUI;
+import it_3st_1team.ui.service.EmployeeService;
 import it_3st_1team.ui.user.VisitorUI;
+import kr.or.dgit.it_3st_1team.dto.Employee;
 
 @SuppressWarnings("serial")
 public class StartUI extends JFrame implements ActionListener, MouseListener{
@@ -174,35 +176,34 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		contentPane.repaint();
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) { //.
-		contentPane.removeAll();
-		ManagerUI mng = new ManagerUI();
-		mng.setBounds(0, 0, 1400, 800);
-		contentPane.add(mng);
-		contentPane.repaint();
 		
-		String id = tfId.getText();
-		char[] pw = passwordField.getPassword();
 		
-		if (id.trim().length() < 1) {
+		if (tfId.getText().trim().length() < 1) {
 			System.out.println("아이디 필수 입력");
 			return;
 		}
-		if (pw.length < 1) {
+		if (new String(passwordField.getPassword()).length() < 1) {
 			System.out.println("비밀번호 필수 입력");
 			return;
 		}
-		// ★아이디와 비밀번호 검사★
-		if (id.trim().toUpperCase().equals("ROOT") && (pw.equals("1234"))) {
-			System.out.println("로그인 성공");
-
-		} else if (id.trim().toUpperCase().equals("ROOT")) {
-			System.out.println("비밀번호가 틀렸습니다.");
-		} else {
-			System.out.println("없는 아이디 입니다.");
-		}
-
-
-	}
+		// 아이디와 비밀번호 검사
+		Employee employee = new Employee();
+		employee.setId(tfId.getText());
+		employee.setPw(passwordField.getText());
+		EmployeeService service = new EmployeeService();
+		Employee findemployeeId = service.findSelectEmployeeIdByNo(employee);
+		if (tfId.getText().equals(findemployeeId.getId()) && new String(passwordField.getPassword()).equals(findemployeeId.getPw())) {
+			JOptionPane.showMessageDialog(null, "Success");  
+			contentPane.removeAll();
+			ManagerUI mng = new ManagerUI();
+			mng.setBounds(0, 0, 1400, 800);
+			contentPane.add(mng);
+			contentPane.repaint();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faild");
+        }
+    }
+	
 	protected void actionPerformedBtnjoin(ActionEvent e) {
 		JoinUI frame = new JoinUI();
 		frame.setVisible(true);
