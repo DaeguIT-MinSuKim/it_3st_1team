@@ -6,7 +6,12 @@ public class Phone {
 	private String phone3;
 	private String total;
 
-	public Phone() {
+	public Phone() {}
+
+	public Phone(String phone1, String phone2, String phone3) {
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+		this.phone3 = phone3;
 	}
 
 	public String getPhone1() {
@@ -35,7 +40,7 @@ public class Phone {
 
 	@Override
 	public String toString() {
-		return String.format("%s-%s-%s", phone1, phone2, phone3);
+		return String.format("%s-%s-%s", phone1,phone2,phone3);
 	}
 
 	

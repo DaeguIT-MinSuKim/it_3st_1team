@@ -2,6 +2,7 @@ package it_3st_1team.ui.user;
 
 import java.awt.Color;
 import java.awt.Font;
+
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -223,4 +224,5 @@ public class RequestBookUI extends JPanel implements ActionListener {
 					e1.printStackTrace();
 				}
 	}
+
 }
