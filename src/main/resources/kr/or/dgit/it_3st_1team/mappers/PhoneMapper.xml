@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.dgit.it_3st_1team.dao.BookDao">
-
-	<sql id="selectSql">
-		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book
-	</sql>
-	
-	<sql id="whereSql">
-		<where>
-			<if test="studId != null">
-				stud_id = #{studId}
-			</if>
-		</where>
-	</sql>
-	
-	<select id="selectBookByAll" resultType="Book">
-		<include refid="selectSql" />
-	</select>
-
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.PhoneDao">
 </mapper>
 
 

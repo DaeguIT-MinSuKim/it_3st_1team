@@ -8,22 +8,19 @@
 		<result property="bkname" column="name"/>
 		<result property="author" column="author" />
 		<result property="publish" column="publish"/>
-		<result property="pubyear" column="pubyear"/>		
+		<result property="pubyear" column="pubyear"/>
+		<result property="inout" column="inout"/>
 	</resultMap>
 	
-	<resultMap type="Book" id="BookWithInoutHashMap" extends="BookResult">
+	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
+		<result property="inout.inout_no" column="inout_no"/>
 		<result property="inout.rentday" column="rentday"/>
 		<result property="inout.returnday" column="returnday"/>
 	</resultMap>
 	
-	<resultMap type="Book" id="BookAssociation" extends="BookResult">
-		<association property="Takeinout" 
-		resultMap="kr.or.dgit.it_3st_1team.dao.TakeinoutDao.TakeinoutResult"/>
-	</resultMap>
-	
 	<sql id="selectWithTakeinoutSql">
-		select b.bkcode, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday
-		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
+		select b.bkcode, bkname, author, publish, pubyear, rentday, returnday
+		from book b left outer join takeinout t on b.bkcode = t.bkcode
 	</sql>
 	
 	<sql id="whereSql">
@@ -34,12 +31,10 @@
 		</where>
 	</sql>
 	
-	<select id="selectBookWithTakeInoutByAll" resultMap="BookWithInoutHashMap" parameterType="map">
+	<select id="selectBookWithTakeInoutByAll" parameterType="Book" resultMap="BookWithTakeinoutResult">
 		<include refid="selectWithTakeinoutSql" />
 	</select>
 	
-	
-
 </mapper>
 
 
