@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
-import kr.or.dgit.it_3st_1team.dto.Phone;
 import kr.or.dgit.it_3st_1team.dto.User;
 
 public class UserTypeHandler extends BaseTypeHandler<User> {
