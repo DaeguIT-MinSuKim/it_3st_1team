@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -172,12 +173,35 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		contentPane.add(user);
 		contentPane.repaint();
 	}
-	protected void actionPerformedBtnMngLogin(ActionEvent e) {
+	protected void actionPerformedBtnMngLogin(ActionEvent e) { //.
 		contentPane.removeAll();
 		ManagerUI mng = new ManagerUI();
 		mng.setBounds(0, 0, 1400, 800);
 		contentPane.add(mng);
 		contentPane.repaint();
+		
+		String id = tfId.getText();
+		char[] pw = passwordField.getPassword();
+		
+		if (id.trim().length() < 1) {
+			System.out.println("아이디 필수 입력");
+			return;
+		}
+		if (pw.length < 1) {
+			System.out.println("비밀번호 필수 입력");
+			return;
+		}
+		// ★아이디와 비밀번호 검사★
+		if (id.trim().toUpperCase().equals("ROOT") && (pw.equals("1234"))) {
+			System.out.println("로그인 성공");
+
+		} else if (id.trim().toUpperCase().equals("ROOT")) {
+			System.out.println("비밀번호가 틀렸습니다.");
+		} else {
+			System.out.println("없는 아이디 입니다.");
+		}
+
+
 	}
 	protected void actionPerformedBtnjoin(ActionEvent e) {
 		JoinUI frame = new JoinUI();
