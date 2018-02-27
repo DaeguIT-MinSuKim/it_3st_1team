@@ -153,7 +153,7 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		System.out.println(list);
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++) {
-			rows[i] = list.get(i).toArray(i);
+			rows[i] = list.get(i).toArray();
 		}
 		return rows;
 	}

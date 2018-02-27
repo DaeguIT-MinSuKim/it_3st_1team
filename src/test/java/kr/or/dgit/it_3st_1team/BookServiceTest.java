@@ -1,8 +1,6 @@
 package kr.or.dgit.it_3st_1team;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -31,6 +29,12 @@ public class BookServiceTest {
 	@Test
 	public void test1FindBookByAll() {
 		List<Book> listStd = service.findBookWithTakeInoutByAll();
+		Assert.assertNotNull(listStd);
+	}
+	
+	@Test
+	public void test2FindBookByAll() {
+		List<Book> listStd = service.selectStudentByNoAssociation();
 		Assert.assertNotNull(listStd);
 	}
 }

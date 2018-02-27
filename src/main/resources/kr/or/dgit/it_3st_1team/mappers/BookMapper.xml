@@ -34,8 +34,7 @@
 	
 	<select id="selectBookWithTakeInoutByAll" parameterType="Book" resultMap="BookWithTakeinoutResult">
 		<include refid="selectWithTakeinoutSql" />
-	</select>
-	
+	</select>	
 </mapper>
 
 

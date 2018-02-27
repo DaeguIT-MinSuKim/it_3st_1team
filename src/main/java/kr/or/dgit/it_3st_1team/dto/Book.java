@@ -120,8 +120,8 @@ public class Book {
 				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num, inout);
 	}
 
-	public Object[] toArray(int i) {
-		return new Object[] {i, bkCode, bkname, author, publish, pubyear, inout.getRentdey(), inout.getReturnday()};
+	public Object[] toArray() {
+		return new Object[] {bkCode, bkname, author, publish, pubyear, inout.getRentdey(), inout.getReturnday()};
 	}
 
 }
