@@ -6,5 +6,5 @@ import kr.or.dgit.it_3st_1team.dto.Book;
 
 public interface BookDao {
 	//select
-	List<Book> selectBookWithTakeInoutByAll();
+	List<Book> selectBookByAllForResultMapExtends();
 }

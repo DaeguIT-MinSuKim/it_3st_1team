@@ -6,6 +6,7 @@ public class Takeinout {
 	private Book book;
 	private String rentdey;
 	private String returnday;
+	
 	public Takeinout() {
 		// TODO Auto-generated constructor stub
 	}

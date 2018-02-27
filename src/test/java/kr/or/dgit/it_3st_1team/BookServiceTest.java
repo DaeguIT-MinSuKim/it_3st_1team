@@ -27,8 +27,8 @@ public class BookServiceTest {
 	}
 
 	@Test
-	public void test1FindBookByAll() {
-		List<Book> listStd = service.findBookWithTakeInoutByAll();
+	public void test1selectBookByAllForResultMapExtends() {
+		List<Book> listStd = service.selectBookByAllForResultMapExtends();
 		Assert.assertNotNull(listStd);
 	}
 }
