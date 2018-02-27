@@ -4,9 +4,18 @@ public class Phone {
 	private String phone1;
 	private String phone2;
 	private String phone3;
-	private String total;
-
-	public Phone() {}
+	
+	public Phone() {}	
+	
+	public Phone(String str) {
+		if(str != null) {
+			String[] parts = str.split("-");
+			
+			if(parts.length >0) this.phone1 = parts[0];
+			if(parts.length >1) this.phone2 = parts[1];
+			if(parts.length >2) this.phone3 = parts[2];
+		}
+	}
 
 	public Phone(String phone1, String phone2, String phone3) {
 		this.phone1 = phone1;
