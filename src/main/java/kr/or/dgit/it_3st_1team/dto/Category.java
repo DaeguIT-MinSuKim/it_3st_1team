@@ -44,8 +44,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return String.format("Category [num=%s, catename=%s, catesize=%s, parentnum=%s]", num, catename, catesize,
-				parentnum);
+		return String.format(" %s, %s, %s, %s", num, catename, catesize, parentnum);
 	}
 	
 	

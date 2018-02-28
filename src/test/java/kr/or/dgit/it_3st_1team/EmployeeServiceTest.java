@@ -1,15 +1,10 @@
 package kr.or.dgit.it_3st_1team;
 
-import java.util.List;
-
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import kr.or.dgit.it_3st_1team.dto.Employee;
 import kr.or.dgit.it_3st_1team.service.EmployeeService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
