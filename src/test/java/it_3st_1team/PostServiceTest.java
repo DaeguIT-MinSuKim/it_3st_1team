@@ -29,15 +29,18 @@ public class PostServiceTest {
 	
 	@Test
 	public void test1SelectPostByAll1() {
-		List<Post> listPost = service.selectPostByAll1();
+		Post post = new Post();
+		List<Post> listPost = service.selectPostByAll1(post);
 		Assert.assertNotNull(listPost);
 	}
 	@Test
 	public void test2SelectPostByAll2() {
-		List<Post> listPost = service.selectPostByAll2();
+		Post post = new Post();
+		post.setDoro("중앙대로");
+		List<Post> listPost = service.selectPostByAll2(post);
 		Assert.assertNotNull(listPost);
-		for(Post post : listPost) {
-			System.out.println(post);
+		for(Post posts : listPost) {
+			System.out.println(posts);
 		}
 	}
 }
