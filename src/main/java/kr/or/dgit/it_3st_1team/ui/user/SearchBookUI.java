@@ -6,7 +6,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,8 +27,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.dgit.it_3st_1team.dto.Category;
+import kr.or.dgit.it_3st_1team.service.CategoryService;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+
 @SuppressWarnings("serial")
-public class SearchBookUI extends JPanel implements ActionListener {
+public class SearchBookUI extends JPanel implements ActionListener, ItemListener {
 	private JTextField tfbookname;
 	private SearchBtn btnSearch = new SearchBtn();
 	private JTable table;
@@ -33,6 +42,8 @@ public class SearchBookUI extends JPanel implements ActionListener {
 	private SearchBookDetailUI search;
 	private JPanel panel_1;
 	int flag = 1;
+	private JComboBox<Category> cbbbig;
+	private JComboBox<Category> cbbmid;
 	
 	public SearchBookUI() {
 
@@ -42,16 +53,30 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
-		String [] categoryBig = {"대분류 전체"};
-		JComboBox<String> cbbbig = new JComboBox<String>();
+		List<Category> categoryBig = new ArrayList<>();
+		Category decate = new Category();
+		decate.setCatename("대분류 전체");
+		categoryBig.add(decate);
+		CategoryService service = new CategoryService();
+		List<Category> listcate = service.selectCategoryBig();
+		for(Category cate: listcate) {
+			categoryBig.add(cate);
+		}
+		DefaultComboBoxModel<Category> model = 
+				new DefaultComboBoxModel<>(categoryBig.toArray(new Category[categoryBig.size()]));
+		cbbbig = new JComboBox<>(model);
+		cbbbig.addItemListener(this);
 		cbbbig.setBorder(null);
 		cbbbig.setMaximumRowCount(10);
 		cbbbig.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		cbbbig.setBounds(30, 50, 150, 50);
 		add(cbbbig);
 		
-		String [] categoryMid = {"중분류 전체"};
-		JComboBox<String> cbbmid = new JComboBox<>();
+		
+		Category decate2 = new Category();
+		decate2.setCatename("중분류 전체");
+		Category[] mid = new Category[] {decate2};
+		cbbmid = new JComboBox<>(mid);
 		cbbmid.setBorder(null);
 		cbbmid.setMaximumRowCount(5);
 		cbbmid.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -181,5 +206,31 @@ public class SearchBookUI extends JPanel implements ActionListener {
 			repaint();
 			flag = 1;
 		}
+	}
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cbbbig) {
+			itemStateChangedCbbbig(e);
+		}
+	}
+	protected void itemStateChangedCbbbig(ItemEvent e) {
+		if(e.getStateChange() == ItemEvent.SELECTED) {
+			loadCategoryMid((Category)cbbbig.getSelectedItem());
+		}
+	}
+	private void loadCategoryMid(Category selectedItem) {
+		System.out.println(selectedItem);
+		List<Category> categoryMid = new ArrayList<>();
+		Category decate2 = new Category();
+		decate2.setCatename("중분류 전체");
+		categoryMid.add(decate2);
+		
+		CategoryService service = new CategoryService();
+		List<Category> listcate = service.selectCategoryMid(selectedItem);
+		for(Category cate: listcate) {
+			categoryMid.add(cate);
+		}
+		DefaultComboBoxModel<Category> model = 
+				new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
+		cbbmid.setModel(model);
 	}
 }
