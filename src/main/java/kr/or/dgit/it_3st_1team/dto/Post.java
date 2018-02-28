@@ -17,6 +17,18 @@ public class Post {
 	public Post() {
 		// TODO Auto-generated constructor stub
 	}
+	public Post(String str) {
+		if(str != null) {
+			String[] parts = str.split(" ");
+			
+			if(parts.length >0) this.zipcode = parts[0];
+			if(parts.length >1) {
+				for(int i=1; i<parts.length; i++) {
+					this.total += parts[i];
+				}
+			}
+		}
+	}
 	public String getZipcode() {
 		return zipcode;
 	}

@@ -3,7 +3,7 @@ package kr.or.dgit.it_3st_1team.dto;
 import java.util.Date;
 
 public class User {
-	private int code;
+	private String code;
 	private String name;
 	private String id;
 	private String pw;
@@ -20,6 +20,10 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public User(String code) {
+		super();
+		this.code = code;
+	}
 	
 	public User(String name, String pw, Phone tel, String email, Post addr_id) {
 		super();
@@ -31,7 +35,7 @@ public class User {
 	}
 
 
-	public User(int code, String name, String id, String pw, Phone tel, String email, Post addr_id, Date entryday) {
+	public User(String code, String name, String id, String pw, Phone tel, String email, Post addr_id, Date entryday) {
 		super();
 		this.code = code;
 		this.name = name;
@@ -43,7 +47,7 @@ public class User {
 		this.entryday = entryday;
 	}
 	
-	public User(int code, String name, String id, String pw, Phone tel, String email, Post addr_id, String addr_de,
+	public User(String code, String name, String id, String pw, Phone tel, String email, Post addr_id, String addr_de,
 			boolean blacktf, Date entryday, Date freeday) {
 		super();
 		this.code = code;
@@ -60,16 +64,16 @@ public class User {
 	}
 
 
-	public synchronized String getAddr_de() {
+	public String getAddr_de() {
 		return addr_de;
 	}
-	public synchronized void setAddr_de(String addr_de) {
+	public void setAddr_de(String addr_de) {
 		this.addr_de = addr_de;
 	}
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getName() {
@@ -137,6 +141,6 @@ public class User {
 	public String toString() {
 		return String.format(
 				"User [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, zipcode=%s, addr_id=%s, addr_de=%s, blacktf=%s, entryday=%s, freeday=%s]",
-				code, name, id, pw, tel, email, zipcode, addr_id.getTotal(), addr_de, blacktf, entryday, freeday);
+				code, name, id, pw, tel, email, zipcode, addr_id, addr_de, blacktf, entryday, freeday);
 	}
 }

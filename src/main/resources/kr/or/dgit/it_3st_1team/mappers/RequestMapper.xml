@@ -3,8 +3,11 @@
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.RequestDao">
 	
 	<insert id="insertRequest" parameterType="Request">
-		insert into request(code,bkname, author, publish, pubyear, isbn, price) 
-		values(#{code},#{bkname},#{author},#{publish},#{pubyear},#{isbn},#{price});
+		insert into request(code, bkname, author, publish, pubyear, isbn, price) 
+		values(#{code.getcode()},#{bkname},#{author},#{publish},#{pubyear},#{isbn},#{price})
 	</insert>
 	
+	<delete id="deleteRequest" parameterType="Request">
+		delete from request where isbn = #{isbn}
+	</delete>
 </mapper>
