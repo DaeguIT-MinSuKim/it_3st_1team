@@ -14,6 +14,7 @@ import it_3st_1team.ui.librarian.EmployeeUI;
 import it_3st_1team.ui.librarian.InoutBookUI;
 import it_3st_1team.ui.librarian.ManagementBookUI;
 import it_3st_1team.ui.user.UserInfoUpdateUI;
+import it_3st_1team.ui.user.VisitorUI;
 
 public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnlogout;
@@ -125,6 +126,8 @@ public class ManagerUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnlogout(ActionEvent arg0) {
+		StartUI vis = new StartUI();
+		vis.setBounds(0, 0, 1400, 800);
 	}
 	protected void actionPerformedBtnBookRequest(ActionEvent arg0) {
 		InoutBookUI iob = new InoutBookUI();
