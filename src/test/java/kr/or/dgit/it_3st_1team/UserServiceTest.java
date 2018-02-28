@@ -1,7 +1,5 @@
 package kr.or.dgit.it_3st_1team;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -12,7 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.it_3st_1team.dto.Phone;
-import kr.or.dgit.it_3st_1team.dto.Post;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
 

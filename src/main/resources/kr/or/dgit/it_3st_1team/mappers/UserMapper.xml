@@ -19,6 +19,7 @@
 		<result property="email" column="email"/>
 		<result property="addr_id.total" column="addr_id"/>
 		<result property="addr_de" column="addr_de"/>
+		<!-- <result property="zipcode" column="zipcode"/> -->
 	</resultMap>
 	
 	<insert id="insertUser" parameterType="User">
@@ -55,7 +56,7 @@
 	</update>
 	
 	<select id="selectAllUser" parameterType="User" resultMap="UserResult">
-		select * from users
+		select code, name, id, pw, tel, email, addr_id, addr_de, entryday, zipcode from users
 	</select>
 	
 	<select id="selectUserById" parameterType="User" resultMap="UserResult">

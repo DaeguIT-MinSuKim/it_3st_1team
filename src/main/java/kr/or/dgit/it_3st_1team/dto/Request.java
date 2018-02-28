@@ -1,7 +1,7 @@
 package kr.or.dgit.it_3st_1team.dto;
 
 public class Request {
-	private User code;
+	private User user;
 	private String bkname;
 	private String author;
 	private String publish;
@@ -14,11 +14,11 @@ public class Request {
 	}
 	
 	public synchronized User getCode() {
-		return code;
+		return user;
 	}
 
 	public synchronized void setCode(User code) {
-		this.code = code;
+		this.user = code;
 	}
 
 	public String getBkname() {
@@ -59,7 +59,7 @@ public class Request {
 	}
 	@Override
 	public String toString() {
-		return String.format("Request [code=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, isbn=%s, price=%s]", code,
+		return String.format("Request [code=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, isbn=%s, price=%s]", user,
 				bkname, author, publish, pubyear, isbn, price);
 	}
 	
