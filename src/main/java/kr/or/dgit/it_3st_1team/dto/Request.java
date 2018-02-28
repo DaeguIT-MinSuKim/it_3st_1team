@@ -1,7 +1,7 @@
 package kr.or.dgit.it_3st_1team.dto;
 
 public class Request {
-	private User code;
+	private User user;
 	private String bkname;
 	private String author;
 	private String publish;
@@ -13,14 +13,13 @@ public class Request {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User getCode() {
-		return code;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCode(User code) {
-		this.code = code;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
 	public String getBkname() {
 		return bkname;
 	}
@@ -59,7 +58,7 @@ public class Request {
 	}
 	@Override
 	public String toString() {
-		return String.format("Request [code=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, isbn=%s, price=%s]", code,
+		return String.format("Request [code=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, isbn=%s, price=%s]", user,
 				bkname, author, publish, pubyear, isbn, price);
 	}
 	

@@ -4,7 +4,7 @@
 	
 	<insert id="insertRequest" parameterType="Request">
 		insert into request(code, bkname, author, publish, pubyear, isbn, price) 
-		values(#{code.getcode()},#{bkname},#{author},#{publish},#{pubyear},#{isbn},#{price})
+		values(#{user.code},#{bkname},#{author},#{publish},#{pubyear},#{isbn},#{price})
 	</insert>
 	
 	<delete id="deleteRequest" parameterType="Request">

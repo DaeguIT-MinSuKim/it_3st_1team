@@ -25,11 +25,11 @@ public class RequestServiceTest {
 		service = null;
 	}
 
-	/*@Test
+	@Test
 	public void test1insertRequest() {
 		Request request = new Request();
 		User user = new User("6");
-		request.setCode(user.getCode());
+		request.setUser(user);
 		request.setAuthor("S.L 그레이");
 		request.setBkname("아파트먼트");
 		request.setPublish("검은숲");
@@ -39,12 +39,12 @@ public class RequestServiceTest {
 		
 		int res = service.insertRequest(request);
 		Assert.assertEquals(1, res);
-	}*/
+	}
 
 	@Test
 	public void test2deleteRequest() {
 		Request request = new Request();
-		request.setIsbn("9788934993766");
+		request.setIsbn("9788952790019");
 		
 		int res = service.deleteRequest(request);
 		Assert.assertEquals(1, res);
