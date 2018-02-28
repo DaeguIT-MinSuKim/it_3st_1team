@@ -7,7 +7,9 @@ public class Employee {
 	private String pw;
 	private Phone tel;
 	private String email;
+	private Post zipcode;
 	private Post addr_id;
+	private String addr_de;
 	private Title titleno;
 	
 	public Employee() {
@@ -55,17 +57,30 @@ public class Employee {
 	public void setTitleno(Title titleno) {
 		this.titleno = titleno;
 	}
-	
 	public Phone getTel() {
 		return tel;
 	}
 	public void setTel(Phone tel) {
 		this.tel = tel;
 	}
+	public synchronized Post getZipcode() {
+		return zipcode;
+	}
+	public synchronized void setZipcode(Post zipcode) {
+		this.zipcode = zipcode;
+	}
+	public synchronized String getAddr_de() {
+		return addr_de;
+	}
+	public synchronized void setAddr_de(String addr_de) {
+		this.addr_de = addr_de;
+	}
+	
 	@Override
 	public String toString() {
-		return String.format("Employee [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, addr_id=%s, titleno=%s]",
-				code, name, id, pw, tel, email, addr_id, titleno);
+		return String.format(
+				"Employee [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, zipcode=%s, addr_id=%s, addr_de=%s, titleno=%s]",
+				code, name, id, pw, tel, email, zipcode, addr_id.getTotal(), addr_de, titleno);
 	}
 	
 	
