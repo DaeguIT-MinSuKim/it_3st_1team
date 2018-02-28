@@ -21,4 +21,15 @@ public class RequestService {
 		}
 		return res;
 	}
+	
+	public int deleteRequest(Request request) {
+		log.debug("deleteRequest()");
+		int res = -1;
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "deleteRequest", request);
+			sqlSession.commit();
+		}
+		return res;
+	}
+	
 }

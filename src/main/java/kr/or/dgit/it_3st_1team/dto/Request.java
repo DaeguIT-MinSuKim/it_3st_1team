@@ -13,14 +13,14 @@ public class Request {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public synchronized User getCode() {
+	public User getUser() {
 		return user;
 	}
 
-	public synchronized void setCode(User code) {
-		this.user = code;
-	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getBkname() {
 		return bkname;
 	}
