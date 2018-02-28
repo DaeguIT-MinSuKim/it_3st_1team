@@ -35,7 +35,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 	private PwPanel pwpanel = new PwPanel();
 	private JTextField tfId;
 	private JButton btnUserLogin;
-	private JPasswordField passwordField;
+	private JPasswordField pwtf;
 	private JButton btnMngLogin;
 	private JButton btnjoin;
 	private JButton btnSearch;
@@ -60,11 +60,11 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		contentPane.add(idpanel);
 		
 		tfId = new JTextField();
+		tfId.addMouseListener(this);
 		tfId.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfId.setForeground(new Color(94,94,94));
 		tfId.setBounds(1100, 200, 200, 50);
-		tfId.setText("User Id");
 		contentPane.add(tfId);
 		tfId.setColumns(10);
 		
@@ -98,11 +98,12 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		btnSearch.setBounds(1031, 427, 318, 30);
 		contentPane.add(btnSearch);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
-		passwordField.setText("****");
-		passwordField.setBounds(1100, 270, 200, 50);
-		contentPane.add(passwordField);
+		pwtf = new JPasswordField();
+		pwtf.addActionListener(this);
+		pwtf.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
+		pwtf.setText("****");
+		pwtf.setBounds(1100, 270, 200, 50);
+		contentPane.add(pwtf);
 		
 		btnjoin = new JButton("회원가입");
 		btnjoin.addActionListener(this);
@@ -182,17 +183,17 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 			JOptionPane.showMessageDialog(null, "아이디를 입력하세요");  
 			return;
 		}
-		if (new String(passwordField.getPassword()).length() < 1) {
+		if (new String(pwtf.getPassword()).length() < 1) {
 			JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요");  
 			return;
 		}
 		// 아이디와 비밀번호 검사
 		Employee employee = new Employee();
 		employee.setId(tfId.getText());
-		employee.setPw(passwordField.getText());
+		employee.setPw(pwtf.getText());
 		EmployeeService service = new EmployeeService();
 		Employee findemployeeId = service.findSelectEmployeeIdByNo(employee);
-		if (tfId.getText().equals(findemployeeId.getId()) && new String(passwordField.getPassword()).equals(findemployeeId.getPw())) {
+		if (tfId.getText().equals(findemployeeId.getId()) && new String(pwtf.getPassword()).equals(findemployeeId.getPw())) {
 			contentPane.removeAll();
 			ManagerUI mng = new ManagerUI();
 			mng.setBounds(0, 0, 1400, 800);
