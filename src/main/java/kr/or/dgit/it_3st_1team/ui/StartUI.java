@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package kr.or.dgit.it_3st_1team.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,13 +22,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-import it_3st_1team.ui.join.IDPWsearchUI;
-import it_3st_1team.ui.join.JoinUI;
-import it_3st_1team.ui.user.SearchBookUI;
-import it_3st_1team.ui.user.UserInfoUpdateUI;
-import it_3st_1team.ui.user.VisitorUI;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
+import kr.or.dgit.it_3st_1team.ui.join.IDPWsearchUI;
+import kr.or.dgit.it_3st_1team.ui.join.JoinUI;
+import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI;
+import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
+import kr.or.dgit.it_3st_1team.ui.user.VisitorUI;
+
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.FocusListener;

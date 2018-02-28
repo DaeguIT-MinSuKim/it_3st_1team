@@ -1,4 +1,4 @@
-package it_3st_1team.ui.librarian;
+package kr.or.dgit.it_3st_1team.ui.librarian;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import it_3st_1team.ui.join.SearchAddrdetailUI;
+import kr.or.dgit.it_3st_1team.ui.join.SearchAddrdetailUI;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;

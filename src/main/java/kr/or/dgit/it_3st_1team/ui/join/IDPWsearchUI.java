@@ -1,4 +1,4 @@
-package it_3st_1team.ui.join;
+package kr.or.dgit.it_3st_1team.ui.join;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
