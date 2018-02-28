@@ -175,15 +175,15 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		contentPane.add(user);
 		contentPane.repaint();
 	}
-	protected void actionPerformedBtnMngLogin(ActionEvent e) { //.
+	protected void actionPerformedBtnMngLogin(ActionEvent e) {
 		
 		
 		if (tfId.getText().trim().length() < 1) {
-			System.out.println("아이디 필수 입력");
+			JOptionPane.showMessageDialog(null, "아이디를 입력하세요");  
 			return;
 		}
 		if (new String(passwordField.getPassword()).length() < 1) {
-			System.out.println("비밀번호 필수 입력");
+			JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요");  
 			return;
 		}
 		// 아이디와 비밀번호 검사
@@ -193,14 +193,14 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		EmployeeService service = new EmployeeService();
 		Employee findemployeeId = service.findSelectEmployeeIdByNo(employee);
 		if (tfId.getText().equals(findemployeeId.getId()) && new String(passwordField.getPassword()).equals(findemployeeId.getPw())) {
-			JOptionPane.showMessageDialog(null, "Success");  
 			contentPane.removeAll();
 			ManagerUI mng = new ManagerUI();
 			mng.setBounds(0, 0, 1400, 800);
 			contentPane.add(mng);
 			contentPane.repaint();
+			contentPane.revalidate();
         }else{
-            JOptionPane.showMessageDialog(null, "Faild");
+        	JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
         }
     }
 	
