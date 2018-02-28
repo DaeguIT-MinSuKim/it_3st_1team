@@ -20,6 +20,7 @@
 		<result property="zipcode" column="zipcode"/>
 		<result property="addr_id.total" column="addr_id"/>
 		<result property="addr_de" column="addr_de"/>
+		<!-- <result property="zipcode" column="zipcode"/> -->
 	</resultMap>
 	
 	<insert id="insertUser" parameterType="User">
