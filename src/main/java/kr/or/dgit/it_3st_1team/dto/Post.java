@@ -17,6 +17,7 @@ public class Post {
 	public Post() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -82,9 +83,7 @@ public class Post {
 	}
 	public void setBunji_num2(int bunji_num2) {
 		this.bunji_num2 = bunji_num2;
-	}
-	
-	
+	}	
 	public String getTotal() {
 		return String.format(
 				"%s %s %s %s %s %s %s %s %s %s %s",
