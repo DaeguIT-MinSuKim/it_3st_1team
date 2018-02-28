@@ -9,7 +9,7 @@ public class Book {
 	private String publish;
 	private int pubyear;
 	private String info;
-	private Location loca_num;
+	private Location location;
 
 	public Book() {
 	}
@@ -79,18 +79,22 @@ public class Book {
 	}
 
 	public Location getLoca_num() {
-		return loca_num;
+		return location;
 	}
 
 	public void setLoca_num(Location loca_num) {
-		this.loca_num = loca_num;
+		this.location = loca_num;
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
 				"Book [bkCode=%s, isbn=%s, rentable=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, info=%s, loca_num=%s]",
-				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num);
+				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, location);
+	}
+
+	public Object[] toArray() {
+		return new Object[] {null, bkname, author, publish, pubyear, null, rentable};
 	}
 
 }

@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.BookService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -25,13 +26,26 @@ public class BookServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		service = null;
 	}
+	
+	@Test
+	public void test1selectBookStartAll() {
+		List<Book> booklist = service.selectBookStartAll();
+		Assert.assertNotNull(booklist);
+		for(Book b: booklist) {
+			System.out.println(b);
+		}
+	}
 
 	@Test
-	public void test1FindBookByAll() {
-		List<Book> listStd = service.findBookByAll();
-		Assert.assertNotNull(listStd);
-		for(Book std : listStd) {
-			System.out.println(std);
+	public void test2selectBookAll() {
+		Book book = new Book();
+		Location loca = new Location();
+		loca.setLoca_num("000010");
+		book.setLoca_num(loca);
+		List<Book> booklist = service.selectBookAll(book);
+		Assert.assertNotNull(booklist);
+		for(Book b: booklist) {
+			System.out.println(b);
 		}
 	}
 }

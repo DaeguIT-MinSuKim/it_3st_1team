@@ -5,17 +5,26 @@
 	<sql id="selectSql">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book
 	</sql>
-	
+		
 	<sql id="whereSql">
 		<where>
-			<if test="studId != null">
-				stud_id = #{studId}
+			<if test="loca_num != null">
+				loca_num = #{location.loca_num}
+			</if>
+			<if test="bkname != null">
+				and bkname = #{bkname}
 			</if>
 		</where>
 	</sql>
 	
-	<select id="selectBookByAll" resultType="Book">
-		<include refid="selectSql" />
+	<select id="selectBookStartAll" resultType="Book">
+		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num, Count(*) from book 
+		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkcode desc
+	</select>
+		
+	<select id="selectBookAll" parameterType="Book" resultType="Book">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
 	</select>
 
 </mapper>
