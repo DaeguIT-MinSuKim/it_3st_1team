@@ -160,7 +160,7 @@ public class UserUI extends JPanel implements ActionListener {
 		btnNews.setBackground(new Color(158,158,158));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		show.repaint();
-		UserInfoUpdateUI update = new UserInfoUpdateUI(user);
+		UserInfoUpdateUI update = new UserInfoUpdateUI();
 		changePanel(update);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent e) {

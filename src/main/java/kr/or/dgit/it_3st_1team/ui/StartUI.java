@@ -1,12 +1,13 @@
 package kr.or.dgit.it_3st_1team.ui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -26,14 +27,7 @@ import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
 import kr.or.dgit.it_3st_1team.ui.join.IDPWsearchUI;
 import kr.or.dgit.it_3st_1team.ui.join.JoinUI;
-import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI;
-import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 import kr.or.dgit.it_3st_1team.ui.user.VisitorUI;
-
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.FocusEvent;
 
 
 @SuppressWarnings("serial")
@@ -49,6 +43,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	private JButton btnjoin;
 	private JButton btnSearch;
 	private JLabel lblNewLabel;
+	public static User LOGINUSER;
 
 	public StartUI() {
 		initComponents();
@@ -192,6 +187,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		User selectUser = service.selectIdPw(user);
 		if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
 			contentPane.removeAll();
+			LOGINUSER = selectUser;
 			UserUI userui = new UserUI(selectUser);
 			userui.setBounds(0, 0, 1400, 800);
 			userui.lblname.setText((selectUser.getName()));

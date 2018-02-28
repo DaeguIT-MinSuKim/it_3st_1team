@@ -48,10 +48,8 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JTextField tfPhone2;
 	private JTextField tfPhone3;
 	private JPanel panel;
-	private User user;
 
-	public UserInfoUpdateUI(User user) {
-		this.user = user;
+	public UserInfoUpdateUI() {
 		initComponents();
 	}
 	private void initComponents() {
@@ -241,6 +239,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	}
 	
 	private void userinfo() {
+		User user = StartUI.LOGINUSER;
 		tfName.setText(user.getName());
 		tfId.setText(user.getId());
 		tfMail.setText(user.getEmail());
@@ -271,7 +270,8 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		SearchAddrdetailUI addr = new SearchAddrdetailUI();
 		addr.setVisible(true);
 	}
-	protected void actionPerformedBtnJoin(ActionEvent arg0) {		UserService service = new UserService();
+	protected void actionPerformedBtnJoin(ActionEvent arg0) {
+		User user = StartUI.LOGINUSER;		UserService service = new UserService();
 		String pw = new String(pwfPw.getPassword());
 		String pwc = new String(pwfPwc.getPassword());
 		
