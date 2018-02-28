@@ -26,9 +26,11 @@ import it_3st_1team.ui.join.JoinUI;
 import it_3st_1team.ui.service.EmployeeService;
 import it_3st_1team.ui.user.VisitorUI;
 import kr.or.dgit.it_3st_1team.dto.Employee;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
-public class StartUI extends JFrame implements ActionListener, MouseListener{
+public class StartUI extends JFrame implements ActionListener, MouseListener, FocusListener{
 	private JPanel contentPane;
 	private MyPanel bgpanel = new MyPanel();
 	private IDPanel idpanel = new IDPanel();
@@ -99,6 +101,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 		contentPane.add(btnSearch);
 		
 		pwtf = new JPasswordField();
+		pwtf.addFocusListener(this);
 		pwtf.addActionListener(this);
 		pwtf.setBorder(new CompoundBorder(null, new EmptyBorder(0, 20, 0, 0)));
 		pwtf.setText("****");
@@ -233,5 +236,19 @@ public class StartUI extends JFrame implements ActionListener, MouseListener{
 	protected void mouseClickedLblNewLabel(MouseEvent e) {		
 		IDPWsearchUI idpwsearch = new IDPWsearchUI();
 		idpwsearch.setVisible(true);
+	}
+	
+	public void focusGained(FocusEvent e) {
+		if (e.getSource() == pwtf) {
+			focusGainedPwtf(e);
+		}
+	}
+	public void focusLost(FocusEvent e) {
+	}
+	protected void focusGainedPwtf(FocusEvent e) {
+		pwtf.setText("");
+	}
+	protected void actionPerformedPwtf(ActionEvent e) {
+		actionPerformedBtnUserLogin(e);
 	}
 }
