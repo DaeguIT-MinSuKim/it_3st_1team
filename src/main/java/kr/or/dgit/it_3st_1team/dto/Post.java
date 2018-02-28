@@ -17,7 +17,6 @@ public class Post {
 	public Post() {
 		// TODO Auto-generated constructor stub
 	}
-	
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -87,13 +86,13 @@ public class Post {
 	public String getTotal() {
 		return String.format(
 				"%s %s %s %s %s %s %s %s %s %s %s",
-				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
+				sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
 				bunji_num2);
 	}
 	public void setTotal(String total) {
 		this.total = String.format(
 				"%s %s %s %s %s %s %s %s %s %s %s",
-				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
+				sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
 				bunji_num2);
 	}
 	@Override
