@@ -1,4 +1,4 @@
-package it_3st_1team.ui.user;
+package kr.or.dgit.it_3st_1team.ui.user;
 
 import java.awt.Color;
 

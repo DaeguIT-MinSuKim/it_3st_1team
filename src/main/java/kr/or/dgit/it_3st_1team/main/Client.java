@@ -1,8 +1,8 @@
-package it_3st_1team.main;
+package kr.or.dgit.it_3st_1team.main;
 
 import java.awt.EventQueue;
 
-import it_3st_1team.ui.StartUI;
+import kr.or.dgit.it_3st_1team.ui.StartUI;
 
 public class Client {
 	public static void main(String[] args) {

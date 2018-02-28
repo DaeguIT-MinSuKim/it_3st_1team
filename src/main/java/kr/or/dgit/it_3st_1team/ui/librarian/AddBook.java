@@ -1,23 +1,26 @@
-package it_3st_1team.ui.librarian;
+package kr.or.dgit.it_3st_1team.ui.librarian;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.JComboBox;
+import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class AddBookUI extends JFrame implements ActionListener {
+public class AddBook extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField tfcode;
@@ -31,7 +34,7 @@ public class AddBookUI extends JFrame implements ActionListener {
 	private JTextField tfpublish;
 	private JTextPane tpinfo;
 
-	public AddBookUI() {
+	public AddBook() {
 		
 		initComponents();
 	}

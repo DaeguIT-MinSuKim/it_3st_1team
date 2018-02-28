@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package kr.or.dgit.it_3st_1team.ui;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;

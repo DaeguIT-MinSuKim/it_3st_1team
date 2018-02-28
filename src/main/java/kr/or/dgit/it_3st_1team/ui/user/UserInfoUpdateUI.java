@@ -1,4 +1,4 @@
-package it_3st_1team.ui.user;
+package kr.or.dgit.it_3st_1team.ui.user;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,12 +15,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import it_3st_1team.ui.StartUI;
-import it_3st_1team.ui.join.SearchAddrdetailUI;
 import kr.or.dgit.it_3st_1team.dto.Phone;
 import kr.or.dgit.it_3st_1team.dto.Post;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
+import kr.or.dgit.it_3st_1team.ui.StartUI;
+import kr.or.dgit.it_3st_1team.ui.join.SearchAddrdetailUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

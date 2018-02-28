@@ -1,4 +1,4 @@
-package it_3st_1team.ui;
+package kr.or.dgit.it_3st_1team.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,11 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
-import it_3st_1team.ui.librarian.EmployeeUI;
-import it_3st_1team.ui.librarian.InoutBookUI;
-import it_3st_1team.ui.librarian.ManagementBookUI;
-import it_3st_1team.ui.user.UserInfoUpdateUI;
+import kr.or.dgit.it_3st_1team.ui.librarian.EmployeeUI;
+import kr.or.dgit.it_3st_1team.ui.librarian.InoutBookUI;
+import kr.or.dgit.it_3st_1team.ui.librarian.ManagementBookUI;
+import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 
 public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnlogout;

@@ -9,6 +9,7 @@ public class User {
 	private String pw;
 	private Phone tel;
 	private String email;
+	private Post zipcode;
 	private Post addr_id;
 	private String addr_de;
 	private boolean blacktf;
@@ -125,11 +126,17 @@ public class User {
 	public void setFreeday(Date freeday) {
 		this.freeday = freeday;
 	}
+	public synchronized Post getZipcode() {
+		return zipcode;
+	}
+	public synchronized void setZipcode(Post zipcode) {
+		this.zipcode = zipcode;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
-				"code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, addr_id=%s, addr_de=%s, "
-				+ "blacktf=%s, entryday=%s, freeday=%s",
-				code, name, id, pw, tel, email, addr_id, addr_de, blacktf, entryday, freeday);
+				"User [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, zipcode=%s, addr_id=%s, addr_de=%s, blacktf=%s, entryday=%s, freeday=%s]",
+				code, name, id, pw, tel, email, zipcode, addr_id.getTotal(), addr_de, blacktf, entryday, freeday);
 	}
 }
