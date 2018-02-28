@@ -31,10 +31,4 @@ public class BookServiceTest {
 		List<Book> listStd = service.selectBookByAllForResultMapExtends();
 		Assert.assertNotNull(listStd);
 	}
-	
-	@Test
-	public void test2FindBookByAll() {
-		List<Book> listStd = service.selectStudentByNoAssociation();
-		Assert.assertNotNull(listStd);
-	}
 }

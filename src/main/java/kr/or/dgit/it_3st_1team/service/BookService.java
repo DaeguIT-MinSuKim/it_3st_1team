@@ -21,12 +21,4 @@ public class BookService {
 		}
 	}
 	
-	public List<Book> selectStudentByNoAssociation(){
-		log.debug("selectStudentByNoAssociation()");
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
-			BookDao bookDao = sqlSession.getMapper(BookDao.class);
-			return bookDao.selectStudentByNoAssociation();
-		}
-	}
-	
 }

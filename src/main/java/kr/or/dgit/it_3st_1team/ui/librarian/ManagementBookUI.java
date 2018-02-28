@@ -152,7 +152,7 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		List<Book> list = service.selectBookByAllForResultMapExtends();
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++) {
-			rows[i] = list.get(i).toArray();
+			rows[i] = list.get(i).toArray(i);
 		}
 		return rows;
 	}
