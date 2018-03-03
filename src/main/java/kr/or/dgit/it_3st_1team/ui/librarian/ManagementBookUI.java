@@ -6,6 +6,10 @@ import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -23,10 +27,9 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
+import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.BookService;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
-import java.awt.event.FocusListener;
-import java.awt.event.FocusEvent;
 
 public class ManagementBookUI extends JPanel implements ActionListener, FocusListener{
 	private JTextField tfSearch;
@@ -56,10 +59,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, FocusLis
 		pSearch = new JPanel();
 		pSearch.setBackground(new Color(255,255,255));
 		pNorth.add(pSearch);
-		pSearch.setLayout(null);
-		
-		setcbkBigCategory();		
-		setcbkMidCategory();
+		pSearch.setLayout(null);		
 		
 		tfSearch = new JTextField();
 		tfSearch.addFocusListener(this);
@@ -130,6 +130,17 @@ public class ManagementBookUI extends JPanel implements ActionListener, FocusLis
 		add(pCenter);
 		pCenter.setLayout(null);
 		
+		setcbkBigCategory();
+		cbkBig.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				setcbkMidCategory();
+				repaint();
+				revalidate();
+			}
+		});
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 0, 1110, 542);
 		pCenter.add(scrollPane);
@@ -158,7 +169,11 @@ public class ManagementBookUI extends JPanel implements ActionListener, FocusLis
 	private void setcbkMidCategory() {
 		cbkMiddle = new JComboBox();
 		cbkMiddle.setBounds(200, 10, 150, 50);
-		List<Category> midList = cateService.selectMidCategoryByAllWithAPI();
+		int num = cbkBig.getSelectedIndex()-1;
+		List<Category> biglist = cateService.selectBigCategoryByAllWithAPI();
+		Category cate1 = selectBigCategory(biglist.get(num));
+		
+		List<Category> midList = cateService.selectMidCategoryBySelectedWithAPI(cate1);
 		midList.add(0, new Category("중분류"));
 		Category[] cates = new Category[midList.size()];
 		midList.toArray(cates);
@@ -176,6 +191,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, FocusLis
 		DefaultComboBoxModel<Category> dcbm = new DefaultComboBoxModel<>(cates);
 		cbkBig.setModel(dcbm);
 		pSearch.add(cbkBig);
+		
 	}
 	private Object[][] getRow() {
 		Object[][] rows = null;
@@ -187,6 +203,18 @@ public class ManagementBookUI extends JPanel implements ActionListener, FocusLis
 		}
 		return rows;
 	}
+	
+	private Object[][] getRow2(Book book) {
+		Object[][] rows = null;
+		BookService service = new BookService();
+		List<Book> list = service.selectBookByBigCategoryWithAPI(book);
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++) {
+			rows[i] = list.get(i).toArray(i);
+		}
+		return rows;
+	}
+	
 	private Object[] getColunmNames() {
 		return new String[] {"NO", "도서코드", "도서명", "저자", "출판사", "출판년도","대여일","반납일"};
 	}
@@ -213,9 +241,27 @@ public class ManagementBookUI extends JPanel implements ActionListener, FocusLis
 			actionPerformedBtnAddbook(e);
 		}
 	}
-	protected void actionPerformedBtnSearch(ActionEvent e) {
-		tfSearch.getText();
-		
+	protected void actionPerformedBtnSearch(ActionEvent e) {			
+		int num = cbkBig.getSelectedIndex()-1;
+		int num2 = cbkMiddle.getSelectedIndex();
+		List<Category> biglist = cateService.selectBigCategoryByAllWithAPI();
+		List<Category> midlist = cateService.selectMidCategoryByAllWithAPI();
+		Category cate1 = selectBigCategory(biglist.get(num));
+		Category cate2 = selectMidCategory(midlist.get(num2));
+		String str1 = cate1.getNum();
+		String str2 = cate2.getNum();
+		String loca_num = str1 + str2;
+		Location loca = new Location();
+		loca.setLoca_num(loca_num);
+		Book book = new Book();
+		book.setLocation(loca);
+		table.setModel(new DefaultTableModel(getRow2(book),getColunmNames()));	
+	}
+	private Category selectMidCategory(Category mid) {
+		return cateService.selectCategoryByNameWithAPI(mid);
+	}
+	private Category selectBigCategory(Category big) {
+		return cateService.selectCategoryByNameWithAPI(big);
 	}
 	public void focusGained(FocusEvent arg0) {
 		if (arg0.getSource() == tfSearch) {

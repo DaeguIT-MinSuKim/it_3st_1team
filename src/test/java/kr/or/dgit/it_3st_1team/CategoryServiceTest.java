@@ -31,10 +31,19 @@ public class CategoryServiceTest {
 		List<Category> list = service.selectBigCategoryByAllWithAPI();
 		Assert.assertNotNull(list);
 	}
-	
+/*	
 	@Test
 	public void test2SelectMidCategoryByAll() {
 		List<Category> list = service.selectMidCategoryByAllWithAPI();
 		Assert.assertNotNull(list);
+	}*/
+	
+	@Test
+	public void test3SelectCategoryByName() {
+		Category cate = new Category();
+		cate.setCatename("철학");
+		Category findCate = service.selectCategoryByNameWithAPI(cate);
+		Assert.assertNotNull(findCate);
 	}
+	
 }

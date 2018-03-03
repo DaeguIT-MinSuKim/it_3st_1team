@@ -86,12 +86,12 @@ public class Book {
 		this.info = info;
 	}
 
-	public Location getLoca_num() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLoca_num(Location loca_num) {
-		this.location = loca_num;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 

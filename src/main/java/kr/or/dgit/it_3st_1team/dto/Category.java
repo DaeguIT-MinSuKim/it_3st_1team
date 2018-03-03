@@ -1,7 +1,7 @@
 package kr.or.dgit.it_3st_1team.dto;
 
 public class Category {
-	private int num;
+	private String num;
 	private String catename;
 	private int catesize;
 	private int parentnum;
@@ -14,11 +14,11 @@ public class Category {
 		this.catename = catename;
 	}
 
-	public int getNum() {
+	public String getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(String num) {
 		this.num = num;
 	}
 

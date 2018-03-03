@@ -43,7 +43,7 @@
 	<sql id="whereCategorySql">
 		<where>
 			<if test="location.loca_num != null">
-				loca_num = #{location.loca_num}
+				loca_num like #{location.loca_num}
 			</if>
 		</where>
 	</sql>

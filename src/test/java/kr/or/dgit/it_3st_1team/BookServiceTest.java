@@ -38,9 +38,9 @@ public class BookServiceTest {
 	@Test
 	public void test2selectBigCategoryByNameForResult() {
 		Location lo = new Location();
-		lo.setLoca_num("100");
+		lo.setLoca_num("100"+"%");
 		Book book = new Book();
-		book.setLoca_num(lo);
+		book.setLocation(lo);
 		List<Book> listStd = service.selectBookByBigCategoryWithAPI(book);
 		Assert.assertNotNull(listStd);
 		System.out.println(listStd);

@@ -4,7 +4,7 @@
 
 	<!-- 대분류 콤보박스 설정 -->
 	<sql id="selectBigCategorySql">
-		select num, catename from category where catesize = 0
+		select num, catename, parentnum from category where catesize = 0
 	</sql>
 	
 	<select id="selectBigCategoryByAllWithAPI" parameterType="Category" resultType="Category">
@@ -15,7 +15,35 @@
 	<sql id="selectMidCategorySql">
 		select num, catename from category where catesize = 1
 	</sql>
+	
+	<sql id="whereparentnumSql">
+			<if test="parentnum != null">
+				and parentnum = #{parentnum}
+			</if>
+	</sql>
+	
 	<select id="selectMidCategoryByAllWithAPI" parameterType="Category" resultType="Category">
 		<include refid="selectMidCategorySql" />
+		<include refid="whereparentnumSql" />
+	</select>
+	
+	
+	<!-- 대분류 이름으로 넘버 불러오기 -->
+	
+	<sql id="selectCategoryAllSql">
+		select num, catename, parentnum from category
+	</sql>
+	
+	<sql id="whereNameSql">
+		<where>
+			<if test="catename != null">
+				catename = #{catename}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectCategoryByNameWithAPI"  parameterType="Category" resultType="Category">
+		<include refid="selectCategoryAllSql" />
+		<include refid="whereNameSql" />
 	</select>
 </mapper>
