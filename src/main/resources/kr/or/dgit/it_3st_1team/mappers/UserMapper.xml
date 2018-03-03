@@ -3,8 +3,8 @@
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.UserDao">
 
 	<sql id="insertUsersql">
-		insert into users(code, name, id, pw, tel, email, addr_id, entryday) 
-		values (#{code},#{name},#{id},#{pw},#{tel},#{email},#{addr_id.total},#{entryday})
+		insert into users(code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday) 
+		values (#{code},#{name},#{id},#{pw},#{tel},#{email},#{zipcode},#{addr_id.total},#{addr_de},#{entryday})
 	</sql>
 	
 	<sql id="deleteSql">
@@ -17,12 +17,11 @@
 		<result property="id" column="id"/>
 		<result property="tel" column="tel"/>
 		<result property="email" column="email"/>
+		<result property="zipcode" column="zipcode"/>
 		<result property="addr_id.total" column="addr_id"/>
+		<result property="addr_de" column="addr_de"/>
+		<!-- <result property="zipcode" column="zipcode"/> -->
 	</resultMap>
-	
-<!-- 	<resultMap type="User" id="Userwithphone" extends="UserResult">
-		<association property="tel" resultMap="kr.or.dgit.it.it_3st_1team.dao.PhoneDao.PhoneResult"/>
-	</resultMap> -->
 	
 	<insert id="insertUser" parameterType="User">
 		<include refid="insertUsersql"/>
@@ -47,19 +46,37 @@
 			<if test="email != null">
 				email = #{email},
 			</if>
+			<if test="zipcode != null">
+				zipcode = #{zipcode},
+			</if>
 			<if test="addr_id != null">
 				addr_id = #{addr_id.total},
+			</if>
+			<if test="addr_de != null">
+				addr_de = #{addr_de},
 			</if>
 		</set>
 		where id= #{id}
 	</update>
 	
 	<select id="selectAllUser" parameterType="User" resultMap="UserResult">
-		select * from users
+		select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users
 	</select>
 	
 	<select id="selectUserById" parameterType="User" resultMap="UserResult">
-		select * from users where id = #{id}
+		select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where id = #{id}
+	</select>
+	
+	<select id="selectNameEmail" parameterType="User" resultMap="UserResult">
+		select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where name = #{name} and email = #{email}
+	</select>
+	
+	<select id="selectIdPw" parameterType="User" resultMap="UserResult">
+		select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where id = #{id} and pw = #{pw}
+	</select>
+	
+	<select id="selectIdEmail" parameterType="User" resultMap="UserResult">
+		select * from users where id = #{id} and email = #{email}
 	</select>
 	
 </mapper>

@@ -10,7 +10,10 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
+<<<<<<< HEAD
 import kr.or.dgit.it_3st_1team.dto.Category;
+=======
+>>>>>>> refs/remotes/origin/master
 import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.BookService;
 
@@ -27,8 +30,18 @@ public class BookServiceTest {
 	public static void tearDownAfterClass() throws Exception {
 		service = null;
 	}
+	
+	@Test
+	public void test1selectBookStartAll() {
+		List<Book> booklist = service.selectBookStartAll();
+		Assert.assertNotNull(booklist);
+		for(Book b: booklist) {
+			System.out.println(b);
+		}
+	}
 
 	@Test
+<<<<<<< HEAD
 	public void test1selectBookByAllForResultMapExtends() {
 		List<Book> listStd = service.selectBookByAllForResultMapExtendsWithAPI();
 		Assert.assertNotNull(listStd);
@@ -44,5 +57,17 @@ public class BookServiceTest {
 		List<Book> listStd = service.selectBookByBigCategoryWithAPI(book);
 		Assert.assertNotNull(listStd);
 		System.out.println(listStd);
+=======
+	public void test2selectBookAll() {
+		Book book = new Book();
+		Location loca = new Location();
+		loca.setLoca_num("000010");
+		book.setLoca_num(loca);
+		List<Book> booklist = service.selectBookAll(book);
+		Assert.assertNotNull(booklist);
+		for(Book b: booklist) {
+			System.out.println(b);
+		}
+>>>>>>> refs/remotes/origin/master
 	}
 }

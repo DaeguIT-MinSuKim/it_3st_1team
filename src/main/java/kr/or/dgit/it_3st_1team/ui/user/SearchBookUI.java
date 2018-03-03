@@ -6,7 +6,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -16,15 +23,20 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
+
+import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.dto.Category;
+import kr.or.dgit.it_3st_1team.dto.Location;
+import kr.or.dgit.it_3st_1team.service.BookService;
+import kr.or.dgit.it_3st_1team.service.CategoryService;
 
 @SuppressWarnings("serial")
-public class SearchBookUI extends JPanel implements ActionListener {
+public class SearchBookUI extends JPanel implements ActionListener, ItemListener, MouseListener {
 	private JTextField tfbookname;
 	private SearchBtn btnSearch = new SearchBtn();
 	private JTable table;
@@ -33,6 +45,8 @@ public class SearchBookUI extends JPanel implements ActionListener {
 	private SearchBookDetailUI search;
 	private JPanel panel_1;
 	int flag = 1;
+	private JComboBox<Category> cbbbig;
+	private JComboBox<Category> cbbmid;
 	
 	public SearchBookUI() {
 
@@ -42,16 +56,30 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
-		String [] categoryBig = {"대분류 전체"};
-		JComboBox<String> cbbbig = new JComboBox<String>();
+		List<Category> categoryBig = new ArrayList<>();
+		Category decate = new Category();
+		decate.setCatename("대분류 전체");
+		categoryBig.add(decate);
+		CategoryService service = new CategoryService();
+		List<Category> listcate = service.selectCategoryBig();
+		for(Category cate: listcate) {
+			categoryBig.add(cate);
+		}
+		DefaultComboBoxModel<Category> model = 
+				new DefaultComboBoxModel<>(categoryBig.toArray(new Category[categoryBig.size()]));
+		cbbbig = new JComboBox<>(model);
+		cbbbig.addItemListener(this);
 		cbbbig.setBorder(null);
 		cbbbig.setMaximumRowCount(10);
 		cbbbig.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		cbbbig.setBounds(30, 50, 150, 50);
 		add(cbbbig);
 		
-		String [] categoryMid = {"중분류 전체"};
-		JComboBox<String> cbbmid = new JComboBox<>();
+		
+		Category decate2 = new Category();
+		decate2.setCatename("중분류 전체");
+		Category[] mid = new Category[] {decate2};
+		cbbmid = new JComboBox<>(mid);
 		cbbmid.setBorder(null);
 		cbbmid.setMaximumRowCount(5);
 		cbbmid.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -59,6 +87,7 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		add(cbbmid);
 		
 		tfbookname = new JTextField();
+		tfbookname.addMouseListener(this);
 		tfbookname.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfbookname.setText("책 제목을 입력해주세요.");
 		tfbookname.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -67,6 +96,7 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		tfbookname.setColumns(10);
 		
 		btnSearch.setBounds(880, 50, 45, 45);
+		btnSearch.addActionListener(this);
 		btnSearch.setBackground(null);
 		btnSearch.setBorder(null);
 		add(btnSearch);
@@ -96,7 +126,8 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		table.setRowHeight(30);
 		table.getTableHeader().setBackground(new Color(245,245,245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		table.setModel(new DefaultTableModel(getRow(),getColunmNames()));
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		loadDatas();
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
@@ -118,39 +149,37 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 	}
 	private Object[][] getRow() {
-		Object[][] rows = new Object[][] {
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null},
-			{null, null, null, null, null, null, null}
-		};
+		Object[][] rows = null;
+		
+			BookService service = new BookService();
+			List<Book> list = service.selectBookStartAll();
+			rows = new Object[list.size()][];
+			for(int i=0; i<rows.length; i++) {
+				rows[i] = list.get(i).toArray();
+			}
 		return rows;
 	}
 	private Object[] getColunmNames() {
 		return new String[] {"NO", "도서명", "저자", "출판사", "출판년도", "비치수/보유수", "대여가능여부"};
 	}
-	private void cellAlign(int align, int...idx) {
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-		dtcr.setHorizontalAlignment(align);
-		
-		TableColumnModel model = table.getColumnModel();
-		for(int i=0; i<idx.length; i++) {
-			model.getColumn(idx[i]).setCellRenderer(dtcr);
-		}
+
+	public void loadDatas() {
+		NonEditableModel model = new NonEditableModel(getRow(), getColunmNames());
+		table.setModel(model);
 	}
+	
+	class NonEditableModel extends DefaultTableModel {
+
+		public NonEditableModel(Object[][] data, Object[] columnNames) {
+			super(data, columnNames);
+		}
+
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+		
+	}	
 	class SearchBtn extends JButton{
 		private ImageIcon icon = new ImageIcon("images/search.png");
 		private Image img = icon.getImage();
@@ -165,9 +194,20 @@ public class SearchBookUI extends JPanel implements ActionListener {
 		if (e.getSource() == btnSearchDe) {
 			actionPerformedBtnSearchDe(e);
 		}
+		if (e.getSource() == btnSearch) {
+			actionPerformedBtnSearch(e);
+		}
+	}
+	private void actionPerformedBtnSearch(ActionEvent e) {
+		Book book = new Book();
+		Location loca = new Location();
+		book.setBkname(tfbookname.getText());
+		
+		BookService service = new BookService();
+		service.selectBookAll(book);
+		
 	}
 	protected void actionPerformedBtnSearchDe(ActionEvent e) {
-		
 		if(flag == 1) {
 			search = new SearchBookDetailUI();
 			search.setBounds(20,120,1080,250);
@@ -181,5 +221,47 @@ public class SearchBookUI extends JPanel implements ActionListener {
 			repaint();
 			flag = 1;
 		}
+	}
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cbbbig) {
+			itemStateChangedCbbbig(e);
+		}
+	}
+	protected void itemStateChangedCbbbig(ItemEvent e) {
+		if(e.getStateChange() == ItemEvent.SELECTED) {
+			loadCategoryMid((Category)cbbbig.getSelectedItem());
+		}
+	}
+	private void loadCategoryMid(Category selectedItem) {
+		System.out.println(selectedItem);
+		List<Category> categoryMid = new ArrayList<>();
+		Category decate2 = new Category();
+		decate2.setCatename("중분류 전체");
+		categoryMid.add(decate2);
+		
+		CategoryService service = new CategoryService();
+		List<Category> listcate = service.selectCategoryMid(selectedItem);
+		for(Category cate: listcate) {
+			categoryMid.add(cate);
+		}
+		DefaultComboBoxModel<Category> model = 
+				new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
+		cbbmid.setModel(model);
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == tfbookname) {
+			mouseClickedTfbookname(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTfbookname(MouseEvent e) {
+		tfbookname.setText("");
 	}
 }

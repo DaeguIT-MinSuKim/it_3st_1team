@@ -1,0 +1,9 @@
+-- isbn 중복된 row 1개만 출력
+SELECT * FROM book GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkname;
+
+-- 중복된 컬럼 갯수 출력 (보유수)
+SELECT bkname, COUNT(*) FROM book GROUP BY isbn HAVING COUNT(*)>1;
+
+-- 최신순 도서검색창을 켰을 때 바로 보이는 테이블
+select bkcode,bkname, isbn, Count(*) from book 
+GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkcode desc;

@@ -17,6 +17,18 @@ public class Post {
 	public Post() {
 		// TODO Auto-generated constructor stub
 	}
+	public Post(String str) {
+		if(str != null) {
+			String[] parts = str.split(" ");
+			
+			if(parts.length >0) this.zipcode = parts[0];
+			if(parts.length >1) {
+				for(int i=1; i<parts.length; i++) {
+					this.total += parts[i];
+				}
+			}
+		}
+	}
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -82,19 +94,17 @@ public class Post {
 	}
 	public void setBunji_num2(int bunji_num2) {
 		this.bunji_num2 = bunji_num2;
-	}
-	
-	
+	}	
 	public String getTotal() {
 		return String.format(
 				"%s %s %s %s %s %s %s %s %s %s %s",
-				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
+				sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
 				bunji_num2);
 	}
 	public void setTotal(String total) {
 		this.total = String.format(
 				"%s %s %s %s %s %s %s %s %s %s %s",
-				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
+				sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
 				bunji_num2);
 	}
 	@Override

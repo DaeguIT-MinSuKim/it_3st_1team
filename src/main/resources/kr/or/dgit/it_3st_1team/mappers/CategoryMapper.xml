@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.CategoryDao">
 
+<<<<<<< HEAD
 	<!-- 대분류 콤보박스 설정 -->
 	<sql id="selectBigCategorySql">
 		select num, catename, parentnum from category where catesize = 0
@@ -46,4 +47,22 @@
 		<include refid="selectCategoryAllSql" />
 		<include refid="whereNameSql" />
 	</select>
+=======
+	<resultMap type="Category" id="CategoryResult">
+		<id property="num" column="num"/>
+		<result property="catename" column="catename"/>
+		<result property="catesize" column="catesize"/>
+		<result property="parentnum" column="parentnum"/>
+	</resultMap>
+	
+	<select id="selectCategoryBig" parameterType="Category" resultMap="CategoryResult">
+		select num, catename, catesize, parentnum from category where catesize = 0 order by num
+	</select>
+	
+	<select id="selectCategoryMid" parameterType="Category" resultMap="CategoryResult">
+		select num, catename, catesize, parentnum from category 
+		where catesize = 1 and parentnum = #{parentnum} order by num
+	</select>
+	
+>>>>>>> refs/remotes/origin/master
 </mapper>

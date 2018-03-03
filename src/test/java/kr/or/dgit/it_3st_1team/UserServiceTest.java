@@ -1,10 +1,20 @@
 package kr.or.dgit.it_3st_1team;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> refs/remotes/origin/master
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
+<<<<<<< HEAD
+=======
+import kr.or.dgit.it_3st_1team.dto.Phone;
+import kr.or.dgit.it_3st_1team.dto.User;
+>>>>>>> refs/remotes/origin/master
 import kr.or.dgit.it_3st_1team.service.UserService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -73,5 +83,45 @@ public class UserServiceTest {
 		User selectUser = service.selectUserById(user);
 		Assert.assertEquals(user.getId(), selectUser.getId());
 		System.out.println(selectUser);
+<<<<<<< HEAD
 	}*/
+=======
+	}
+	
+	@Test
+	public void test6selectNameEmail() {
+		User user = new User();
+		user.setName("김연아");
+		user.setEmail("yuna@dgit.com");
+		
+		User selectUser = service.selectNameEmail(user);
+		Assert.assertEquals(user.getName(), selectUser.getName());
+		Assert.assertEquals(user.getEmail(), selectUser.getEmail());
+		System.out.println(selectUser);
+	}
+	
+	@Test
+	public void test7selectIdPw() {
+		User user = new User();
+		user.setId("sehun");
+		user.setPw("sehun");
+		
+		User selectUser = service.selectIdPw(user);
+		Assert.assertEquals(user.getId(), selectUser.getId());
+		Assert.assertEquals(user.getPw(), selectUser.getPw());
+		System.out.println(selectUser);
+	}
+	
+	@Test
+	public void test8selectIdEmail() {
+		User user = new User();
+		user.setId("yuna");
+		user.setEmail("yuna@dgit.com");
+		
+		User selectUser = service.selectIdEmail(user);
+		Assert.assertEquals(user.getId(), selectUser.getId());
+		Assert.assertEquals(user.getEmail(), selectUser.getEmail());
+		System.out.println(selectUser);
+	}
+>>>>>>> refs/remotes/origin/master
 }

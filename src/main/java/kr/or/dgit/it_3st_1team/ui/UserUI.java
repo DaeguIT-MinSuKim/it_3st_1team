@@ -8,8 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
+import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.ui.user.HistoryUI;
 import kr.or.dgit.it_3st_1team.ui.user.RequestBookUI;
 import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI;
@@ -23,8 +26,11 @@ public class UserUI extends JPanel implements ActionListener {
 	private JButton btnHistory;
 	private JButton btnNews;
 	private JButton btnUserUpdate;
+	public JLabel lblname;
+	public User user;
 	
-	public UserUI() {
+	public UserUI(User user) {
+		this.user = user;
 		initComponents();
 	}
 	private void initComponents() {
@@ -40,7 +46,7 @@ public class UserUI extends JPanel implements ActionListener {
 		btnBookSearch.addActionListener(this);
 		btnBookSearch.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookSearch.setForeground(new Color(255, 255, 255));
-		btnBookSearch.setBackground(new Color(158,158,158));
+		btnBookSearch.setBackground(new Color(127,127,127));
 		btnBookSearch.setBounds(0, 50, 250, 45);
 		panel.add(btnBookSearch);
 		
@@ -83,10 +89,30 @@ public class UserUI extends JPanel implements ActionListener {
 		btnlogout.setBounds(70, 650, 100, 30);
 		panel.add(btnlogout);	
 		
+		lblname = new JLabel("");
+		lblname.setForeground(Color.WHITE);
+		lblname.setFont(new Font("굴림", Font.PLAIN, 14));
+		lblname.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblname.setBounds(31, 25, 81, 15);
+		panel.add(lblname);
+		
+		JLabel label = new JLabel("님의 도서관");
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("굴림", Font.PLAIN, 14));
+		label.setBounds(114, 25, 84, 15);
+		panel.add(label);
+		
 		show = new JPanel();
+		show.setBackground(Color.WHITE);
 		show.setBounds(250, 0, 1150, 800);
 		add(show);
+		
+		SearchBookUI showpanel = new SearchBookUI();
+		showpanel.setBounds(250, 0, 1150, 800);
+		showpanel.setBackground(Color.WHITE);
+		changePanel(showpanel);
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnNews) {
 			actionPerformedBtnNews(e);

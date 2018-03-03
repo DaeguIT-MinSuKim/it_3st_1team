@@ -11,7 +11,16 @@ public interface UserDao {
 	int updateUser(User user);
 	//delete
 	int deleteUser(int code);
+	
 	//select
+	//모든 회원 출력
 	List<User> selectAllUser();
-	User selectUserById(User user);
+	//아이디로 회원정보출력
+	User selectUserById(User user);	
+	//아이디찾기 - 이름, 이메일
+	User selectNameEmail(User user);
+	//비밀번호찾기 - 아이디, 이메일
+	User selectIdEmail(User user);
+	//로그인 - 아이디, 비밀번호
+	User selectIdPw(User user);
 }

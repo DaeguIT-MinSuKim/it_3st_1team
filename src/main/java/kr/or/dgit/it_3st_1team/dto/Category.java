@@ -48,7 +48,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return String.format(" %s", catename);
+		return String.format("%s", catename);
 	}
 	
 	

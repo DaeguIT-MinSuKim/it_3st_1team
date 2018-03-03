@@ -12,6 +12,7 @@ public class Book {
 	private Location location;
 	private Takeinout takeinout;
 
+
 	public Book() {}
 	
 	public Takeinout getInout() {
@@ -86,12 +87,12 @@ public class Book {
 		this.info = info;
 	}
 
-	public Location getLocation() {
+	public Location getLoca_num() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setLoca_num(Location loca_num) {
+		this.location = loca_num;
 	}
 	
 
@@ -102,8 +103,12 @@ public class Book {
 				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, location, takeinout);
 	}
 
-	public Object[] toArray(int i) {
+	public Object[] toArrayTakeinout(int i) {
 		return new Object[] {i, bkCode, bkname, author, publish, pubyear, takeinout.getRentdey(), takeinout.getReturnday()};
+	}
+
+	public Object[] toArray() {
+		return new Object[] {null, bkname, author, publish, pubyear, null, rentable};
 	}
 
 }

@@ -25,6 +25,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnNews;
 	private JPanel showpanel;
 	private ManagementBookUI manager;
+	
 	public ManagerUI() {
 		initComponents();
 	}
