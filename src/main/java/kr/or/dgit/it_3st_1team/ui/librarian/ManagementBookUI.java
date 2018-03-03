@@ -151,6 +151,12 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 	private void setcbkMidCategory() {
 		cbkMiddle = new JComboBox();
 		cbkMiddle.setBounds(200, 10, 150, 50);
+		List<Category> midList = cateService.selectMidCategoryByAllWithAPI();
+		midList.add(0, new Category("중분류"));
+		Category[] cates = new Category[midList.size()];
+		midList.toArray(cates);
+		DefaultComboBoxModel<Category> dcbm = new DefaultComboBoxModel<>(cates);
+		cbkMiddle.setModel(dcbm);
 		pSearch.add(cbkMiddle);
 	}
 	private void setcbkBigCategory() {

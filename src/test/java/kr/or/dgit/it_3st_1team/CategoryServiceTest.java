@@ -31,4 +31,10 @@ public class CategoryServiceTest {
 		List<Category> list = service.selectBigCategoryByAllWithAPI();
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void test2SelectMidCategoryByAll() {
+		List<Category> list = service.selectMidCategoryByAllWithAPI();
+		Assert.assertNotNull(list);
+	}
 }

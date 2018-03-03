@@ -21,4 +21,10 @@ public class CategoryService {
 		}
 	}
 	
+	public List<Category> selectMidCategoryByAllWithAPI(){
+		log.debug("selectMidCategoryByAllWithAPI()");
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace + "selectMidCategoryByAllWithAPI");
+		}
+	}
 }

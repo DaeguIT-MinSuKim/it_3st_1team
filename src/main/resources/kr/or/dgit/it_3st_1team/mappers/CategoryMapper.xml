@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.CategoryDao">
+
+	<!-- 대분류 콤보박스 설정 -->
 	<sql id="selectBigCategorySql">
 		select num, catename from category where catesize = 0
 	</sql>
 	
-	<sql id="whereBigCategotySql">
-		<where>
-			<if test="">
-			
-			</if>
-		</where>
-	</sql>
-	
 	<select id="selectBigCategoryByAllWithAPI" parameterType="Category" resultType="Category">
 		<include refid="selectBigCategorySql" />
+	</select>
+	
+	<!-- 중분류 콤보 박스 설정 -->
+	<sql id="selectMidCategorySql">
+		select num, catename from category where catesize = 1
+	</sql>
+	<select id="selectMidCategoryByAllWithAPI" parameterType="Category" resultType="Category">
+		<include refid="selectMidCategorySql" />
 	</select>
 </mapper>
