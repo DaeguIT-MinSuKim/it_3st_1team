@@ -1,9 +1,13 @@
 package kr.or.dgit.it_3st_1team.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.ResultContext;
+import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.it_3st_1team.dao.ManageBookDao;
@@ -33,6 +37,23 @@ public class ManageBookService {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
 			ManageBookDao bookDao = sqlSession.getMapper(ManageBookDao.class);
 			return bookDao.selectBookByBigCategoryWithAPI(book);
+		}
+	}
+	
+	public Map<String, Book> selectBookByMapWithAPI(){
+		log.debug("selectBookByMapWithAPI()");
+		Map<String, Book> map = new HashMap<>();
+        ResultHandler<Book> resultHandler = new ResultHandler<Book>() {
+            @Override
+            public void handleResult(ResultContext<? extends Book> resultContext) {
+            	Book book = resultContext.getResultObject();
+                map.put(book.getBkCode(), book);
+            }
+        };
+
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			sqlSession.select(namespace + "selectBookByMapWithAPI", resultHandler);
+			return map;
 		}
 	}
 

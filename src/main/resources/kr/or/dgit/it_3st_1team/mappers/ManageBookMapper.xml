@@ -11,21 +11,23 @@
 		<result property="publish" column="publish"/>
 		<result property="pubyear" column="pubyear"/>
 		<result property="info" column="info"/>
+		<result property="rentday" column="rentday" />
+		<result property="returnday" column="returnday" />
 	</resultMap>
 	
 	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
-		<result property="takeinout.inout_no" column="inout_no"/>
-		<result property="takeinout.user.code" column="code" />
-		<result property="takeinout.book.bkCode" column="bkcode" />
-		<result property="takeinout.rentday" column="rentday"/>
-		<result property="takeinout.returnday" column="returnday"/>
+<!-- 		<result property="take.inout_no" column="inout_no"/>
+		<result property="take.user.code" column="code" />
+		<result property="take.book.bkCode" column="bkcode" />
+		<result property="take.rentday" column="rentday"/>
+		<result property="take.returnday" column="returnday"/> -->
 		<result property="location.loca_num" column="loca_num"/>
 		<!-- <result property="location.loca_section" column="loca_section"/> -->
 	</resultMap>
 	
 	<sql id="selectJoinTakeinoutSql">
-		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num, t.inout_no
-		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, rentday, returnday, loca_num, t.inout_no
+		from book b left outer join takeinout t on b.bkcode=t.bkcode
 	</sql>
 	
 	<sql id="whereAllSql">
@@ -62,6 +64,14 @@
 		<include refid="whereAllSql" />
 	</select>
 	
+	<sql id="selectParameterSql">
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num, t.inout_no
+		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
+	</sql>
+	
+	<select id="selectBookByMapWithAPI" parameterType="map" resultMap="BookWithTakeinoutResult">
+		<include refid="selectParameterSql" />
+	</select>
 	
 </mapper>
 

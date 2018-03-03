@@ -10,23 +10,16 @@ public class Book {
 	private int pubyear;
 	private String info;
 	private Location location;
-	private Takeinout takeinout;
+	private String rentday;
+	private String returnday;
 
-
-	public Book() {}
+	public Book() {
+	}
 	
 	public Book(String bkname) {
 		this.bkname = bkname;
 	}
 
-	public Takeinout getInout() {
-		return takeinout;
-	}
-
-	public void setInout(Takeinout inout) {
-		this.takeinout = inout;
-	}
-	
 	public String getBkCode() {
 		return bkCode;
 	}
@@ -90,6 +83,7 @@ public class Book {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+
 	public Location getLocation() {
 		return location;
 	}
@@ -97,24 +91,32 @@ public class Book {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
-	public Takeinout getTakeinout() {
-		return takeinout;
+
+	public String getRentday() {
+		return rentday;
 	}
 
-	public void setTakeinout(Takeinout takeinout) {
-		this.takeinout = takeinout;
+	public void setRentday(String rentday) {
+		this.rentday = rentday;
+	}
+
+	public String getReturnday() {
+		return returnday;
+	}
+
+	public void setReturnday(String returnday) {
+		this.returnday = returnday;
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"Book [bkCode=%s, isbn=%s, rentable=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, info=%s, loca=%s, takeinout=%s]",
-				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, location, takeinout);
+				"Book [bkCode=%s, isbn=%s, rentable=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, info=%s, location=%s, rentday=%s, returnday=%s]",
+				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, location, rentday, returnday);
 	}
 
 	public Object[] toArrayTakeinout(int i) {
-		return new Object[] {i, bkCode, bkname, author, publish, pubyear, takeinout.getRentdey(), takeinout.getReturnday()};
+		return new Object[] {i, bkCode, bkname, author, publish, pubyear, rentday, returnday};
 	}
 
 	public Object[] toArray() {

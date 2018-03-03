@@ -1,6 +1,8 @@
 package kr.or.dgit.it_3st_1team;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -47,4 +49,13 @@ public class ManageBookServiceTest {
 		Assert.assertNotNull(listStd);
 		System.out.println(listStd);
 	}
+	
+/*	@Test
+	public void test3selectBookByMapWithAPI() {
+		Map<String, Book> map = service.selectBookByMapWithAPI();
+		Assert.assertNotNull(map);
+		for(Entry<String, Book>entry : map.entrySet()){
+            System.out.printf("key(%s) - value(%s)%n", entry.getKey(), entry.getValue());
+        }
+	}*/
 }

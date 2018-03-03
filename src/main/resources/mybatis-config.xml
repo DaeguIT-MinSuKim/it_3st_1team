@@ -13,6 +13,9 @@
 	</typeAliases>
 	
 	<typeHandlers>
+		<typeHandler javaType="java.sql.Timestamp" handler="org.apache.ibatis.type.DateTypeHandler"/>
+		<typeHandler javaType="java.sql.Time" handler="org.apache.ibatis.type.DateTypeHandler"/>
+		<typeHandler javaType="java.sql.Date" handler="org.apache.ibatis.type.DateTypeHandler"/>
 		<package name="kr.or.dgit.it_3st_1team.typehandlers"/>
 	</typeHandlers>
 	
