@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -21,15 +22,21 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.service.BookService;
+import kr.or.dgit.it_3st_1team.service.CategoryService;
 
 public class ManagementBookUI extends JPanel implements ActionListener{
 	private JTextField tfSearch;
 	private JTable table;
 	private JButton btnAddbook;
+	private JComboBox<Category> cbkBig;
+	private JPanel pSearch;
+	private CategoryService cateService;
+	private JComboBox<Category> cbkMiddle;
 
 	public ManagementBookUI() {
-
+		cateService = new CategoryService();
 		initComponents();
 	}
 	private void initComponents() {
@@ -43,18 +50,13 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		add(pNorth);
 		pNorth.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		JPanel pSearch = new JPanel();
+		pSearch = new JPanel();
 		pSearch.setBackground(new Color(255,255,255));
 		pNorth.add(pSearch);
 		pSearch.setLayout(null);
 		
-		JComboBox cbkBig = new JComboBox();
-		cbkBig.setBounds(new Rectangle(30, 10, 150, 50));
-		pSearch.add(cbkBig);
-		
-		JComboBox cbkMiddle = new JComboBox();
-		cbkMiddle.setBounds(200, 10, 150, 50);
-		pSearch.add(cbkMiddle);
+		setcbkBigCategory();		
+		setcbkMidCategory();
 		
 		tfSearch = new JTextField();
 		tfSearch.setBounds(370, 10, 500, 50);
@@ -146,6 +148,22 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		
 	}
 	
+	private void setcbkMidCategory() {
+		cbkMiddle = new JComboBox();
+		cbkMiddle.setBounds(200, 10, 150, 50);
+		pSearch.add(cbkMiddle);
+	}
+	private void setcbkBigCategory() {
+		cbkBig = new JComboBox();
+		cbkBig.setBounds(new Rectangle(30, 10, 150, 50));
+		List<Category> bigList = cateService.selectBigCategoryByAllWithAPI();
+		bigList.add(0, new Category("대분류"));
+		Category[] cates = new Category[bigList.size()];
+		bigList.toArray(cates);
+		DefaultComboBoxModel<Category> dcbm = new DefaultComboBoxModel<>(cates);
+		cbkBig.setModel(dcbm);
+		pSearch.add(cbkBig);
+	}
 	private Object[][] getRow() {
 		Object[][] rows = null;
 		BookService service = new BookService();

@@ -10,6 +10,10 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Category(String catename) {
+		this.catename = catename;
+	}
+
 	public int getNum() {
 		return num;
 	}
@@ -44,7 +48,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return String.format(" %s, %s, %s, %s", num, catename, catesize, parentnum);
+		return String.format(" %s", catename);
 	}
 	
 	
