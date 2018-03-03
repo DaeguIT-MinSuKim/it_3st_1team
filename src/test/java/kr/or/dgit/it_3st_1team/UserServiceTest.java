@@ -1,20 +1,13 @@
 package kr.or.dgit.it_3st_1team;
 
-<<<<<<< HEAD
-=======
-import java.util.List;
-
->>>>>>> refs/remotes/origin/master
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-<<<<<<< HEAD
-=======
-import kr.or.dgit.it_3st_1team.dto.Phone;
 import kr.or.dgit.it_3st_1team.dto.User;
->>>>>>> refs/remotes/origin/master
 import kr.or.dgit.it_3st_1team.service.UserService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -85,8 +78,6 @@ public class UserServiceTest {
 		System.out.println(selectUser);
 <<<<<<< HEAD
 	}*/
-=======
-	}
 	
 	@Test
 	public void test6selectNameEmail() {
@@ -123,5 +114,4 @@ public class UserServiceTest {
 		Assert.assertEquals(user.getEmail(), selectUser.getEmail());
 		System.out.println(selectUser);
 	}
->>>>>>> refs/remotes/origin/master
 }

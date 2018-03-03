@@ -10,10 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
-<<<<<<< HEAD
-import kr.or.dgit.it_3st_1team.dto.Category;
-=======
->>>>>>> refs/remotes/origin/master
 import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.BookService;
 
@@ -41,7 +37,6 @@ public class BookServiceTest {
 	}
 
 	@Test
-<<<<<<< HEAD
 	public void test1selectBookByAllForResultMapExtends() {
 		List<Book> listStd = service.selectBookByAllForResultMapExtendsWithAPI();
 		Assert.assertNotNull(listStd);
@@ -53,11 +48,12 @@ public class BookServiceTest {
 		Location lo = new Location();
 		lo.setLoca_num("100"+"%");
 		Book book = new Book();
-		book.setLocation(lo);
+		book.setLoca_num(lo);
 		List<Book> listStd = service.selectBookByBigCategoryWithAPI(book);
 		Assert.assertNotNull(listStd);
 		System.out.println(listStd);
-=======
+	}
+
 	public void test2selectBookAll() {
 		Book book = new Book();
 		Location loca = new Location();
@@ -68,6 +64,5 @@ public class BookServiceTest {
 		for(Book b: booklist) {
 			System.out.println(b);
 		}
->>>>>>> refs/remotes/origin/master
 	}
 }
