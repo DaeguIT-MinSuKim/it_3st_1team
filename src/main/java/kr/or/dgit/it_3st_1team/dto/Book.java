@@ -15,6 +15,10 @@ public class Book {
 
 	public Book() {}
 	
+	public Book(String bkname) {
+		this.bkname = bkname;
+	}
+
 	public Takeinout getInout() {
 		return takeinout;
 	}
@@ -86,15 +90,21 @@ public class Book {
 	public void setInfo(String info) {
 		this.info = info;
 	}
-
-	public Location getLoca_num() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLoca_num(Location loca_num) {
-		this.location = loca_num;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
+	public Takeinout getTakeinout() {
+		return takeinout;
+	}
+
+	public void setTakeinout(Takeinout takeinout) {
+		this.takeinout = takeinout;
+	}
 
 	@Override
 	public String toString() {

@@ -36,33 +36,16 @@ public class BookServiceTest {
 		}
 	}
 
-	@Test
-	public void test1selectBookByAllForResultMapExtends() {
-		List<Book> listStd = service.selectBookByAllForResultMapExtendsWithAPI();
-		Assert.assertNotNull(listStd);
-		System.out.println(listStd);
-	}
-	
-	@Test
-	public void test2selectBigCategoryByNameForResult() {
-		Location lo = new Location();
-		lo.setLoca_num("100"+"%");
-		Book book = new Book();
-		book.setLoca_num(lo);
-		List<Book> listStd = service.selectBookByBigCategoryWithAPI(book);
-		Assert.assertNotNull(listStd);
-		System.out.println(listStd);
-	}
-
 	public void test2selectBookAll() {
 		Book book = new Book();
 		Location loca = new Location();
 		loca.setLoca_num("000010");
-		book.setLoca_num(loca);
+		book.setLocation(loca);
 		List<Book> booklist = service.selectBookAll(book);
 		Assert.assertNotNull(booklist);
 		for(Book b: booklist) {
 			System.out.println(b);
 		}
 	}
+
 }

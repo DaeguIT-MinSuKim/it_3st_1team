@@ -23,17 +23,6 @@
 		<!-- <result property="location.loca_section" column="loca_section"/> -->
 	</resultMap>
 	
-	<sql id="selectJoinTakeinoutSql">
-		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num
-		from book as b left outer join takeinout as t on b.bkcode = t.bkcode order by b.bkcode asc
-	</sql>
-<<<<<<< HEAD
-	
-	<select id="selectBookByAllForResultMapExtendsWithAPI" parameterType="Book" resultMap="BookWithTakeinoutResult">
-		<include refid="selectJoinTakeinoutSql" />
-	</select>
-	
-	
 	<!-- 분류별 책 검색 -->
 	
 	<sql id="selectCategorySql">
@@ -42,41 +31,30 @@
 	</sql>
 	
 	<sql id="whereCategorySql">
-=======
-		
+	</sql>
 	<sql id="whereSql">
->>>>>>> refs/remotes/origin/master
 		<where>
-<<<<<<< HEAD
 			<if test="location.loca_num != null">
 				loca_num like #{location.loca_num}
-=======
+			</if>
 			<if test="loca_num != null">
 				loca_num = #{location.loca_num}
 			</if>
 			<if test="bkname != null">
 				and bkname = #{bkname}
->>>>>>> refs/remotes/origin/master
 			</if>
 		</where>
 	</sql>
 	
-<<<<<<< HEAD
-	
-	<select id="selectBookByBigCategoryWithAPI" parameterType="Book" resultMap="BookWithTakeinoutResult">
-		<include refid="selectCategorySql" />
-		<include refid="whereCategorySql" />
-=======
 	<select id="selectBookStartAll" resultType="Book">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num, Count(*) from book 
 		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkcode desc
 	</select>
 		
-	<select id="selectBookAll" parameterType="Book" resultType="Book">
+	<!-- <select id="selectBookAll" parameterType="Book" resultType="Book">
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
->>>>>>> refs/remotes/origin/master
-	</select>
+	</select> -->
 	
 </mapper>
 

@@ -1,11 +1,13 @@
 package kr.or.dgit.it_3st_1team.dto;
 
+import java.util.Date;
+
 public class Takeinout {
 	private int inout_no;
 	private User user;
 	private Book book;
-	private String rentdey;
-	private String returnday;
+	private Date rentdey;
+	private Date returnday;
 	
 	public Takeinout() {
 	}
@@ -28,16 +30,20 @@ public class Takeinout {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	public String getRentdey() {
+
+	public Date getRentdey() {
 		return rentdey;
 	}
-	public void setRentdey(String rentdey) {
+
+	public void setRentdey(Date rentdey) {
 		this.rentdey = rentdey;
 	}
-	public String getReturnday() {
+
+	public Date getReturnday() {
 		return returnday;
 	}
-	public void setReturnday(String returnday) {
+
+	public void setReturnday(Date returnday) {
 		this.returnday = returnday;
 	}
 

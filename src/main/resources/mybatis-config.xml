@@ -6,7 +6,6 @@
 	
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
-		<setting name="jdbcTypeForNull" value="VARCHAR"/>
 	</settings>
 
 	<typeAliases>
@@ -37,6 +36,7 @@
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/CategoryMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/LocationMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/BookMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/ManageBookMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/RequestMapper.xml"/>
 	</mappers>
 </configuration>

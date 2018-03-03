@@ -26,4 +26,5 @@ public class CategoryService {
 			return sqlSession.selectList(namespace + "selectCategoryMid", category);
 		}
 	}
+	
 }
