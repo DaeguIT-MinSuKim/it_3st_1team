@@ -25,8 +25,10 @@ import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.service.BookService;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
 
-public class ManagementBookUI extends JPanel implements ActionListener{
+public class ManagementBookUI extends JPanel implements ActionListener, FocusListener{
 	private JTextField tfSearch;
 	private JTable table;
 	private JButton btnAddbook;
@@ -34,6 +36,7 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 	private JPanel pSearch;
 	private CategoryService cateService;
 	private JComboBox<Category> cbkMiddle;
+	private JButton btnSearch;
 
 	public ManagementBookUI() {
 		cateService = new CategoryService();
@@ -59,11 +62,15 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 		setcbkMidCategory();
 		
 		tfSearch = new JTextField();
+		tfSearch.addFocusListener(this);
+		tfSearch.setText("도서명으로 검색하세요");
+		tfSearch.setToolTipText("도서명으로 검색하세요");
 		tfSearch.setBounds(370, 10, 500, 50);
 		pSearch.add(tfSearch);
 		tfSearch.setColumns(10);
 		
-		JButton btnSearch = new JButton("검색");
+		btnSearch = new JButton("검색");
+		btnSearch.addActionListener(this);
 		btnSearch.setBorder(null);
 		btnSearch.setBackground(new Color(52,152,219));
 		btnSearch.setForeground(new Color(255, 255, 255));
@@ -173,7 +180,7 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 	private Object[][] getRow() {
 		Object[][] rows = null;
 		BookService service = new BookService();
-		List<Book> list = service.selectBookByAllForResultMapExtends();
+		List<Book> list = service.selectBookByAllForResultMapExtendsWithAPI();
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++) {
 			rows[i] = list.get(i).toArray(i);
@@ -199,8 +206,24 @@ public class ManagementBookUI extends JPanel implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearch) {
+			actionPerformedBtnSearch(e);
+		}
 		if (e.getSource() == btnAddbook) {
 			actionPerformedBtnAddbook(e);
 		}
+	}
+	protected void actionPerformedBtnSearch(ActionEvent e) {
+		tfSearch.getText();
+		
+	}
+	public void focusGained(FocusEvent arg0) {
+		if (arg0.getSource() == tfSearch) {
+			focusGainedTfSearch(arg0);
+		}
+	}
+	public void focusLost(FocusEvent arg0) {
+	}
+	protected void focusGainedTfSearch(FocusEvent arg0) {		tfSearch.setText("");
 	}
 }

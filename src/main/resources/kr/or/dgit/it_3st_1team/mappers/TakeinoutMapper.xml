@@ -4,14 +4,12 @@
 
 	<!-- resultmap -->
 	<resultMap type="Takeinout" id="TakeinoutResult">
-<!-- 		<id property="inout_no" column="inout_no"/>
-		<result property="user" column="code" />
-		<result property="book" column="bkcode" /> -->
+ 		<id property="inout_no" column="inout_no"/>
 		<result property="rentday" column="rentday"/>
 		<result property="returnday" column="returnday"/>
 	</resultMap>
 	
-<!-- 	<resultMap type="Takeinout" id="UserResult" extends="TakeinoutResult">
+ 	<resultMap type="Takeinout" id="UserResult" extends="TakeinoutResult">
 		<result property="user.code" column="code"/>
 		<result property="user.name" column="name"/>
 		<result property="user.id" column="id"/>
@@ -20,16 +18,16 @@
 		<result property="addr_id.total" column="addr_id"/>
 	</resultMap>
 	
-	<resultMap type="Takeinout" id="bookResult" extends="TakeinoutResult">
+	<resultMap type="Takeinout" id="BookResult" extends="TakeinoutResult">
 		<result property="book.bkCode" column="bkcode"/>
-		<result property="isbn" column="isbn"/>
-		<result property="rentable" column="rentable"/>
-		<result property="bkname" column="bkname"/>
-		<result property="author" column="author"/>
-		<result property="publish" column="publish"/>
-		<result property="pubyear" column="pubyear"/>
-		<result property="info" column="info"/>
-	</resultMap> -->
+		<result property="book.isbn" column="isbn"/>
+		<result property="book.rentable" column="rentable"/>
+		<result property="book.bkname" column="bkname"/>
+		<result property="book.author" column="author"/>
+		<result property="book.publish" column="publish"/>
+		<result property="book.pubyear" column="pubyear"/>
+		<result property="book.info" column="info"/>
+	</resultMap>
 
 </mapper>
 

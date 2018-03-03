@@ -12,12 +12,20 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 
 public class BookService {
 	private static final Log log = LogFactory.getLog(BookDao.class);
+	private String namespace= "kr.or.dgit.it_3st_1team.dao.BookDao.";
 	
-	public List<Book> selectBookByAllForResultMapExtends(){
-		log.debug("selectBookByAllForResultMapExtends()");
+	public List<Book> selectBookByAllForResultMapExtendsWithAPI(){
+		log.debug("selectBookByAllForResultMapExtendsWithAPI()");
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace + "selectBookByAllForResultMapExtendsWithAPI");
+		}
+	}
+
+	public List<Book> selectBookByBigCategoryWithAPI(Book book) {
+		log.debug("selectBookByBigCategoryWithAPI()");
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
 			BookDao bookDao = sqlSession.getMapper(BookDao.class);
-			return bookDao.selectBookByAllForResultMapExtends();
+			return bookDao.selectBookByBigCategoryWithAPI(book);
 		}
 	}
 	
