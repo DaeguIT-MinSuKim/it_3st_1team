@@ -1,9 +1,9 @@
--- isbn Áßº¹µÈ row 1°³¸¸ Ãâ·Â
+-- isbn ì¤‘ë³µëœ row 1ê°œë§Œ ì¶œë ¥
 SELECT * FROM book GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkname;
 
--- Áßº¹µÈ ÄÃ·³ °¹¼ö Ãâ·Â (º¸À¯¼ö)
+-- ì¤‘ë³µëœ ì»¬ëŸ¼ ê°¯ìˆ˜ ì¶œë ¥ (ë³´ìœ ìˆ˜)
 SELECT bkname, COUNT(*) FROM book GROUP BY isbn HAVING COUNT(*)>1;
 
--- ÃÖ½Å¼ø µµ¼­°Ë»öÃ¢À» Ä×À» ¶§ ¹Ù·Î º¸ÀÌ´Â Å×ÀÌºí
+-- ìµœì‹ ìˆœ ë„ì„œê²€ìƒ‰ì°½ì„ ì¼°ì„ ë•Œ ë°”ë¡œ ë³´ì´ëŠ” í…Œì´ë¸”
 select bkcode,bkname, isbn, Count(*) from book 
 GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkcode desc;
