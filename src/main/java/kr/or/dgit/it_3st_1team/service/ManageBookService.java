@@ -67,5 +67,16 @@ public class ManageBookService {
 			return res;
 		}
 	}
+	
+	// 도서 삭제
+	public int deleteBookWithAPI(Book book) {
+		log.debug("deleteBookWithAPI()");
+		int res = -1;
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			res = sqlSession.delete(namespace + "deleteBookWithAPI", book);
+			sqlSession.commit();
+			return res;
+		}
+	}
 
 }

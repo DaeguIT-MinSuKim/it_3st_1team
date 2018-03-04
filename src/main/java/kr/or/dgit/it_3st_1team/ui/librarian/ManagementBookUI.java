@@ -45,6 +45,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	private JRadioButton rdbtnOut;
 	private JRadioButton rdbtnAll;
 	private JRadioButton rdbtnIn;
+	private JButton btnDeleteBook;
 	
 
 	public ManagementBookUI() {
@@ -150,7 +151,8 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		btnAddbook.setBounds(905, 15, 90, 40);
 		pState.add(btnAddbook);
 		
-		JButton btnDeleteBook = new JButton("도서삭제");
+		btnDeleteBook = new JButton("도서삭제");
+		btnDeleteBook.addActionListener(this);
 		btnDeleteBook.setBorder(null);
 		btnDeleteBook.setBackground(new Color(94,94,94));
 		btnDeleteBook.setForeground(new Color(255, 255, 255));
@@ -299,8 +301,16 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		AddBookUI frame = new AddBookUI();
 		frame.setVisible(true);
 	}
+	protected void actionPerformedBtnDeleteBook(ActionEvent e) {
+		DeleteBookUI frame = new DeleteBookUI();
+		frame.setVisible(true);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnDeleteBook) {
+			actionPerformedBtnDeleteBook(e);
+		}
 		if (e.getSource() == btnSearch) {
 			actionPerformedBtnSearch(e);
 		}
@@ -368,4 +378,5 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			setAlignWidth();
 		}
 	}
+	
 }

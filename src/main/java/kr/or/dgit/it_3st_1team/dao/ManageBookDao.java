@@ -13,4 +13,7 @@ public interface ManageBookDao {
 	// insert
 	int insertBookWithAPI(Book book);
 	
+	// delete
+	int deleteBookWithAPI(Book book);
+	
 }
