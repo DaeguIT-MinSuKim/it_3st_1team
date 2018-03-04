@@ -7,12 +7,14 @@ import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.it_3st_1team.dao.BookDao;
+import kr.or.dgit.it_3st_1team.dao.TakeinoutDao;
 import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.dto.Takeinout;
 import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 
-public class BookService {
-	private static final Log log = LogFactory.getLog(BookDao.class);
-	private String namespace = "kr.or.dgit.it_3st_1team.dao.BookDao.";
+public class TakeinoutService {
+	private static final Log log = LogFactory.getLog(TakeinoutDao.class);
+	private String namespace = "kr.or.dgit.it_3st_1team.dao.TakeinoutDao.";
 	
 	public List<Book> selectBookByAllForResultMapExtendsWithAPI(){
 		log.debug("selectBookByAllForResultMapExtendsWithAPI()");
@@ -43,5 +45,10 @@ public class BookService {
 		}
 	}
 	
-	
+	public Takeinout selectTakeinoutByBkCode(Takeinout inout) {
+		log.debug("selectTakeinoutByBkCode()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectTakeinoutByBkCode", inout);
+		}
+	}
 }

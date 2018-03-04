@@ -57,4 +57,14 @@ public class ManageBookService {
 		}
 	}
 
+	public int insertBookWithAPI(Book book) {
+		log.debug("insertBookWithAPI()");
+		int res = -1;
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertBookWithAPI", book);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
 }

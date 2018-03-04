@@ -9,16 +9,13 @@
 		<result property="returnday" column="returnday"/>
 	</resultMap>
 	
- 	<resultMap type="Takeinout" id="UserResult" extends="TakeinoutResult">
+ 	<resultMap type="Takeinout" id="UserWithBookResult" extends="TakeinoutResult">
 		<result property="user.code" column="code"/>
 		<result property="user.name" column="name"/>
 		<result property="user.id" column="id"/>
 		<result property="user.tel" column="tel"/>
 		<result property="user.email" column="email"/>
 		<result property="addr_id.total" column="addr_id"/>
-	</resultMap>
-	
-	<resultMap type="Takeinout" id="BookResult" extends="TakeinoutResult">
 		<result property="book.bkCode" column="bkcode"/>
 		<result property="book.isbn" column="isbn"/>
 		<result property="book.rentable" column="rentable"/>
@@ -28,6 +25,14 @@
 		<result property="book.pubyear" column="pubyear"/>
 		<result property="book.info" column="info"/>
 	</resultMap>
+	
+	<sql id="selectTakeinoutBookSql">
+		select inout_no, code, bkcode, rentday, returnday from takeinout
+	</sql>
+	
+	<select id="selectTakeinoutByBkCode" parameterType="Takeinout" resultType="UserWithBookResult">
+		select inout_no, code, bkcode, rentday, returnday from takeinout where bkcode=#{bkCode} and code=#{code}
+	</select>
 
 </mapper>
 

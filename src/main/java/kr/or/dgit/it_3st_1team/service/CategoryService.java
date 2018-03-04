@@ -11,7 +11,7 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 
 public class CategoryService {
 	private static final Log log = LogFactory.getLog(CategoryService.class);
-	private static String namespace ="kr.or.dgit.it_3st_1team.dao.CategoryDao.";
+	private String namespace ="kr.or.dgit.it_3st_1team.dao.CategoryDao.";
 	
 	public List<Category> selectCategoryBig() {
 		log.debug("selectCategoryBig()");

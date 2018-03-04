@@ -9,7 +9,7 @@ public class User {
 	private String pw;
 	private Phone tel;
 	private String email;
-	private Post zipcode;
+	private String zipcode;
 	private Post addr_id;
 	private String addr_de;
 	private boolean blacktf;
@@ -109,11 +109,11 @@ public class User {
 		this.email = email;
 	}
 
-	public Post getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(Post zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 

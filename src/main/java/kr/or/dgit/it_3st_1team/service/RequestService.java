@@ -10,7 +10,7 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 public class RequestService {
 	private static final Log log = LogFactory.getLog(RequestService.class);
 	
-	private static String namespace = "kr.or.dgit.it_3st_1team.dao.RequestDao.";
+	private String namespace = "kr.or.dgit.it_3st_1team.dao.RequestDao.";
 	
 	public int insertRequest(Request request) {
 		log.debug("insertRequest()");

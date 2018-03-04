@@ -12,7 +12,7 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 public class UserService {
 	private static final Log log = LogFactory.getLog(UserService.class);
 	
-	private static String namespace = "kr.or.dgit.it_3st_1team.dao.UserDao.";
+	private String namespace = "kr.or.dgit.it_3st_1team.dao.UserDao.";
 	
 	public int insertUser(User user) {
 		log.debug("insertUser()");
@@ -24,7 +24,7 @@ public class UserService {
 		return res;
 	}
 	
-	public static int deleteUser(int code) {
+	public int deleteUser(int code) {
 		log.debug("deleteUser()");
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
@@ -40,7 +40,7 @@ public class UserService {
 		}
 	}
 	
-	public static int updateUser(User user) {
+	public int updateUser(User user) {
 		log.debug("updateUser()");
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
@@ -88,6 +88,13 @@ public class UserService {
 		log.debug("selectIdEmail()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + "selectIdEmail", user);
+		}
+	}
+	
+	public User selectUserByCode(User user) {
+		log.debug("selectUserByCode()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectUserByCode", user);
 		}
 	}
 }

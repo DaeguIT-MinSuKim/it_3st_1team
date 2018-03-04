@@ -79,4 +79,8 @@
 		select * from users where id = #{id} and email = #{email}
 	</select>
 	
+	<select id="selectUserByCode" parameterType="User" resultMap="UserResult">
+		select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where code = #{code}
+	</select>
+	
 </mapper>

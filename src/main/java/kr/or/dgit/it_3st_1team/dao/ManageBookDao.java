@@ -10,4 +10,7 @@ public interface ManageBookDao {
 	List<Book> selectBookByAllForResultMapExtendsWithAPI();	// 사원프로그램 자료 관리 전체 검색	
 	List<Book> selectBookByBigCategoryWithAPI(Book book);	// 카테고리 API인데..
 
+	// insert
+	int insertBookWithAPI(Book book);
+	
 }

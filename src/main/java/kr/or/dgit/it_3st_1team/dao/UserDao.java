@@ -23,4 +23,6 @@ public interface UserDao {
 	User selectIdEmail(User user);
 	//로그인 - 아이디, 비밀번호
 	User selectIdPw(User user);
+	//회원코드로 회원정보출력
+	User selectUserByCode(User user);	
 }

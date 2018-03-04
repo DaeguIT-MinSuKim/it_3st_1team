@@ -6,7 +6,25 @@ public class Takeinout {
 	private Book book;
 	private String rentdey;
 	private String returnday;
+	private String bkcode;
+	private String code;
 	
+	public String getBkcode() {
+		return bkcode;
+	}
+
+	public void setBkcode(String bkcode) {
+		this.bkcode = bkcode;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public Takeinout() {
 	}
 	
@@ -58,7 +76,8 @@ public class Takeinout {
 
 	@Override
 	public String toString() {
-		return String.format("%s,%s", rentdey, returnday);
+		return String.format("Takeinout [inout_no=%s, user=%s, book=%s, rentdey=%s, returnday=%s]", inout_no, user,
+				book, rentdey, returnday);
 	}
 
 }

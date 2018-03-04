@@ -73,6 +73,15 @@
 		<include refid="selectParameterSql" />
 	</select>
 	
+	<sql id="insertBookSql">
+		insert into book(bkcode, isbn, bkname, author, publish, pubyear, info, loca_num)
+		values (#{bkCode},#{isbn},#{bkname},#{author},#{publish},#{pubyear},#{info},#{location.loca_num})
+	</sql>
+	
+	<select id="insertBookWithAPI" parameterType="Book">
+		<include refid="insertBookSql" />
+	</select>
+	
 </mapper>
 
 

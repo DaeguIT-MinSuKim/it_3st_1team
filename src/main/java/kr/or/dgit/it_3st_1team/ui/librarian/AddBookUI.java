@@ -5,10 +5,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -17,7 +19,18 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class AddBookUI extends JFrame implements ActionListener {
+import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.dto.Category;
+import kr.or.dgit.it_3st_1team.dto.Location;
+import kr.or.dgit.it_3st_1team.service.CategoryService;
+import kr.or.dgit.it_3st_1team.service.ManageBookService;
+
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.ItemEvent;
+
+public class AddBookUI extends JFrame implements ActionListener, ItemListener {
 
 	private JPanel contentPane;
 	private JTextField tfcode;
@@ -30,9 +43,12 @@ public class AddBookUI extends JFrame implements ActionListener {
 	private JTextField tfauthor;
 	private JTextField tfpublish;
 	private JTextPane tpinfo;
+	private JComboBox<Category> cbkMiddle;
+	private JComboBox<Category> cbkBig;
+	private List<Category> bigListCategory;
+	private List<Category> midListCategory;
 
 	public AddBookUI() {
-		
 		initComponents();
 	}
 	private void initComponents() {
@@ -127,13 +143,35 @@ public class AddBookUI extends JFrame implements ActionListener {
 		contentPane.add(tfpubyear);
 		tfpubyear.setColumns(10);
 		
-		JComboBox catebig = new JComboBox();
-		catebig.setBounds(150, 190, 150, 30);
-		contentPane.add(catebig);
+		List<Category> cateBig = new ArrayList<>();
+		Category decate = new Category();
+		decate.setCatename("대분류 전체");
+		cateBig.add(decate);
+		CategoryService service = new CategoryService();
+		bigListCategory = service.selectCategoryBig();
+		for(Category cate: bigListCategory) {
+			cateBig.add(cate);
+		}
+		DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<>(cateBig.toArray(new Category[cateBig.size()]));
+		cbkBig = new JComboBox<>();
+		cbkBig.addItemListener(this);
+		cbkBig.setModel(model);
+		cbkBig.setBorder(null);
+		cbkBig.setMaximumRowCount(10);
+		cbkBig.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		cbkBig.setBounds(150, 190, 150, 30);
+		contentPane.add(cbkBig);
 		
-		JComboBox catemid = new JComboBox();
-		catemid.setBounds(310, 190, 150, 30);
-		contentPane.add(catemid);
+		
+		Category decate2 = new Category();
+		decate2.setCatename("중분류 전체");
+		cbkMiddle = new JComboBox<>();
+		cbkMiddle.addItem(decate2);
+		cbkMiddle.setBorder(null);
+		cbkMiddle.setMaximumRowCount(5);
+		cbkMiddle.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		cbkMiddle.setBounds(310, 190, 150, 30);
+		contentPane.add(cbkMiddle);
 		
 		tfisbn = new JTextField();
 		tfisbn.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
@@ -156,6 +194,7 @@ public class AddBookUI extends JFrame implements ActionListener {
 		contentPane.add(btnReset);
 		
 		btnAdd = new JButton("도서 추가");
+		btnAdd.addActionListener(this);
 		btnAdd.setBorder(null);
 		btnAdd.setForeground(new Color(64,64,64));
 		btnAdd.setBackground(new Color(52,152,219));
@@ -163,6 +202,9 @@ public class AddBookUI extends JFrame implements ActionListener {
 		contentPane.add(btnAdd);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAdd) {
+			actionPerformedBtnAdd(e);
+		}
 		if (e.getSource() == btnReset) {
 			actionPerformedButton(e);
 		}
@@ -175,5 +217,68 @@ public class AddBookUI extends JFrame implements ActionListener {
 		tfpublish.setText("");
 		tfpubyear.setText("");
 		tpinfo.setText("");
+	}
+	public void itemStateChanged(ItemEvent arg0) {
+		if (arg0.getSource() == cbkBig) {
+			loadCategoryMid((Category)cbkBig.getSelectedItem());
+		}
+	}
+	protected void itemStateChangedCatebig(ItemEvent arg0) {
+	}
+	
+	private void loadCategoryMid(Category selectedItem) {
+		List<Category> categoryMid = new ArrayList<>();
+		Category decate2 = new Category("중분류 전체");
+		categoryMid.add(decate2);
+		
+		CategoryService service = new CategoryService();
+		midListCategory = service.selectCategoryMid(selectedItem);
+		for(Category cate: midListCategory) {
+			categoryMid.add(cate);
+		}
+		DefaultComboBoxModel<Category> model = 
+				new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
+		cbkMiddle.setModel(model);
+	}
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		Book book = new Book();
+		if(!(isEmpty())) {
+			book.setBkCode(tfcode.getText().substring(1, 19));	// 도서코드
+			System.out.println(book.getBkCode());
+			book.setBkname(tfname.getText());	// 도서명
+			book.setAuthor(tfauthor.getText());	// 저자
+			book.setIsbn(tfisbn.getText());		// isbn
+			book.setPublish(tfpublish.getText());	// 출판사
+			book.setPubyear(Integer.parseInt(tfpubyear.getText()));	// 출판년도
+			book.setInfo(tpinfo.getText());		// 도서정보
+			Location loca = new Location();
+			if(cbkBig.getSelectedIndex() > 0) {
+				int bigIdx = cbkBig.getSelectedIndex();
+				int midIdx = cbkMiddle.getSelectedIndex();
+				if(cbkMiddle.getSelectedIndex() > 0) {
+					loca.setLoca_num(bigListCategory.get(bigIdx-1).getNum() + midListCategory.get(midIdx-1).getNum());				
+					book.setLocation(loca);
+				}else {
+					JOptionPane.showMessageDialog(null, "중분류를 선택해주세요");
+					return;
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "분류를 선택해주세요");
+				return;
+			}
+			System.out.println(loca.getLoca_num());
+		}else {
+			JOptionPane.showMessageDialog(null, "모든 정보가 입력되어야 합니다");
+			return;
+		}
+		ManageBookService service = new ManageBookService();
+		service.insertBookWithAPI(book);
+	}
+	private boolean isEmpty() {
+		if(tfcode.getText().equals("") || tfname.getText().equals("") || tfauthor.getText().equals("") || tfisbn.getText().equals("") ||
+				tfpublish.getText().equals("") || tfpubyear.getText().equals("") || tpinfo.getText().equals("")) {
+			return true;
+		}
+		return false;
 	}
 }
