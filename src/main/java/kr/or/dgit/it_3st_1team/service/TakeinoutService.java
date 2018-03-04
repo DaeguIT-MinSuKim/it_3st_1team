@@ -45,10 +45,19 @@ public class TakeinoutService {
 		}
 	}
 	
+	// 도서코드에 입력된 값과 대여중인 목록의 값 비교 검색
 	public Takeinout selectTakeinoutByBkCode(Takeinout inout) {
 		log.debug("selectTakeinoutByBkCode()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + "selectTakeinoutByBkCode", inout);
 		}
 	}
+	
+	public List<Takeinout> selectUserForBookByAll(Takeinout inout){
+		log.debug("selectUserForBookByAll()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectUserForBookByAll", inout);
+		}
+	}
+	
 }

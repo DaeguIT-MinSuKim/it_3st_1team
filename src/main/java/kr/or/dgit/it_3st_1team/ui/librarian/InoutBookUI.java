@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,10 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import org.junit.Assert;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Takeinout;
@@ -30,7 +34,6 @@ import kr.or.dgit.it_3st_1team.service.UserService;
 public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 	private JTable table;
 	private JButton btnUserSearch;
-	private UserService userService;
 	private JTextField tfUserCode;
 	private JTextField tfName;
 	private JTextField tfId;
@@ -44,7 +47,6 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 	public InoutBookUI() {
 		
 		initComponents();
-		userService = new UserService();
 	}
 	private void initComponents() {
 		setBackground(Color.WHITE);
@@ -229,8 +231,22 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		};
 		return rows;
 	}
+	private Object[][] getRow2() {
+		Object[][] rows = null;
+		TakeinoutService service = new TakeinoutService();
+		Takeinout inout = new Takeinout();
+		User user = new User();
+		user.setCode(tfUserCode.getText());
+		inout.setUser(user);
+		List<Takeinout> list = service.selectUserForBookByAll(inout);
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++){
+			rows[i] = list.get(i).toArrayUserForBook(i);
+		}
+		return rows;
+	}
 	private Object[] getColunmNames() {
-		return new String[] {"NO", "도서코드", "도서명", "저자", "출판사", "출판년도","대여일","반납일"};
+		return new String[] {"NO", "도서코드", "도서명", "저자", "출판사", "출판년도","대여일","반납예정일"};
 	}
 	
 	private void cellAlign(int align, int...idx) {
@@ -251,13 +267,56 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		System.out.println(tfUserCode.getText());
 		if(!(tfUserCode.getText().equals(""))) {
 			User user = new User(tfUserCode.getText());
+			UserService userService = new UserService();
 			user = userService.selectUserByCode(user);
 			setUserInfo(user);
-			System.out.println("ㅇㅇ");
+			setTakeinoutTable();
+			
 		}/*else {
 			JOptionPane.showMessageDialog(null, "회원코드를 입력해주세요");
 		}*/
 	}
+	private void setTakeinoutTable() {
+		NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames());
+		table.setModel(model);
+		setAlignWidth();
+	}
+	
+	public void setAlignWidth() {
+		// 셀의 너비와 정렬 // 외울것
+		tableCellAlign(SwingConstants.CENTER,0,1,2,3,4,5,6,7);	//해당컬럼의 정렬방식
+		tableCellWidth(40,150,400,150,140,90,100,100);	//순서대로의 너비값
+	}
+	
+	protected void tableCellWidth(int... width) {
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model.getColumn(i).setPreferredWidth(width[i]);
+		}
+	}
+	
+	class NonEditableModel extends DefaultTableModel {
+
+		public NonEditableModel(Object[][] data, Object[] columnNames) {
+			super(data, columnNames);
+		}
+
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+		
+	}	
+	
+	protected void tableCellAlign(int align, int... idx) {
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 각각의 셀의 틀
+		dtcr.setHorizontalAlignment(align);
+		TableColumnModel model = table.getColumnModel();
+		for (int i = 0; i < idx.length; i++) {
+			model.getColumn(idx[i]).setCellRenderer(dtcr);
+		}
+	}
+	
 	private void setUserInfo(User user) {
 		tfId.setText(user.getId());
 		tfName.setText(user.getName());
@@ -282,6 +341,7 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 	protected void keyReleasedTfUserCode(KeyEvent arg0) {
 		if(tfUserCode.getText().length() == 14) {
 			User user = new User(tfUserCode.getText());
+			UserService userService = new UserService();
 			user = userService.selectUserByCode(user);
 			setUserInfo(user);
 		}
@@ -290,9 +350,12 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		if(tfBkCode.getText().length() == 19) {
 			String str = tfBkCode.getText().substring(1, 19);
 			Book book = new Book();
+			book.setBkCode(str);
+			User user = new User();
+			user.setCode(tfUserCode.getText());
 			Takeinout inout = new Takeinout();
-			inout.setBkcode(str);
-			inout.setCode(tfUserCode.getText());
+			inout.setBook(book);
+			inout.setUser(user);
 			TakeinoutService service = new TakeinoutService();
 			inout = service.selectTakeinoutByBkCode(inout);
 			if(inout == null) {

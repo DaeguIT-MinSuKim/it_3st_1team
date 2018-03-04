@@ -11,16 +11,16 @@
 		<result property="publish" column="publish"/>
 		<result property="pubyear" column="pubyear"/>
 		<result property="info" column="info"/>
-		<result property="rentday" column="rentday" />
-		<result property="returnday" column="returnday" />
+		<!-- <result property="rentday" column="rentday" />
+		<result property="returnday" column="returnday" /> -->
 	</resultMap>
 	
 	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
-<!-- 		<result property="take.inout_no" column="inout_no"/>
+ 		<result property="take.inout_no" column="inout_no"/>
 		<result property="take.user.code" column="code" />
 		<result property="take.book.bkCode" column="bkcode" />
 		<result property="take.rentday" column="rentday"/>
-		<result property="take.returnday" column="returnday"/> -->
+		<result property="take.returnday" column="returnday"/>
 		<result property="location.loca_num" column="loca_num"/>
 		<!-- <result property="location.loca_section" column="loca_section"/> -->
 	</resultMap>
@@ -37,13 +37,6 @@
 			</if>
 			<if test="location.loca_num != null">
 				and loca_num like #{location.loca_num}
-			</if>
-		</where>
-	</sql>
-	<sql id="whereInoutSql">
-		<where>
-			<if test="tak">
-			
 			</if>
 		</where>
 	</sql>
@@ -68,19 +61,6 @@
 		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num, t.inout_no
 		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
 	</sql>
-	
-	<select id="selectBookByMapWithAPI" parameterType="map" resultMap="BookWithTakeinoutResult">
-		<include refid="selectParameterSql" />
-	</select>
-	
-	<sql id="insertBookSql">
-		insert into book(bkcode, isbn, bkname, author, publish, pubyear, info, loca_num)
-		values (#{bkCode},#{isbn},#{bkname},#{author},#{publish},#{pubyear},#{info},#{location.loca_num})
-	</sql>
-	
-	<select id="insertBookWithAPI" parameterType="Book">
-		<include refid="insertBookSql" />
-	</select>
 	
 </mapper>
 

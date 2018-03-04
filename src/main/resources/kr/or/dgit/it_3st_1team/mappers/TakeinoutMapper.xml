@@ -15,7 +15,6 @@
 		<result property="user.id" column="id"/>
 		<result property="user.tel" column="tel"/>
 		<result property="user.email" column="email"/>
-		<result property="addr_id.total" column="addr_id"/>
 		<result property="book.bkCode" column="bkcode"/>
 		<result property="book.isbn" column="isbn"/>
 		<result property="book.rentable" column="rentable"/>
@@ -30,8 +29,16 @@
 		select inout_no, code, bkcode, rentday, returnday from takeinout
 	</sql>
 	
-	<select id="selectTakeinoutByBkCode" parameterType="Takeinout" resultType="UserWithBookResult">
-		select inout_no, code, bkcode, rentday, returnday from takeinout where bkcode=#{bkCode} and code=#{code}
+	<select id="selectTakeinoutByBkCode" parameterType="Takeinout" resultMap="UserWithBookResult">
+		select inout_no, code, bkcode, rentday, returnday from takeinout where bkcode=#{book.bkCode} and code=#{user.code}
+	</select>
+	
+	
+	
+	<select id="selectUserForBookByAll" parameterType="Takeinout" resultMap="UserWithBookResult">
+		select t.inout_no, t.code, t.bkcode, t.rentday, t.returnday, b.isbn,
+			b.rentable, b.bkname, b.author, b.publish, b.pubyear, b.info
+		from takeinout as t left outer join book as b on t.code =#{user.code} where t.bkcode = b.bkcode;
 	</select>
 
 </mapper>

@@ -11,4 +11,6 @@ public interface TakeinoutDao {
 	
 	// select by bkcode and code
 	Takeinout selectTakeinoutByBkCode(Book book);
+	
+	List<Takeinout> selectUserForBookByAll(Takeinout inout);
 }
