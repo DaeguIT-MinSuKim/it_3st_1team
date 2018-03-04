@@ -53,6 +53,7 @@ public class TakeinoutService {
 		}
 	}
 	
+	// 현재 유저가 대여중인 도서 목록 검색
 	public List<Takeinout> selectUserForBookByAll(Takeinout inout){
 		log.debug("selectUserForBookByAll()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -60,4 +61,24 @@ public class TakeinoutService {
 		}
 	}
 	
+	// 대여중이 아닌 도서 insert
+	public int insertTakeinoutByBkcode(Takeinout inout) {
+		int res = -1;
+		log.debug("insertTakeinoutByBkcode()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertTakeinoutByBkcode", inout);
+			sqlSession.commit();
+		}		
+		return res;
+	}
+	
+	public int deleteTakeinoutByBkcode(Takeinout inout) {
+		int res = -1;
+		log.debug("deleteTakeinoutByBkcode()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			res = sqlSession.delete(namespace + "deleteTakeinoutByBkcode", inout);
+			sqlSession.commit();
+		}		
+		return res;
+	}
 }

@@ -40,5 +40,18 @@ public class TakeinoutServiceTest {
 			System.out.println(b);
 		}
 	}
+	
+	@Test
+	public void test2insertTakeinoutByBkcode() {
+		Takeinout inout = new Takeinout();
+		User user = new User();
+		user.setCode("12200818002076");
+		Book book = new Book();
+		book.setBkCode("122008EM0000111112");
+		inout.setUser(user);
+		inout.setBook(book);
+		int res = service.insertTakeinoutByBkcode(inout);
+		Assert.assertSame(1, res);
+	}	
 
 }

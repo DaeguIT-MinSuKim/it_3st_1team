@@ -57,6 +57,7 @@ public class ManageBookService {
 		}
 	}
 
+	// 도서 추가
 	public int insertBookWithAPI(Book book) {
 		log.debug("insertBookWithAPI()");
 		int res = -1;

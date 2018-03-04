@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,8 +22,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
-import org.junit.Assert;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Takeinout;
@@ -43,6 +42,8 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 	private JTextField tfAddress;
 	private JTextField tfAddr_de;
 	private JTextField tfBkCode;
+	private JScrollPane scrollPane;
+	private JPanel pTable;
 
 	public InoutBookUI() {
 		
@@ -186,13 +187,13 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		btnIn.setBackground(new Color(94,94,94));
 		panel_1.add(btnIn);
 		
-		JPanel pTable = new JPanel();
+		pTable = new JPanel();
 		pTable.setBackground(Color.WHITE);
 		pTable.setBounds(0, 400, 1150, 400);
 		add(pTable);
 		pTable.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 0, 1130, 400);
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
@@ -271,7 +272,7 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 			user = userService.selectUserByCode(user);
 			setUserInfo(user);
 			setTakeinoutTable();
-			
+			pTable.repaint();
 		}/*else {
 			JOptionPane.showMessageDialog(null, "회원코드를 입력해주세요");
 		}*/
@@ -344,6 +345,8 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 			UserService userService = new UserService();
 			user = userService.selectUserByCode(user);
 			setUserInfo(user);
+			setTakeinoutTable();
+			pTable.repaint();
 		}
 	}
 	protected void keyReleasedTfBkCode(KeyEvent arg0) {
@@ -357,17 +360,19 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 			inout.setBook(book);
 			inout.setUser(user);
 			TakeinoutService service = new TakeinoutService();
-			inout = service.selectTakeinoutByBkCode(inout);
-			if(inout == null) {
-				System.out.println(str);
-				System.out.println(tfUserCode.getText());
-				System.out.println("널이래요");
-				System.out.println(inout);
+			Takeinout findinout = service.selectTakeinoutByBkCode(inout);
+			if(findinout == null) {
+				service.insertTakeinoutByBkcode(inout);
+				JOptionPane.showMessageDialog(null, "대여 되었습니다");
 				tfBkCode.setText("");
+				setTakeinoutTable();
+				pTable.repaint();
 			}else {
-				System.out.println(str);
-				System.out.println(tfUserCode.getText());
-				System.out.println(inout);
+				service.deleteTakeinoutByBkcode(inout);
+				JOptionPane.showMessageDialog(null, "반납 되었습니다");
+				tfBkCode.setText("");
+				setTakeinoutTable();
+				pTable.repaint();
 			}
 		}
 	}

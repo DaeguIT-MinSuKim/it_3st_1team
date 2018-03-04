@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -24,11 +28,6 @@ import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.ManageBookService;
-
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ItemEvent;
 
 public class AddBookUI extends JFrame implements ActionListener, ItemListener {
 
@@ -242,7 +241,7 @@ public class AddBookUI extends JFrame implements ActionListener, ItemListener {
 	}
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		Book book = new Book();
-		if(!(isEmpty())) {
+		if(isEmpty()) {
 			book.setBkCode(tfcode.getText().substring(1, 19));	// 도서코드
 			System.out.println(book.getBkCode());
 			book.setBkname(tfname.getText());	// 도서명
@@ -267,18 +266,19 @@ public class AddBookUI extends JFrame implements ActionListener, ItemListener {
 				return;
 			}
 			System.out.println(loca.getLoca_num());
+			ManageBookService service = new ManageBookService();
+			service.insertBookWithAPI(book);
+			JOptionPane.showMessageDialog(null, "도서가 추가되었습니다");
 		}else {
 			JOptionPane.showMessageDialog(null, "모든 정보가 입력되어야 합니다");
 			return;
 		}
-		ManageBookService service = new ManageBookService();
-		service.insertBookWithAPI(book);
 	}
 	private boolean isEmpty() {
 		if(tfcode.getText().equals("") || tfname.getText().equals("") || tfauthor.getText().equals("") || tfisbn.getText().equals("") ||
 				tfpublish.getText().equals("") || tfpubyear.getText().equals("") || tpinfo.getText().equals("")) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 }
