@@ -1,13 +1,86 @@
--- 출납 테이블 delete 시 history 에 update trigger
+select code, name, id, pw, tel, email, zipcode, addr_id, addr_de from users where code = 1;
 
+select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where code = '1';
+
+select * from location;
+
+select * from title;
+
+select * from employee;
+
+select code, name, id, pw, tel, email, addr_id, titleno from employee;
+
+select * from category;
+
+select * from book;
+
+select b.bkcode, bkname, author, publish, pubyear, rentday, returnday
+from book b left outer join takeinout t on b.bkcode = t.bkcode;
+
+select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book;
+
+select b.bkcode, u.code, b.bkname, b.author, b.publish, b.pubyear, u.entryday, u.freeday from book as b join users as u;
+
+select b.bkcode, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday
+from book as b left outer join takeinout as t on b.bkcode = t.bkcode;
+
+update book set rentable = 1;
+
+select inout_no, code, bkcode, rentday, returnday from takeinout where code = '4';
+
+-- 유저가 현재 대여중인 책 목록 검색
+select t.inout_no, t.code, t.bkcode, t.rentday, t.returnday, b.isbn, b.rentable, b.bkname, b.author, b.publish, b.pubyear, b.info
+from takeinout as t left outer join book as b on t.code = '4' where t.bkcode = b.bkcode;
+
+select inout_no, code, bkcode, rentday, returnday from takeinout where bkcode='122008EM0000393414' and code=12200818002076;
+
+
+select * from takeinout;
+
+select * from book where bkcode = '122008EM0000393415';
+
+-- 도서 삭제(모든 외래키 끊고 해야됨)
+delete from book where bkcode = '122008EM0000393413';
+
+delete from takeinout;
+
+select * from history;
+
+delete from history;
+
+select b.bkcode, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday
+from book as b left outer join takeinout as t on b.bkcode = t.bkcode order by bkcode asc;
+
+select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, rentday, returnday, loca_num, t.inout_no
+from book b left outer join takeinout t on b.bkcode=t.bkcode;
+
+-- 출납 대여
+insert into takeinout(code, bkcode, rentday, returnday)
+values('12200818002076', '122008EM0000393414', curdate(), adddate(curdate(), 14));
+
+
+select * from book where bkcode = '122008EM0000393414';
+
+-- 출납 반납
+delete from takeinout where bkcode = '122008em0000393414' and code = '12200818002076';
+
+select * from takeinout;
+
+select returnday from takeinout where code = '12200818002076';
+
+select * from history;
+
+delete from history;
+
+-- 출납 테이블 delete 시 history 에 update trigger
 create trigger tri_takeinout_after_delete_history
 after delete
 on bookmanagement.takeinout
 for each row
-begin
-	update history set realreturn = adddate(curdate(),-2), delay = curdate() - realreturn where bkcode = old.bkcode and realreturn is null;  
+begin	
+	update history set realreturn = curdate(), delay = if(curdate() > old.returnday, curdate()-old.returnday, 0)
+	where bkcode = old.bkcode and realreturn is null;
 end;
-
 
 -- 출납 테이블 insert 시 history 에 insert trigger
 
@@ -17,12 +90,36 @@ on bookmanagement.takeinout
 for each row
 begin
 	insert into history(code,realreturn,delay,bkcode)
-	values(new.code,null,null,new.bkcode);
+	values(new.code, null,null,new.bkcode);
 end;
 
--- 출납 대여
-insert into takeinout values
-(8, 5,'122008em0000333331',curdate(),adddate(curdate(), 7));
+-- 대분류 검색
+select num, catename, parentnum from category where catesize = 0;
 
--- 출납 반납
-delete from takeinout where bkcode = '122008em0000333331' and code = '5';
+-- 중분류 검색
+select * from category where catesize = 1 and parentnum = 4;
+
+-- 도서 전체 검색
+select b.bkcode, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday
+from book as b left outer join takeinout as t on b.bkcode = t.bkcode order by b.bkcode asc;
+
+select * from location;
+
+select * from category;
+
+select * from book;
+
+select * from users;
+
+select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where id ='bomi' and pw = 'bomi';
+
+-- 대분류만 선택시 검색 조건
+select b.bkcode, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num
+from book as b left outer join takeinout as t on b.bkcode = t.bkcode where bkname like '%학%' and loca_num like '100%';
+
+
+select b.bkcode, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num
+from book as b left outer join takeinout as t on b.bkcode = t.bkcode where loca_num = '100130';
+
+select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num, t.inout_no
+from book as b left outer join takeinout as t on b.bkcode = t.bkcode;

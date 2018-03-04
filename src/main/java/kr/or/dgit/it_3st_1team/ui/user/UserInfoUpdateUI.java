@@ -257,7 +257,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		button.setBounds(578, 74, 97, 30);
 		panel.add(button);
 		
-		userinfo();
+//		userinfo();
 	}
 	
 	private void userinfo() {

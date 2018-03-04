@@ -132,9 +132,8 @@ public class ManagerUI extends JPanel implements ActionListener {
 		changePanel(iob);
 	}
 	protected void actionPerformedBtnUserUpdate(ActionEvent arg0) {
-		/*UserInfoUpdateUI update = new UserInfoUpdateUI();
-		update.tfName();
-		changePanel(update);*/
+		UserInfoUpdateUI update = new UserInfoUpdateUI();
+		changePanel(update);
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent arg0) {
 		manager = new ManagementBookUI();
