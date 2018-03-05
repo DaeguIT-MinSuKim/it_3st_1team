@@ -232,7 +232,9 @@ public class JoinUI extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnSearchAddr(ActionEvent e) {
-		SearchAddrdetailUI addr = new SearchAddrdetailUI();
+		SearchAddrdetailUI addr = new SearchAddrdetailUI(tfAddr, tfpostnum);
 		addr.setVisible(true);
+		addr.getTfPostAddr(tfAddr);
+		addr.getTfPostNum(tfpostnum);
 	}
 }

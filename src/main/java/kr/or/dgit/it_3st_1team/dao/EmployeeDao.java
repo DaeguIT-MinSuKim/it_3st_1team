@@ -6,5 +6,8 @@ import kr.or.dgit.it_3st_1team.dto.Employee;
 
 public interface EmployeeDao {
 	//select
-	List<Employee> selectEmployeeByAll();
+	/*List<Employee> selectEmployeeByAll();*/
+
+	Employee selectEmployeeIdByNo(Employee employee);
+	Employee selectEmployeePwByNo(Employee employee);
 }

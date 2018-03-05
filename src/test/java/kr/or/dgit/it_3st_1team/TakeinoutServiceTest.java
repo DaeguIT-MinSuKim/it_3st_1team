@@ -28,7 +28,7 @@ public class TakeinoutServiceTest {
 		service = null;
 	}
 	
-	@Test
+	/*@Test
 	public void test1selectBookStartAll() {
 		Takeinout inout = new Takeinout();
 		User user = new User();
@@ -52,6 +52,6 @@ public class TakeinoutServiceTest {
 		inout.setBook(book);
 		int res = service.insertTakeinoutByBkcode(inout);
 		Assert.assertSame(1, res);
-	}	
+	}	*/
 
 }

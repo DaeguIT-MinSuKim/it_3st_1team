@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.EmployeeDao">
-
-	<sql id="selectSql">
-		select code, name, id, pw, tel, email, addr_id, titleno from employee
+	
+	<sql id="selectIdSql">
+		SELECT id, pw
+		FROM employee
 	</sql>
 	
 	<sql id="whereSql">
 		<where>
-			<if test="studId != null">
-				stud_id = #{studId}
+			<if test="id != null">
+				id = #{id}
+			</if>
+			<if test="pw != null">
+				and pw = #{pw}
 			</if>
 		</where>
 	</sql>
 	
-	<select id="selectEmployeeByAll" resultType="Employee">
-		<include refid="selectSql" />
+
+
+	<select id="selectEmployeeIdByNo" resultType="Employee">
+		<include refid="selectIdSql" />
+		<include refid="whereSql" />		
 	</select>
+	
+
 
 </mapper>
-
-
-

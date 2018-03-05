@@ -13,11 +13,11 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 public class EmployeeService {
 	private static final Log log = LogFactory.getLog(EmployeeDao.class);
 	
-	public List<Employee> findEmployeeByAll(){
-		log.debug("selectEmployeeByAll()");
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
-			EmployeeDao empDao = sqlSession.getMapper(EmployeeDao.class);
-			return empDao.selectEmployeeByAll();
+	public Employee findSelectEmployeeIdByNo(Employee employee) {
+		log.debug("selectEmployeeIdByNo()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
+			return employeeDao.selectEmployeeIdByNo(employee);
 		}
 	}
 	
