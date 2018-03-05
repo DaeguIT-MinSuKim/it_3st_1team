@@ -350,11 +350,11 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			info.tfpubyear.setText(Integer.toString(resultBook.getPubyear()));
 			info.tfnum.setText(Integer.toString(BookService.getInstance().selectExistNum(isbn)));
 			
-			
-			String section = LocationService.getInstance().selectSectionBynum(resultBook.getLocation());
+			/*Location loca = new Location();
+			loca.setLoca_num(resultBook.getLocation()));
+			String section = LocationService.getInstance().selectSectionBynum(loca);
 			JOptionPane.showMessageDialog(null, section);
-			
-			info.tfLocation.setText(String.format("%s%s", resultBook.getLocation(),section));
+			info.tfLocation.setText(String.format("%s%s", resultBook.getLocation(),section));*/
 			//info.tfreservenum.setText();
 		}
 	}
