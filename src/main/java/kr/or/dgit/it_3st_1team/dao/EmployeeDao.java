@@ -7,4 +7,6 @@ import kr.or.dgit.it_3st_1team.dto.Employee;
 public interface EmployeeDao {
 	//select
 	List<Employee> selectEmployeeByAll();
+	// insert
+	int insertEmployeeWithAPI(Employee emp);
 }

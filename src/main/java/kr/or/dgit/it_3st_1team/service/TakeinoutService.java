@@ -61,6 +61,14 @@ public class TakeinoutService {
 		}
 	}
 	
+	// 현재 도서가 대여중인지 아닌지 검색
+	public Takeinout selectMatchingBook(Book inout) {
+		log.debug("selectMatchingBook()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectMatchingBook", inout);
+		}
+	}
+	
 	// 대여중이 아닌 도서 insert
 	public int insertTakeinoutByBkcode(Takeinout inout) {
 		int res = -1;

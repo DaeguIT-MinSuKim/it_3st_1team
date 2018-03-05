@@ -15,6 +15,9 @@ public interface TakeinoutDao {
 	// 현재 유저가 대여중인 도서 목록 검색
 	List<Takeinout> selectUserForBookByAll(Takeinout inout);
 	
+	// 도서가 대여중인지 검색
+	Takeinout selectMatchingBook(Book inout);
+	
 	// 대여중이 아닌 도서 대여
 	int insertTakeinoutByBkcode(Takeinout inout);
 	

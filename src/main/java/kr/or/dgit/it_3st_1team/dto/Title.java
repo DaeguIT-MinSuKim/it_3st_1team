@@ -8,6 +8,11 @@ public class Title {
 	public Title() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Title(String name) {
+		this.name = name;
+	}
+
 	public int getTitleno() {
 		return titleno;
 	}
@@ -26,9 +31,11 @@ public class Title {
 	public void setPower(String power) {
 		this.power = power;
 	}
+
 	@Override
 	public String toString() {
-		return String.format("Title [titleno=%s, name=%s, power=%s]", titleno, name, power);
+		return String.format("%s", name);
 	}
+	
 
 }

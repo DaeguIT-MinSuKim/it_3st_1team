@@ -7,10 +7,10 @@ public class Employee {
 	private String pw;
 	private Phone tel;
 	private String email;
-	private Post zipcode;
-	private Post addr_id;
+	private String zipcode;
+	private String addr_id;
 	private String addr_de;
-	private Title titleno;
+	private Title title;
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
@@ -45,29 +45,33 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Post getAddr_id() {
-		return addr_id;
+
+
+	public Title getTitle() {
+		return title;
 	}
-	public void setAddr_id(Post addr_id) {
-		this.addr_id = addr_id;
+	public void setTitle(Title title) {
+		this.title = title;
 	}
-	public Title getTitleno() {
-		return titleno;
-	}
-	public void setTitleno(Title titleno) {
-		this.titleno = titleno;
-	}
+	
 	public Phone getTel() {
 		return tel;
 	}
 	public void setTel(Phone tel) {
 		this.tel = tel;
 	}
-	public synchronized Post getZipcode() {
+
+	public String getZipcode() {
 		return zipcode;
 	}
-	public synchronized void setZipcode(Post zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+	public String getAddr_id() {
+		return addr_id;
+	}
+	public void setAddr_id(String addr_id) {
+		this.addr_id = addr_id;
 	}
 	public synchronized String getAddr_de() {
 		return addr_de;
@@ -79,8 +83,14 @@ public class Employee {
 	@Override
 	public String toString() {
 		return String.format(
-				"Employee [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, zipcode=%s, addr_id=%s, addr_de=%s, titleno=%s]",
-				code, name, id, pw, tel, email, zipcode, addr_id.getTotal(), addr_de, titleno);
+				"Employee [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, zipcode=%s, addr_id=%s, addr_de=%s, title=%s]",
+				code, name, id, pw, tel, email, zipcode, addr_id, addr_de, title);
+	}
+	
+	public Object[] toArray() {
+		return new Object [] {
+				code, name, id, tel, email, addr_id, title.getName()
+		};
 	}
 	
 	
