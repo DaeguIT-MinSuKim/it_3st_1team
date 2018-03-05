@@ -4,14 +4,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.management.modelmbean.ModelMBean;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.service.BookService;
 
 public class SearchBookDetailUI extends JPanel implements ActionListener {
 	private JTextField tfBookcode;
@@ -23,6 +31,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 	private JButton btnReset;
 	private JButton btnClose;
 	private JPanel panel;
+	private SearchBookUI bookui;
 
 	public SearchBookDetailUI() {
 		initComponents();
@@ -99,9 +108,9 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		tfisbn.setColumns(10);
 		
 		btnSearch = new JButton("검색");
+		btnSearch.addActionListener(this);
 
 		btnSearch.setBorder(null);
-		btnSearch.addActionListener(this);
 		btnSearch.setBackground(new Color(52,152,219));
 		btnSearch.setForeground(Color.WHITE);
 		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -117,7 +126,17 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		btnReset.setBounds(890, 190, 90, 30);
 		panel.add(btnReset);
 	}
+	
+	
+	public void setBookui(SearchBookUI bookui) {
+		this.bookui = bookui;
+		
+	}
+
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearch) {
+			actionPerformedBtnSearch(e);
+		}
 		if (e.getSource() == btnReset) {
 			actionPerformedBtnReset(e);
 		}
@@ -128,5 +147,35 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		tfisbn.setText("");
 		tfpublish.setText("");
 		tfpubyear.setText("");
+	}
+	protected void actionPerformedBtnSearch(ActionEvent e) {
+		Book book = new Book();
+		if(!tfBookcode.getText().trim().isEmpty()){
+			book.setBkCode(tfBookcode.getText());
+		}
+		if(!tfauthor.getText().trim().isEmpty()){
+			book.setAuthor(tfauthor.getText());
+		}
+		if(!tfisbn.getText().trim().isEmpty()){
+			book.setIsbn(tfisbn.getText());
+		}
+		if(!tfpublish.getText().trim().isEmpty()){
+			book.setPublish(tfpublish.getText());
+		}
+		if(!tfpubyear.getText().trim().isEmpty()){
+			book.setPubyear(Integer.parseInt(tfpubyear.getText()));
+		}
+		if(!bookui.tfbookname.getText().trim().isEmpty() && !bookui.tfbookname.getText().equals("책 제목을 입력해주세요.")){
+			book.setBkname(bookui.tfbookname.getText());
+			System.out.println(bookui.tfbookname.getText());
+		}
+		
+		
+		List<Book> list = BookService.getInstance().selectBookDetail(book);
+		bookui.loadDatas(list);
+		System.out.println(list);
+		bookui.cellAlign(SwingConstants.CENTER,0,1,3,4,5,6);
+		bookui.cellAlign(SwingConstants.LEFT,1,2);
+		bookui.PreferredWidth(40,400,160,150,100,130,130);
 	}
 }

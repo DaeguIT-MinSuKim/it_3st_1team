@@ -45,6 +45,28 @@
 			</if>
 		</where>
 	</sql>
+	<sql id="whereDetailSql">
+		<where>
+			<if test="bkCode != null">
+				bkCode #{bkCode}
+			</if>
+			<if test="bkname != null">
+				and bkname = #{bkname}
+			</if>
+			<if test="author != null">
+				and author = #{author}
+			</if>
+			<if test="publish != null">
+				and publish = #{publish}
+			</if>
+			<if test="pubyear > 0">
+				and pubyear = #{pubyear}
+			</if>
+			<if test="isbn != null">
+				and isbn = #{isbn}
+			</if>
+		</where>
+	</sql>
 	
 	<select id="selectBookStartAll" resultType="Book">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num, Count(*) from book 
@@ -59,6 +81,13 @@
 	<!-- 보유수 찾기 -->
 	<select id="selectExistNum" parameterType="String" resultType="int">
 		select count(*) as '보유수' from book where isbn = #{isbn}
+	</select>
+	
+	<!-- 도서 상세검색 -->
+	<select id="selectBookDetail" parameterType="Book" resultMap="BookResult">
+		select bkCode, isbn, rentable, bkname, author, publish, pubyear from book
+		<include refid="whereDetailSql"/>
+		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkname;
 	</select>
 </mapper>
 

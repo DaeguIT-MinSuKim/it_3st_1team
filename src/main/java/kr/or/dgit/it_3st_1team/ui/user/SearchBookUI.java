@@ -24,10 +24,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
@@ -37,9 +40,9 @@ import kr.or.dgit.it_3st_1team.service.CategoryService;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel implements ActionListener, ItemListener, MouseListener {
-	private JTextField tfbookname;
+	public JTextField tfbookname;
 	private SearchBtn btnSearch = new SearchBtn();
-	private JTable table;
+	public JTable table;
 	private JScrollPane scrollPane;
 	private JButton btnSearchDe;
 	private SearchBookDetailUI search;
@@ -56,18 +59,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
-		List<Category> categoryBig = new ArrayList<>();
-		Category decate = new Category();
-		decate.setCatename("대분류 전체");
-		categoryBig.add(decate);
-		CategoryService service = new CategoryService();
-		List<Category> listcate = service.selectCategoryBig();
-		for(Category cate: listcate) {
-			categoryBig.add(cate);
-		}
-		DefaultComboBoxModel<Category> model = 
-				new DefaultComboBoxModel<>(categoryBig.toArray(new Category[categoryBig.size()]));
-		cbbbig = new JComboBox<>(model);
+		
+		cbbbig = new JComboBox<>();
 		cbbbig.addItemListener(this);
 		cbbbig.setBorder(null);
 		cbbbig.setMaximumRowCount(10);
@@ -76,10 +69,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		add(cbbbig);
 		
 		
-		Category decate2 = new Category();
-		decate2.setCatename("중분류 전체");
-		Category[] mid = new Category[] {decate2};
-		cbbmid = new JComboBox<>(mid);
+		
+		cbbmid = new JComboBox<>();
 		cbbmid.setBorder(null);
 		cbbmid.setMaximumRowCount(5);
 		cbbmid.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -127,16 +118,22 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		table.getTableHeader().setBackground(new Color(245,245,245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		loadDatas();
+		List<Book>list = BookService.getInstance().selectBookStartAll();
+		loadDatas(list);
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
+		cellAlign(SwingConstants.CENTER,0,1,3,4,5,6);
+		cellAlign(SwingConstants.LEFT,1,2);
+		PreferredWidth(40,400,160,150,100,130,130);
+		
+		/*table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
 		table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
 		table.getColumnModel().getColumn(2).setPreferredWidth(160); //저자
 		table.getColumnModel().getColumn(3).setPreferredWidth(150);  //출판사
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);  //출판년도
 		table.getColumnModel().getColumn(5).setPreferredWidth(130); //비치수/보유수
-		table.getColumnModel().getColumn(6).setPreferredWidth(130); //대여가능여부
+		table.getColumnModel().getColumn(6).setPreferredWidth(130); //대여가능여부 */
+		
 		scrollPane.setViewportView(table);
 		
 		JCheckBox cblistview = new JCheckBox();
@@ -147,25 +144,60 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		lblListview.setBounds(900, 0, 178, 22);
 		panel_1.add(lblListview);
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-	}
-	private Object[][] getRow() {
-		Object[][] rows = null;
 		
-			BookService service = new BookService();
-			List<Book> list = service.selectBookStartAll();
+		initcmb();
+	}
+	public void cellAlign(int align, int...idx) {
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+		dtcr.setHorizontalAlignment(align);
+		
+		TableColumnModel model = table.getColumnModel();	//각각 컬럼에 적용
+		for(int i=0; i<idx.length; i++) {
+			model.getColumn(idx[i]).setCellRenderer(dtcr);
+		}
+	}
+	public void PreferredWidth(int...width){
+		TableColumnModel model1 = table.getColumnModel();
+		for(int i=0; i<width.length; i++) {
+			model1.getColumn(i).setPreferredWidth(width[i]);
+		}
+	}
+	private void initcmb() {
+		List<Category> categoryBig = new ArrayList<>();
+		Category decate = new Category();
+		decate.setCatename("대분류 전체");
+		categoryBig.add(decate);
+		CategoryService service = new CategoryService();
+		List<Category> listcate = service.selectCategoryBig();
+		for(Category cate: listcate) {
+			categoryBig.add(cate);
+		}
+		DefaultComboBoxModel<Category> model = 
+				new DefaultComboBoxModel<>(categoryBig.toArray(new Category[categoryBig.size()]));
+		cbbbig.setModel(model);
+		
+		
+		Category decate2 = new Category();
+		decate2.setCatename("중분류 전체");
+		Category[] mid = new Category[] {decate2};
+		cbbmid.setModel(new DefaultComboBoxModel<>(mid));
+	}
+	public Object[][] getRow(List<Book> list) {
+		Object[][] rows = null;
 			rows = new Object[list.size()][];
 			for(int i=0; i<rows.length; i++) {
 				rows[i] = list.get(i).toArray(i);
 			}
 		return rows;
 	}
-	private Object[] getColunmNames() {
+	public Object[] getColunmNames() {
 		return new String[] {"NO", "도서명", "저자", "출판사", "출판년도", "비치수/보유수", "대여가능여부"};
 	}
 
-	public void loadDatas() {
-		NonEditableModel model = new NonEditableModel(getRow(), getColunmNames());
+	public void loadDatas(List<Book> list) {
+		NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
 		table.setModel(model);
+		invalidate();
 	}
 	
 	class NonEditableModel extends DefaultTableModel {
@@ -202,15 +234,14 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		Book book = new Book();
 		Location loca = new Location();
 		book.setBkname(tfbookname.getText());
-		
-		BookService service = new BookService();
-		service.selectBookAll(book);
-		
+		List<Book> list = BookService.getInstance().selectBookAll(book);
+		loadDatas(list);
 	}
 	protected void actionPerformedBtnSearchDe(ActionEvent e) {
 		if(flag == 1) {
 			search = new SearchBookDetailUI();
 			search.setBounds(20,120,1080,250);
+			search.setBookui(this);
 			add(search);
 			panel_1.setBounds(10, 380, 1110, 542);
 			flag = 0;

@@ -13,7 +13,16 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 public class BookService {
 	private static final Log log = LogFactory.getLog(BookDao.class);
 	private String namespace = "kr.or.dgit.it_3st_1team.dao.BookDao.";
+	private static final BookService instance = new BookService();
 	
+	private BookService() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static BookService getInstance() {
+		return instance;
+	}
+
 	public List<Book> selectBookByAllForResultMapExtendsWithAPI(){
 		log.debug("selectBookByAllForResultMapExtendsWithAPI()");
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
@@ -42,6 +51,7 @@ public class BookService {
 			return sqlSession.selectList(namespace + "selectBookAll", book);
 		}
 	}
+	
 	public int selectExistNum(String isbn){
 		log.debug("selectExistNum()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -49,5 +59,10 @@ public class BookService {
 		}
 	}
 	
-	
+	public List<Book> selectBookDetail(Book book){
+		log.debug("selectBookDetail()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectBookDetail", book);
+		}
+	}
 }

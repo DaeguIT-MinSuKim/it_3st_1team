@@ -19,7 +19,7 @@ public class BookServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		service = new BookService();
+		service = BookService.getInstance();
 	}
 
 	@AfterClass
@@ -51,6 +51,34 @@ public class BookServiceTest {
 	public void test3selectExistNum() {
 		int bookNum = service.selectExistNum("9788962880069");
 		Assert.assertNotNull(bookNum);
+	}
+	
+	@Test
+	public void test4selectBookDetail() {
+		Book book = new Book();
+		book.setAuthor("톤 텔레헨");
+		List<Book> booklist1 = service.selectBookDetail(book);
+		Assert.assertNotNull(booklist1);
+		for(Book b: booklist1) {
+			System.out.println(b);
+		}
+		
+		Book book2 = new Book();
+		book2.setPublish("북라이프");
+		List<Book> booklist2 = service.selectBookDetail(book2);
+		Assert.assertNotNull(booklist2);
+		for(Book b: booklist2) {
+			System.out.println(b);
+		}
+		
+		Book book3 = new Book();
+		book3.setBkname("언어의 온도");
+		book3.setPubyear(2016);
+		List<Book> booklist3 = service.selectBookDetail(book3);
+		Assert.assertNotNull(booklist3);
+		for(Book b: booklist3) {
+			System.out.println(b);
+		}
 	}
 
 }

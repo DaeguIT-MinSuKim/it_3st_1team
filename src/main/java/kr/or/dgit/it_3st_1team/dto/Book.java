@@ -53,9 +53,9 @@ public class Book {
 	public String isRentable() {
 		String able;
 		if(rentable==false) {
-			able = "대여가능";
-		}else {
 			able = "대여불가";
+		}else {
+			able = "대여가능";
 		}
 		return able;
 	}
@@ -125,8 +125,7 @@ public class Book {
 	}
 
 	public Object[] toArray(int i) {
-		BookService service = new BookService();
-		return new Object[] {i+1, bkname, author, publish, pubyear, service.selectExistNum(isbn), isRentable()};
+		return new Object[] {i+1, bkname, author, publish, pubyear, BookService.getInstance().selectExistNum(isbn), isRentable()};
 	}
 
 }
