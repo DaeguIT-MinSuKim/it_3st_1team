@@ -114,4 +114,15 @@ public class Post {
 				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
 				bunji_num2);
 	}
+	
+	public Object[] toArray(int i) {
+		return new Object[] {
+			i, sido + " " + sigungu + " "  + doro + " " + build_num1 + " - " + build_num2, zipcode
+		};
+	}
+	public Object[] toArray1(int i) {
+		return new Object[] {
+			i, sido + " " + sigungu + " " + heangjeong_name + bunji_num1 +" - " + bunji_num2 + " (" + bubjung_name + ")", zipcode
+		};
+	}
 }
