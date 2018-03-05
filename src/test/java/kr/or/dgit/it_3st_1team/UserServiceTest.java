@@ -79,7 +79,7 @@ public class UserServiceTest {
 <<<<<<< HEAD
 	}*/
 	
-	/*@Test
+	@Test
 	public void test6selectNameEmail() {
 		User user = new User();
 		user.setName("김연아");
@@ -113,5 +113,5 @@ public class UserServiceTest {
 		Assert.assertEquals(user.getId(), selectUser.getId());
 		Assert.assertEquals(user.getEmail(), selectUser.getEmail());
 		System.out.println(selectUser);
-	}*/
+	}
 }

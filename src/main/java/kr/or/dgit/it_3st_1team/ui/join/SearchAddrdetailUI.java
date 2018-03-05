@@ -198,12 +198,13 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		int 선택된행 = table.getSelectedRow();
 		int nextCol = table.getSelectedColumn()+1;
 		if (e.getClickCount() == 2) { 
+			setVisible(false);
 			int 선택된열 = table.getSelectedColumn();
 			
 			DefaultTableModel tm=(DefaultTableModel) table.getModel();			
 			tfone.setText((String) tm.getValueAt(선택된행, 선택된열));
 			tftwo.setText((String) tm.getValueAt(선택된행, nextCol));
-
+			
 		/*	System.out.println(value.toString());
 			System.out.println(value2.toString());	*/		
 		} // 더블클릭
