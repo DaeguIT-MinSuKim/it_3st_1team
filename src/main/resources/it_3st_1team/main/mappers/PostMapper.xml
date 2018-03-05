@@ -33,7 +33,7 @@
 	<sql id="whereSql1">
 		<where>
 			<if test="bubjung_name != null">
-				 bubjung_name = #{bubjung_name} or heangjeong_name = #{bubjung_name} or bunji_num1 = #{bubjung_name}
+				 bubjung_name = #{bubjung_name} or heangjeong_name = #{bubjung_name}
 			</if>			
 		</where>
 	</sql>
@@ -46,11 +46,14 @@
 		</where>
 	</sql>
 
+	<!-- 구 주소  -->
 	<select id="selectPostByAll1"  parameterType="post" resultMap="PostResult1">
 		<include refid="selectSql1" />
 		<include refid="whereSql1" />
 	</select>
 	
+	
+	<!-- 도로 -->
 	<select id="selectPostByAll2"  parameterType="post" resultMap="PostResult">
 		<include refid="selectSql2" />		
 		<include refid="whereSql2" />		
