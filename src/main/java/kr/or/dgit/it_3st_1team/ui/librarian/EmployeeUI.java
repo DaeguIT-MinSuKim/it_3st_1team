@@ -51,6 +51,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private JPanel pTable;
 	private JScrollPane scrollPane;
 	private JButton btnUpdate;
+	private JButton btnCancel;
 
 	public EmployeeUI() {
 
@@ -214,7 +215,8 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnUpdate.setBackground(new Color(94,94,94));
 		pNorth.add(btnUpdate);
 		
-		JButton btnCancel = new JButton("취  소");
+		btnCancel = new JButton("취  소");
+		btnCancel.addActionListener(this);
 		btnCancel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnCancel.setBounds(951, 388, 90, 40);
 		btnCancel.setForeground(Color.WHITE);
@@ -302,6 +304,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			actionPerformedBtnCancel(e);
+		}
 		if (e.getSource() == btnUpdate) {
 			actionPerformedBtnUpdate(e);
 		}
@@ -341,6 +346,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 			tfEmpTel2.setText(emp.getTel().getPhone2());
 			tfEmpTel3.setText(emp.getTel().getPhone3());
 			tfEmpEmail.setText(emp.getEmail());
+			tfEmpAddr1.setText(emp.getAddr_id());
+			tfEmpAddr2.setText(emp.getAddr_de());
+			tfEmpZipCode.setText(emp.getZipcode());
 			cbkTitle.setSelectedIndex(emp.getTitle().getTitleno());
 		}
 	}
@@ -408,5 +416,15 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}else {
 			JOptionPane.showMessageDialog(null, "모든 정보가 입력되어야 합니다.");
 		}
+	}
+	protected void actionPerformedBtnCancel(ActionEvent e) {
+		tfEmpNo.setText("");
+		tfEmpID.setText("");
+		tfEmpName.setText("");
+		tfEmpTel1.setText("");
+		tfEmpTel2.setText("");
+		tfEmpTel3.setText("");
+		tfEmpEmail.setText("");
+		cbkTitle.setSelectedIndex(0);
 	}
 }

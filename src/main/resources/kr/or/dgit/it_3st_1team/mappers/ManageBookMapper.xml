@@ -78,6 +78,13 @@
 		delete from book where bkcode = #{bkCode};
 	</delete>
 	
+	<!-- 현재 대여중인 도서 목록 -->
+	<select id="selectBookForTakeinoutWithAPI" parameterType="Book" resultMap="BookWithTakeinoutResult">
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday as rentd, t.returnday as returnd, loca_num, t.inout_no
+		from book b right outer join takeinout t on b.bkcode=t.bkcode
+		<include refid="whereAllSql" />
+	</select>
+	
 	
 </mapper>
 

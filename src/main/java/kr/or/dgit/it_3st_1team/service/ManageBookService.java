@@ -40,20 +40,11 @@ public class ManageBookService {
 		}
 	}
 	
-	public Map<String, Book> selectBookByMapWithAPI(){
-		log.debug("selectBookByMapWithAPI()");
-		Map<String, Book> map = new HashMap<>();
-        ResultHandler<Book> resultHandler = new ResultHandler<Book>() {
-            @Override
-            public void handleResult(ResultContext<? extends Book> resultContext) {
-            	Book book = resultContext.getResultObject();
-                map.put(book.getBkCode(), book);
-            }
-        };
-
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			sqlSession.select(namespace + "selectBookByMapWithAPI", resultHandler);
-			return map;
+	// 대여중인 도서 목록
+	public List<Book> selectBookForTakeinoutWithAPI(Book book){
+		log.debug("selectBookForTakeinoutWithAPI()");
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectList(namespace + "selectBookForTakeinoutWithAPI", book);
 		}
 	}
 

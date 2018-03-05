@@ -234,7 +234,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			}
 			book.setLocation(loca);
 		}
-		List<Book> list = mbService.selectBookByNameForResultMapExtendsWithAPI(book);
+		List<Book> list = mbService.selectBookForTakeinoutWithAPI(book);
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++){
 			rows[i] = list.get(i).toArrayTakeinout(i);
@@ -357,7 +357,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	protected void itemStateChangedRdbtnOut(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getRow(), getColunmNames()); 
+			NonEditableModel model = new NonEditableModel(getRow3(), getColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();
 		}
