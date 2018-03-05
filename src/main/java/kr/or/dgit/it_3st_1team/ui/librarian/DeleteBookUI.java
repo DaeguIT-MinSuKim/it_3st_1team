@@ -147,8 +147,7 @@ public class DeleteBookUI extends JFrame implements ActionListener, ItemListener
 		Category decate = new Category();
 		decate.setCatename("대분류 전체");
 		cateBig.add(decate);
-		CategoryService service = new CategoryService();
-		bigListCategory = service.selectCategoryBig();
+		bigListCategory = CategoryService.getInstance().selectCategoryBig();
 		for(Category cate: bigListCategory) {
 			cateBig.add(cate);
 		}
@@ -231,8 +230,7 @@ public class DeleteBookUI extends JFrame implements ActionListener, ItemListener
 		Category decate2 = new Category("중분류 전체");
 		categoryMid.add(decate2);
 		
-		CategoryService service = new CategoryService();
-		midListCategory = service.selectCategoryMid(selectedItem);
+		midListCategory = CategoryService.getInstance().selectCategoryMid(selectedItem);
 		for(Category cate: midListCategory) {
 			categoryMid.add(cate);
 		}
