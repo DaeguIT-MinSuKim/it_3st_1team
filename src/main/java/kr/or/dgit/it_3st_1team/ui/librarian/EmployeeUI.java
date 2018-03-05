@@ -25,8 +25,12 @@ import kr.or.dgit.it_3st_1team.dto.Title;
 import kr.or.dgit.it_3st_1team.service.EmployeeService;
 import kr.or.dgit.it_3st_1team.service.TitleService;
 import kr.or.dgit.it_3st_1team.ui.join.SearchAddrdetailUI;
+import javax.swing.ListSelectionModel;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
-public class EmployeeUI extends JPanel implements ActionListener {
+@SuppressWarnings("serial")
+public class EmployeeUI extends JPanel implements ActionListener, MouseListener {
 	private JTable table;
 	private JTextField tfEmpNo;
 	private JTextField tfEmpName;
@@ -40,6 +44,7 @@ public class EmployeeUI extends JPanel implements ActionListener {
 	private JTextField tfEmpZipCode;
 	private JButton btnSearchAddr;
 	private JComboBox<Title> cbkTitle;
+	private List<Employee> list;
 
 	public EmployeeUI() {
 
@@ -241,6 +246,8 @@ public class EmployeeUI extends JPanel implements ActionListener {
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		table = new JTable();
+		table.addMouseListener(this);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setRowHeight(30);
 		table.setBackground(Color.WHITE);
 		table.getTableHeader().setBackground(new Color(245,245,245));
@@ -262,7 +269,7 @@ public class EmployeeUI extends JPanel implements ActionListener {
 	private Object[][] getRow() {
 		Object[][] rows = null;
 		EmployeeService empService= new EmployeeService();
-		List<Employee> list = empService.selectEmployeeByAll();
+		list = empService.selectEmployeeByAll();
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++){
 			rows[i] = list.get(i).toArray();
@@ -289,5 +296,32 @@ public class EmployeeUI extends JPanel implements ActionListener {
 	protected void actionPerformedButton(ActionEvent e) {
 		SearchAddrdetailUI addr = new SearchAddrdetailUI();
 		addr.setVisible(true);
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTable(MouseEvent e) {
+		if (e.getClickCount() == 1) { 
+			int row = table.getSelectedRow();
+			Employee emp = list.get(row);
+			tfEmpNo.setText(emp.getCode());
+			tfEmpID.setText(emp.getId());
+			tfEmpName.setText(emp.getName());
+			tfEmpTel1.setText(emp.getTel().getPhone1());
+			tfEmpTel2.setText(emp.getTel().getPhone2());
+			tfEmpTel3.setText(emp.getTel().getPhone3());
+			tfEmpEmail.setText(emp.getEmail());
+			cbkTitle.setSelectedIndex(emp.getTitle().getTitleno());
+		}
 	}
 }
