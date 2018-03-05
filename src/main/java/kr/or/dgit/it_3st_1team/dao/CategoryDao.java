@@ -14,4 +14,6 @@ public interface CategoryDao {
 	Category selectCategoryByNameWithAPI(Category cate);
 	List<Category> selectCategoryBig ();
 	List<Category> selectCategoryMid (Category category);
+	
+	String selectCateNum(Category category);
 }

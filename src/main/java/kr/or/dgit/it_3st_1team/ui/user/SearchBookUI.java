@@ -167,8 +167,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		Category decate = new Category();
 		decate.setCatename("대분류 전체");
 		categoryBig.add(decate);
-		CategoryService service = new CategoryService();
-		List<Category> listcate = service.selectCategoryBig();
+		List<Category> listcate = CategoryService.getInstance().selectCategoryBig();
 		for(Category cate: listcate) {
 			categoryBig.add(cate);
 		}
@@ -233,9 +232,25 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	private void actionPerformedBtnSearch(ActionEvent e) {
 		Book book = new Book();
 		Location loca = new Location();
-		book.setBkname(tfbookname.getText());
+		Category cate = (Category)cbbbig.getSelectedItem();		
+		String num = CategoryService.getInstance().selectCateNum(cate);
+		
+		Category cate2 = (Category)cbbmid.getSelectedItem();
+		String num2 = CategoryService.getInstance().selectCateNum(cate2);
+		
+		String fullCate = String.format("%s%s", num, num2);
+		loca.setLoca_num(fullCate);
+		
+		if(!tfbookname.getText().trim().isEmpty() && !tfbookname.getText().equals("책 제목을 입력해주세요.")){
+			book.setBkname(tfbookname.getText());
+		}
+		
+		book.setLocation(loca);
 		List<Book> list = BookService.getInstance().selectBookAll(book);
 		loadDatas(list);
+		cellAlign(SwingConstants.CENTER,0,1,3,4,5,6);
+		cellAlign(SwingConstants.LEFT,1,2);
+		PreferredWidth(40,400,160,150,100,130,130);
 	}
 	protected void actionPerformedBtnSearchDe(ActionEvent e) {
 		if(flag == 1) {
@@ -270,8 +285,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		decate2.setCatename("중분류 전체");
 		categoryMid.add(decate2);
 		
-		CategoryService service = new CategoryService();
-		List<Category> listcate = service.selectCategoryMid(selectedItem);
+		List<Category> listcate = CategoryService.getInstance().selectCategoryMid(selectedItem);
 		for(Category cate: listcate) {
 			categoryMid.add(cate);
 		}

@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.management.modelmbean.ModelMBean;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,8 +14,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.service.BookService;
@@ -29,7 +26,6 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 	private JTextField tfisbn;
 	private JButton btnSearch;
 	private JButton btnReset;
-	private JButton btnClose;
 	private JPanel panel;
 	private SearchBookUI bookui;
 
@@ -173,7 +169,6 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		
 		List<Book> list = BookService.getInstance().selectBookDetail(book);
 		bookui.loadDatas(list);
-		System.out.println(list);
 		bookui.cellAlign(SwingConstants.CENTER,0,1,3,4,5,6);
 		bookui.cellAlign(SwingConstants.LEFT,1,2);
 		bookui.PreferredWidth(40,400,160,150,100,130,130);

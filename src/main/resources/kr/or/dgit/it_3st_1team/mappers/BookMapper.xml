@@ -11,6 +11,7 @@
 		<result property="publish" column="publish"/>
 		<result property="pubyear" column="pubyear"/>
 		<result property="info" column="info"/>
+		<result property="location.loca_num" column="laca_num"/>
 	</resultMap>
 	
 	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
@@ -36,9 +37,6 @@
 		<where>
 			<if test="location.loca_num != null">
 				loca_num like #{location.loca_num}
-			</if>
-			<if test="loca_num != null">
-				loca_num = #{location.loca_num}
 			</if>
 			<if test="bkname != null">
 				and bkname = #{bkname}
@@ -73,10 +71,10 @@
 		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkcode desc
 	</select>
 		
-	<!-- <select id="selectBookAll" parameterType="Book" resultType="BookResult">
+	<select id="selectBookAll" parameterType="Book" resultType="Book">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book 
 		<include refid="whereSql"/>
-	</select> -->
+	</select>
 	
 	<!-- 보유수 찾기 -->
 	<select id="selectExistNum" parameterType="String" resultType="int">

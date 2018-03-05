@@ -31,11 +31,8 @@ public class BookServiceTest {
 	public void test1selectBookStartAll() {
 		List<Book> booklist = service.selectBookStartAll();
 		Assert.assertNotNull(booklist);
-		for(Book b: booklist) {
-			System.out.println(b);
-		}
 	}
-/*	@Test
+	@Test
 	public void test2selectBookAll() {
 		Book book = new Book();
 		Location loca = new Location();
@@ -43,10 +40,7 @@ public class BookServiceTest {
 		book.setLocation(loca);
 		List<Book> booklist = service.selectBookAll(book);
 		Assert.assertNotNull(booklist);
-		for(Book b: booklist) {
-			System.out.println(b);
-		}
-	}*/
+	}
 	@Test
 	public void test3selectExistNum() {
 		int bookNum = service.selectExistNum("9788962880069");

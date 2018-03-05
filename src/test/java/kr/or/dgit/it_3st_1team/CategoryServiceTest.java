@@ -18,7 +18,7 @@ public class CategoryServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		service = new CategoryService();
+		service = CategoryService.getInstance();
 	}
 
 	@AfterClass
@@ -44,5 +44,13 @@ public class CategoryServiceTest {
 		for(Category cate: listcate) {
 			System.out.println(cate);
 		}
+	}
+	
+	@Test
+	public void test3selectCateNum() {
+		Category category = new Category();
+		category.setCatename("문헌정보학");
+		String num = service.selectCateNum(category);
+		Assert.assertNotNull(num);
 	}
 }

@@ -12,7 +12,16 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 public class CategoryService {
 	private static final Log log = LogFactory.getLog(CategoryService.class);
 	private String namespace ="kr.or.dgit.it_3st_1team.dao.CategoryDao.";
+	private static final CategoryService instance = new CategoryService();
 	
+	public static CategoryService getInstance() {
+		return instance;
+	}
+
+	private CategoryService() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<Category> selectCategoryBig() {
 		log.debug("selectCategoryBig()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -27,4 +36,10 @@ public class CategoryService {
 		}
 	}
 	
+	public String selectCateNum(Category category) {
+		log.debug("selectCateNum()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectCateNum", category);
+		}
+	}
 }
