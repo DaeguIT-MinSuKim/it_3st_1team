@@ -42,16 +42,13 @@ public class TakeinoutServiceTest {
 	}
 	
 	@Test
-	public void test2insertTakeinoutByBkcode() {
+	public void test2selectMatchingBook() {
 		Takeinout inout = new Takeinout();
-		User user = new User();
-		user.setCode("12200818002076");
 		Book book = new Book();
-		book.setBkCode("122008EM0000111112");
-		inout.setUser(user);
+		book.setBkCode("122008EM0000393415");
 		inout.setBook(book);
-		int res = service.insertTakeinoutByBkcode(inout);
-		Assert.assertSame(1, res);
+		inout = service.selectMatchingBook(book);
+		Assert.assertNotNull(inout);
 	}	
 
 }

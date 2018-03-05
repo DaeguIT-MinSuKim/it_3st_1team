@@ -400,12 +400,18 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 			inout.setUser(user);
 			TakeinoutService service = new TakeinoutService();
 			Takeinout findinout = service.selectTakeinoutByBkCode(inout);
+			Takeinout outBook = service.selectMatchingBook(book);
+			System.out.println(outBook);
 			if(findinout == null) {
-				service.insertTakeinoutByBkcode(inout);
-				JOptionPane.showMessageDialog(null, "대여 되었습니다");
-				tfBkCode.setText("");
-				setTakeinoutTable();
-				pTable.repaint();
+
+					service.insertTakeinoutByBkcode(inout);
+					JOptionPane.showMessageDialog(null, "대여 되었습니다");
+					tfBkCode.setText("");
+					setTakeinoutTable();
+					pTable.repaint();
+/*				}else {
+					JOptionPane.showMessageDialog(null, "현재 대여중인 도서 입니다");
+				}*/
 			}else {
 				service.deleteTakeinoutByBkcode(inout);
 				JOptionPane.showMessageDialog(null, "반납 되었습니다");

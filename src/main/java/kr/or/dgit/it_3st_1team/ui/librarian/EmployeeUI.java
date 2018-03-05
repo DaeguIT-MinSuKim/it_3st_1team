@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.Employee;
+import kr.or.dgit.it_3st_1team.dto.Phone;
 import kr.or.dgit.it_3st_1team.dto.Title;
 import kr.or.dgit.it_3st_1team.service.EmployeeService;
 import kr.or.dgit.it_3st_1team.service.TitleService;
@@ -40,11 +41,12 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private JTextField tfEmpAddr1;
 	private JTextField tfEmpTel2;
 	private JTextField tfEmpTel3;
-	private JTextField tdEmpAddr2;
+	private JTextField tfEmpAddr2;
 	private JTextField tfEmpZipCode;
 	private JButton btnSearchAddr;
 	private JComboBox<Title> cbkTitle;
 	private List<Employee> list;
+	private JButton btnAdd;
 
 	public EmployeeUI() {
 
@@ -155,11 +157,11 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		pNorth.add(tfEmpAddr1);
 		tfEmpAddr1.setColumns(10);
 		
-		tdEmpAddr2 = new JTextField();
-		tdEmpAddr2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tdEmpAddr2.setColumns(10);
-		tdEmpAddr2.setBounds(562, 297, 515, 30);
-		pNorth.add(tdEmpAddr2);
+		tfEmpAddr2 = new JTextField();
+		tfEmpAddr2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfEmpAddr2.setColumns(10);
+		tfEmpAddr2.setBounds(562, 297, 515, 30);
+		pNorth.add(tfEmpAddr2);
 		
 		btnSearchAddr = new JButton("주소찾기");
 		btnSearchAddr.addActionListener(this);
@@ -192,7 +194,8 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		lblBar2.setBounds(789, 137, 57, 30);
 		pNorth.add(lblBar2);
 		
-		JButton btnAdd = new JButton("추  가");
+		btnAdd = new JButton("추  가");
+		btnAdd.addActionListener(this);
 		btnAdd.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnAdd.setBounds(594, 388, 90, 40);
 		btnAdd.setForeground(Color.WHITE);
@@ -289,6 +292,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAdd) {
+			actionPerformedBtnAdd(e);
+		}
 		if (e.getSource() == btnSearchAddr) {
 			actionPerformedButton(e);
 		}
@@ -324,4 +330,30 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 			cbkTitle.setSelectedIndex(emp.getTitle().getTitleno());
 		}
 	}
+	
+	// 사원 추가
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		EmployeeService service = new EmployeeService();
+		Employee emp = new Employee();
+		emp.setCode(tfEmpNo.getText());
+		emp.setId(tfEmpID.getText());
+		emp.setName(tfEmpName.getText());
+		emp.setEmail(tfEmpEmail.getText());
+		Phone tel = new Phone();
+		tel.setPhone1(tfEmpTel1.getText());
+		tel.setPhone2(tfEmpTel2.getText());
+		tel.setPhone3(tfEmpTel3.getText());
+		emp.setTel(tel);
+		emp.setZipcode(tfEmpZipCode.getText());
+		emp.setAddr_id(tfEmpAddr1.getText());
+		emp.setAddr_de(tfEmpAddr2.getText());
+		emp.setPw(tfEmpNo.getText());
+		Title title = new Title();
+		title.setTitleno(cbkTitle.getSelectedIndex());
+		emp.setTitle(title);
+		service.insertEmployeeWithAPI(emp);
+	}
+	/*private boolean isEmpty() {
+		return if(tfEmpNo.getText().equals("") || tfEmpID.getText().equals("") || tfEmpName.gettext);
+	}*/
 }

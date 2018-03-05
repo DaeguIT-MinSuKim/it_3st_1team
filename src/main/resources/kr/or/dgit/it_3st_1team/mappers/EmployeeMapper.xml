@@ -32,11 +32,21 @@
 			</if>
 		</where>
 	</sql>
-	
+	<!-- 모든 사원 검색 -->
 	<select id="selectEmployeeByAll" parameterType="Employee" resultMap="EmployeeWithTitleResult">
 		<include refid="selectSql" />
 	</select>
-
+	
+	<!-- 사원 추가 -->
+	<sql id="insertSql">
+		insert into employee(code, name, id, pw, tel, email, zipcode, addr_id, addr_de, titleno)
+		values(#{code},#{name},#{id},#{pw},#{tel},#{email},#{zipcode},#{addr_id},#{addr_de},#{title.titleno});
+	</sql>
+	<insert id="insertEmployeeWithAPI" parameterType="Employee">
+		<include refid="insertSql" />
+	</insert>
+	
+	
 </mapper>
 
 

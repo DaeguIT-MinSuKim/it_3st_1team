@@ -34,4 +34,11 @@ public class EmployeeServiceTest {
 			System.out.println(emp);
 		}
 	}
+	/*@Test
+	public void test2insertEmployeeWithAPI() {
+		Employee emp = new Employee();
+		
+		int res = service.insertEmployeeWithAPI();
+		Assert.assertSame(1,res);
+	}*/
 }

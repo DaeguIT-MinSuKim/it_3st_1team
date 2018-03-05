@@ -21,4 +21,14 @@ public class EmployeeService {
 		}
 	}
 	
+	public int insertEmployeeWithAPI(Employee emp){
+		log.debug("insertEmployeeWithAPI()");
+		int res = -1;
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			res = sqlSession.insert(namespace + "insertEmployeeWithAPI", emp);
+			sqlSession.commit();			
+		}
+		return res;
+	}
+	
 }
