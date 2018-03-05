@@ -383,6 +383,7 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 				}else {
 					JOptionPane.showMessageDialog(null, "현재 타인이 대여중인 도서 입니다");
 					JOptionPane.showMessageDialog(null, "현재 타인이 대여중인 도서 입니다");
+					tfBkCode.setText("");
 				}
 			}else {
 				service.deleteTakeinoutByBkcode(inout);
