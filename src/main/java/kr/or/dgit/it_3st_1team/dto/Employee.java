@@ -10,7 +10,7 @@ public class Employee {
 	private Post zipcode;
 	private Post addr_id;
 	private String addr_de;
-	private Title titleno;
+	private Title title;
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
@@ -51,12 +51,14 @@ public class Employee {
 	public void setAddr_id(Post addr_id) {
 		this.addr_id = addr_id;
 	}
-	public Title getTitleno() {
-		return titleno;
+
+	public Title getTitle() {
+		return title;
 	}
-	public void setTitleno(Title titleno) {
-		this.titleno = titleno;
+	public void setTitle(Title title) {
+		this.title = title;
 	}
+	
 	public Phone getTel() {
 		return tel;
 	}
@@ -79,8 +81,13 @@ public class Employee {
 	@Override
 	public String toString() {
 		return String.format(
-				"Employee [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, zipcode=%s, addr_id=%s, addr_de=%s, titleno=%s]",
-				code, name, id, pw, tel, email, zipcode, addr_id.getTotal(), addr_de, titleno);
+				"Employee [code=%s, name=%s, id=%s, pw=%s, tel=%s, email=%s, zipcode=%s, addr_id=%s, addr_de=%s, title=%s]",
+				code, name, id, pw, tel, email, zipcode, addr_id, addr_de, title);
+	}
+	public Object[] toArray() {
+		return new Object [] {
+				code, name, id, tel, email, addr_id, title.getName()
+		};
 	}
 	
 	

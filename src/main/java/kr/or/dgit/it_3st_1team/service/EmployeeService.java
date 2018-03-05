@@ -12,12 +12,12 @@ import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 
 public class EmployeeService {
 	private static final Log log = LogFactory.getLog(EmployeeDao.class);
+	private String namespace = "kr.or.dgit.it_3st_1team.dao.EmployeeDao.";
 	
-	public List<Employee> findEmployeeByAll(){
+	public List<Employee> selectEmployeeByAll(){
 		log.debug("selectEmployeeByAll()");
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
-			EmployeeDao empDao = sqlSession.getMapper(EmployeeDao.class);
-			return empDao.selectEmployeeByAll();
+			return sqlSession.selectList(namespace + "selectEmployeeByAll");
 		}
 	}
 	

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.TitleDao">
+
+	<resultMap type="Title" id="TitleResult">
+		<id property="titleno" column="titleno"/>
+		<result property="name" column="name"/>
+		<result property="power" column="power"/>
+	</resultMap>
+
+	<select id="selectAllTitle" parameterType="Title" resultMap="TitleResult">
+		select titleno, name, power from title
+	</select>
+	
+</mapper>
