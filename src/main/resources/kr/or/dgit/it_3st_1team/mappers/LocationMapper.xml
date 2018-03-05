@@ -5,6 +5,11 @@
 		<id property="loca_num" column="loca_num"/>
 		<result property="loca_section" column="loca_section" />
 	</resultMap>
+	
+	<select id="selectSectionBynum" parameterType="Location" resultType="String">
+		select loca_section from location where loca_num = #{loca_num}
+	</select>
+	
 </mapper>
 
 
