@@ -38,5 +38,7 @@
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/BookMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/ManageBookMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/RequestMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/IDPWsearchMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/PostMapper.xml"/>
 	</mappers>
 </configuration>
