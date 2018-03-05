@@ -15,7 +15,9 @@
 	
 	<select id="selectCategoryMid" parameterType="Category" resultMap="CategoryResult">
 		select num, catename, catesize, parentnum from category 
-		where catesize = 1 and parentnum = #{parentnum} order by num
+		where catesize = 1 and parentnum = #{parentnum}
+		GROUP BY catename HAVING COUNT(catename) > 0
+		order by num
 	</select>
 	
 </mapper>
