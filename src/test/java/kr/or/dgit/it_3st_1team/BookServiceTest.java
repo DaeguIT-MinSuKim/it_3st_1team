@@ -35,7 +35,7 @@ public class BookServiceTest {
 			System.out.println(b);
 		}
 	}
-
+/*	@Test
 	public void test2selectBookAll() {
 		Book book = new Book();
 		Location loca = new Location();
@@ -46,6 +46,11 @@ public class BookServiceTest {
 		for(Book b: booklist) {
 			System.out.println(b);
 		}
+	}*/
+	@Test
+	public void test3selectExistNum() {
+		int bookNum = service.selectExistNum("9788962880069");
+		Assert.assertNotNull(bookNum);
 	}
 
 }

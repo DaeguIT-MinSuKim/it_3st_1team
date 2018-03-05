@@ -155,7 +155,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			List<Book> list = service.selectBookStartAll();
 			rows = new Object[list.size()][];
 			for(int i=0; i<rows.length; i++) {
-				rows[i] = list.get(i).toArray();
+				rows[i] = list.get(i).toArray(i);
 			}
 		return rows;
 	}

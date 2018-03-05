@@ -1,5 +1,7 @@
 package kr.or.dgit.it_3st_1team.dto;
 
+import kr.or.dgit.it_3st_1team.service.BookService;
+
 public class Book {
 	private String bkCode;
 	private String isbn;
@@ -48,8 +50,14 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public boolean isRentable() {
-		return rentable;
+	public String isRentable() {
+		String able;
+		if(rentable==false) {
+			able = "대여가능";
+		}else {
+			able = "대여불가";
+		}
+		return able;
 	}
 
 	public void setRentable(boolean rentable) {
@@ -116,8 +124,9 @@ public class Book {
 		return new Object[] {i, bkCode, bkname, author, publish, pubyear, take.getRentday(), take.getReturnday()};
 	}
 
-	public Object[] toArray() {
-		return new Object[] {null, bkname, author, publish, pubyear, null, rentable};
+	public Object[] toArray(int i) {
+		BookService service = new BookService();
+		return new Object[] {i+1, bkname, author, publish, pubyear, service.selectExistNum(isbn), isRentable()};
 	}
 
 }

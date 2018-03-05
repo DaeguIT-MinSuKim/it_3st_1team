@@ -51,11 +51,15 @@
 		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkcode desc
 	</select>
 		
-	<!-- <select id="selectBookAll" parameterType="Book" resultType="Book">
-		<include refid="selectSql"/>
+	<!-- <select id="selectBookAll" parameterType="Book" resultType="BookResult">
+		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book 
 		<include refid="whereSql"/>
 	</select> -->
 	
+	<!-- 보유수 찾기 -->
+	<select id="selectExistNum" parameterType="String" resultType="int">
+		select count(*) as '보유수' from book where isbn = #{isbn}
+	</select>
 </mapper>
 
 

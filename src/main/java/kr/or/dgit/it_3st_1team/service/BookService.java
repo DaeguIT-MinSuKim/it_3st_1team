@@ -42,6 +42,12 @@ public class BookService {
 			return sqlSession.selectList(namespace + "selectBookAll", book);
 		}
 	}
+	public int selectExistNum(String isbn){
+		log.debug("selectExistNum()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectExistNum", isbn);
+		}
+	}
 	
 	
 }
