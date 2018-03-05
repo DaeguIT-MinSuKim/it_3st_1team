@@ -9,4 +9,7 @@ public interface EmployeeDao {
 	List<Employee> selectEmployeeByAll();
 	// insert
 	int insertEmployeeWithAPI(Employee emp);
+	// update
+	int updateEmployeeWithAPI(Employee emp);
+	
 }

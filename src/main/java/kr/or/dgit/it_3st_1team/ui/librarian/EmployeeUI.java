@@ -11,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -47,6 +48,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private JComboBox<Title> cbkTitle;
 	private List<Employee> list;
 	private JButton btnAdd;
+	private JPanel pTable;
+	private JScrollPane scrollPane;
+	private JButton btnUpdate;
 
 	public EmployeeUI() {
 
@@ -202,7 +206,8 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnAdd.setBackground(new Color(94,94,94));
 		pNorth.add(btnAdd);
 		
-		JButton btnUpdate = new JButton("수  정");
+		btnUpdate = new JButton("수  정");
+		btnUpdate.addActionListener(this);
 		btnUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUpdate.setBounds(774, 388, 90, 40);
 		btnUpdate.setForeground(Color.WHITE);
@@ -237,17 +242,21 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		button_2.setBounds(60, 309, 310, 100);
 		pNorth.add(button_2);
 		
-		JPanel pTable = new JPanel();
+		pTable = new JPanel();
 		pTable.setBackground(Color.WHITE);
 		pTable.setBounds(0, 450, 1150, 350);
 		add(pTable);
 		pTable.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 0, 1130, 390);
 		pTable.add(scrollPane);
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		loadDataTable();
+		
+	}
+	private void loadDataTable() {
 		table = new JTable();
 		table.addMouseListener(this);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -266,8 +275,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		table.getColumnModel().getColumn(5).setPreferredWidth(400); //주소
 		table.getColumnModel().getColumn(6).setPreferredWidth(100); //직책명
 		scrollPane.setViewportView(table);
-		
 	}
+	
+	
 	
 	private Object[][] getRow() {
 		Object[][] rows = null;
@@ -292,6 +302,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnUpdate) {
+			actionPerformedBtnUpdate(e);
+		}
 		if (e.getSource() == btnAdd) {
 			actionPerformedBtnAdd(e);
 		}
@@ -316,6 +329,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
+	
 	protected void mouseClickedTable(MouseEvent e) {
 		if (e.getClickCount() == 1) { 
 			int row = table.getSelectedRow();
@@ -333,27 +347,66 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	
 	// 사원 추가
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		EmployeeService service = new EmployeeService();
-		Employee emp = new Employee();
-		emp.setCode(tfEmpNo.getText());
-		emp.setId(tfEmpID.getText());
-		emp.setName(tfEmpName.getText());
-		emp.setEmail(tfEmpEmail.getText());
-		Phone tel = new Phone();
-		tel.setPhone1(tfEmpTel1.getText());
-		tel.setPhone2(tfEmpTel2.getText());
-		tel.setPhone3(tfEmpTel3.getText());
-		emp.setTel(tel);
-		emp.setZipcode(tfEmpZipCode.getText());
-		emp.setAddr_id(tfEmpAddr1.getText());
-		emp.setAddr_de(tfEmpAddr2.getText());
-		emp.setPw(tfEmpNo.getText());
-		Title title = new Title();
-		title.setTitleno(cbkTitle.getSelectedIndex());
-		emp.setTitle(title);
-		service.insertEmployeeWithAPI(emp);
+		if(isEmpty()) {
+			EmployeeService service = new EmployeeService();
+			Employee emp = new Employee();
+			emp.setCode(tfEmpNo.getText());
+			emp.setId(tfEmpID.getText());
+			emp.setName(tfEmpName.getText());
+			emp.setEmail(tfEmpEmail.getText());
+			Phone tel = new Phone();
+			tel.setPhone1(tfEmpTel1.getText());
+			tel.setPhone2(tfEmpTel2.getText());
+			tel.setPhone3(tfEmpTel3.getText());
+			emp.setTel(tel);
+			emp.setZipcode(tfEmpZipCode.getText());
+			emp.setAddr_id(tfEmpAddr1.getText());
+			emp.setAddr_de(tfEmpAddr2.getText());
+			emp.setPw(tfEmpNo.getText());
+			Title title = new Title();
+			title.setTitleno(cbkTitle.getSelectedIndex());
+			emp.setTitle(title);
+			service.insertEmployeeWithAPI(emp);
+			JOptionPane.showMessageDialog(null, "추가 되었습니다");
+			loadDataTable();			
+		}else {
+			JOptionPane.showMessageDialog(null, "모든 정보가 입력되어야 합니다.");
+		}
 	}
-	/*private boolean isEmpty() {
-		return if(tfEmpNo.getText().equals("") || tfEmpID.getText().equals("") || tfEmpName.gettext);
-	}*/
+	private boolean isEmpty() {
+		if(tfEmpNo.getText().equals("") || tfEmpID.getText().equals("") || tfEmpName.getText().equals("") ||
+			tfEmpEmail.getText().equals("") || tfEmpTel1.getText().equals("") || tfEmpTel2.getText().equals("") || tfEmpTel3.getText().equals("") ||
+			tfEmpAddr1.getText().equals("") || tfEmpAddr2.getText().equals("") || tfEmpZipCode.getText().equals("")) {
+			return false;
+		}
+		return true;
+	}
+	// 사원 정보 수정
+	protected void actionPerformedBtnUpdate(ActionEvent e) {
+		if(isEmpty()) {
+			EmployeeService service = new EmployeeService();
+			Employee emp = new Employee();
+			emp.setCode(tfEmpNo.getText());
+			emp.setId(tfEmpID.getText());
+			emp.setName(tfEmpName.getText());
+			emp.setEmail(tfEmpEmail.getText());
+			Phone tel = new Phone();
+			tel.setPhone1(tfEmpTel1.getText());
+			tel.setPhone2(tfEmpTel2.getText());
+			tel.setPhone3(tfEmpTel3.getText());
+			emp.setTel(tel);
+			emp.setZipcode(tfEmpZipCode.getText());
+			emp.setAddr_id(tfEmpAddr1.getText());
+			emp.setAddr_de(tfEmpAddr2.getText());
+			emp.setPw(tfEmpNo.getText());
+			Title title = new Title();
+			title.setTitleno(cbkTitle.getSelectedIndex());
+			emp.setTitle(title);
+			service.updateEmployeeWithAPI(emp);
+			JOptionPane.showMessageDialog(null, "수정 되었습니다.");
+			loadDataTable();
+		}else {
+			JOptionPane.showMessageDialog(null, "모든 정보가 입력되어야 합니다.");
+		}
+	}
 }

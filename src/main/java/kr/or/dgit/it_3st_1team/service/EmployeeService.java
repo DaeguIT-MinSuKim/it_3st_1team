@@ -30,5 +30,14 @@ public class EmployeeService {
 		}
 		return res;
 	}
-	
+	// 사원 정보 수정
+	public int updateEmployeeWithAPI(Employee emp){
+		log.debug("updateEmployeeWithAPI()");
+		int res = -1;
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			res = sqlSession.insert(namespace + "updateEmployeeWithAPI", emp);
+			sqlSession.commit();		
+		}
+		return res;
+	}
 }

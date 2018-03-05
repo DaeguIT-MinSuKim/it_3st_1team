@@ -46,6 +46,10 @@
 		<include refid="insertSql" />
 	</insert>
 	
+	<update id="updateEmployeeWithAPI">
+		update employee set name = #{name}, tel = #{tel}, email = #{email}, zipcode = #{zipcode}, addr_id = #{addr_id}, addr_de = #{addr_de}, titleno = #{title.titleno}
+		where code = #{code};
+	</update>
 	
 </mapper>
 
