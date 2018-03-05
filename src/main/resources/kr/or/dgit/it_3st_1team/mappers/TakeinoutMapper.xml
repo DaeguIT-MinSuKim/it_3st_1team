@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.TakeinoutDao">
+
+	<!-- resultmap -->
+	<resultMap type="Takeinout" id="TakeinoutResult">
+ 		<id property="inout_no" column="inout_no"/>
+		<result property="rentday" column="rentday"/>
+		<result property="returnday" column="returnday"/>
+	</resultMap>
+	
+ 	<resultMap type="Takeinout" id="UserWithBookResult" extends="TakeinoutResult">
+		<result property="user.code" column="code"/>
+		<result property="user.name" column="name"/>
+		<result property="user.id" column="id"/>
+		<result property="user.tel" column="tel"/>
+		<result property="user.email" column="email"/>
+		<result property="book.bkCode" column="bkcode"/>
+		<result property="book.isbn" column="isbn"/>
+		<result property="book.rentable" column="rentable"/>
+		<result property="book.bkname" column="bkname"/>
+		<result property="book.author" column="author"/>
+		<result property="book.publish" column="publish"/>
+		<result property="book.pubyear" column="pubyear"/>
+		<result property="book.info" column="info"/>
+	</resultMap>
+	
+	<sql id="selectTakeinoutBookSql">
+		select inout_no, code, bkcode, rentday, returnday from takeinout
+	</sql>
+	
+	<!-- 현재 유저가 도서코드에 입력된 책을 대여중인지 아닌지에 대한 검색 -->
+	<select id="selectTakeinoutByBkCode" parameterType="Takeinout" resultMap="UserWithBookResult">
+		select inout_no, code, bkcode, rentday, returnday from takeinout where bkcode=#{book.bkCode} and code=#{user.code}
+	</select>
+	
+	<!-- 현재 유저가 대여중인 도서 목록 검색 -->
+	<select id="selectUserForBookByAll" parameterType="Takeinout" resultMap="UserWithBookResult">
+		select t.inout_no, t.code, t.bkcode, t.rentday, t.returnday, b.isbn,
+			b.rentable, b.bkname, b.author, b.publish, b.pubyear, b.info
+		from takeinout as t left outer join book as b on t.code =#{user.code} where t.bkcode = b.bkcode;
+	</select>
+	
+	<!-- 현재 유저가 이 책을 대여중이 아니라면 대여하는 insert 문장 -->
+	<insert id="insertTakeinoutByBkcode" parameterType="Takeinout">
+		insert into takeinout (code, bkcode, rentday, returnday)
+		values (#{user.code}, #{book.bkCode}, curdate(), adddate(curdate(), 14));
+	</insert>
+	
+	<!-- 현재 유저가 이 책을 대여중이라면 반납하는 delete 문장 -->
+	<delete id="deleteTakeinoutByBkcode">
+		delete from takeinout where bkcode = #{book.bkCode} and code = #{user.code};
+	</delete>
+
+</mapper>
+
+
+
+

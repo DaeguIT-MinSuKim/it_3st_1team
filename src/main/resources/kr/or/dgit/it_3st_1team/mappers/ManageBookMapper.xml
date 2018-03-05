@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.ManageBookDao">
+	<!-- 모두 보기  -->
+	<resultMap type="Book" id="BookResult">
+		<id property="bkCode" column="bkcode"/>
+		<result property="isbn" column="isbn"/>
+		<result property="rentable" column="rentable"/>
+		<result property="bkname" column="bkname"/>
+		<result property="author" column="author"/>
+		<result property="publish" column="publish"/>
+		<result property="pubyear" column="pubyear"/>
+		<result property="info" column="info"/>
+		<!-- <result property="rentday" column="rentday" />
+		<result property="returnday" column="returnday" /> -->
+	</resultMap>
+	
+	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
+ 		<result property="take.inout_no" column="inout_no"/>
+		<result property="take.user.code" column="code" />
+		<result property="take.book.bkCode" column="bkcode" />
+		<result property="location.loca_num" column="loca_num"/>
+		<!-- <result property="location.loca_section" column="loca_section"/> -->
+	</resultMap>
+	
+	<sql id="selectJoinTakeinoutSql">
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, rentday, returnday, loca_num, t.inout_no
+		from book b left outer join takeinout t on b.bkcode=t.bkcode
+	</sql>
+	
+	<sql id="whereAllSql">
+		<where>
+			<if test="bkname != null">
+				bkname like #{bkname}
+			</if>
+			<if test="location.loca_num != null">
+				and loca_num like #{location.loca_num}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="selectBookByNameSql">
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num
+		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
+	</sql>
+	
+	<select id="selectBookByAllForResultMapExtendsWithAPI" parameterType="Book" resultMap="BookWithTakeinoutResult">
+		<include refid="selectJoinTakeinoutSql" />
+		<include refid="whereAllSql" />
+	</select>
+	
+	
+	<select id="selectBookByNameForResultMapExtendsWithAPI" parameterType="Book" resultMap="BookWithTakeinoutResult">
+		<include refid="selectBookByNameSql" />
+		<include refid="whereAllSql" />
+	</select>
+	
+	<sql id="selectParameterSql">
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num, t.inout_no
+		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
+	</sql>
+	
+	
+	<!-- 도서 추가 sql -->
+	<sql id="insertBookSql">
+		insert into book(bkcode, isbn, bkname, author, publish, pubyear, info, loca_num)
+		values(#{bkCode},#{isbn},#{bkname},#{author},#{publish},#{pubyear},#{info},#{location.loca_num})
+	</sql>
+	
+	<!-- 도서 추가 -->
+	<insert id="insertBookWithAPI">
+		<include refid="insertBookSql" />
+	</insert>
+	
+	<delete id="deleteBookWithAPI">
+		delete from book where bkcode = #{bkCode};
+	</delete>
+	
+	
+</mapper>
+
+
+

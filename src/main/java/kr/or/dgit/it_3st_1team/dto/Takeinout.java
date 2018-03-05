@@ -1,51 +1,59 @@
 package kr.or.dgit.it_3st_1team.dto;
 
-import java.util.Date;
-
 public class Takeinout {
 	private int inout_no;
-	private User code;
-	private Book bkcode;
-	private Date rentdey;
-	private Date returnday;
+	private User user;
+	private Book book;
+	private String rentday;
+	private String returnday;
+	
 	public Takeinout() {
-		// TODO Auto-generated constructor stub
 	}
+	
 	public int getInout_no() {
 		return inout_no;
 	}
 	public void setInout_no(int inout_no) {
 		this.inout_no = inout_no;
 	}
-	public User getCode() {
-		return code;
+	public User getUser() {
+		return user;
 	}
-	public void setCode(User code) {
-		this.code = code;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public Book getBkcode() {
-		return bkcode;
+	public Book getBook() {
+		return book;
 	}
-	public void setBkcode(Book bkcode) {
-		this.bkcode = bkcode;
+	public void setBook(Book book) {
+		this.book = book;
 	}
-	public Date getRentdey() {
-		return rentdey;
+
+	public String getRentday() {
+		return rentday;
 	}
-	public void setRentdey(Date rentdey) {
-		this.rentdey = rentdey;
+
+	public void setRentday(String rentday) {
+		this.rentday = rentday;
 	}
-	public Date getReturnday() {
+
+	public String getReturnday() {
 		return returnday;
 	}
-	public void setReturnday(Date returnday) {
+
+	public void setReturnday(String returnday) {
 		this.returnday = returnday;
 	}
+
 	@Override
 	public String toString() {
-		return String.format("Takeinout [inout_no=%s, code=%s, bkcode=%s, rentdey=%s, returnday=%s]", inout_no, code,
-				bkcode, rentdey, returnday);
+		return String.format("Takeinout [inout_no=%s, user=%s, book=%s, rentday=%s, returnday=%s]", inout_no, user,
+				book, rentday, returnday);
 	}
-	
-	
+
+	public Object[] toArrayUserForBook(int i) {
+		return new Object[] {i,  book.getBkCode(), book.getBkname(), book.getAuthor(), book.getPublish(), book.getPubyear(),
+				rentday, returnday};
+	}
+
 }

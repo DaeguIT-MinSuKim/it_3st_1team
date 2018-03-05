@@ -5,8 +5,7 @@ public class Phone {
 	private String phone2;
 	private String phone3;
 	
-	public Phone() {}
-	
+	public Phone() {}	
 	
 	public Phone(String str) {
 		if(str != null) {

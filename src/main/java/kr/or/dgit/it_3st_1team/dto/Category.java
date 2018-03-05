@@ -1,7 +1,7 @@
 package kr.or.dgit.it_3st_1team.dto;
 
 public class Category {
-	private int num;
+	private String num;
 	private String catename;
 	private int catesize;
 	private int parentnum;
@@ -10,11 +10,15 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getNum() {
+	public Category(String catename) {
+		this.catename = catename;
+	}
+
+	public String getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(String num) {
 		this.num = num;
 	}
 
@@ -44,8 +48,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return String.format("Category [num=%s, catename=%s, catesize=%s, parentnum=%s]", num, catename, catesize,
-				parentnum);
+		return String.format("%s", catename);
 	}
 	
 	
