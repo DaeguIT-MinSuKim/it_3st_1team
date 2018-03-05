@@ -425,6 +425,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		tfEmpTel2.setText("");
 		tfEmpTel3.setText("");
 		tfEmpEmail.setText("");
+		tfEmpAddr1.setText("");
+		tfEmpZipCode.setText("");
+		tfEmpAddr2.setText("");
 		cbkTitle.setSelectedIndex(0);
 	}
 }

@@ -56,17 +56,21 @@ from book b left outer join takeinout t on b.bkcode=t.bkcode;
 
 -- 출납 대여
 insert into takeinout(code, bkcode, rentday, returnday)
-values('12200818002076', '122008EM0000393414', curdate(), adddate(curdate(), 14));
+values('12200818002076', '122008EM0000111111', curdate(), adddate(curdate(), 14));
 
 
-select * from book where bkcode = '122008EM0000393414';
+select * from book where bkcode = '122008EM0000111111';
 
 -- 출납 반납
 delete from takeinout where bkcode = '122008em0000393414' and code = '12200818002076';
 
 select * from takeinout;
 
+delete from takeinout;
+
 select returnday from takeinout where code = '12200818002076';
+
+select bkcode from takeinout where bkcode = '122008EM0000393415';
 
 select * from history;
 
@@ -111,6 +115,14 @@ select * from book;
 
 select * from users;
 
+select * from employee;
+
+delete from employee where code = 4444;
+
+select * from employee e left outer join title t on e.titleno = t.titleno;
+
+select * from title;
+
 select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where id ='bomi' and pw = 'bomi';
 
 -- 대분류만 선택시 검색 조건
@@ -123,3 +135,21 @@ from book as b left outer join takeinout as t on b.bkcode = t.bkcode where loca_
 
 select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num, t.inout_no
 from book as b left outer join takeinout as t on b.bkcode = t.bkcode;
+
+-- 사원 추가
+insert into employee(code, name, id, pw, tel, email, zipcode, addr_id, addr_de, titleno)
+values(4444, '정현락', 'ragne', '4444', '010-4444-0160', 'login486@naver.com', '45532', '대구시 서구 내당1동 34-35번지', '1층', 2);
+
+
+-- 대여중인 도서 목록
+select * from book as b right outer join takeinout as t on b.bkcode = t.bkcode;
+
+select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday as rentd, t.returnday as returnd, loca_num, t.inout_no
+from book b right outer join takeinout t on b.bkcode=t.bkcode;
+
+delete from employee where code =  '8888';
+
+-- 사원 정보 수정
+update employee set name = 'name', tel = '', email = '', zipcode = '', addr_id = '', addr_de = '', titleno = 3 where code = code; 
+
+select * from employee;
