@@ -50,6 +50,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	int flag = 1;
 	private JComboBox<Category> cbbbig;
 	private JComboBox<Category> cbbmid;
+	private JCheckBox cblistview;
 	
 	public SearchBookUI() {
 
@@ -59,7 +60,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
-		
 		cbbbig = new JComboBox<>();
 		cbbbig.addItemListener(this);
 		cbbbig.setBorder(null);
@@ -67,8 +67,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		cbbbig.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		cbbbig.setBounds(30, 50, 150, 50);
 		add(cbbbig);
-		
-		
 		
 		cbbmid = new JComboBox<>();
 		cbbmid.setBorder(null);
@@ -114,6 +112,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		
 		table = new JTable();
+		table.addMouseListener(this);
 		table.setRowHeight(30);
 		table.getTableHeader().setBackground(new Color(245,245,245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
@@ -136,10 +135,12 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		
 		scrollPane.setViewportView(table);
 		
-		JCheckBox cblistview = new JCheckBox();
+		cblistview = new JCheckBox();
+		cblistview.addItemListener(this);
 		cblistview.setBounds(870, 0, 21, 21);
 		panel_1.add(cblistview);
 		cblistview.setBackground(Color.WHITE);
+		cblistview.setSelected(true);
 		JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
 		lblListview.setBounds(900, 0, 178, 22);
 		panel_1.add(lblListview);
@@ -269,6 +270,9 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		}
 	}
 	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cblistview) {
+			itemStateChangedCblistview(e);
+		}
 		if (e.getSource() == cbbbig) {
 			itemStateChangedCbbbig(e);
 		}
@@ -294,6 +298,9 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		cbbmid.setModel(model);
 	}
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == table) {
+			mouseClickedTable(e);
+		}
 		if (e.getSource() == tfbookname) {
 			mouseClickedTfbookname(e);
 		}
@@ -308,5 +315,40 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 	protected void mouseClickedTfbookname(MouseEvent e) {
 		tfbookname.setText("");
+	}
+	protected void itemStateChangedCblistview(ItemEvent e) {		if(e.getStateChange()==ItemEvent.SELECTED) {
+		
+		}else {
+			
+		}
+	}
+	protected void mouseClickedTable(MouseEvent e) {
+		if(e.getClickCount() == 2) {
+			table = (JTable) e.getSource();
+			String name = table.getModel().getValueAt(table.getSelectedRow(), 1).toString();
+			String author = table.getModel().getValueAt(table.getSelectedRow(), 2).toString();
+			String publish = table.getModel().getValueAt(table.getSelectedRow(), 3).toString();
+			int pubyear = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
+			System.out.println(String.format("%s %s %s %s", name, author, publish, pubyear));
+			Book book = new Book();
+			book.setBkname(name);
+			book.setAuthor(author);
+			book.setPublish(publish);
+			book.setPubyear(pubyear);
+			String isbn = BookService.getInstance().selectIsbn(book);
+			Book resultBook = BookService.getInstance().selectByIsbn(isbn);
+			BookinfoUI info = new BookinfoUI();
+			info.setVisible(true);
+			info.tfBookcode.setText(resultBook.getBkCode());
+			info.tfauthor.setText(resultBook.getAuthor());
+			info.tfpublish.setText(resultBook.getPublish());
+			info.tfBookname.setText(resultBook.getBkname());
+			info.tpinfo.setText(resultBook.getInfo());
+			info.tfisbn.setText(resultBook.getIsbn());
+			info.tfpubyear.setText(Integer.toString(resultBook.getPubyear()));
+			info.tfnum.setText(Integer.toString(BookService.getInstance().selectExistNum(isbn)));
+			//info.tfreservenum.setText();
+			//info.tfLocation.setText(t);
+		}
 	}
 }

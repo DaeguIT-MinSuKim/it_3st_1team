@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,38 +14,39 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTextPane;
 
 @SuppressWarnings("serial")
-public class BookinfoUI extends JPanel {
-	private JTextField tfBookcode;
-	private JTextField tfauthor;
-	private JTextField tfpublish;
-	private JTextField tfpubyear;
-	private JTextField tfisbn;
+public class BookinfoUI extends JFrame {
+	public JTextField tfBookcode;
+	public JTextField tfauthor;
+	public JTextField tfpublish;
+	public JTextField tfpubyear;
+	public JTextField tfisbn;
 	private JButton btnPrint;
 	private JPanel panel;
 	private JLabel lblbookname;
-	private JTextField tfBookname;
+	public JTextField tfBookname;
 	private JLabel lblLocation;
-	private JTextField tfLocation;
+	public JTextField tfLocation;
 	private JLabel lblnum;
-	private JTextField tfnum;
+	public JTextField tfnum;
 	private JLabel lblreservenum;
-	private JTextField tfreservenum;
+	public JTextField tfreservenum;
 	private JButton btnreserve;
 	private JButton btnClose;
 	private JLabel lblinfo;
+	public JTextPane tpinfo;
 	
 	public BookinfoUI() {
 		initComponents();
 	}
 
 	private void initComponents() {
-		setBackground(Color.WHITE);
-		setLayout(null);
-		
+		setTitle("상세 도서 보기");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(400, 250, 930, 520);
 		panel = new JPanel();
 		panel.setBackground(new Color(224,224,224));
 		panel.setBounds(0, 0, 1150, 800);
-		add(panel);
+		setContentPane(panel);
 		panel.setLayout(null);
 		
 		JLabel lblBookcode = new JLabel("도서코드");
@@ -169,7 +171,7 @@ public class BookinfoUI extends JPanel {
 		tfreservenum.setBounds(670, 70, 126, 30);
 		panel.add(tfreservenum);
 		
-		JTextPane tpinfo = new JTextPane();
+		tpinfo = new JTextPane();
 		tpinfo.setEditable(false);
 		tpinfo.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tpinfo.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
@@ -181,6 +183,7 @@ public class BookinfoUI extends JPanel {
 		btnPrint.setForeground(Color.WHITE);
 		btnPrint.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		btnPrint.setBounds(531, 270, 70, 30);
+		btnPrint.setBorder(null);
 		panel.add(btnPrint);
 		
 		btnreserve = new JButton("예약");
@@ -188,6 +191,7 @@ public class BookinfoUI extends JPanel {
 		btnreserve.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		btnreserve.setBackground(new Color(52, 152, 219));
 		btnreserve.setBounds(808, 70, 70, 30);
+		btnreserve.setBorder(null);
 		panel.add(btnreserve);
 		
 		btnClose = new JButton("닫기");
@@ -195,6 +199,7 @@ public class BookinfoUI extends JPanel {
 		btnClose.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		btnClose.setBackground(new Color(52, 152, 219));
 		btnClose.setBounds(808, 420, 70, 30);
+		btnClose.setBorder(null);
 		panel.add(btnClose);
 	}
 }

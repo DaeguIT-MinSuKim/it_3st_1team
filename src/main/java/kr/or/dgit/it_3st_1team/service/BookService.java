@@ -65,4 +65,18 @@ public class BookService {
 			return sqlSession.selectList(namespace + "selectBookDetail", book);
 		}
 	}
+	
+	public String selectIsbn(Book book) {
+		log.debug("selectIsbn()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectIsbn", book);
+		}
+	}
+	
+	public Book selectByIsbn(String isbn) {
+		log.debug("selectByIsbn()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectByIsbn", isbn);
+		}
+	}
 }

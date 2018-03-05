@@ -41,6 +41,7 @@ public class BookServiceTest {
 		List<Book> booklist = service.selectBookAll(book);
 		Assert.assertNotNull(booklist);
 	}
+	
 	@Test
 	public void test3selectExistNum() {
 		int bookNum = service.selectExistNum("9788962880069");
@@ -73,6 +74,24 @@ public class BookServiceTest {
 		for(Book b: booklist3) {
 			System.out.println(b);
 		}
+	}
+	
+	@Test
+	public void test5selectIsbn() {
+		Book book = new Book();
+		book.setBkname("코끼리의 마음");
+		book.setAuthor("톤 텔레헨");
+		book.setPublish("아르테");
+		book.setPubyear(2018);
+		String isbn = service.selectIsbn(book);
+		Assert.assertNotNull(isbn);
+	}
+	
+	@Test
+	public void test6selectByIsbn() {
+		String isbn = "9788950973476";
+		Book book = service.selectByIsbn(isbn);
+		Assert.assertNotNull(book);
 	}
 
 }

@@ -13,4 +13,6 @@ public interface BookDao {
 	List<Book> selectBookStartAll();	//도서검색 창 떴을 때 바로 보이는 책 목록
 	List<Book> selectBookAll(Book book); //도서검색에서 일반검색을 할 때
 	List<Book> selectBookDetail(Book book);
+	List<Book> selectIsbn(Book book); //상세도서보기를 위한 isbn 찾기
+	Book selectByIsbn(String isbn); //isbn으로 도서찾기 -> 결과 상세도서보기에 넣음
 }

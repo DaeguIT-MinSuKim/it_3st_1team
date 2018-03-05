@@ -87,6 +87,19 @@
 		<include refid="whereDetailSql"/>
 		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkname;
 	</select>
+	
+	<!-- isbn 찾기 -->
+	<select id="selectIsbn" parameterType="Book" resultType="String">
+		select isbn from book 
+		<include refid="whereDetailSql"/>
+		GROUP BY isbn HAVING COUNT(isbn) > 0;
+	</select>
+	
+	<!-- isbn으로 도서찾기 -->
+	<select id="selectByIsbn" parameterType="String" resultType="Book">
+		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book where isbn = #{isbn}
+		GROUP BY isbn HAVING COUNT(isbn) > 0;
+	</select>
 </mapper>
 
 
