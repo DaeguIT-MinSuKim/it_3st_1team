@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.it_3st_1team.dto.User;
-import kr.or.dgit.it_3st_1team.service.UserService;
+import kr.or.dgit.it_3st_1team.service.IDPWsearchService;
 
 @SuppressWarnings("serial")
 public class IDPWsearchUI extends JFrame implements ActionListener {
@@ -148,23 +148,28 @@ public class IDPWsearchUI extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnIdfind(ActionEvent e) {
-		UserService service = new UserService();
+		IDPWsearchService service = new IDPWsearchService();
 		User user = new User();
 		user.setName(tfName.getText());
 		user.setEmail(tfMail.getText());
-		User selectuser = service.selectNameEmail(user);
-		if(user.getName().equals(selectuser.getName()) && user.getEmail().equals(selectuser.getEmail())) {
-			dispose();
-			JOptionPane.showMessageDialog(null, String.format("찾으신 아이디는 %s입니다", selectuser.getId()));
-		}else {
+		User selectuser = service.selectIdByName(user);
+		try{
+			if(user.getName().equals(selectuser.getName()) && user.getEmail().equals(selectuser.getEmail())) {
+				dispose();
+				JOptionPane.showMessageDialog(null, String.format("찾으신 아이디는 %s입니다", selectuser.getId()));
+			}
+		}catch (NullPointerException e2) {
 			JOptionPane.showMessageDialog(null, "없는 정보입니다");
+		}finally {
+			tfName.setText("");
+			tfMail.setText("");
 		}
 	}
 	protected void actionPerformedTfMail(ActionEvent e) {
 		actionPerformedBtnIdfind(e);
 	}
 	protected void actionPerformedBtnPwfind(ActionEvent e) {
-		UserService service = new UserService();
+		IDPWsearchService service = new IDPWsearchService();
 		User user = new User();
 		user.setId(tfId2.getText());
 		user.setEmail(tfMail2.getText());

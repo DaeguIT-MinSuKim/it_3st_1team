@@ -36,7 +36,7 @@ public class PostServiceTest {
 	@Test
 	public void test2SelectPostByAll2() {
 		Post post = new Post();
-		post.setDoro("중앙대로");
+//		post.setDoro("중앙대로");
 		List<Post> listPost = service.selectPostByAll2(post);
 		Assert.assertNotNull(listPost);
 		for(Post posts : listPost) {

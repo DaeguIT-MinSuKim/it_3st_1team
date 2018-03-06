@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MyBatisSqlSessionFactory {
-<<<<<<< HEAD
 private static SqlSessionFactory sqlSessionFactory;
     
     public static SqlSessionFactory getSqlSessionFactory(){
@@ -30,26 +29,4 @@ private static SqlSessionFactory sqlSessionFactory;
     public static SqlSession openSession(){
         return getSqlSessionFactory().openSession();
     }
-
-=======
-	private static SqlSessionFactory sqlSessionFactory;
-	
-	public static SqlSessionFactory getSqlSessionFactory(){
-		if(sqlSessionFactory == null) {
-			InputStream inputStream;
-			try {
-				inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-				sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			}catch(IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException(e.getCause());
-			}
-		}
-		return sqlSessionFactory;
-	}
-
-	public static SqlSession openSession() {
-		return getSqlSessionFactory().openSession();
-	}
->>>>>>> refs/remotes/origin/hotfix_park2
 }

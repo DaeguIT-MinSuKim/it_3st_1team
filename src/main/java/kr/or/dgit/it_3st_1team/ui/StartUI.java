@@ -206,12 +206,12 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		}
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
-	/*	contentPane.removeAll();
+		contentPane.removeAll();
 		ManagerUI mng = new ManagerUI();
 		mng.setBounds(0, 0, 1400, 800);
 		contentPane.add(mng);
-		contentPane.repaint();*/
-		if (tfId.getText().trim().length() < 1) {
+		contentPane.repaint();
+		/*if (tfId.getText().trim().length() < 1) {
 			JOptionPane.showMessageDialog(null, "아이디를 입력하세요");  
 			return;
 		}
@@ -234,7 +234,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 			contentPane.revalidate();
         }else{
         	JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
-        }
+        }*/
 	}
 	protected void actionPerformedBtnjoin(ActionEvent e) {
 		JoinUI frame = new JoinUI();

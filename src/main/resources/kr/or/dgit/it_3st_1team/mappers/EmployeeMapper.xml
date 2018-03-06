@@ -52,7 +52,7 @@
 	</update>
 	
 	<!-- 아이디 비번 찾기 -->
-	<sql id="selectIdSql">
+	<!-- <sql id="selectIdSql">
 		SELECT id, pw
 		FROM employee
 	</sql>
@@ -71,7 +71,7 @@
 	<select id="selectEmployeeIdByNo" resultType="Employee">
 		<include refid="selectIdSql" />
 		<include refid="whereSql" />		
-	</select>
+	</select> -->
 	
 </mapper>
 

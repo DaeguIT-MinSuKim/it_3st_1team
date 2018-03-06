@@ -112,7 +112,8 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		scrollPane.setViewportView(table);
 	}
 	private Object[][] getRow() {
-		PostService service = new PostService();
+		Object[][] rows = null;
+/*		PostService service = new PostService();
 		Post post = new Post();
 		post.setBubjung_name(tfAddrName.getText());
 		List<Post> findpost = service.selectPostByAll1(post);
@@ -120,11 +121,12 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		for(int i = 0 ; i < rows.length ; i++){
 			rows[i] = findpost.get(i).toArray1(i);
 		}
-		System.out.println(rows);
+		System.out.println(rows);*/
 		return rows;
 	}
 	private Object[][] getRow2() {
-		PostService service = new PostService();
+		Object[][] rows = null;
+		/*PostService service = new PostService();
 		Post post = new Post();
 		post.setDoro(tfAddrName.getText()+"%");
 		List<Post> findpost = service.selectPostByAll2(post);
@@ -132,7 +134,7 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		for(int i = 0 ; i < rows.length ; i++){
 			rows[i] = findpost.get(i).toArray(i);
 		}
-		System.out.println(rows);
+		System.out.println(rows);*/
 		return rows;
 	}
 	private Object[][] getRow3() {
