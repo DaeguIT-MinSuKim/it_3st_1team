@@ -7,6 +7,7 @@
  		<id property="inout_no" column="inout_no"/>
 		<result property="rentday" column="rentday"/>
 		<result property="returnday" column="returnday"/>
+		<!-- <result property="isbn" column="isbn"/> -->
 	</resultMap>
 	
  	<resultMap type="Takeinout" id="UserWithBookResult" extends="TakeinoutResult">
