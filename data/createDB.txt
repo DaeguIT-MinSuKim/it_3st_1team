@@ -9,7 +9,7 @@ drop table users;
 drop table takeinout;
 drop table history;
 drop table reserve;
-
+drop table request;
 
 CREATE TABLE bookmanagement.users (
 	code     VARCHAR(20)  NOT NULL COMMENT '회원코드', 
@@ -21,9 +21,9 @@ CREATE TABLE bookmanagement.users (
 	zipcode  varchar(6)   null,
 	addr_id  VARCHAR(100) NULL     COMMENT '주소', -- 주소
 	addr_de	 varchar(100) null,
-	blacktf  BOOLEAN      NULL     COMMENT '블랙여부' default 1, -- 블랙여부
+	blacktf  BOOLEAN      NULL     COMMENT '블랙여부' default 0, -- 블랙여부
 	entryday DATE         NULL     COMMENT '가입일자', -- 가입일자
-	freeday  DATE         NULL     COMMENT '대여가능날짜' -- 대여가능날짜
+	freeday  DATE         null
 )
 COMMENT '회원';
 
@@ -77,7 +77,7 @@ ALTER TABLE bookmanagement.title
 CREATE TABLE bookmanagement.book (
 	bkcode   VARCHAR(20)  NOT NULL COMMENT '도서코드', -- 도서코드
 	isbn     VARCHAR(20)  NULL     COMMENT 'ISBN', -- ISBN
-	rentable BOOLEAN      NULL     COMMENT '대여가능여부' default 0, -- 대여가능여부
+	rentable BOOLEAN      NULL     COMMENT '대여가능여부' default 1, -- 대여가능여부
 	bkname   VARCHAR(100) NOT NULL COMMENT '도서명', -- 도서명
 	author   VARCHAR(50)  NOT NULL COMMENT '저자', -- 저자
 	publish  VARCHAR(50)  NOT NULL COMMENT '출판사', -- 출판사
@@ -95,12 +95,15 @@ ALTER TABLE bookmanagement.book
 		);
 
 -- 출납
+drop table takeinout;
+
 CREATE TABLE bookmanagement.takeinout (
 	inout_no  INT(10)     NOT null primary key auto_increment COMMENT '번호',
 	code      VARCHAR(20) NOT NULL COMMENT '회원코드', 
 	bkcode    VARCHAR(20) NOT NULL COMMENT '도서코드', 
 	rentday   DATE        NULL     COMMENT '대여일', 
-	returnday DATE        NULL     COMMENT '반납예정일' 
+	returnday DATE        NULL     COMMENT '반납예정일',
+	isbn varchar(20) not null
 )
 COMMENT '출납';
 
@@ -206,12 +209,8 @@ ALTER TABLE bookmanagement.book
 -- 출납
 ALTER TABLE bookmanagement.takeinout
 	ADD CONSTRAINT FK_users_TO_takeinout -- 회원 -> 출납
-		FOREIGN KEY (
-			code -- 회원코드
-		)
-		REFERENCES bookmanagement.users ( -- 회원
-			code -- 회원코드
-		);
+		FOREIGN KEY (code) REFERENCES bookmanagement.users (code)
+		on update cascade;
 
 -- 출납
 ALTER TABLE bookmanagement.takeinout
@@ -231,7 +230,7 @@ ALTER TABLE bookmanagement.reserve
 		)
 		REFERENCES bookmanagement.users ( -- 회원
 			code -- 회원코드
-		);
+		)on update cascade;
 
 -- 예약
 ALTER TABLE bookmanagement.reserve
@@ -251,7 +250,7 @@ ALTER TABLE bookmanagement.history
 		)
 		REFERENCES bookmanagement.users ( -- 회원
 			code -- 회원코드
-		);
+		)on update cascade;
 
 -- 출납history
 ALTER TABLE bookmanagement.history
@@ -271,4 +270,4 @@ ALTER TABLE bookmanagement.request
 		)
 		REFERENCES bookmanagement.users ( -- 회원
 			code -- 회원코드
-		);
+		)on update cascade;
