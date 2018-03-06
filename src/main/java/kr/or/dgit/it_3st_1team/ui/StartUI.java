@@ -196,9 +196,10 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 			contentPane.revalidate();
 			repaint();
 			revalidate();
-		}else {
+		}/*catch(NullPointerException er) {
+			er.printStackTrace();
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
-		}
+		}*/
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
 		contentPane.removeAll();
