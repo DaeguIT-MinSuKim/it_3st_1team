@@ -33,8 +33,8 @@ public class JoinUI extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	private JButton btnIdc;
 	private JTextField tfpostnum;
-	private JTextField tfAddr;
-	private JTextField tfAddrDe;
+	private JTextField tfone;
+	private JTextField tftwo;
 	private JButton btnSearchAddr;
 	private JLabel lblAddr;
 	private JLabel lblAddrDe;
@@ -182,19 +182,19 @@ public class JoinUI extends JFrame implements ActionListener {
 		contentPane.add(tfpostnum);
 		tfpostnum.setColumns(10);
 		
-		tfAddr = new JTextField();
-		tfAddr.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		tfAddr.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfAddr.setBounds(150, 310, 400, 30);
-		contentPane.add(tfAddr);
-		tfAddr.setColumns(10);
+		tfone = new JTextField();
+		tfone.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfone.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfone.setBounds(150, 310, 400, 30);
+		contentPane.add(tfone);
+		tfone.setColumns(10);
 		
-		tfAddrDe = new JTextField();
-		tfAddrDe.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		tfAddrDe.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfAddrDe.setColumns(10);
-		tfAddrDe.setBounds(150, 350, 400, 30);
-		contentPane.add(tfAddrDe);
+		tftwo = new JTextField();
+		tftwo.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tftwo.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tftwo.setColumns(10);
+		tftwo.setBounds(150, 350, 400, 30);
+		contentPane.add(tftwo);
 		
 		btnJoin = new JButton("회원가입");
 		btnJoin.setBorder(null);
@@ -232,9 +232,9 @@ public class JoinUI extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnSearchAddr(ActionEvent e) {
-		SearchAddrdetailUI addr = new SearchAddrdetailUI(tfAddr, tfpostnum);
+		SearchAddrdetailUI addr = new SearchAddrdetailUI(tfone, tfpostnum);
 		addr.setVisible(true);
-		addr.getTfPostAddr(tfAddr);
+		addr.getTfPostAddr(tfone);
 		addr.getTfPostNum(tfpostnum);
 	}
 }

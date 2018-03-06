@@ -39,11 +39,11 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private JTextField tfEmpID;
 	private JTextField tfEmpTel1;
 	private JTextField tfEmpEmail;
-	private JTextField tfEmpAddr1;
+	private JTextField tfAddr_id;
 	private JTextField tfEmpTel2;
 	private JTextField tfEmpTel3;
-	private JTextField tfEmpAddr2;
-	private JTextField tfEmpZipCode;
+	private JTextField tfAddr_de;
+	private JTextField tfZipCode;
 	private JButton btnSearchAddr;
 	private JComboBox<Title> cbkTitle;
 	private List<Employee> list;
@@ -150,23 +150,23 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		pNorth.add(tfEmpEmail);
 		tfEmpEmail.setColumns(10);
 		
-		tfEmpZipCode = new JTextField();
-		tfEmpZipCode.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpZipCode.setColumns(10);
-		tfEmpZipCode.setBounds(562, 215, 370, 30);
-		pNorth.add(tfEmpZipCode);
+		tfZipCode = new JTextField();
+		tfZipCode.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfZipCode.setColumns(10);
+		tfZipCode.setBounds(562, 215, 370, 30);
+		pNorth.add(tfZipCode);
 		
-		tfEmpAddr1 = new JTextField();
-		tfEmpAddr1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpAddr1.setBounds(562, 255, 515, 30);
-		pNorth.add(tfEmpAddr1);
-		tfEmpAddr1.setColumns(10);
+		tfAddr_id = new JTextField();
+		tfAddr_id.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfAddr_id.setBounds(562, 255, 515, 30);
+		pNorth.add(tfAddr_id);
+		tfAddr_id.setColumns(10);
 		
-		tfEmpAddr2 = new JTextField();
-		tfEmpAddr2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpAddr2.setColumns(10);
-		tfEmpAddr2.setBounds(562, 297, 515, 30);
-		pNorth.add(tfEmpAddr2);
+		tfAddr_de = new JTextField();
+		tfAddr_de.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		tfAddr_de.setColumns(10);
+		tfAddr_de.setBounds(562, 297, 515, 30);
+		pNorth.add(tfAddr_de);
 		
 		btnSearchAddr = new JButton("주소찾기");
 		btnSearchAddr.addActionListener(this);
@@ -318,7 +318,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}
 	}
 	protected void actionPerformedButton(ActionEvent e) {
-		SearchAddrdetailUI addr = new SearchAddrdetailUI();
+		SearchAddrdetailUI addr = new SearchAddrdetailUI(tfAddr_id, tfZipCode);
 		addr.setVisible(true);
 	}
 	public void mouseClicked(MouseEvent e) {
@@ -346,9 +346,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 			tfEmpTel2.setText(emp.getTel().getPhone2());
 			tfEmpTel3.setText(emp.getTel().getPhone3());
 			tfEmpEmail.setText(emp.getEmail());
-			tfEmpAddr1.setText(emp.getAddr_id());
-			tfEmpAddr2.setText(emp.getAddr_de());
-			tfEmpZipCode.setText(emp.getZipcode());
+			tfAddr_id.setText(emp.getAddr_id());
+			tfAddr_de.setText(emp.getAddr_de());
+			tfZipCode.setText(emp.getZipcode());
 			cbkTitle.setSelectedIndex(emp.getTitle().getTitleno());
 		}
 	}
@@ -367,9 +367,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 			tel.setPhone2(tfEmpTel2.getText());
 			tel.setPhone3(tfEmpTel3.getText());
 			emp.setTel(tel);
-			emp.setZipcode(tfEmpZipCode.getText());
-			emp.setAddr_id(tfEmpAddr1.getText());
-			emp.setAddr_de(tfEmpAddr2.getText());
+			emp.setZipcode(tfZipCode.getText());
+			emp.setAddr_id(tfAddr_id.getText());
+			emp.setAddr_de(tfAddr_de.getText());
 			emp.setPw(tfEmpNo.getText());
 			Title title = new Title();
 			title.setTitleno(cbkTitle.getSelectedIndex());
@@ -384,7 +384,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private boolean isEmpty() {
 		if(tfEmpNo.getText().equals("") || tfEmpID.getText().equals("") || tfEmpName.getText().equals("") ||
 			tfEmpEmail.getText().equals("") || tfEmpTel1.getText().equals("") || tfEmpTel2.getText().equals("") || tfEmpTel3.getText().equals("") ||
-			tfEmpAddr1.getText().equals("") || tfEmpAddr2.getText().equals("") || tfEmpZipCode.getText().equals("")) {
+			tfAddr_id.getText().equals("") || tfAddr_de.getText().equals("") || tfZipCode.getText().equals("")) {
 			return false;
 		}
 		return true;
@@ -403,9 +403,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 			tel.setPhone2(tfEmpTel2.getText());
 			tel.setPhone3(tfEmpTel3.getText());
 			emp.setTel(tel);
-			emp.setZipcode(tfEmpZipCode.getText());
-			emp.setAddr_id(tfEmpAddr1.getText());
-			emp.setAddr_de(tfEmpAddr2.getText());
+			emp.setZipcode(tfZipCode.getText());
+			emp.setAddr_id(tfAddr_id.getText() + tfAddr_de.getText());
+			emp.setAddr_de(tfAddr_de.getText());
 			emp.setPw(tfEmpNo.getText());
 			Title title = new Title();
 			title.setTitleno(cbkTitle.getSelectedIndex());
@@ -425,9 +425,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		tfEmpTel2.setText("");
 		tfEmpTel3.setText("");
 		tfEmpEmail.setText("");
-		tfEmpAddr1.setText("");
-		tfEmpZipCode.setText("");
-		tfEmpAddr2.setText("");
+		tfAddr_id.setText("");
+		tfZipCode.setText("");
+		tfAddr_de.setText("");
 		cbkTitle.setSelectedIndex(0);
 	}
 }

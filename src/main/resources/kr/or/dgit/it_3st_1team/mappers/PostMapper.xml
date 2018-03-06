@@ -33,13 +33,13 @@
 	<sql id="whereSql1">
 		<where>
 			<if test="bubjung_name != null">
-				 bubjung_name = #{bubjung_name} or heangjeong_name = #{bubjung_name}
+				 bubjung_name like #{bubjung_name} or heangjeong_name like #{bubjung_name}
 			</if>			
 		</where>
 	</sql>
 	
 	<sql id="whereSql2">
-		<where>			
+		<where>
 			<if test="doro != null">
 				doro like #{doro}
 			</if>			
@@ -47,7 +47,7 @@
 	</sql>
 
 	<!-- 구 주소  -->
-	<select id="selectPostByAll1"  parameterType="post" resultMap="PostResult1">
+	<select id="selectDongWithAPI"  parameterType="post" resultMap="PostResult1">
 		<include refid="selectSql1" />
 		<include refid="whereSql1" />
 	</select>

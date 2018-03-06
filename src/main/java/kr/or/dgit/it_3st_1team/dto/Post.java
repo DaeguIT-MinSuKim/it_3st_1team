@@ -101,7 +101,7 @@ public class Post {
 	}
 
 	public void setAddr_id(String addr_id) {
-		this.addr_id = addr_id;
+		this.addr_id = sido;
 	}
 
 	public String getAddr_de() {
@@ -120,8 +120,14 @@ public class Post {
 				build_num2, addr_id, addr_de);
 	}
 
-	public Object[] toArray(int i) {
-		return new Object[] { i, addr_id, zipcode };
+	public Object[] toArrayDong(int i) {
+		this.addr_id = sido + sigungu + heangjeong_name + bunji_num1 + "-" + bunji_num2;
+		return new Object[] { i, sido + " " + sigungu + " " + heangjeong_name + " " + bunji_num1 + " - " + bunji_num2 + " " + "("+bubjung_name+") ", zipcode };
+	}
+
+	public Object[] toArrayDoro(int i) {
+		this.addr_id = sido + sigungu + doro + build_num1 + "-" + build_num2;
+		return new Object[] { i, sido + " " + sigungu + " " + doro + " " + build_num1 + " - " + build_num2 + " ", zipcode };
 	}
 
 }

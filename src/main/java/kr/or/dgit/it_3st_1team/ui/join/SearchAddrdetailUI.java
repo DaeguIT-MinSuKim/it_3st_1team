@@ -115,11 +115,11 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		Object[][] rows = null;
 		PostService service = new PostService();
 		Post post = new Post();
-		post.setBubjung_name(tfAddrName.getText());
-		List<Post> findpost = service.selectPostByAll1(post);
+		post.setBubjung_name(tfAddrName.getText() + "%");
+		List<Post> findpost = service.selectDongWithAPI(post);
 		rows = new Object[findpost.size()][];
 		for(int i = 0 ; i < rows.length ; i++){
-			rows[i] = findpost.get(i).toArray(i);
+			rows[i] = findpost.get(i).toArrayDong(i);
 		}
 		System.out.println(rows);
 		return rows;
@@ -132,7 +132,7 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		List<Post> findpost = service.selectPostByAll2(post);
 		rows = new Object[findpost.size()][];
 		for(int i = 0 ; i < rows.length ; i++){
-			rows[i] = findpost.get(i).toArray(i);
+			rows[i] = findpost.get(i).toArrayDoro(i);
 		}
 		System.out.println(rows);
 		return rows;
@@ -206,9 +206,7 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 			DefaultTableModel tm=(DefaultTableModel) table.getModel();			
 			tfone.setText((String) tm.getValueAt(선택된행, 선택된열));
 			tftwo.setText((String) tm.getValueAt(선택된행, nextCol));
-			
-		/*	System.out.println(value.toString());
-			System.out.println(value2.toString());	*/		
+				
 		} // 더블클릭
 		
 	}

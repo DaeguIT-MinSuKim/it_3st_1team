@@ -34,9 +34,9 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JTextField tfMail;
 	private JButton btnJoin;
 	private JButton btnCancel;
-	private JTextField tfpostnum;
-	private JTextField tfAddr;
-	private JTextField tfAddrDe;
+	private JTextField tfZipCode;
+	private JTextField tfAddr_id;
+	private JTextField tfAddr_de;
 	private JButton btnSearchAddr;
 	private JLabel lblAddr;
 	private JLabel lblAddrDe;
@@ -179,26 +179,26 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		panel.add(tfMail);
 		tfMail.setColumns(10);
 		
-		tfpostnum = new JTextField();
-		tfpostnum.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		tfpostnum.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfpostnum.setBounds(294, 354, 120, 30);
-		panel.add(tfpostnum);
-		tfpostnum.setColumns(10);
+		tfZipCode = new JTextField();
+		tfZipCode.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfZipCode.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfZipCode.setBounds(294, 354, 120, 30);
+		panel.add(tfZipCode);
+		tfZipCode.setColumns(10);
 		
-		tfAddr = new JTextField();
-		tfAddr.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		tfAddr.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfAddr.setBounds(294, 394, 400, 30);
-		panel.add(tfAddr);
-		tfAddr.setColumns(10);
+		tfAddr_id = new JTextField();
+		tfAddr_id.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfAddr_id.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfAddr_id.setBounds(294, 394, 400, 30);
+		panel.add(tfAddr_id);
+		tfAddr_id.setColumns(10);
 		
-		tfAddrDe = new JTextField();
-		tfAddrDe.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		tfAddrDe.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfAddrDe.setColumns(10);
-		tfAddrDe.setBounds(294, 434, 400, 30);
-		panel.add(tfAddrDe);
+		tfAddr_de = new JTextField();
+		tfAddr_de.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfAddr_de.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfAddr_de.setColumns(10);
+		tfAddr_de.setBounds(294, 434, 400, 30);
+		panel.add(tfAddr_de);
 		
 		btnJoin = new JButton("수정");
 		btnJoin.addActionListener(this);
@@ -272,7 +272,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		Post post = user.getAddr_id();
 		//tfpostnum.setText(post.getZipcode());
 		//tfAddr.setText(post.getWithoutZipcode());
-		tfAddrDe.setText(user.getAddr_de());
+		tfAddr_de.setText(user.getAddr_de());
 		/*Post post = user.getAddr_id();
 		tfpostnum.setText(post.getZipcode());*/
 		
@@ -289,7 +289,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnSearchAddr(ActionEvent arg0) {
-		SearchAddrdetailUI addr = new SearchAddrdetailUI();
+		SearchAddrdetailUI addr = new SearchAddrdetailUI(tfAddr_id, tfZipCode);
 		addr.setVisible(true);
 	}
 	protected void actionPerformedBtnJoin(ActionEvent arg0) {
@@ -307,7 +307,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		user.setTel(phone);
 		user.setEmail(tfMail.getText());
 		//post 수정
-		user.setAddr_de(tfAddrDe.getText());
+		user.setAddr_de(tfAddr_de.getText());
 		
 		if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
 			JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
