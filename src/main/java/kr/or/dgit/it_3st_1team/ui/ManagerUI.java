@@ -154,6 +154,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 	}
 	protected void actionPerformedBtnUserUpdate(ActionEvent arg0) {
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
+		update.tfId.setEditable(true);
 		changePanel(update);
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent arg0) {

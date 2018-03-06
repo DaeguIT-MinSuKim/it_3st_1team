@@ -48,7 +48,7 @@ public class TakeinoutServiceTest {
 		book.setBkCode("122008EM0000393415");
 		inout.setBook(book);
 		inout = service.selectMatchingBook(book);
-//		Assert.assertNotNull(inout);
+		//Assert.assertNotNull(inout);
 	}	
 
 

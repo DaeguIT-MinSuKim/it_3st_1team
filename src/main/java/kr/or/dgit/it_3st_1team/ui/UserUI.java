@@ -131,46 +131,41 @@ public class UserUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnBookSearch(ActionEvent e) {
-		show.removeAll();
 		btnBookSearch.setBackground(new Color(127,127,127));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
 		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		show.repaint();
 		SearchBookUI search = new SearchBookUI();
 		changePanel(search);
 	}
 	protected void actionPerformedBtnBookRequest(ActionEvent e) {
-		show.removeAll();
 		btnBookRequest.setBackground(new Color(127,127,127));
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
 		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		show.repaint();
 		RequestBookUI request = new RequestBookUI();
 		changePanel(request);
 	}
 	protected void actionPerformedBtnUserUpdate(ActionEvent e) {
-		show.removeAll();
 		btnUserUpdate.setBackground(new Color(127,127,127));
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
 		btnNews.setBackground(new Color(158,158,158));
 		btnBookRequest.setBackground(new Color(158,158,158));
-		show.repaint();
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
+		update.btnadd.setVisible(false);
+		update.btnsearch.setVisible(false);
+		update.userinfo();
 		changePanel(update);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent e) {
-		show.removeAll();
 		btnHistory.setBackground(new Color(127,127,127));
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		btnNews.setBackground(new Color(158,158,158));
 		btnBookRequest.setBackground(new Color(158,158,158));
-		show.repaint();
 		HistoryUI history = new HistoryUI();
 		changePanel(history);
 	}
