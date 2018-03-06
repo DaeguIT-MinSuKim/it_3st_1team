@@ -7,8 +7,6 @@ public class Post {
 	
 	public Post() {}
 	
-	
-	
 	public Post(String zipcode, String addr_id, String addr_de) {
 		this.zipcode = zipcode;
 		this.addr_id = addr_id;
@@ -32,6 +30,7 @@ public class Post {
 	public void setAddr_de(String addr_de) {
 		this.addr_de = addr_de;
 	}
+	
 	@Override
 	public String toString() {
 		return String.format("Post [zipcode=%s, addr_id=%s, addr_de=%s]", zipcode, addr_id, addr_de);
