@@ -38,18 +38,23 @@
 	<select id="selectUserForBookByAll" parameterType="Takeinout" resultMap="UserWithBookResult">
 		select t.inout_no, t.code, t.bkcode, t.rentday, t.returnday, b.isbn,
 			b.rentable, b.bkname, b.author, b.publish, b.pubyear, b.info
-		from takeinout as t left outer join book as b on t.code =#{user.code} where t.bkcode = b.bkcode;
+		from takeinout as t left outer join book as b on t.code =#{user.code} where t.bkcode = b.bkcode
+	</select>
+	
+	<!-- 현재 도서가 대여중인지 아닌지 검색 -->
+	<select id="selectMatchingBook" parameterType="Takeinout" resultMap="UserWithBookResult">
+		select bkcode from takeinout where bkcode = #{bkCode}
 	</select>
 	
 	<!-- 현재 유저가 이 책을 대여중이 아니라면 대여하는 insert 문장 -->
 	<insert id="insertTakeinoutByBkcode" parameterType="Takeinout">
 		insert into takeinout (code, bkcode, rentday, returnday)
-		values (#{user.code}, #{book.bkCode}, curdate(), adddate(curdate(), 14));
+		values (#{user.code}, #{book.bkCode}, curdate(), adddate(curdate(), 14))
 	</insert>
 	
 	<!-- 현재 유저가 이 책을 대여중이라면 반납하는 delete 문장 -->
 	<delete id="deleteTakeinoutByBkcode">
-		delete from takeinout where bkcode = #{book.bkCode} and code = #{user.code};
+		delete from takeinout where bkcode = #{book.bkCode} and code = #{user.code}
 	</delete>
 
 	<!-- isbn으로 대여된 도서 찾기 (비치수를 찾기 위한 문장) -->

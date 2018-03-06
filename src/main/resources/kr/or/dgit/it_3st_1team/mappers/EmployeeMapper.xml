@@ -2,8 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.EmployeeDao">
 
+	<resultMap type="Employee" id="EmployeeResult">
+		<id property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="tel" column="tel"/>
+		<result property="email" column="email"/>
+		<result property="zipcode" column="zipcode"/>
+		<result property="addr_id" column="addr_id"/>
+		<result property="addr_de" column="addr_de"/>
+	</resultMap>
+	
+	<resultMap type="Employee" id="EmployeeWithTitleResult" extends="EmployeeResult">
+		<result property="title.titleno" column="ti"/>
+		<result property="title.name" column="na"/>
+		<result property="title.power" column="power"/>
+	</resultMap>
+	
+
 	<sql id="selectSql">
-		select code, name, id, pw, tel, email, addr_id, titleno from employee
+		select code, e.name, pw, id, tel, email, zipcode, addr_id, addr_de, e.titleno as ti, t.name as na, t.power from employee e left outer join title t on e.titleno = t.titleno
 	</sql>
 	
 	<sql id="whereSql">
@@ -13,11 +32,25 @@
 			</if>
 		</where>
 	</sql>
-	
-	<select id="selectEmployeeByAll" resultType="Employee">
+	<!-- 모든 사원 검색 -->
+	<select id="selectEmployeeByAll" parameterType="Employee" resultMap="EmployeeWithTitleResult">
 		<include refid="selectSql" />
 	</select>
-
+	
+	<!-- 사원 추가 -->
+	<sql id="insertSql">
+		insert into employee(code, name, id, pw, tel, email, zipcode, addr_id, addr_de, titleno)
+		values(#{code},#{name},#{id},#{pw},#{tel},#{email},#{zipcode},#{addr_id},#{addr_de},#{title.titleno});
+	</sql>
+	<insert id="insertEmployeeWithAPI" parameterType="Employee">
+		<include refid="insertSql" />
+	</insert>
+	
+	<update id="updateEmployeeWithAPI">
+		update employee set name = #{name}, tel = #{tel}, email = #{email}, zipcode = #{zipcode}, addr_id = #{addr_id}, addr_de = #{addr_de}, titleno = #{title.titleno}
+		where code = #{code};
+	</update>
+	
 </mapper>
 
 

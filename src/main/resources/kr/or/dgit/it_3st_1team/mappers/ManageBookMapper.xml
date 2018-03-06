@@ -17,6 +17,8 @@
 	
 	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
  		<result property="take.inout_no" column="inout_no"/>
+		<result property="take.rentday" column="rentd" />
+		<result property="take.returnday" column="returnd" />
 		<result property="take.user.code" column="code" />
 		<result property="take.book.bkCode" column="bkcode" />
 		<result property="location.loca_num" column="loca_num"/>
@@ -24,7 +26,7 @@
 	</resultMap>
 	
 	<sql id="selectJoinTakeinoutSql">
-		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, rentday, returnday, loca_num, t.inout_no
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday as rentd, t.returnday as returnd, loca_num, t.inout_no
 		from book b left outer join takeinout t on b.bkcode=t.bkcode
 	</sql>
 	
@@ -40,7 +42,7 @@
 	</sql>
 	
 	<sql id="selectBookByNameSql">
-		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday as rentd, t.returnday as returnd, loca_num
 		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
 	</sql>
 	
@@ -56,7 +58,7 @@
 	</select>
 	
 	<sql id="selectParameterSql">
-		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num, t.inout_no
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday as rentd, t.returnday as retuurnd, loca_num, t.inout_no
 		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
 	</sql>
 	
@@ -75,6 +77,13 @@
 	<delete id="deleteBookWithAPI">
 		delete from book where bkcode = #{bkCode};
 	</delete>
+	
+	<!-- 현재 대여중인 도서 목록 -->
+	<select id="selectBookForTakeinoutWithAPI" parameterType="Book" resultMap="BookWithTakeinoutResult">
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday as rentd, t.returnday as returnd, loca_num, t.inout_no
+		from book b right outer join takeinout t on b.bkcode=t.bkcode
+		<include refid="whereAllSql" />
+	</select>
 	
 	
 </mapper>

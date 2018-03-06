@@ -44,6 +44,8 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 	private JTextField tfBkCode;
 	private JScrollPane scrollPane;
 	private JPanel pTable;
+	private JButton btnOut;
+	private JButton btnIn;
 
 	public InoutBookUI() {
 		
@@ -169,7 +171,8 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		pUser.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JButton btnOut = new JButton("대 여");
+		btnOut = new JButton("대 여");
+		btnOut.addActionListener(this);
 		btnOut.setFont(new Font("맑은 고딕", Font.PLAIN, 99));
 		btnOut.setForeground(Color.WHITE);
 		btnOut.setBounds(16, 17, 300, 160);
@@ -179,7 +182,8 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		btnOut.setMinimumSize(new Dimension(150, 150));
 		panel_1.add(btnOut);
 		
-		JButton btnIn = new JButton("반 납");
+		btnIn = new JButton("반 납");
+		btnIn.addActionListener(this);
 		btnIn.setBorder(null);
 		btnIn.setFont(new Font("맑은 고딕", Font.PLAIN, 99));
 		btnIn.setForeground(Color.WHITE);
@@ -260,6 +264,12 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnIn) {
+			actionPerformedBtnIn(e);
+		}
+		if (e.getSource() == btnOut) {
+			actionPerformedBtnOut(e);
+		}
 		if (e.getSource() == btnUserSearch) {
 			actionPerformedBtnUserSearch(e);
 		}
@@ -350,6 +360,48 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 	protected void keyReleasedTfBkCode(KeyEvent arg0) {
+		if(tfBkCode.getText().length() == 19) {
+			String str = tfBkCode.getText().substring(1, 19);
+			Book book = new Book();
+			book.setBkCode(str);
+			User user = new User();
+			user.setCode(tfUserCode.getText());
+			Takeinout inout = new Takeinout();
+			inout.setBook(book);
+			inout.setUser(user);
+			TakeinoutService service = new TakeinoutService();
+			Takeinout findinout = service.selectTakeinoutByBkCode(inout);
+			Takeinout outBook = service.selectMatchingBook(book);
+			System.out.println(outBook);
+			if(findinout == null) {
+				if(outBook == null) {
+					service.insertTakeinoutByBkcode(inout);
+					JOptionPane.showMessageDialog(null, "대여 되었습니다");
+					tfBkCode.setText("");
+					setTakeinoutTable();
+					pTable.repaint();					
+				}else {
+					JOptionPane.showMessageDialog(null, "현재 타인이 대여중인 도서 입니다");
+					JOptionPane.showMessageDialog(null, "현재 타인이 대여중인 도서 입니다");
+					tfBkCode.setText("");
+				}
+			}else {
+				service.deleteTakeinoutByBkcode(inout);
+				JOptionPane.showMessageDialog(null, "반납 되었습니다");
+				tfBkCode.setText("");
+				setTakeinoutTable();
+				pTable.repaint();
+			}
+		}
+	}
+	
+	// 대여
+	protected void actionPerformedBtnOut(ActionEvent e) {
+		
+	}
+	
+	// 반납
+	protected void actionPerformedBtnIn(ActionEvent e) {
 		if(tfBkCode.getText().length() == 19) {
 			String str = tfBkCode.getText().substring(1, 19);
 			Book book = new Book();

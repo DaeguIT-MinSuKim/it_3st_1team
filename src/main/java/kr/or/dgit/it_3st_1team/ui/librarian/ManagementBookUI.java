@@ -118,7 +118,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		ButtonGroup group = new ButtonGroup();
 		
 		rdbtnAll = new JRadioButton("모두보기");
-		rdbtnAll.addItemListener(this);
+		rdbtnAll.addItemListener(item);
 		rdbtnAll.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		rdbtnAll.setBackground(Color.WHITE);
 		rdbtnAll.setBounds(10, 30, 100, 30);
@@ -126,7 +126,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		pState.add(rdbtnAll);
 		
 		rdbtnOut = new JRadioButton("대여");
-		rdbtnOut.addItemListener(this);
+		rdbtnOut.addItemListener(item);
 		rdbtnOut.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		rdbtnOut.setBackground(Color.WHITE);
 		rdbtnOut.setBounds(110, 30, 70, 30);
@@ -134,7 +134,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		pState.add(rdbtnOut);
 		
 		rdbtnIn = new JRadioButton("반납");
-		rdbtnIn.addItemListener(this);
+		rdbtnIn.addItemListener(item);
 		rdbtnIn.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		rdbtnIn.setBackground(Color.WHITE);
 		rdbtnIn.setBounds(180, 30, 100, 30);
@@ -182,6 +182,23 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		scrollPane.setViewportView(table);
 		
 	}
+	
+	ItemListener item = new ItemListener() {
+		
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			if (e.getSource() == rdbtnIn) {
+				itemStateChangedRdbtnIn(e);
+			}
+			if (e.getSource() == rdbtnAll) {
+				itemStateChangedRdbtnAll(e);
+			}
+			if (e.getSource() == rdbtnOut) {
+				itemStateChangedRdbtnOut(e);
+			}
+		}
+		
+	};
 	
 	private Object[][] getRow() {
 		return new Object[][] {
@@ -234,7 +251,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			}
 			book.setLocation(loca);
 		}
-		List<Book> list = mbService.selectBookByNameForResultMapExtendsWithAPI(book);
+		List<Book> list = mbService.selectBookForTakeinoutWithAPI(book);
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++){
 			rows[i] = list.get(i).toArrayTakeinout(i);
@@ -331,16 +348,8 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 				new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
 		cbkMiddle.setModel(model);
 	}
+	
 	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == rdbtnIn) {
-			itemStateChangedRdbtnIn(e);
-		}
-		if (e.getSource() == rdbtnAll) {
-			itemStateChangedRdbtnAll(e);
-		}
-		if (e.getSource() == rdbtnOut) {
-			itemStateChangedRdbtnOut(e);
-		}
 		if (e.getSource() == cbkBig) {
 			itemStateChangedCbkBig(e);
 		}
@@ -351,20 +360,30 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		}
 	}
 	protected void actionPerformedBtnSearch(ActionEvent e) {
-		NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
-		table.setModel(model);
-		setAlignWidth();
+		if(rdbtnOut.isSelected()) {
+			NonEditableModel model = new NonEditableModel(getRow3(), getColunmNames()); 
+			table.setModel(model);
+			setAlignWidth();
+		}else if(rdbtnAll.isSelected()) {
+			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
+			table.setModel(model);
+			setAlignWidth();			
+		}else {
+			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
+			table.setModel(model);
+			setAlignWidth();
+		}
 	}
 	protected void itemStateChangedRdbtnOut(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getRow(), getColunmNames()); 
+			NonEditableModel model = new NonEditableModel(getRow3(), getColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();
 		}
 	}
 	protected void itemStateChangedRdbtnAll(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getRow(), getColunmNames()); 
+			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();
 		}
