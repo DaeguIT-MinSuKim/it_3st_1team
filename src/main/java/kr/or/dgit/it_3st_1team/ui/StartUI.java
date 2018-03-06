@@ -182,21 +182,24 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	protected void actionPerformedBtnUserLogin(ActionEvent e) {
 		UserService service = new UserService();
 		User user = new User();
-		user.setId(tfId.getText());
-		user.setPw(pwtf.getText());
-		User selectUser = service.selectIdPw(user);
-		if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
-			contentPane.removeAll();
-			LOGINUSER = selectUser;
-			UserUI userui = new UserUI(selectUser);
-			userui.setBounds(0, 0, 1400, 800);
-			userui.lblname.setText((selectUser.getName()));
-			contentPane.add(userui);
-			contentPane.repaint();
-			contentPane.revalidate();
-			repaint();
-			revalidate();
-		}else {
+		try {
+			user.setId(tfId.getText());
+			user.setPw(pwtf.getText());
+			User selectUser = service.selectIdPw(user);
+			if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
+				contentPane.removeAll();
+				LOGINUSER = selectUser;
+				UserUI userui = new UserUI(selectUser);
+				userui.setBounds(0, 0, 1400, 800);
+				userui.lblname.setText((selectUser.getName()));
+				contentPane.add(userui);
+				contentPane.repaint();
+				contentPane.revalidate();
+				repaint();
+				revalidate();
+			}
+		}catch(NullPointerException er) {
+			/*er.printStackTrace();*/
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
 		}
 	}
