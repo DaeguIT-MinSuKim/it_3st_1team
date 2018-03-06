@@ -27,7 +27,7 @@ import kr.or.dgit.it_3st_1team.ui.join.SearchAddrdetailUI;
 @SuppressWarnings("serial")
 public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JTextField tfName;
-	private JTextField tfId;
+	public JTextField tfId;
 	private JPasswordField pwfPw;
 	private JPasswordField pwfPwc;
 	private JTextField tfPhone1;
@@ -46,9 +46,10 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JTextField tfPhone2;
 	private JTextField tfPhone3;
 	private JPanel panel;
-	private JLabel label_3;
-	private JTextField textField;
-	private JButton button;
+	private JLabel lblcode;
+	private JTextField tfcode;
+	public JButton btnadd;
+	public JButton btnsearch;
 
 	public UserInfoUpdateUI() {
 		initComponents();
@@ -67,7 +68,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		
 		label = new JLabel("회원 정보");
 		label.setFont(new Font("맑은 고딕", Font.BOLD, 36));
-		label.setBounds(173, 21, 360, 53);
+		label.setBounds(173, 15, 360, 53);
 		panel.add(label);
 		
 		JLabel lblName = new JLabel("이름");
@@ -127,7 +128,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfName = new JTextField();
 		tfName.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfName.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		tfName.setBounds(294, 114, 120, 30);
+		tfName.setBounds(294, 114, 150, 30);
 		panel.add(tfName);
 		tfName.setColumns(10);
 		
@@ -236,32 +237,38 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		label_2.setBounds(414, 281, 20, 15);
 		panel.add(label_2);
 		
-		label_3 = new JLabel("회원코드");
-		label_3.setHorizontalAlignment(SwingConstants.LEFT);
-		label_3.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
-		label_3.setBounds(173, 70, 120, 40);
-		panel.add(label_3);
+		lblcode = new JLabel("회원코드");
+		lblcode.setHorizontalAlignment(SwingConstants.LEFT);
+		lblcode.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+		lblcode.setBounds(173, 70, 120, 40);
+		panel.add(lblcode);
 		
-		textField = new JTextField();
-		textField.setText((String) null);
-		textField.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		textField.setColumns(10);
-		textField.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
-		textField.setBounds(294, 75, 259, 30);
-		panel.add(textField);
+		tfcode = new JTextField();
+		tfcode.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		tfcode.setColumns(10);
+		tfcode.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfcode.setBounds(294, 75, 150, 30);
+		panel.add(tfcode);
 		
-		button = new JButton("추  가");
-		button.setForeground(Color.WHITE);
-		button.setBorder(null);
-		button.setBackground(new Color(52, 152, 219));
-		button.setBounds(578, 74, 97, 30);
-		panel.add(button);
+		btnadd = new JButton("추가");
+		btnadd.setForeground(new Color(64,64,64));
+		btnadd.setBorder(null);
+		btnadd.setBackground(new Color(190,190,190));
+		btnadd.setBounds(460, 75, 97, 30);
+		panel.add(btnadd);
 		
-//		userinfo();
+		btnsearch = new JButton("검색");
+		btnsearch.setForeground(new Color(64,64,64));
+		btnsearch.setBorder(null);
+		btnsearch.setBackground(new Color(190,190,190));
+		btnsearch.setBounds(460, 154, 97, 30);
+		panel.add(btnsearch);
 	}
 	
-	private void userinfo() {
+	public void userinfo() {
 		User user = StartUI.LOGINUSER;
+		tfcode.setText(user.getCode());
+		tfcode.setEditable(false);
 		tfName.setText(user.getName());
 		tfId.setText(user.getId());
 		tfMail.setText(user.getEmail());
