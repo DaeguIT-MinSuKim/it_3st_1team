@@ -40,4 +40,13 @@ public class EmployeeService {
 		}
 		return res;
 	}
+	
+	public Employee findSelectEmployeeIdByNo(Employee employee) {
+		log.debug("selectEmployeeIdByNo()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
+			return employeeDao.selectEmployeeIdByNo(employee);
+		}
+	}
+	
 }

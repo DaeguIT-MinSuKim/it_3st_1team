@@ -17,7 +17,7 @@ public interface TakeinoutDao {
 	
 	// 도서가 대여중인지 검색
 	Takeinout selectMatchingBook(Book inout);
-	
+
 	// 대여중이 아닌 도서 대여
 	int insertTakeinoutByBkcode(Takeinout inout);
 	

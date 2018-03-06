@@ -42,4 +42,5 @@ public class CategoryService {
 			return sqlSession.selectOne(namespace + "selectCateNum", category);
 		}
 	}
+
 }

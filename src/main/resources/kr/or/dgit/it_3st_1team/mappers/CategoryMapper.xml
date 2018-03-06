@@ -23,4 +23,5 @@
 	<select id="selectCateNum" parameterType="Category" resultType="String">
 		select num from category where catename = #{catename}
 	</select>
+
 </mapper>

@@ -230,6 +230,7 @@ public class AddBookUI extends JFrame implements ActionListener, ItemListener {
 		categoryMid.add(decate2);
 		
 		midListCategory = CategoryService.getInstance().selectCategoryMid(selectedItem);
+
 		for(Category cate: midListCategory) {
 			categoryMid.add(cate);
 		}

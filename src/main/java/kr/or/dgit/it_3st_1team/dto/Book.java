@@ -124,6 +124,7 @@ public class Book {
 		return new Object[] {i, bkCode, bkname, author, publish, pubyear, take.getRentday(), take.getReturnday()};
 	}
 
+
 	public Object[] toArray(int i) {
 		return new Object[] {i+1, bkname, author, publish, pubyear, BookService.getInstance().selectExistNum(isbn), isRentable()};
 	}

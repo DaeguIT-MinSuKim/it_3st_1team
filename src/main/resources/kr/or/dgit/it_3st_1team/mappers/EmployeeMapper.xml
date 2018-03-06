@@ -51,7 +51,27 @@
 		where code = #{code};
 	</update>
 	
+	<!-- 아이디 비번 찾기 -->
+	<sql id="selectIdSql">
+		SELECT id, pw
+		FROM employee
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+			<if test="pw != null">
+				and pw = #{pw}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectEmployeeIdByNo" resultType="Employee">
+		<include refid="selectIdSql" />
+		<include refid="whereSql" />		
+	</select>
+	
 </mapper>
-
-
 

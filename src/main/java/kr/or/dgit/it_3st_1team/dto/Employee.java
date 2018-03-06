@@ -11,6 +11,7 @@ public class Employee {
 	private String addr_id;
 	private String addr_de;
 	private Title title;
+
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
@@ -53,7 +54,6 @@ public class Employee {
 	public void setTitle(Title title) {
 		this.title = title;
 	}
-	
 	public Phone getTel() {
 		return tel;
 	}

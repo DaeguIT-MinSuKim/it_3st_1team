@@ -41,4 +41,13 @@ public class EmployeeServiceTest {
 		int res = service.insertEmployeeWithAPI();
 		Assert.assertSame(1,res);
 	}*/
+	
+	/*@Test
+	public void test1findSelectEmployeeIdByNo() {
+		Employee employee = new Employee();
+		employee.setId("namju");
+		employee.setPw("namju");
+		Employee findemployeeId = service.findSelectEmployeeIdByNo(employee);
+		Assert.assertNotNull(findemployeeId);
+	}*/
 }

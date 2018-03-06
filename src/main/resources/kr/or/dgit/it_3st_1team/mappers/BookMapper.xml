@@ -100,6 +100,7 @@
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book where isbn = #{isbn}
 		GROUP BY isbn HAVING COUNT(isbn) > 0;
 	</select>
+
 </mapper>
 
 

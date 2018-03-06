@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.PostDao">
+
+	<resultMap id="PostResult" type="Post">
+		<result property="zipcode" column="zipcode"/>
+		<result property="sido" column="sido"/>
+		<result property="sigungu" column="sigungu"/>
+		<result property="doro" column="doro"/>
+		<result property="build_num1" column="build_num1"/>
+		<result property="build_num2" column="build_num2"/>		
+	</resultMap>
+	
+	<resultMap id="PostResult1" type="Post">
+		<result property="zipcode" column="zipcode"/>
+		<result property="sido" column="sido"/>
+		<result property="sigungu" column="sigungu"/>
+		<result property="bubjung_name" column="bubjung_name"/>
+		<result property="heangjeong_name" column="heangjeong_name"/>
+		<result property="bunji_num1" column="bunji_num1"/>
+		<result property="bunji_num2" column="bunji_num2"/>		
+	</resultMap>
+
+	<sql id="selectSql1">
+		SELECT zipcode, sido, sigungu, bubjung_name, heangjeong_name, bunji_num1, bunji_num2
+		FROM post
+	</sql>
+	<sql id="selectSql2">
+		SELECT zipcode, sido, sigungu, doro, build_num1, build_num2
+		FROM post
+	</sql>
+	
+	<sql id="whereSql1">
+		<where>
+			<if test="bubjung_name != null">
+				 bubjung_name = #{bubjung_name} or heangjeong_name = #{bubjung_name}
+			</if>			
+		</where>
+	</sql>
+	
+	<sql id="whereSql2">
+		<where>			
+			<if test="doro != null">
+				doro like #{doro}
+			</if>			
+		</where>
+	</sql>
+
+	<!-- 구 주소  -->
+	<select id="selectPostByAll1"  parameterType="post" resultMap="PostResult1">
+		<include refid="selectSql1" />
+		<include refid="whereSql1" />
+	</select>
+	
+	
+	<!-- 도로 -->
+	<select id="selectPostByAll2"  parameterType="post" resultMap="PostResult">
+		<include refid="selectSql2" />		
+		<include refid="whereSql2" />		
+	</select>
+
+
+
+</mapper>

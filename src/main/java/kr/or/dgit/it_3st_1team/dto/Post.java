@@ -30,11 +30,10 @@ public class Post {
 	public void setAddr_de(String addr_de) {
 		this.addr_de = addr_de;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("Post [zipcode=%s, addr_id=%s, addr_de=%s]", zipcode, addr_id, addr_de);
 	}
-	
 	
 }
