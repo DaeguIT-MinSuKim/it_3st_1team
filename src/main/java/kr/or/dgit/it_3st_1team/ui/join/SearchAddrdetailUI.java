@@ -113,28 +113,28 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 	}
 	private Object[][] getRow() {
 		Object[][] rows = null;
-/*		PostService service = new PostService();
+		PostService service = new PostService();
 		Post post = new Post();
 		post.setBubjung_name(tfAddrName.getText());
 		List<Post> findpost = service.selectPostByAll1(post);
-		Object[][] rows = new Object[findpost.size()][];
+		rows = new Object[findpost.size()][];
 		for(int i = 0 ; i < rows.length ; i++){
-			rows[i] = findpost.get(i).toArray1(i);
+			rows[i] = findpost.get(i).toArray(i);
 		}
-		System.out.println(rows);*/
+		System.out.println(rows);
 		return rows;
 	}
 	private Object[][] getRow2() {
 		Object[][] rows = null;
-		/*PostService service = new PostService();
+		PostService service = new PostService();
 		Post post = new Post();
 		post.setDoro(tfAddrName.getText()+"%");
 		List<Post> findpost = service.selectPostByAll2(post);
-		Object[][] rows = new Object[findpost.size()][];
+		rows = new Object[findpost.size()][];
 		for(int i = 0 ; i < rows.length ; i++){
 			rows[i] = findpost.get(i).toArray(i);
 		}
-		System.out.println(rows);*/
+		System.out.println(rows);
 		return rows;
 	}
 	private Object[][] getRow3() {

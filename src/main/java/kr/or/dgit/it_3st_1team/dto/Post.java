@@ -4,6 +4,8 @@ public class Post {
 	private String zipcode;
 	private String addr_id;
 	private String addr_de;
+	private String bubjung_name;
+	private String doro;
 	
 	public Post() {}
 	
@@ -31,9 +33,31 @@ public class Post {
 		this.addr_de = addr_de;
 	}
 
+	public String getBubjung_name() {
+		return bubjung_name;
+	}
+
+	public void setBubjung_name(String bubjung_name) {
+		this.bubjung_name = bubjung_name;
+	}
+
+	public String getDoro() {
+		return doro;
+	}
+
+	public void setDoro(String doro) {
+		this.doro = doro;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Post [zipcode=%s, addr_id=%s, addr_de=%s]", zipcode, addr_id, addr_de);
+	}
+
+	public Object[] toArray(int i) {
+		return new Object[] {
+				i, addr_id, zipcode
+		};
 	}
 	
 }
