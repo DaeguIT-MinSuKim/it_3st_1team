@@ -1,6 +1,7 @@
 package kr.or.dgit.it_3st_1team.dto;
 
 import kr.or.dgit.it_3st_1team.service.BookService;
+import kr.or.dgit.it_3st_1team.service.TakeinoutService;
 
 public class Book {
 	private String bkCode;
@@ -125,7 +126,11 @@ public class Book {
 	}
 
 	public Object[] toArray(int i) {
-		return new Object[] {i+1, bkname, author, publish, pubyear, BookService.getInstance().selectExistNum(isbn), isRentable()};
+		int ExistNum = BookService.getInstance().selectExistNum(isbn);
+		TakeinoutService service = new TakeinoutService();
+		int Num = service.selectOutNum(isbn);
+		int inNum = ExistNum - Num;
+		return new Object[] {i+1, bkname, author, publish, pubyear, inNum+" / "+ExistNum, isRentable()};
 	}
 
 }

@@ -81,4 +81,11 @@ public class TakeinoutService {
 		}		
 		return res;
 	}
+	
+	public int selectOutNum(String isbn){
+		log.debug("selectOutNum()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectOutNum", isbn);
+		}
+	}
 }

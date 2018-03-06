@@ -54,4 +54,9 @@ public class TakeinoutServiceTest {
 		Assert.assertSame(1, res);
 	}	
 
+	@Test
+	public void test3selectOutNum() {
+		String Isbn = "9788962880069";
+		int res = service.selectOutNum(Isbn);
+	}	
 }
