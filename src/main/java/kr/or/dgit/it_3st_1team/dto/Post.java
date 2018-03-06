@@ -2,32 +2,17 @@ package kr.or.dgit.it_3st_1team.dto;
 
 public class Post {
 	private String zipcode;
-	private String sido;
-	private String sigungu;
-	private String doro;
-	private int build_num1;
-	private int build_num2;
-	private String bubjung_name;
-	private String ri;
-	private String heangjeong_name;
-	private int bunji_num1;
-	private int bunji_num2;
-	private String total;
-		
-	public Post() {
-		// TODO Auto-generated constructor stub
-	}
-	public Post(String str) {
-		if(str != null) {
-			String[] parts = str.split(" ");
-			
-			if(parts.length >0) this.zipcode = parts[0];
-			if(parts.length >1) {
-				for(int i=1; i<parts.length; i++) {
-					this.total += parts[i];
-				}
-			}
-		}
+	private String addr_id;
+	private String addr_de;
+	
+	public Post() {}
+	
+	
+	
+	public Post(String zipcode, String addr_id, String addr_de) {
+		this.zipcode = zipcode;
+		this.addr_id = addr_id;
+		this.addr_de = addr_de;
 	}
 	public String getZipcode() {
 		return zipcode;
@@ -35,83 +20,22 @@ public class Post {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getSido() {
-		return sido;
+	public String getAddr_id() {
+		return addr_id;
 	}
-	public void setSido(String sido) {
-		this.sido = sido;
+	public void setAddr_id(String addr_id) {
+		this.addr_id = addr_id;
 	}
-	public String getSigungu() {
-		return sigungu;
+	public String getAddr_de() {
+		return addr_de;
 	}
-	public void setSigungu(String sigungu) {
-		this.sigungu = sigungu;
-	}
-	public String getDoro() {
-		return doro;
-	}
-	public void setDoro(String doro) {
-		this.doro = doro;
-	}
-	public int getBuild_num1() {
-		return build_num1;
-	}
-	public void setBuild_num1(int build_num1) {
-		this.build_num1 = build_num1;
-	}
-	public int getBuild_num2() {
-		return build_num2;
-	}
-	public void setBuild_num2(int build_num2) {
-		this.build_num2 = build_num2;
-	}
-	public String getBubjung_name() {
-		return bubjung_name;
-	}
-	public void setBubjung_name(String bubjung_name) {
-		this.bubjung_name = bubjung_name;
-	}
-	public String getRi() {
-		return ri;
-	}
-	public void setRi(String ri) {
-		this.ri = ri;
-	}
-	public String getHeangjeong_name() {
-		return heangjeong_name;
-	}
-	public void setHeangjeong_name(String heangjeong_name) {
-		this.heangjeong_name = heangjeong_name;
-	}
-	public int getBunji_num1() {
-		return bunji_num1;
-	}
-	public void setBunji_num1(int bunji_num1) {
-		this.bunji_num1 = bunji_num1;
-	}
-	public int getBunji_num2() {
-		return bunji_num2;
-	}
-	public void setBunji_num2(int bunji_num2) {
-		this.bunji_num2 = bunji_num2;
-	}	
-	public String getTotal() {
-		return String.format(
-				"%s %s %s %s %s %s %s %s %s %s %s",
-				sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
-				bunji_num2);
-	}
-	public void setTotal(String total) {
-		this.total = String.format(
-				"%s %s %s %s %s %s %s %s %s %s %s",
-				sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
-				bunji_num2);
+	public void setAddr_de(String addr_de) {
+		this.addr_de = addr_de;
 	}
 	@Override
 	public String toString() {
-		return String.format(
-				"%s %s %s %s %s %s %s %s %s %s %s",
-				zipcode, sido, sigungu, doro, build_num1, build_num2, bubjung_name, ri, heangjeong_name, bunji_num1,
-				bunji_num2);
+		return String.format("Post [zipcode=%s, addr_id=%s, addr_de=%s]", zipcode, addr_id, addr_de);
 	}
+	
+	
 }
