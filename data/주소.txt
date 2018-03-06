@@ -1,4 +1,4 @@
-load data local infile 'D:/DataFiles/´ë±¸±¤¿ª½Ã.txt'
+load data local infile 'D:/DataFiles/ëŒ€êµ¬ê´‘ì—­ì‹œ.txt'
 into table post
 character set 'utf8'
 fields terminated by'|'
