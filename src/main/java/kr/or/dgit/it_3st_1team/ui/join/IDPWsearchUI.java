@@ -22,6 +22,7 @@ import javax.swing.border.LineBorder;
 import kr.or.dgit.it_3st_1team.dto.Employee;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.EmployeeService;
+import kr.or.dgit.it_3st_1team.service.IDPWsearchService;
 import kr.or.dgit.it_3st_1team.service.UserService;
 
 
@@ -151,7 +152,7 @@ public class IDPWsearchUI extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnIdfind(ActionEvent e) {
-		/*IDPWsearchService service = new IDPWsearchService();
+		UserService service = new UserService();
 		User user = new User();
 		EmployeeService serviceEmp = new EmployeeService();
 		Employee emp = new Employee();
@@ -175,13 +176,13 @@ public class IDPWsearchUI extends JFrame implements ActionListener {
 			}catch(NullPointerException er1){
 				JOptionPane.showMessageDialog(null, "존재하지 않는 정보입니다");
 			}
-		}*/
+		}
 	}
 	protected void actionPerformedTfMail(ActionEvent e) {
 		actionPerformedBtnIdfind(e);
 	}
 	protected void actionPerformedBtnPwfind(ActionEvent e) {
-		/*try {
+		try {
 			UserService service = new UserService();
 			User user = new User();
 			user.setId(tfId2.getText());
@@ -207,7 +208,7 @@ public class IDPWsearchUI extends JFrame implements ActionListener {
 			}catch(NullPointerException er1){
 				JOptionPane.showMessageDialog(null, "존재하지 않는 정보입니다");
 			}
-		}*/
+		}
 	}
 	protected void actionPerformedTfMail2(ActionEvent e) {
 		actionPerformedBtnPwfind(e);

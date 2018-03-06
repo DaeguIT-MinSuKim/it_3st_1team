@@ -9,8 +9,10 @@ public interface EmployeeDao {
 	List<Employee> selectEmployeeByAll();
 	// insert
 	int insertEmployeeWithAPI(Employee emp);
-	// update
+	// update 사원정보 수정시 비번 노변경
 	int updateEmployeeWithAPI(Employee emp);
+	// 비번만 변경용
+	int updatePasswordWithAPI(Employee emp);
 
 	//select
 	//사원 로그인 - 아이디, 비밀번호

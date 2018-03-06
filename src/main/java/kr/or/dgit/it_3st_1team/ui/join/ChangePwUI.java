@@ -96,7 +96,7 @@ public class ChangePwUI extends JFrame implements ActionListener {
 				EmployeeService serviceEmp = new EmployeeService();
 				emp.setCode(emp.getCode());
 				emp.setPw(pw1);
-				serviceEmp.updateEmployeeWithAPI(emp);		
+				serviceEmp.updatePasswordWithAPI(emp);		
 				
 			}else{
 				UserService service = new UserService();

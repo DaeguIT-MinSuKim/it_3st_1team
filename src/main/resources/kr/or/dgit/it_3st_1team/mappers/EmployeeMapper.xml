@@ -46,8 +46,15 @@
 		<include refid="insertSql" />
 	</insert>
 	
+	<!-- 사원정보만 변경 -->
 	<update id="updateEmployeeWithAPI" parameterType="Employee">
-		update employee set name = #{name}, pw=#{pw}, tel = #{tel}, email = #{email}, zipcode = #{zipcode}, addr_id = #{addr_id}, addr_de = #{addr_de}, titleno = #{title.titleno}
+		update employee set name = #{name}, tel = #{tel}, email = #{email}, zipcode = #{zipcode}, addr_id = #{addr_id}, addr_de = #{addr_de}, titleno = #{title.titleno}
+		where code = #{code};
+	</update>
+	
+	<!-- 비밀번호만 변경 -->
+	<update id="updatePasswordWithAPI" parameterType="Employee">
+		update employee set pw = #{pw}
 		where code = #{code};
 	</update>
 	

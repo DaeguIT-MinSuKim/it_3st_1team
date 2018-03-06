@@ -35,11 +35,13 @@ public class EmployeeService {
 		log.debug("updateEmployeeWithAPI()");
 		int res = -1;
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
-			res = sqlSession.insert(namespace + "updateEmployeeWithAPI", emp);
-			sqlSession.commit();		
+			res = sqlSession.update(namespace + "updateEmployeeWithAPI", emp);
+			sqlSession.commit();
 		}
 		return res;
 	}
+	
+	// 비밀번호만 사원 변경 
 	
 	/*public Employee findSelectEmployeeIdByNo(Employee employee) {
 		log.debug("selectEmployeeIdByNo()");
@@ -63,11 +65,23 @@ public class EmployeeService {
 		}
 	}
 	
+	// 사원 정보 변경 
 	public Employee selectIdEmail(Employee emp) {
 		log.debug("selectIdEmail()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + "selectIdEmail", emp);
 		}
+	}
+
+	// 비번만 변경용
+	public int updatePasswordWithAPI(Employee emp) {
+		log.debug("updatePasswordWithAPI()");
+		int res = -1;
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			res = sqlSession.update(namespace + "updatePasswordWithAPI", emp);
+			sqlSession.commit();
+		}
+		return res;
 	}
 
 }

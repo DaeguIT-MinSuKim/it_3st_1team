@@ -69,6 +69,13 @@ public class UserService {
 			return sqlSession.selectOne(namespace + "selectUserById", user);
 		}
 	}
+	
+	public User selectIdEmail(User user) {
+		log.debug("selectIdEmail()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectIdEmail", user);
+		}
+	}
 
 	public User selectIdPw(User user) {
 		log.debug("selectIdPw()");
@@ -81,6 +88,13 @@ public class UserService {
 		log.debug("selectUserByCode()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + "selectUserByCode", user);
+		}
+	}
+
+	public User selectNameEmail(User user) {
+		log.debug("selectNameEmail()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectNameEmail", user);
 		}
 	}
 }

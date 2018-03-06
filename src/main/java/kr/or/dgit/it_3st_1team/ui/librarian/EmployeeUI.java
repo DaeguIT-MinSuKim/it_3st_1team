@@ -406,7 +406,6 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 			emp.setZipcode(tfZipCode.getText());
 			emp.setAddr_id(tfAddr_id.getText() + tfAddr_de.getText());
 			emp.setAddr_de(tfAddr_de.getText());
-			emp.setPw(tfEmpNo.getText());
 			Title title = new Title();
 			title.setTitleno(cbkTitle.getSelectedIndex());
 			emp.setTitle(title);
