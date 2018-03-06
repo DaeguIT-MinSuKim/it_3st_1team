@@ -8,8 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
+import kr.or.dgit.it_3st_1team.dto.Employee;
 import kr.or.dgit.it_3st_1team.ui.librarian.EmployeeUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.InoutBookUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.ManagementBookUI;
@@ -25,8 +28,13 @@ public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnNews;
 	private JPanel showpanel;
 	private ManagementBookUI manager;
+	public Employee emp;
+	public JLabel lblname;
 	
-	public ManagerUI() {
+	
+	
+	public ManagerUI(Employee emp) {
+		this.emp = emp;
 		initComponents();
 	}
 
@@ -95,6 +103,19 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		btnlogout.setBounds(70, 650, 100, 30);
 		panel.add(btnlogout);
+		
+		lblname = new JLabel("");
+		lblname.setForeground(Color.WHITE);
+		lblname.setFont(new Font("굴림", Font.PLAIN, 14));
+		lblname.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblname.setBounds(31, 25, 81, 15);
+		panel.add(lblname);
+		
+		JLabel label = new JLabel("님의 도서관");
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("굴림", Font.PLAIN, 14));
+		label.setBounds(114, 25, 84, 15);
+		panel.add(label);
 		
 		showpanel = new JPanel();
 		showpanel.setBounds(250, 0, 1150, 800);

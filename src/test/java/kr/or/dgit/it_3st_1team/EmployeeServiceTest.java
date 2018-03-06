@@ -41,13 +41,39 @@ public class EmployeeServiceTest {
 		int res = service.insertEmployeeWithAPI();
 		Assert.assertSame(1,res);
 	}*/
+	@Test
+	public void test3selectIdPw() {
+		Employee emp = new Employee();
+		emp.setId("namju");
+		emp.setPw("namju");
+		
+		Employee selectEmp = service.selectIdPw(emp);
+		Assert.assertEquals(emp.getId(), selectEmp.getId());
+		Assert.assertEquals(emp.getPw(), selectEmp.getPw());
+		System.out.println(selectEmp);
+	}
 	
-	/*@Test
-	public void test1findSelectEmployeeIdByNo() {
-		Employee employee = new Employee();
-		employee.setId("namju");
-		employee.setPw("namju");
-		Employee findemployeeId = service.findSelectEmployeeIdByNo(employee);
-		Assert.assertNotNull(findemployeeId);
-	}*/
+	@Test
+	public void test4selectNameEmail() {
+		Employee emp = new Employee();
+		emp.setName("김남주");
+		emp.setEmail("namju@dgit.com");
+		
+		Employee selectEmp = service.selectNameEmail(emp);
+		Assert.assertEquals(emp.getName(), selectEmp.getName());
+		Assert.assertEquals(emp.getEmail(), selectEmp.getEmail());
+		System.out.println(selectEmp);
+	}
+	
+	@Test
+	public void test5selectIdEmail() {
+		Employee emp = new Employee();
+		emp.setId("namju");
+		emp.setEmail("namju@dgit.com");
+		
+		Employee selectEmp = service.selectIdEmail(emp);
+		Assert.assertEquals(emp.getId(), selectEmp.getId());
+		Assert.assertEquals(emp.getEmail(), selectEmp.getEmail());
+		System.out.println(selectEmp);
+	}
 }

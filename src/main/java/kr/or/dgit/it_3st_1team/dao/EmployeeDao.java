@@ -11,8 +11,13 @@ public interface EmployeeDao {
 	int insertEmployeeWithAPI(Employee emp);
 	// update
 	int updateEmployeeWithAPI(Employee emp);
-	// 아이디 검색
-	Employee selectEmployeeIdByNo(Employee employee);
-	Employee selectEmployeePwByNo(Employee employee);
+
+	//select
+	//사원 로그인 - 아이디, 비밀번호
+	Employee selectIdPw(Employee emp);
+	//아이디찾기 - 이름, 이메일
+	Employee selectNameEmail(Employee emp);
+	//비밀번호찾기 - 아이디, 이메일
+	Employee selectIdEmail(Employee emp);
 
 }

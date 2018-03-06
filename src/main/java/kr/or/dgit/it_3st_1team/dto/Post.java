@@ -129,5 +129,4 @@ public class Post {
 		this.addr_id = sido + sigungu + doro + build_num1 + "-" + build_num2;
 		return new Object[] { i, sido + " " + sigungu + " " + doro + " " + build_num1 + " - " + build_num2 + " ", zipcode };
 	}
-
 }

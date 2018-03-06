@@ -1,5 +1,7 @@
 package kr.or.dgit.it_3st_1team;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -7,6 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import kr.or.dgit.it_3st_1team.dto.Phone;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
 
@@ -45,7 +48,7 @@ public class UserServiceTest {
 		Assert.assertSame(1, deleteUser);
 	}*/
 	
-	/*@Test
+	@Test
 	public void test3UpdateUser() {
 		User user = new User();
 		user.setId("juhyun");
@@ -56,7 +59,7 @@ public class UserServiceTest {
 		phone.setPhone3("2222");
 		user.setTel(phone);
 		
-		int result = UserService.updateUser(user);
+		int result = service.updateUser(user);
 		Assert.assertSame(1, result);
 	}
 	@Test
@@ -76,8 +79,7 @@ public class UserServiceTest {
 		User selectUser = service.selectUserById(user);
 		Assert.assertEquals(user.getId(), selectUser.getId());
 		System.out.println(selectUser);
-<<<<<<< HEAD
-	}*/
+	}
 	
 	@Test
 	public void test7selectIdPw() {

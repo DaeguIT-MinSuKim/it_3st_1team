@@ -41,12 +41,33 @@ public class EmployeeService {
 		return res;
 	}
 	
-	public Employee findSelectEmployeeIdByNo(Employee employee) {
+	/*public Employee findSelectEmployeeIdByNo(Employee employee) {
 		log.debug("selectEmployeeIdByNo()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
 			return employeeDao.selectEmployeeIdByNo(employee);
 		}
+	}*/
+	
+	public Employee selectIdPw(Employee emp) {
+		log.debug("selectIdPw()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectIdPw", emp);
+		}
 	}
 	
+	public Employee selectNameEmail(Employee emp) {
+		log.debug("selectNameEmail()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectNameEmail", emp);
+		}
+	}
+	
+	public Employee selectIdEmail(Employee emp) {
+		log.debug("selectIdEmail()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectIdEmail", emp);
+		}
+	}
+
 }

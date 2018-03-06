@@ -46,32 +46,28 @@
 		<include refid="insertSql" />
 	</insert>
 	
-	<update id="updateEmployeeWithAPI">
-		update employee set name = #{name}, tel = #{tel}, email = #{email}, zipcode = #{zipcode}, addr_id = #{addr_id}, addr_de = #{addr_de}, titleno = #{title.titleno}
+	<update id="updateEmployeeWithAPI" parameterType="Employee">
+		update employee set name = #{name}, pw=#{pw}, tel = #{tel}, email = #{email}, zipcode = #{zipcode}, addr_id = #{addr_id}, addr_de = #{addr_de}, titleno = #{title.titleno}
 		where code = #{code};
 	</update>
 	
-	<!-- 아이디 비번 찾기 -->
-	<!-- <sql id="selectIdSql">
-		SELECT id, pw
-		FROM employee
-	</sql>
+	<select id="selectIdPw" parameterType="User" resultMap="EmployeeWithTitleResult">
+		select e.code, e.name, e.id, e.pw, e.tel, e.email, e.zipcode, e.addr_id, e.addr_de, t.name, e.titleno as ti
+		from employee e join title t on e.titleno = t.titleno 
+		where id=#{id} and pw=#{pw}
+	</select>
 	
-	<sql id="whereSql">
-		<where>
-			<if test="id != null">
-				id = #{id}
-			</if>
-			<if test="pw != null">
-				and pw = #{pw}
-			</if>
-		</where>
-	</sql>
+	<select id="selectNameEmail" parameterType="User" resultMap="EmployeeWithTitleResult">
+		select e.code, e.name, e.id, e.pw, e.tel, e.email, e.zipcode, e.addr_id, e.addr_de, t.name, e.titleno as ti
+		from employee e join title t on e.titleno = t.titleno  
+		where e.name = #{name} and email = #{email}
+	</select>
 	
-	<select id="selectEmployeeIdByNo" resultType="Employee">
-		<include refid="selectIdSql" />
-		<include refid="whereSql" />		
-	</select> -->
+	<select id="selectIdEmail" parameterType="User" resultMap="EmployeeWithTitleResult">
+		select e.code, e.name, e.id, e.pw, e.tel, e.email, e.zipcode, e.addr_id, e.addr_de, t.name, e.titleno as ti
+		from employee e join title t on e.titleno = t.titleno 
+		where id = #{id} and email = #{email}
+	</select>
 	
 </mapper>
 

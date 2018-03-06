@@ -19,8 +19,11 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import kr.or.dgit.it_3st_1team.dto.Employee;
 import kr.or.dgit.it_3st_1team.dto.User;
-import kr.or.dgit.it_3st_1team.service.IDPWsearchService;
+import kr.or.dgit.it_3st_1team.service.EmployeeService;
+import kr.or.dgit.it_3st_1team.service.UserService;
+
 
 @SuppressWarnings("serial")
 public class IDPWsearchUI extends JFrame implements ActionListener {
@@ -148,39 +151,63 @@ public class IDPWsearchUI extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnIdfind(ActionEvent e) {
-		IDPWsearchService service = new IDPWsearchService();
+		/*IDPWsearchService service = new IDPWsearchService();
 		User user = new User();
-		user.setName(tfName.getText());
-		user.setEmail(tfMail.getText());
-		User selectuser = service.selectIdByName(user);
-		try{
+		EmployeeService serviceEmp = new EmployeeService();
+		Employee emp = new Employee();
+		try {
+			user.setName(tfName.getText());
+			user.setEmail(tfMail.getText());
+			User selectuser = service.selectNameEmail(user);
 			if(user.getName().equals(selectuser.getName()) && user.getEmail().equals(selectuser.getEmail())) {
 				dispose();
 				JOptionPane.showMessageDialog(null, String.format("찾으신 아이디는 %s입니다", selectuser.getId()));
 			}
-		}catch (NullPointerException e2) {
-			JOptionPane.showMessageDialog(null, "없는 정보입니다");
-		}finally {
-			tfName.setText("");
-			tfMail.setText("");
-		}
+		}catch(NullPointerException er){
+			try {
+				emp.setName(tfName.getText());
+				emp.setEmail(tfMail.getText());
+				Employee selectEmp = serviceEmp.selectNameEmail(emp);
+				if(emp.getName().equals(selectEmp.getName()) && emp.getEmail().equals(selectEmp.getEmail())) {
+					dispose();
+					JOptionPane.showMessageDialog(null, String.format("찾으신 아이디는 %s입니다", selectEmp.getId()));
+				}
+			}catch(NullPointerException er1){
+				JOptionPane.showMessageDialog(null, "존재하지 않는 정보입니다");
+			}
+		}*/
 	}
 	protected void actionPerformedTfMail(ActionEvent e) {
 		actionPerformedBtnIdfind(e);
 	}
 	protected void actionPerformedBtnPwfind(ActionEvent e) {
-		IDPWsearchService service = new IDPWsearchService();
-		User user = new User();
-		user.setId(tfId2.getText());
-		user.setEmail(tfMail2.getText());
-		User selectuser = service.selectIdEmail(user);
-		if(user.getId().equals(selectuser.getId()) && user.getEmail().equals(selectuser.getEmail())) {
-			dispose();
-			ChangePwUI chan = new ChangePwUI(user);
-			chan.setVisible(true);
-		}else {
-			JOptionPane.showMessageDialog(null, "없는 정보입니다");
-		}
+		/*try {
+			UserService service = new UserService();
+			User user = new User();
+			user.setId(tfId2.getText());
+			user.setEmail(tfMail2.getText());
+			User selectuser = service.selectIdEmail(user);
+			if(user.getId().equals(selectuser.getId()) && user.getEmail().equals(selectuser.getEmail())) {
+				dispose();
+				ChangePwUI chan = new ChangePwUI(user);
+				chan.setVisible(true);
+			}
+		}catch(NullPointerException er){
+			try {
+				EmployeeService serviceEmp = new EmployeeService();
+				Employee emp = new Employee();
+				emp.setId(tfId2.getText());
+				emp.setEmail(tfMail2.getText());
+				Employee selectEmp = serviceEmp.selectIdEmail(emp);
+				if(emp.getId().equals(selectEmp.getId()) && emp.getEmail().equals(selectEmp.getEmail())) {
+					dispose();
+					ChangePwUI chan = new ChangePwUI(selectEmp);
+					chan.setVisible(true);
+				}
+			}catch(NullPointerException er1){
+				JOptionPane.showMessageDialog(null, "존재하지 않는 정보입니다");
+			}
+		}*/
 	}
 	protected void actionPerformedTfMail2(ActionEvent e) {
 		actionPerformedBtnPwfind(e);

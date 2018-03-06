@@ -46,6 +46,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	private JButton btnSearch;
 	private JLabel lblNewLabel;
 	public static User LOGINUSER;
+	public static Employee LOGINEMP;
 
 	public StartUI() {
 		initComponents();
@@ -206,36 +207,30 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		}
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
-		contentPane.removeAll();
-		ManagerUI mng = new ManagerUI();
-		mng.setBounds(0, 0, 1400, 800);
-		contentPane.add(mng);
-		contentPane.repaint();
-		/*if (tfId.getText().trim().length() < 1) {
-			JOptionPane.showMessageDialog(null, "아이디를 입력하세요");  
-			return;
-		}
-		if (new String(pwtf.getPassword()).length() < 1) {
-			JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요");  
-			return;
-		}
-		// 아이디와 비밀번호 검사
-		Employee employee = new Employee();
-		employee.setId(tfId.getText());
-		employee.setPw(pwtf.getText());
 		EmployeeService service = new EmployeeService();
-		Employee findemployeeId = service.findSelectEmployeeIdByNo(employee);
-		if (tfId.getText().equals(findemployeeId.getId()) && new String(pwtf.getPassword()).equals(findemployeeId.getPw())) {
-			contentPane.removeAll();
-			ManagerUI mng = new ManagerUI();
-			mng.setBounds(0, 0, 1400, 800);
-			contentPane.add(mng);
-			contentPane.repaint();
-			contentPane.revalidate();
-        }else{
-        	JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
-        }*/
+		Employee emp = new Employee();
+		try {
+			emp.setId(tfId.getText());
+			emp.setPw(pwtf.getText());
+			Employee selectEmp = service.selectIdPw(emp);
+			if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
+				contentPane.removeAll();
+				LOGINEMP = selectEmp;
+				ManagerUI mngui = new ManagerUI(selectEmp);
+				mngui.setBounds(0, 0, 1400, 800);
+				mngui.lblname.setText((selectEmp.getName()));
+				contentPane.add(mngui);
+				contentPane.repaint();
+				contentPane.revalidate();
+				repaint();
+				revalidate();
+			}
+		}catch(NullPointerException er) {
+			/*er.printStackTrace();*/
+			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
+		}
 	}
+	
 	protected void actionPerformedBtnjoin(ActionEvent e) {
 		JoinUI frame = new JoinUI();
 		frame.setVisible(true);

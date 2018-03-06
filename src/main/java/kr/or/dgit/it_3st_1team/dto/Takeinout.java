@@ -6,13 +6,13 @@ public class Takeinout {
 	private Book book;
 	private String rentday;
 	private String returnday;
-	//private String isbn;
+	private String isbn;
 	
 	public Takeinout() {
 	}
 	
 	
-	/*public String getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
@@ -20,7 +20,7 @@ public class Takeinout {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-*/
+
 
 	public int getInout_no() {
 		return inout_no;
