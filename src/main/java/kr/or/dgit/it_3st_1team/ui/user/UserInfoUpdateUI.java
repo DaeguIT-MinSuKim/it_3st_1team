@@ -17,7 +17,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import kr.or.dgit.it_3st_1team.UserServiceTest;
 import kr.or.dgit.it_3st_1team.dto.Phone;
 import kr.or.dgit.it_3st_1team.dto.Post;
 import kr.or.dgit.it_3st_1team.dto.User;
@@ -344,15 +343,16 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnsearch(ActionEvent arg0) {
 		User user = new User();
 		user.setId(tfId.getText());		UserService service = new UserService();
-		service.selectUserById(user);
-		tfcode.setText(user.getCode());
-		tfId.setText(user.getId());
-		tfName.setName(user.getName());
-		tfpostnum.setText(user.getZipcode());
-		//tfAddr.setText(user.getAddr_id());
-		tfAddrDe.setText(user.getAddr_de());
-		tfMail.setText(user.getEmail());
-		Phone phone = user.getTel();
+		User selectUser = service.selectUserById(user);
+		System.out.println(selectUser);
+		tfcode.setText(selectUser.getCode());
+		tfId.setText(selectUser.getId());
+		tfName.setText(selectUser.getName());
+		tfpostnum.setText(selectUser.getZipcode());
+		//tfAddr.setText(selectUser.getAddr_id());
+		tfAddrDe.setText(selectUser.getAddr_de());
+		tfMail.setText(selectUser.getEmail());
+		Phone phone = selectUser.getTel();
 		tfPhone1.setText(phone.getPhone1());
 		tfPhone2.setText(phone.getPhone2());
 		tfPhone3.setText(phone.getPhone3());
