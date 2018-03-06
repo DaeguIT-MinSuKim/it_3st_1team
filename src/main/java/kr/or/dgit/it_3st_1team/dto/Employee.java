@@ -89,7 +89,7 @@ public class Employee {
 	
 	public Object[] toArray() {
 		return new Object [] {
-				code, name, id, tel, email, addr_id, title.getName()
+				code, name, id, tel, email, addr_id+" "+addr_de, title.getName()
 		};
 	}
 	

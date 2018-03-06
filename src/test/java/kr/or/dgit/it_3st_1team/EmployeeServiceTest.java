@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.it_3st_1team.dto.Employee;
-import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.EmployeeService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
