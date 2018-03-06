@@ -1,0 +1,7 @@
+load data local infile 'D:/DataFiles/´ë±¸±¤¿ª½Ã.txt'
+into table post
+character set 'utf8'
+fields terminated by'|'
+ignore 1 lines
+(@zipcode, @sido, @d, @sigungu, @d, @d, @d, @d, @doro, @d, @d, @build_num1, @build_num2, @d, @d, @d, @d, @bubjung_name, @ri, @heangjeong_name, @d, @bunji_num1, @d, @bunji_num2, @d, @d)
+set zipcode=@zipcode, sido=@sido, sigungu=@sigungu, doro=@doro, build_num1=@build_num1, build_num2=@build_num2,bubjung_name=@bubjung_name, ri=@ri,heangjeong_name=@heangjeong_name, bunji_num1=@bunji_num1, bunji_num2=@bunji_num2;

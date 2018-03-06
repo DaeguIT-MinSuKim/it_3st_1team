@@ -51,4 +51,9 @@ public class TakeinoutServiceTest {
 		Assert.assertNotNull(inout);
 	}	
 
+	@Test
+	public void test3selectOutNum() {
+		String Isbn = "9788962880069";
+		int res = service.selectOutNum(Isbn);
+	}	
 }

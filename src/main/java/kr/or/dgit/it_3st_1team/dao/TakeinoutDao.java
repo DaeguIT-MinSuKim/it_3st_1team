@@ -23,4 +23,7 @@ public interface TakeinoutDao {
 	
 	// 대여중인 도서 반납
 	int deleteTakeinoutByBkcode(Takeinout inout);
+	
+	// 비치수 찾기
+	int selectOutNum(String isbn);
 }

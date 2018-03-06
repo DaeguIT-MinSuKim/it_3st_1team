@@ -57,6 +57,10 @@
 		delete from takeinout where bkcode = #{book.bkCode} and code = #{user.code}
 	</delete>
 
+	<!-- isbn으로 대여된 도서 찾기 (비치수를 찾기 위한 문장) -->
+	<select id="selectOutNum" parameterType="String" resultType="int">
+		SELECT COUNT(*) as '대여중 도서 수' FROM takeinout where isbn = #{isbn}
+	</select>
 </mapper>
 
 
