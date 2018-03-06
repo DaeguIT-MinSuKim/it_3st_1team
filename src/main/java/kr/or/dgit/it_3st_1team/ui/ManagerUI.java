@@ -147,6 +147,12 @@ public class ManagerUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnlogout(ActionEvent arg0) {
+		StartUITest.contentPane.removeAll();
+		MainUI mian = new MainUI();
+		mian.setPreferredSize(new Dimension(1400, 800));
+		StartUITest.contentPane.setVisible(true);
+		StartUITest.contentPane.repaint();
+		StartUITest.contentPane.revalidate();
 	}
 	protected void actionPerformedBtnBookRequest(ActionEvent arg0) {
 		InoutBookUI iob = new InoutBookUI();
