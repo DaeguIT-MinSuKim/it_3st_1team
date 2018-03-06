@@ -19,7 +19,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -38,7 +37,6 @@ import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.BookService;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
-import kr.or.dgit.it_3st_1team.service.LocationService;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel implements ActionListener, ItemListener, MouseListener {

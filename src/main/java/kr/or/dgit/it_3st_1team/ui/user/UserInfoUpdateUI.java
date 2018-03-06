@@ -32,7 +32,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JPasswordField pwfPwc;
 	private JTextField tfPhone1;
 	private JTextField tfMail;
-	private JButton btnJoin;
+	private JButton btnupdate;
 	private JButton btnCancel;
 	private JTextField tfZipCode;
 	private JTextField tfAddr_id;
@@ -201,13 +201,13 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfAddr_de.setBounds(294, 434, 400, 30);
 		panel.add(tfAddr_de);
 		
-		btnJoin = new JButton("수정");
-		btnJoin.addActionListener(this);
-		btnJoin.setBorder(null);
-		btnJoin.setForeground(Color.WHITE);
-		btnJoin.setBackground(new Color(52,152,219));
-		btnJoin.setBounds(343, 494, 97, 30);
-		panel.add(btnJoin);
+		btnupdate = new JButton("수정");
+		btnupdate.addActionListener(this);
+		btnupdate.setBorder(null);
+		btnupdate.setForeground(Color.WHITE);
+		btnupdate.setBackground(new Color(52,152,219));
+		btnupdate.setBounds(343, 494, 97, 30);
+		panel.add(btnupdate);
 		
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
@@ -258,6 +258,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		panel.add(btnadd);
 		
 		btnsearch = new JButton("검색");
+		btnsearch.addActionListener(this);
 		btnsearch.setForeground(new Color(64,64,64));
 		btnsearch.setBorder(null);
 		btnsearch.setBackground(new Color(190,190,190));
@@ -276,7 +277,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfPhone1.setText(tel.getPhone1());
 		tfPhone2.setText(tel.getPhone2());
 		tfPhone3.setText(tel.getPhone3());
-		Post post = user.getAddr_id();
+		//Post post = user.getAddr_id();
 		//tfpostnum.setText(post.getZipcode());
 		//tfAddr.setText(post.getWithoutZipcode());
 		tfAddr_de.setText(user.getAddr_de());
@@ -285,11 +286,14 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnsearch) {
+			actionPerformedBtnsearch(arg0);
+		}
 		if (arg0.getSource() == btnCancel) {
 			actionPerformedBtnCancel(arg0);
 		}
-		if (arg0.getSource() == btnJoin) {
-			actionPerformedBtnJoin(arg0);
+		if (arg0.getSource() == btnupdate) {
+			actionPerformedBtnupdate(arg0);
 		}
 		if (arg0.getSource() == btnSearchAddr) {
 			actionPerformedBtnSearchAddr(arg0);
@@ -299,8 +303,11 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		SearchAddrdetailUI addr = new SearchAddrdetailUI(tfAddr_id, tfZipCode);
 		addr.setVisible(true);
 	}
-	protected void actionPerformedBtnJoin(ActionEvent arg0) {
-		User user = StartUI.LOGINUSER;		UserService service = new UserService();
+	protected void actionPerformedBtnupdate(ActionEvent arg0) {
+		User user = StartUI.LOGINUSER;
+		/*if(user != null) {
+			
+		}*/		UserService service = new UserService();
 		String pw = new String(pwfPw.getPassword());
 		String pwc = new String(pwfPwc.getPassword());
 		
@@ -314,6 +321,9 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		user.setTel(phone);
 		user.setEmail(tfMail.getText());
 		//post 수정
+		Post post = new Post();
+		user.setZipcode(tfZipCode.getText());
+		//user.setAddr_id(tfAddr.getText());
 		user.setAddr_de(tfAddr_de.getText());
 		
 		if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
@@ -329,5 +339,23 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnCancel(ActionEvent arg0) {		userinfo();
 		pwfPw.setText("");
 		pwfPwc.setText("");
+	}
+	protected void actionPerformedBtnsearch(ActionEvent arg0) {
+		User user = new User();
+		user.setId(tfId.getText());		UserService service = new UserService();
+		User selectUser = service.selectUserById(user);
+		System.out.println(selectUser);
+		tfcode.setText(selectUser.getCode());
+		tfId.setText(selectUser.getId());
+		tfName.setText(selectUser.getName());
+		tfZipCode.setText(selectUser.getZipcode());
+		//tfAddr.setText(selectUser.getAddr_id());
+		tfAddr_de.setText(selectUser.getAddr_de());
+		tfMail.setText(selectUser.getEmail());
+		Phone phone = selectUser.getTel();
+		tfPhone1.setText(phone.getPhone1());
+		tfPhone2.setText(phone.getPhone2());
+		tfPhone3.setText(phone.getPhone3());
+		
 	}
 }
