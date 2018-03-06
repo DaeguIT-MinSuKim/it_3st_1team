@@ -23,7 +23,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.it_3st_1team.dto.Employee;
 import kr.or.dgit.it_3st_1team.dto.User;
+import kr.or.dgit.it_3st_1team.service.EmployeeService;
 import kr.or.dgit.it_3st_1team.service.UserService;
 import kr.or.dgit.it_3st_1team.ui.join.IDPWsearchUI;
 import kr.or.dgit.it_3st_1team.ui.join.JoinUI;
@@ -44,6 +46,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	private JButton btnSearch;
 	private JLabel lblNewLabel;
 	public static User LOGINUSER;
+	public static Employee LOGINEMP;
 
 	public StartUI() {
 		initComponents();
@@ -182,31 +185,50 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	protected void actionPerformedBtnUserLogin(ActionEvent e) {
 		UserService service = new UserService();
 		User user = new User();
-		user.setId(tfId.getText());
-		user.setPw(pwtf.getText());
-		User selectUser = service.selectIdPw(user);
-		if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
-			contentPane.removeAll();
-			LOGINUSER = selectUser;
-			UserUI userui = new UserUI(selectUser);
-			userui.setBounds(0, 0, 1400, 800);
-			userui.lblname.setText((selectUser.getName()));
-			contentPane.add(userui);
-			contentPane.repaint();
-			contentPane.revalidate();
-			repaint();
-			revalidate();
-		}/*catch(NullPointerException er) {
-			er.printStackTrace();
+		try {
+			user.setId(tfId.getText());
+			user.setPw(pwtf.getText());
+			User selectUser = service.selectIdPw(user);
+			if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
+				contentPane.removeAll();
+				LOGINUSER = selectUser;
+				UserUI userui = new UserUI(selectUser);
+				userui.setBounds(0, 0, 1400, 800);
+				userui.lblname.setText((selectUser.getName()));
+				contentPane.add(userui);
+				contentPane.repaint();
+				contentPane.revalidate();
+				repaint();
+				revalidate();
+			}
+		}catch(NullPointerException er) {
+			/*er.printStackTrace();*/
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
-		}*/
+		}
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
-		contentPane.removeAll();
-		ManagerUI mng = new ManagerUI();
-		mng.setBounds(0, 0, 1400, 800);
-		contentPane.add(mng);
-		contentPane.repaint();
+		EmployeeService service = new EmployeeService();
+		Employee emp = new Employee();
+		try {
+			emp.setId(tfId.getText());
+			emp.setPw(pwtf.getText());
+			Employee selectEmp = service.selectIdPw(emp);
+			if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
+				contentPane.removeAll();
+				LOGINEMP = selectEmp;
+				ManagerUI mngui = new ManagerUI(selectEmp);
+				mngui.setBounds(0, 0, 1400, 800);
+				mngui.lblname.setText((selectEmp.getName()));
+				contentPane.add(mngui);
+				contentPane.repaint();
+				contentPane.revalidate();
+				repaint();
+				revalidate();
+			}
+		}catch(NullPointerException er) {
+			/*er.printStackTrace();*/
+			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
+		}
 	}
 	protected void actionPerformedBtnjoin(ActionEvent e) {
 		JoinUI frame = new JoinUI();
