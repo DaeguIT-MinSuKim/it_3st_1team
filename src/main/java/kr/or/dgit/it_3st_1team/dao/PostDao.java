@@ -9,4 +9,7 @@ public interface PostDao {
 	List<Post> selectPostByAll1(Post post);	
 	List<Post> selectPostByAll2(Post post);
 	
+	// 옛날 주소 찾기 
+	List<Post> selectDongWithAPI(Post post);
+	
 }

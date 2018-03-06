@@ -27,17 +27,28 @@ public class PostServiceTest {
 		service = null;
 	}
 	
-	@Test
+/*	@Test
 	public void test1SelectPostByAll1() {
 		Post post = new Post();
 		List<Post> listPost = service.selectPostByAll1(post);
 		Assert.assertNotNull(listPost);
-	}
+	}*/
 	@Test
 	public void test2SelectPostByAll2() {
 		Post post = new Post();
-//		post.setDoro("중앙대로");
+		post.setDoro("중앙대로");
 		List<Post> listPost = service.selectPostByAll2(post);
+		Assert.assertNotNull(listPost);
+		for(Post posts : listPost) {
+			System.out.println(posts);
+		}
+	}
+	
+	@Test
+	public void test3SelectPostBunjiWithAPI() {
+		Post post = new Post();
+		post.setBubjung_name("대명동");
+		List<Post> listPost = service.selectDongWithAPI(post);
 		Assert.assertNotNull(listPost);
 		for(Post posts : listPost) {
 			System.out.println(posts);
