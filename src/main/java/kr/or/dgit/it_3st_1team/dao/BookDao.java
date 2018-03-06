@@ -15,5 +15,6 @@ public interface BookDao {
 	List<Book> selectBookDetail(Book book);
 	List<Book> selectIsbn(Book book); //상세도서보기를 위한 isbn 찾기
 	Book selectByIsbn(String isbn); //isbn으로 도서찾기 -> 결과 상세도서보기에 넣음
-
+	
+	int selectExistNum(String isbn); //보유수 찾기
 }
