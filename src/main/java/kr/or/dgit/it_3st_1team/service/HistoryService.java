@@ -29,4 +29,17 @@ public class HistoryService {
 		}
 	}
 	
+	public List<History> selectOuthistory(History his) {
+		log.debug("selectOuthistory()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectOuthistory", his);
+		}
+	}
+	
+	public List<History> selectInhistory(History his) {
+		log.debug("selectInhistory()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectInhistory", his);
+		}
+	}
 }

@@ -8,14 +8,32 @@
 		<result property="delay" column="delay"/>
 		<result property="returnday" column="returnday"/>
 		<result property="rentday" column="rentday"/>
+		<result property="bkcode" column="bk"/>
+		<result property="bkname" column="bn"/>
+		<result property="author" column="ba"/>
 	</resultMap>
-	
-	<sql id="selectSql">
-		select code, bkcode, realreturn, delay, returnday, rentday from history
-	</sql>
-	
+		
 	<select id="selectAllhistory" parameterType="History" resultMap="HistoryResult">
-		<include refid="selectSql"/>
+		select code, b.bkcode as bk, realreturn, delay, returnday, rentday, b.bkname as bn, b.author as ba
+		from history h join book b
+		on h.bkcode=b.bkcode
 		where code = #{code}
+		order by rentday desc;
+	</select>
+	
+	<select id="selectOuthistory" parameterType="History" resultMap="HistoryResult">
+		select code, b.bkcode as bk, realreturn, delay, returnday, rentday, b.bkname as bn, b.author as ba
+		from history h join book b
+		on h.bkcode=b.bkcode
+		where code = #{code} and realreturn is null
+		order by rentday desc;
+	</select>
+	
+	<select id="selectInhistory" parameterType="History" resultMap="HistoryResult">
+		select code, b.bkcode as bk, realreturn, delay, returnday, rentday, b.bkname as bn, b.author as ba
+		from history h join book b
+		on h.bkcode=b.bkcode
+		where code = #{code} and realreturn is not null
+		order by rentday desc;
 	</select>
 </mapper>

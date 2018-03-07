@@ -1,9 +1,7 @@
 package kr.or.dgit.it_3st_1team.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
-import kr.or.dgit.it_3st_1team.service.HistoryService;
 
 public class History {
 	private int his_no;
@@ -68,9 +66,14 @@ public class History {
 	}
 	
 	public Object[] historyAll(int i) {
-		
-		//HistoryService.getInstance().selectAllhistory(his);
-		return new Object[] {i+1, bkname, author, rentday, returnday, realreturn, delay, isState()};
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		String day;
+		if(realreturn==null) {
+			day = "";
+		}else{
+			day = sd.format(realreturn);
+		}
+		return new Object[] {i+1, bkname, author, sd.format(rentday), sd.format(returnday), day, delay, isState()};
 	}
 	private String isState() {
 		String state;

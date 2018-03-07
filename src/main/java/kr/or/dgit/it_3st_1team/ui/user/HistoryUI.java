@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -19,12 +22,16 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.service.HistoryService;
+import kr.or.dgit.it_3st_1team.ui.StartUI;
+import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI.NonEditableModel;
 
 @SuppressWarnings("serial")
 public class HistoryUI extends JPanel implements ActionListener {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JRadioButton rdbtnAll;
+	private JRadioButton rdbtnout;
+	private JRadioButton rdbtnin;
 
 	public HistoryUI() {
 		initComponents();
@@ -39,32 +46,6 @@ public class HistoryUI extends JPanel implements ActionListener {
 		pTableHistory.setBounds(20, 10, 1140, 542);
 		add(pTableHistory);
 		pTableHistory.setLayout(null);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBackground(Color.WHITE);
-		scrollPane.setBounds(0, 35, 1110, 542);
-		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		pTableHistory.add(scrollPane);
-		
-		table = new JTable();
-		table.setRowHeight(30);
-		table.setBackground(Color.WHITE);
-		table.getTableHeader().setBackground(new Color(245,245,245));
-		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		//table.setModel(new DefaultTableModel(getRow(list),getColunmNames()));
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
-		cellAlign(SwingConstants.LEFT, 1, 2);
-		PreferredWidth(50,410,200,150,150,150,100,120);
-		/*table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
-		table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
-		table.getColumnModel().getColumn(2).setPreferredWidth(110); //저자
-		table.getColumnModel().getColumn(3).setPreferredWidth(130);  //대출일
-		table.getColumnModel().getColumn(4).setPreferredWidth(130);  //반납예정일
-		table.getColumnModel().getColumn(5).setPreferredWidth(100); //연체일수
-		table.getColumnModel().getColumn(6).setPreferredWidth(100); //상태
-*/		scrollPane.setViewportView(table);
 				
 		JPanel pPage = new JPanel();
 		pPage.setBackground(Color.WHITE);
@@ -82,14 +63,16 @@ public class HistoryUI extends JPanel implements ActionListener {
 		pTableHistory.add(rdbtnAll);
 		group.add(rdbtnAll);
 		
-		JRadioButton rdbtnout = new JRadioButton("대출");
+		rdbtnout = new JRadioButton("대출");
+		rdbtnout.addActionListener(this);
 		rdbtnout.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		rdbtnout.setBackground(Color.WHITE);
 		rdbtnout.setBounds(100, 0, 60, 30);
 		pTableHistory.add(rdbtnout);
 		group.add(rdbtnout);
 		
-		JRadioButton rdbtnin = new JRadioButton("반납");
+		rdbtnin = new JRadioButton("반납");
+		rdbtnin.addActionListener(this);
 		rdbtnin.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		rdbtnin.setBackground(Color.WHITE);
 		rdbtnin.setBounds(160, 0, 60, 30);
@@ -115,28 +98,65 @@ public class HistoryUI extends JPanel implements ActionListener {
 		group.add(rdbrequest);
 		pTableHistory.add(rdbrequest);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setBounds(0, 35, 1110, 542);
+		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		pTableHistory.add(scrollPane);
+		
+		table = new JTable();
+		table.setRowHeight(30);
+		table.setBackground(Color.WHITE);
+		table.getTableHeader().setBackground(new Color(245,245,245));
+		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		loadDatas(Collections.emptyList());
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+		cellAlign(SwingConstants.LEFT, 1, 2);
+		PreferredWidth(50,410,200,150,150,150,100,120);
+		/*table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
+		table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
+		table.getColumnModel().getColumn(2).setPreferredWidth(110); //저자
+		table.getColumnModel().getColumn(3).setPreferredWidth(130);  //대출일
+		table.getColumnModel().getColumn(4).setPreferredWidth(130);  //반납예정일
+		table.getColumnModel().getColumn(5).setPreferredWidth(100); //연체일수
+		table.getColumnModel().getColumn(6).setPreferredWidth(100); //상태
+*/		scrollPane.setViewportView(table);
+
+		rdbtnAll.setSelected(true);
+		selectStartAllrdb();
 	}
 	
 	private Object[][] getRow(List<History> list) {
 		Object[][] rows = null;
 		rows = new Object[list.size()][];
-		if(rdbtnAll.isSelected()) {
 			for (int i = 0; i < rows.length; i++) {
 				rows[i] = list.get(i).historyAll(i);
 			}
-		}
 		return rows;
 	}
 	private Object[] getColunmNames() {
 		return new String[] {"NO", "도서명", "저자", "대출일","반납예정일","실반납일", "연체일수","상태"};
 	}
 	public void loadDatas(List<History> list) {
-		DefaultTableModel model = new DefaultTableModel(getRow(list), getColunmNames());
+		NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
 		table.setModel(model);
-		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(50,410,200,150,150,150,100,120);
 		invalidate();
+	}
+	class NonEditableModel extends DefaultTableModel {
+		public NonEditableModel(Object[][] data, Object[] columnNames) {
+			super(data, columnNames);
+		}
+
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+
 	}
 	private void cellAlign(int align, int...idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
@@ -154,14 +174,36 @@ public class HistoryUI extends JPanel implements ActionListener {
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == rdbtnin) {
+			actionPerformedRdbtnin(e);
+		}
+		if (e.getSource() == rdbtnout) {
+			actionPerformedRdbtnout(e);
+		}
 		if (e.getSource() == rdbtnAll) {
 			actionPerformedRdbtnAll(e);
 		}
 	}
 	protected void actionPerformedRdbtnAll(ActionEvent e) {
+		selectStartAllrdb();
+	}
+
+	private void selectStartAllrdb() {
 		History his = new History();
-		his.setCode("6");
+		his.setCode(StartUI.LOGINUSER.getCode());
 		List<History> list = HistoryService.getInstance().selectAllhistory(his);
+		loadDatas(list);
+	}
+	protected void actionPerformedRdbtnout(ActionEvent e) {
+		History his = new History();
+		his.setCode(StartUI.LOGINUSER.getCode());
+		List<History> list = HistoryService.getInstance().selectOuthistory(his);
+		loadDatas(list);
+	}
+	protected void actionPerformedRdbtnin(ActionEvent e) {
+		History his = new History();
+		his.setCode(StartUI.LOGINUSER.getCode());
+		List<History> list = HistoryService.getInstance().selectInhistory(his);
 		loadDatas(list);
 	}
 }
