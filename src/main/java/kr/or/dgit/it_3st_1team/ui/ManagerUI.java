@@ -20,18 +20,16 @@ import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 
 public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnlogout;
-	private JButton btnBookRequest;
+	private JButton btnBookinout;
 	private JButton btnUserUpdate;
-	private JButton btnBookSearch;
+	private JButton btnBookmanager;
 	private JButton btnHistory;
 	private JButton btnEmpManage;
 	private JButton btnNews;
-	private JPanel showpanel;
+	private InoutBookUI showpanel;
 	private ManagementBookUI manager;
 	public Employee emp;
 	public JLabel lblname;
-	
-	
 	
 	public ManagerUI(Employee emp) {
 		this.emp = emp;
@@ -48,21 +46,21 @@ public class ManagerUI extends JPanel implements ActionListener {
 		add(panel);
 		panel.setLayout(null);
 		
-		btnBookSearch = new JButton("자료 관리");
-		btnBookSearch.addActionListener(this);
-		btnBookSearch.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnBookSearch.setForeground(new Color(255, 255, 255));
-		btnBookSearch.setBackground(new Color(158,158,158));
-		btnBookSearch.setBounds(0, 50, 250, 45);
-		panel.add(btnBookSearch);
+		btnBookmanager = new JButton("자료 관리");
+		btnBookmanager.addActionListener(this);
+		btnBookmanager.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnBookmanager.setForeground(new Color(255, 255, 255));
+		btnBookmanager.setBackground(new Color(158,158,158));
+		btnBookmanager.setBounds(0, 50, 250, 45);
+		panel.add(btnBookmanager);
 		
-		btnBookRequest = new JButton("도서 출납 관리");
-		btnBookRequest.addActionListener(this);
-		btnBookRequest.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnBookRequest.setForeground(new Color(255, 255, 255));
-		btnBookRequest.setBackground(new Color(158,158,158));
-		btnBookRequest.setBounds(0, 110, 250, 45);
-		panel.add(btnBookRequest);
+		btnBookinout = new JButton("도서 출납 관리");
+		btnBookinout.addActionListener(this);
+		btnBookinout.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnBookinout.setForeground(new Color(255, 255, 255));
+		btnBookinout.setBackground(new Color(94, 94, 94));
+		btnBookinout.setBounds(0, 110, 250, 45);
+		panel.add(btnBookinout);
 		
 		btnHistory = new JButton("도서 출납 통계");
 		btnHistory.addActionListener(this);
@@ -117,7 +115,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		label.setBounds(114, 25, 84, 15);
 		panel.add(label);
 		
-		showpanel = new JPanel();
+		showpanel = new InoutBookUI();
 		showpanel.setBounds(250, 0, 1150, 800);
 		showpanel.setBackground(Color.WHITE);
 		add(showpanel);
@@ -133,14 +131,14 @@ public class ManagerUI extends JPanel implements ActionListener {
 		if (arg0.getSource() == btnHistory) {
 			actionPerformedBtnHistory(arg0);
 		}
-		if (arg0.getSource() == btnBookSearch) {
-			actionPerformedBtnBookSearch(arg0);
+		if (arg0.getSource() == btnBookmanager) {
+			actionPerformedbtnBookmanager(arg0);
 		}
 		if (arg0.getSource() == btnUserUpdate) {
 			actionPerformedBtnUserUpdate(arg0);
 		}
-		if (arg0.getSource() == btnBookRequest) {
-			actionPerformedBtnBookRequest(arg0);
+		if (arg0.getSource() == btnBookinout) {
+			actionPerformedbtnBookinout(arg0);
 		}
 		if (arg0.getSource() == btnlogout) {
 			actionPerformedBtnlogout(arg0);
@@ -148,27 +146,62 @@ public class ManagerUI extends JPanel implements ActionListener {
 	}
 	protected void actionPerformedBtnlogout(ActionEvent arg0) {
 	}
-	protected void actionPerformedBtnBookRequest(ActionEvent arg0) {
+	protected void actionPerformedbtnBookinout(ActionEvent arg0) {
+		btnBookinout.setBackground(new Color(94, 94, 94));
+		btnBookmanager.setBackground(new Color(158,158,158));
+		btnEmpManage.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(158,158,158));
 		InoutBookUI iob = new InoutBookUI();
 		changePanel(iob);
 	}
 	protected void actionPerformedBtnUserUpdate(ActionEvent arg0) {
+		btnBookinout.setBackground(new Color(158,158,158));
+		btnBookmanager.setBackground(new Color(158,158,158));
+		btnEmpManage.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(94, 94, 94));
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
 		update.tfId.setEditable(true);
 		changePanel(update);
 	}
-	protected void actionPerformedBtnBookSearch(ActionEvent arg0) {
+	protected void actionPerformedbtnBookmanager(ActionEvent arg0) {
+		btnBookinout.setBackground(new Color(158,158,158));
+		btnBookmanager.setBackground(new Color(94, 94, 94));
+		btnEmpManage.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(158,158,158));
 		manager = new ManagementBookUI();
 		changePanel(manager);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent arg0) {
-		
+		btnBookinout.setBackground(new Color(158,158,158));
+		btnBookmanager.setBackground(new Color(158,158,158));
+		btnEmpManage.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(94,94,94));
+		btnNews.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(158,158,158));
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
+		btnBookinout.setBackground(new Color(158,158,158));
+		btnBookmanager.setBackground(new Color(158,158,158));
+		btnEmpManage.setBackground(new Color(158,158,158));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(94,94,94));
+		btnUserUpdate.setBackground(new Color(158,158,158));
 		NoticeUI no = new NoticeUI();
 		changePanel(no);
 	}
 	protected void actionPerformedBtnEmpManage(ActionEvent arg0) {
+		btnBookinout.setBackground(new Color(158,158,158));
+		btnBookmanager.setBackground(new Color(158,158,158));
+		btnEmpManage.setBackground(new Color(94,94,94));
+		btnHistory.setBackground(new Color(158,158,158));
+		btnNews.setBackground(new Color(158,158,158));
+		btnUserUpdate.setBackground(new Color(158,158,158));
 		EmployeeUI emp = new EmployeeUI();
 		changePanel(emp);
 	}
