@@ -60,6 +60,9 @@ public class Book {
 		}
 		return able;
 	}
+	public boolean getterRentable() {
+		return rentable;
+	}
 
 	public void setRentable(boolean rentable) {
 		this.rentable = rentable;
@@ -122,7 +125,7 @@ public class Book {
 	}
 
 	public Object[] toArrayTakeinout(int i) {
-		return new Object[] {i, bkCode, bkname, author, publish, pubyear, take.getRentday(), take.getReturnday()};
+		return new Object[] {i+1, bkCode, bkname, author, publish, pubyear, take.getRentday(), take.getReturnday()};
 	}
 
 
