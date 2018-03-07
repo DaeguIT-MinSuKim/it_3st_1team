@@ -40,9 +40,6 @@
 			<if test="bkname != null">
 				and bkname like #{bkname}
 			</if>
-			<if test="rentable != null">
-				and rentable = #{rentable}
-			</if>
 		</where>
 	</sql>
 	<sql id="whereDetailSql">
@@ -76,7 +73,6 @@
 	<select id="selectBookAll" parameterType="Book" resultMap="BookWithTakeinoutResult">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book 
 		<include refid="whereSql"/>
-		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkname asc
 	</select>
 	
 	<!-- 보유수 찾기 -->
