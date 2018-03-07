@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.it_3st_1team.dto.Employee;
+import kr.or.dgit.it_3st_1team.ui.chart.myChartPanel;
 import kr.or.dgit.it_3st_1team.ui.librarian.EmployeeUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.InoutBookUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.ManagementBookUI;
@@ -168,7 +169,8 @@ public class ManagerUI extends JPanel implements ActionListener {
 		changePanel(manager);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent arg0) {
-		
+		myChartPanel chart = new myChartPanel();
+		changePanel(chart);
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
 		NoticeUI no = new NoticeUI();
