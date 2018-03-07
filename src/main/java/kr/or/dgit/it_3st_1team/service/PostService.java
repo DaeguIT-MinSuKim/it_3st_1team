@@ -7,7 +7,6 @@ import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.it_3st_1team.dao.PostDao;
-import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Post;
 import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 

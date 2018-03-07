@@ -29,6 +29,7 @@ import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.ManageBookService;
 
+@SuppressWarnings("serial")
 public class AddBookUI extends JFrame implements ActionListener, ItemListener {
 
 	private JPanel contentPane;

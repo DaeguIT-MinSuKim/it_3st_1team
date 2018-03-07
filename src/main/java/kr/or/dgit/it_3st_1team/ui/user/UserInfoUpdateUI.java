@@ -18,7 +18,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.it_3st_1team.dto.Phone;
-import kr.or.dgit.it_3st_1team.dto.Post;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
 import kr.or.dgit.it_3st_1team.ui.StartUI;
