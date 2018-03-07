@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.HistoryDao">
+
+	<resultMap type="History" id="HistoryResult">
+		<id property="his_no" column="his_no"/> 
+		<result property="realreturn" column="realreturn"/>
+		<result property="delay" column="delay"/>
+		<result property="returnday" column="returnday"/>
+		<result property="rentday" column="rentday"/>
+	</resultMap>
+	
+	<sql id="selectSql">
+		select code, bkcode, realreturn, delay, returnday, rentday from history
+	</sql>
+	
+	<select id="selectAllhistory" parameterType="History" resultMap="HistoryResult">
+		<include refid="selectSql"/>
+		where code = #{code}
+	</select>
+</mapper>

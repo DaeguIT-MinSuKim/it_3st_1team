@@ -262,6 +262,11 @@ ALTER TABLE bookmanagement.history
 			bkcode -- 도서코드
 		);
 		
+ALTER TABLE bookmanagement.history
+	ADD column (returnday date null);
+ALTER TABLE bookmanagement.history
+	ADD column (rentday date null);
+		
 -- 신청request
 ALTER TABLE bookmanagement.request
 	ADD CONSTRAINT FK_users_TO_request -- 회원 -> 출납history

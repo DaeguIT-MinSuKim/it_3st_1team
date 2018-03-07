@@ -20,7 +20,19 @@
 		<result property="zipcode" column="zipcode"/>
 		<result property="addr_id" column="addr_id"/>
 		<result property="addr_de" column="addr_de"/>
-		<!-- <result property="zipcode" column="zipcode"/> -->
+	</resultMap>
+	
+	<resultMap type="User" id="UserResultwithHistory">
+		<id property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="id" column="id"/>
+		<result property="tel" column="tel"/>
+		<result property="email" column="email"/>
+		<result property="zipcode" column="zipcode"/>
+		<result property="addr_id" column="addr_id"/>
+		<result property="addr_de" column="addr_de"/>
+		<collection property="users" 
+		resultMap="kr.or.dgit.it_3st_1team.dao.UserDao.HistoryResult"></collection>
 	</resultMap>
 	
 	<insert id="insertUser" parameterType="User">

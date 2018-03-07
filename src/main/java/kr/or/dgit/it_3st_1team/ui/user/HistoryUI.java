@@ -2,10 +2,12 @@ package kr.or.dgit.it_3st_1team.ui.user;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -15,13 +17,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import kr.or.dgit.it_3st_1team.dto.Book;
-import javax.swing.JLabel;
+import kr.or.dgit.it_3st_1team.dto.History;
+import kr.or.dgit.it_3st_1team.service.HistoryService;
 
 @SuppressWarnings("serial")
-public class HistoryUI extends JPanel {
+public class HistoryUI extends JPanel implements ActionListener {
 	private JTable table;
 	private JScrollPane scrollPane;
+	private JRadioButton rdbtnAll;
 
 	public HistoryUI() {
 		initComponents();
@@ -48,13 +51,12 @@ public class HistoryUI extends JPanel {
 		table.setBackground(Color.WHITE);
 		table.getTableHeader().setBackground(new Color(245,245,245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		List<Book> list = new ArrayList<>();
-		table.setModel(new DefaultTableModel(getRow(list),getColunmNames()));
+		//table.setModel(new DefaultTableModel(getRow(list),getColunmNames()));
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
-		PreferredWidth(50,430,430,140,140,100,100);
+		PreferredWidth(50,410,200,150,150,150,100,120);
 		/*table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
 		table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
 		table.getColumnModel().getColumn(2).setPreferredWidth(110); //저자
@@ -72,7 +74,8 @@ public class HistoryUI extends JPanel {
 		
 		ButtonGroup group = new ButtonGroup();
 		
-		JRadioButton rdbtnAll = new JRadioButton("모두보기");
+		rdbtnAll = new JRadioButton("모두보기");
+		rdbtnAll.addActionListener(this);
 		rdbtnAll.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		rdbtnAll.setBackground(Color.WHITE);
 		rdbtnAll.setBounds(0, 0, 100, 30);
@@ -114,16 +117,26 @@ public class HistoryUI extends JPanel {
 		
 	}
 	
-	private Object[][] getRow(List<Book> list) {
+	private Object[][] getRow(List<History> list) {
 		Object[][] rows = null;
 		rows = new Object[list.size()][];
-		for (int i = 0; i < rows.length; i++) {
-			rows[i] = list.get(i).toArray(i);
+		if(rdbtnAll.isSelected()) {
+			for (int i = 0; i < rows.length; i++) {
+				rows[i] = list.get(i).historyAll(i);
+			}
 		}
 		return rows;
 	}
 	private Object[] getColunmNames() {
-		return new String[] {"번호", "도서명", "저자", "대출일","반납예정일", "연체일수","상태"};
+		return new String[] {"NO", "도서명", "저자", "대출일","반납예정일","실반납일", "연체일수","상태"};
+	}
+	public void loadDatas(List<History> list) {
+		DefaultTableModel model = new DefaultTableModel(getRow(list), getColunmNames());
+		table.setModel(model);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+		cellAlign(SwingConstants.LEFT, 1, 2);
+		PreferredWidth(50,410,200,150,150,150,100,120);
+		invalidate();
 	}
 	private void cellAlign(int align, int...idx) {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
@@ -139,5 +152,16 @@ public class HistoryUI extends JPanel {
 		for (int i = 0; i < width.length; i++) {
 			model1.getColumn(i).setPreferredWidth(width[i]);
 		}
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == rdbtnAll) {
+			actionPerformedRdbtnAll(e);
+		}
+	}
+	protected void actionPerformedRdbtnAll(ActionEvent e) {
+		History his = new History();
+		his.setCode("6");
+		List<History> list = HistoryService.getInstance().selectAllhistory(his);
+		loadDatas(list);
 	}
 }
