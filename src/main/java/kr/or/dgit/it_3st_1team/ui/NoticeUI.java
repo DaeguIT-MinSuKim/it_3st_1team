@@ -17,11 +17,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+@SuppressWarnings("serial")
 public class NoticeUI extends JPanel {
 	private JTextField textField;
 	private JTable table;
 	private JScrollPane scrollPane;
-	private JPanel panel_1;
 	private JButton button_1;
 	private JButton button_2;
 

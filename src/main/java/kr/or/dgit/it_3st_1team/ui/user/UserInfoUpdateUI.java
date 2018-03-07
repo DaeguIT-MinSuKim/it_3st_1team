@@ -18,7 +18,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.it_3st_1team.dto.Phone;
-import kr.or.dgit.it_3st_1team.dto.Post;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
 import kr.or.dgit.it_3st_1team.ui.StartUI;
@@ -320,8 +319,6 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		phone.setPhone3(tfPhone3.getText());
 		user.setTel(phone);
 		user.setEmail(tfMail.getText());
-		//post 수정
-		Post post = new Post();
 		user.setZipcode(tfZipCode.getText());
 		//user.setAddr_id(tfAddr.getText());
 		user.setAddr_de(tfAddr_de.getText());

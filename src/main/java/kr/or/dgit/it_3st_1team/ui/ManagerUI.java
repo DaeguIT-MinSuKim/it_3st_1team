@@ -19,6 +19,7 @@ import kr.or.dgit.it_3st_1team.ui.librarian.InoutBookUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.ManagementBookUI;
 import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 
+@SuppressWarnings("serial")
 public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnlogout;
 	private JButton btnBookRequest;

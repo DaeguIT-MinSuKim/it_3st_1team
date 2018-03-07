@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class StartUITest extends JFrame {
 	public static JPanel contentPane;
 	public static MainUI main;

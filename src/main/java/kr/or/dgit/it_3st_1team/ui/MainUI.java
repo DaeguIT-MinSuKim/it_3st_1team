@@ -30,6 +30,7 @@ import kr.or.dgit.it_3st_1team.ui.join.IDPWsearchUI;
 import kr.or.dgit.it_3st_1team.ui.join.JoinUI;
 import kr.or.dgit.it_3st_1team.ui.user.VisitorUI;
 
+@SuppressWarnings("serial")
 public class MainUI extends JPanel implements ActionListener, MouseListener, FocusListener {
 	private JPanel contentPane;
 	private MyPanel bgpanel = new MyPanel();
