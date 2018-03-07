@@ -97,4 +97,11 @@ public class UserService {
 			return sqlSession.selectOne(namespace + "selectNameEmail", user);
 		}
 	}
+	
+	public User selectCode(User user) {
+		log.debug("selectCode()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectCode", user);
+		}
+	}
 }

@@ -4,7 +4,7 @@
 
 	<sql id="insertUsersql">
 		insert into users(code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday) 
-		values (#{code},#{name},#{id},#{pw},#{tel},#{email},#{zipcode},#{addr_id.total},#{addr_de},#{entryday})
+		values (#{code},#{name},#{id},#{pw},#{tel},#{email},#{zipcode},#{addr_id},#{addr_de},#{entryday})
 	</sql>
 	
 	<sql id="deleteSql">
@@ -18,7 +18,7 @@
 		<result property="tel" column="tel"/>
 		<result property="email" column="email"/>
 		<result property="zipcode" column="zipcode"/>
-		<result property="addr_id.total" column="addr_id"/>
+		<result property="addr_id" column="addr_id"/>
 		<result property="addr_de" column="addr_de"/>
 		<!-- <result property="zipcode" column="zipcode"/> -->
 	</resultMap>
@@ -34,6 +34,9 @@
 	<update id="updateUser" parameterType="User">
 		update users
 		<set>
+			<if test="code != null">
+				code = #{code},
+			</if>
 			<if test="name != null">
 				name = #{name},
 			</if>
@@ -50,7 +53,7 @@
 				zipcode = #{zipcode},
 			</if>
 			<if test="addr_id != null">
-				addr_id = #{addr_id.total},
+				addr_id = #{addr_id},
 			</if>
 			<if test="addr_de != null">
 				addr_de = #{addr_de},
@@ -81,6 +84,10 @@
 	
 	<select id="selectUserByCode" parameterType="User" resultMap="UserResult">
 		select code, name, id, pw, tel, email, zipcode, addr_id, addr_de, entryday from users where code = #{code}
+	</select>
+	
+	<select id="selectCode" parameterType="User" resultType="User">
+		select code from users where code = #{code}
 	</select>
 	
 </mapper>

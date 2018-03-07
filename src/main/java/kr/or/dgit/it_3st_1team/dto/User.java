@@ -10,7 +10,7 @@ public class User {
 	private Phone tel;
 	private String email;
 	private String zipcode;
-	private Post addr_id;
+	private String addr_id;
 	private String addr_de;
 	private boolean blacktf;
 	private Date entryday;
@@ -25,7 +25,7 @@ public class User {
 		this.code = code;
 	}
 	
-	public User(String name, String pw, Phone tel, String email, Post addr_id) {
+	public User(String name, String pw, Phone tel, String email, String addr_id) {
 		this.name = name;
 		this.pw = pw;
 		this.tel = tel;
@@ -33,7 +33,7 @@ public class User {
 		this.addr_id = addr_id;
 	}
 
-	public User(String code, String name, String id, String pw, Phone tel, String email, Post addr_id, Date entryday) {
+	public User(String code, String name, String id, String pw, Phone tel, String email, String addr_id, Date entryday) {
 		super();
 		this.code = code;
 		this.name = name;
@@ -45,7 +45,7 @@ public class User {
 		this.entryday = entryday;
 	}
 	
-	public User(String code, String name, String id, String pw, Phone tel, String email, Post addr_id, String addr_de,
+	public User(String code, String name, String id, String pw, Phone tel, String email, String addr_id, String addr_de,
 			boolean blacktf, Date entryday, Date freeday) {
 		super();
 		this.code = code;
@@ -117,11 +117,11 @@ public class User {
 		this.zipcode = zipcode;
 	}
 
-	public Post getAddr_id() {
+	public String getAddr_id() {
 		return addr_id;
 	}
 
-	public void setAddr_id(Post addr_id) {
+	public void setAddr_id(String addr_id) {
 		this.addr_id = addr_id;
 	}
 

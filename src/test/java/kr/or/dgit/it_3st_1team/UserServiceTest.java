@@ -92,4 +92,14 @@ public class UserServiceTest {
 		Assert.assertEquals(user.getPw(), selectUser.getPw());
 		System.out.println(selectUser);
 	}
+	
+	@Test
+	public void test8selectCode() {
+		User user = new User();
+		user.setCode("8");
+		
+		User selecUser = service.selectCode(user);
+		Assert.assertNotNull(selecUser);
+		System.out.println(selecUser);
+	}
 }

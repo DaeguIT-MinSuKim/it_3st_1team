@@ -25,4 +25,6 @@ public interface UserDao {
 	User selectIdPw(User user);
 	//회원코드로 회원정보출력
 	User selectUserByCode(User user);	
+	//회원코드 중복확인
+	User selectCode(User user);
 }

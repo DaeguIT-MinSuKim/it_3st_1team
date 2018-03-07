@@ -132,6 +132,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfName.setColumns(10);
 		
 		tfId = new JTextField();
+		tfId.addActionListener(this);
 		tfId.setEditable(false);
 		tfId.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -250,6 +251,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		panel.add(tfcode);
 		
 		btnadd = new JButton("추가");
+		btnadd.addActionListener(this);
 		btnadd.setForeground(new Color(64,64,64));
 		btnadd.setBorder(null);
 		btnadd.setBackground(new Color(190,190,190));
@@ -276,15 +278,17 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfPhone1.setText(tel.getPhone1());
 		tfPhone2.setText(tel.getPhone2());
 		tfPhone3.setText(tel.getPhone3());
-		//Post post = user.getAddr_id();
-		//tfpostnum.setText(post.getZipcode());
-		//tfAddr.setText(post.getWithoutZipcode());
+		tfZipCode.setText(user.getZipcode());
+		tfAddr_id.setText(user.getAddr_id());
 		tfAddr_de.setText(user.getAddr_de());
-		/*Post post = user.getAddr_id();
-		tfpostnum.setText(post.getZipcode());*/
-		
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnadd) {
+			actionPerformedBtnadd(arg0);
+		}
+		if (arg0.getSource() == tfId) {
+			actionPerformedTfId(arg0);
+		}
 		if (arg0.getSource() == btnsearch) {
 			actionPerformedBtnsearch(arg0);
 		}
@@ -303,39 +307,81 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		addr.setVisible(true);
 	}
 	protected void actionPerformedBtnupdate(ActionEvent arg0) {
-		User user = StartUI.LOGINUSER;
-		/*if(user != null) {
-			
-		}*/		UserService service = new UserService();
 		String pw = new String(pwfPw.getPassword());
 		String pwc = new String(pwfPwc.getPassword());
-		
-		user.setName(tfName.getText());
-		user.setPw(pw);
-		//phone 수정
-		Phone phone = new Phone();
-		phone.setPhone1(tfPhone1.getText());
-		phone.setPhone2(tfPhone2.getText());
-		phone.setPhone3(tfPhone3.getText());
-		user.setTel(phone);
-		user.setEmail(tfMail.getText());
-		user.setZipcode(tfZipCode.getText());
-		//user.setAddr_id(tfAddr.getText());
-		user.setAddr_de(tfAddr_de.getText());
-		
-		if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
-			JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
+		User user = StartUI.LOGINUSER;
+		if(user != null) {
+			UserService service = new UserService();
+			
+			user.setName(tfName.getText());
+			user.setPw(pw);
+			Phone phone = new Phone();
+			phone.setPhone1(tfPhone1.getText());
+			phone.setPhone2(tfPhone2.getText());
+			phone.setPhone3(tfPhone3.getText());
+			user.setTel(phone);
+			user.setEmail(tfMail.getText());
+			user.setZipcode(tfZipCode.getText());
+			user.setAddr_id(tfAddr_id.getText());
+			user.setAddr_de(tfAddr_de.getText());
+			
+			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
+				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
+			}else {
+				service.updateUser(user);
+				JOptionPane.showMessageDialog(null, ("회원정보가 수정되었습니다."));	
+				userinfo();
+				pwfPw.setText("");
+				pwfPwc.setText("");
+			}
+		}else{
+			User searchuser = new User();
+			searchuser.setId(tfId.getText());
+			UserService service = new UserService();
+			User selectUser = service.selectUserById(searchuser);
+			
+			selectUser.setName(tfName.getText());
+			selectUser.setPw(pw);
+			Phone phone = new Phone();
+			phone.setPhone1(tfPhone1.getText());
+			phone.setPhone2(tfPhone2.getText());
+			phone.setPhone3(tfPhone3.getText());
+			selectUser.setTel(phone);
+			selectUser.setEmail(tfMail.getText());
+			selectUser.setZipcode(tfZipCode.getText());
+			selectUser.setAddr_id(tfAddr_id.getText());
+			selectUser.setAddr_de(tfAddr_de.getText());
+
+			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
+				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
+			}else {
+				service.updateUser(selectUser);
+				JOptionPane.showMessageDialog(null, ("회원정보가 수정되었습니다."));	
+				pwfPw.setText("");
+				pwfPwc.setText("");
+			}
+		}
+	}
+	protected void actionPerformedBtnCancel(ActionEvent arg0) {
+		User user = StartUI.LOGINUSER;
+		if(user == null) {
+			pwfPw.setText("");
+			pwfPwc.setText("");
+			tfcode.setText("");
+			tfName.setText("");
+			tfId.setText("");
+			tfMail.setText("");
+			tfPhone1.setText("");
+			tfPhone2.setText("");
+			tfPhone3.setText("");
+			tfZipCode.setText("");
+			tfAddr_id.setText("");
+			tfAddr_de.setText("");
 		}else {
-			service.updateUser(user);
-			JOptionPane.showMessageDialog(null, ("회원정보가 수정되었습니다."));	
 			userinfo();
 			pwfPw.setText("");
 			pwfPwc.setText("");
 		}
-	}
-	protected void actionPerformedBtnCancel(ActionEvent arg0) {		userinfo();
-		pwfPw.setText("");
-		pwfPwc.setText("");
 	}
 	protected void actionPerformedBtnsearch(ActionEvent arg0) {
 		User user = new User();
@@ -346,13 +392,27 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfId.setText(selectUser.getId());
 		tfName.setText(selectUser.getName());
 		tfZipCode.setText(selectUser.getZipcode());
-		//tfAddr.setText(selectUser.getAddr_id());
+		tfAddr_id.setText(selectUser.getAddr_id());
 		tfAddr_de.setText(selectUser.getAddr_de());
 		tfMail.setText(selectUser.getEmail());
 		Phone phone = selectUser.getTel();
 		tfPhone1.setText(phone.getPhone1());
 		tfPhone2.setText(phone.getPhone2());
 		tfPhone3.setText(phone.getPhone3());
-		
+	}
+	protected void actionPerformedTfId(ActionEvent arg0) {		actionPerformedBtnsearch(arg0);
+	}
+	protected void actionPerformedBtnadd(ActionEvent arg0) {		User user = new User();
+		user.setId(tfId.getText());
+		user.setCode(tfcode.getText());
+		UserService service = new UserService();
+		User result = service.selectCode(user);
+		System.out.println(result);
+		if(result != null) {
+			JOptionPane.showMessageDialog(null, "이미 존재하는 코드입니다.");
+		}else{
+			service.updateUser(user);
+			JOptionPane.showMessageDialog(null, "회원코드가 변경되었습니다.");
+		}
 	}
 }
