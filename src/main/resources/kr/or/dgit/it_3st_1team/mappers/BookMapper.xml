@@ -99,7 +99,7 @@
 	</select>
 	
 	<!-- isbn으로 도서찾기 -->
-	<select id="selectByIsbn" parameterType="String" resultType="Book">
+	<select id="selectByIsbn" parameterType="String" resultMap="BookWithTakeinoutResult">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book where isbn = #{isbn}
 		GROUP BY isbn HAVING COUNT(isbn) > 0;
 	</select>

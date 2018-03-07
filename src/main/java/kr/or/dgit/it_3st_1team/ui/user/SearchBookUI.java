@@ -38,6 +38,7 @@ import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.BookService;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
+import kr.or.dgit.it_3st_1team.service.LocationService;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel implements ActionListener, ItemListener, MouseListener {
@@ -413,7 +414,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			String author = table.getModel().getValueAt(table.getSelectedRow(), 2).toString();
 			String publish = table.getModel().getValueAt(table.getSelectedRow(), 3).toString();
 			int pubyear = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
-			System.out.println(String.format("%s %s %s %s", name, author, publish, pubyear));
 			Book book = new Book();
 			book.setBkname(name);
 			book.setAuthor(author);
@@ -431,14 +431,11 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			info.tfisbn.setText(resultBook.getIsbn());
 			info.tfpubyear.setText(Integer.toString(resultBook.getPubyear()));
 			info.tfnum.setText(Integer.toString(BookService.getInstance().selectExistNum(isbn)));
-
-			/*
-			 * Location loca = new Location(); loca.setLoca_num(resultBook.getLocation()));
-			 * String section = LocationService.getInstance().selectSectionBynum(loca);
-			 * JOptionPane.showMessageDialog(null, section);
-			 * info.tfLocation.setText(String.format("%s%s",
-			 * resultBook.getLocation(),section));
-			 */
+			Location loca = new Location();
+			loca.setLoca_num(resultBook.getLocation().getLoca_num());
+			String section = LocationService.getInstance().selectSectionBynum(loca);
+			info.tfLocation.setText(String.format("%s%s", section, loca.getLoca_num()));
+			
 			// info.tfreservenum.setText();
 		}
 	}

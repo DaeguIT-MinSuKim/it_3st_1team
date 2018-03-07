@@ -137,4 +137,11 @@ public class Book {
 		return new Object[] {i+1, bkname, author, publish, pubyear, inNum+" / "+ExistNum, isRentable()};
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Book [bkCode=%s, isbn=%s, rentable=%s, bkname=%s, author=%s, publish=%s, pubyear=%s, info=%s, location=%s, take=%s]",
+				bkCode, isbn, rentable, bkname, author, publish, pubyear, info, location, take);
+	}
+
 }
