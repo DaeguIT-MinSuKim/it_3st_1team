@@ -169,7 +169,6 @@ public class ManagerUI extends JPanel implements ActionListener {
 		changePanel(manager);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent arg0) {
-		myChartPanel chart = new myChartPanel();
 		changePanel(chart);
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
