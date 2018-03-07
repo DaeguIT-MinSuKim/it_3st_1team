@@ -14,8 +14,11 @@ import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class VisitorUI extends JPanel implements ActionListener {
-	private JButton btnlogout;
+	private JButton btnlogin;
 	private JButton btnJoin;
+	private JButton btnBookRequest;
+	private JButton btnHistory;
+	private JButton btnNews;
 
 	public VisitorUI() {
 		initComponents();
@@ -37,34 +40,37 @@ public class VisitorUI extends JPanel implements ActionListener {
 		btnBookSearch.setBounds(0, 50, 250, 45);
 		panel.add(btnBookSearch);
 		
-		JButton btnBookRequest = new JButton("도서 신청");
+		btnBookRequest = new JButton("도서 신청");
+		btnBookRequest.addActionListener(this);
 		btnBookRequest.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBookRequest.setForeground(new Color(255, 255, 255));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		btnBookRequest.setBounds(0, 110, 250, 45);
 		panel.add(btnBookRequest);
 		
-		JButton btnHistory = new JButton("대출/반납 이력");
+		btnHistory = new JButton("대출/반납 이력");
+		btnHistory.addActionListener(this);
 		btnHistory.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnHistory.setForeground(new Color(255, 255, 255));
 		btnHistory.setBackground(new Color(158,158,158));
 		btnHistory.setBounds(0, 170, 250, 45);
 		panel.add(btnHistory);
 		
-		JButton btnNews = new JButton("공지 사항");
+		btnNews = new JButton("공지 사항");
+		btnNews.addActionListener(this);
 		btnNews.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnNews.setForeground(new Color(255, 255, 255));
 		btnNews.setBackground(new Color(158,158,158));
 		btnNews.setBounds(0, 230, 250, 45);
 		panel.add(btnNews);
 		
-		btnlogout = new JButton("로그인");
-		btnlogout.addActionListener(this);
-		btnlogout.setBorder(null);
-		btnlogout.setBackground(new Color(224,224,224));
-		btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		btnlogout.setBounds(15, 650, 100, 30);
-		panel.add(btnlogout);
+		btnlogin = new JButton("로그인");
+		btnlogin.addActionListener(this);
+		btnlogin.setBorder(null);
+		btnlogin.setBackground(new Color(224,224,224));
+		btnlogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		btnlogin.setBounds(15, 650, 100, 30);
+		panel.add(btnlogin);
 		
 		btnJoin = new JButton("회원가입");
 		btnJoin.addActionListener(this);
@@ -80,20 +86,37 @@ public class VisitorUI extends JPanel implements ActionListener {
 		add(showpanel);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNews) {
+			actionPerformedBtnNews(e);
+		}
+		if (e.getSource() == btnHistory) {
+			actionPerformedBtnHistory(e);
+		}
+		if (e.getSource() == btnBookRequest) {
+			actionPerformedBtnBookRequest(e);
+		}
 		if (e.getSource() == btnJoin) {
 			actionPerformedBtnJoin(e);
 		}
-		if (e.getSource() == btnlogout) {
-			actionPerformedBtnlogout(e);
+		if (e.getSource() == btnlogin) {
+			actionPerformedbtnlogin(e);
 		}
 	}
-	protected void actionPerformedBtnlogout(ActionEvent e) {
+	protected void actionPerformedbtnlogin(ActionEvent e) {
 		LoginUI login = new LoginUI();
 		login.setVisible(true);
 	}
 	protected void actionPerformedBtnJoin(ActionEvent e) {
 		JoinUI join = new JoinUI();
 		join.setVisible(true);
-
+	}
+	protected void actionPerformedBtnBookRequest(ActionEvent e) {
+		actionPerformedbtnlogin(e);
+	}
+	protected void actionPerformedBtnHistory(ActionEvent e) {
+		actionPerformedbtnlogin(e);
+	}
+	protected void actionPerformedBtnNews(ActionEvent e) {
+		actionPerformedbtnlogin(e);
 	}
 }
