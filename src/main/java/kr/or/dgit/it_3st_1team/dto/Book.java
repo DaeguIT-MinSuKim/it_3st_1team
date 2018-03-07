@@ -60,6 +60,9 @@ public class Book {
 		}
 		return able;
 	}
+	public boolean getterRentable() {
+		return rentable;
+	}
 
 	public void setRentable(boolean rentable) {
 		this.rentable = rentable;

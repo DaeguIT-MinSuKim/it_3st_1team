@@ -11,15 +11,14 @@
 		<result property="publish" column="publish"/>
 		<result property="pubyear" column="pubyear"/>
 		<result property="info" column="info"/>
-		<result property="location.loca_num" column="laca_num"/>
 	</resultMap>
 	
 	<resultMap type="Book" id="BookWithTakeinoutResult" extends="BookResult">
-		<result property="takeinout.inout_no" column="inout_no"/>
-		<result property="takeinout.user.code" column="code" />
-		<result property="takeinout.book.bkCode" column="bkcode" />
-		<result property="takeinout.rentday" column="t.rentday"/>
-		<result property="takeinout.returnday" column="t.returnday"/>
+		<result property="take.inout_no" column="inout_no"/>
+		<result property="take.user.code" column="code" />
+		<result property="take.book.bkCode" column="bkcode" />
+		<result property="take.rentday" column="ti"/>
+		<result property="take.returnday" column="te"/>
 		<result property="location.loca_num" column="loca_num"/>
 		<!-- <result property="location.loca_section" column="loca_section"/> -->
 	</resultMap>
@@ -27,7 +26,7 @@
 	<!-- 분류별 책 검색 -->
 	
 	<sql id="selectCategorySql">
-		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday, t.returnday, loca_num
+		select b.bkcode, b.isbn, b.bkname, b.author, b.publish, b.pubyear, t.rentday as ti, t.returnday as te, loca_num
 		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
 	</sql>
 	
@@ -39,7 +38,10 @@
 				loca_num like #{location.loca_num}
 			</if>
 			<if test="bkname != null">
-				and bkname = #{bkname}
+				and bkname like #{bkname}
+			</if>
+			<if test="rentable != null">
+				and rentable = #{rentable}
 			</if>
 		</where>
 	</sql>
@@ -71,9 +73,10 @@
 		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkcode desc
 	</select>
 		
-	<select id="selectBookAll" parameterType="Book" resultType="Book">
+	<select id="selectBookAll" parameterType="Book" resultMap="BookWithTakeinoutResult">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book 
 		<include refid="whereSql"/>
+		GROUP BY isbn HAVING COUNT(isbn) > 0 order by bkname asc
 	</select>
 	
 	<!-- 보유수 찾기 -->
