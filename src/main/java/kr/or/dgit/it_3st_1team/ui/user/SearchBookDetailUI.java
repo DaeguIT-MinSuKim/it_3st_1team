@@ -18,6 +18,7 @@ import javax.swing.border.LineBorder;
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.service.BookService;
 
+@SuppressWarnings("serial")
 public class SearchBookDetailUI extends JPanel implements ActionListener {
 	private JTextField tfBookcode;
 	private JTextField tfauthor;

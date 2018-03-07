@@ -18,6 +18,7 @@ import kr.or.dgit.it_3st_1team.ui.librarian.InoutBookUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.ManagementBookUI;
 import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 
+@SuppressWarnings("serial")
 public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnlogout;
 	private JButton btnBookinout;
@@ -145,6 +146,12 @@ public class ManagerUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnlogout(ActionEvent arg0) {
+		StartUITest.contentPane.removeAll();
+		MainUI mian = new MainUI();
+		mian.setPreferredSize(new Dimension(1400, 800));
+		StartUITest.contentPane.setVisible(true);
+		StartUITest.contentPane.repaint();
+		StartUITest.contentPane.revalidate();
 	}
 	protected void actionPerformedbtnBookinout(ActionEvent arg0) {
 		btnBookinout.setBackground(new Color(94, 94, 94));
@@ -184,6 +191,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnHistory.setBackground(new Color(94,94,94));
 		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
+
 	}
 	protected void actionPerformedBtnNews(ActionEvent arg0) {
 		btnBookinout.setBackground(new Color(158,158,158));

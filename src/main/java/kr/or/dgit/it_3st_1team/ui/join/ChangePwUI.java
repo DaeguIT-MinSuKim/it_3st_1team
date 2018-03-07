@@ -19,6 +19,7 @@ import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.EmployeeService;
 import kr.or.dgit.it_3st_1team.service.UserService;
 
+@SuppressWarnings("serial")
 public class ChangePwUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;

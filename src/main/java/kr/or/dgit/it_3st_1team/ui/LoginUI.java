@@ -27,6 +27,7 @@ import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
 import kr.or.dgit.it_3st_1team.ui.join.IDPWsearchUI;
 
+@SuppressWarnings("serial")
 public class LoginUI extends JFrame implements MouseListener, ActionListener, FocusListener {
 
 	private JPanel contentPane;
