@@ -60,6 +60,7 @@ public class Book {
 		}
 		return able;
 	}
+	
 	public boolean getterRentable() {
 		return rentable;
 	}

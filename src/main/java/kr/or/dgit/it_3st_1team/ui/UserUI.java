@@ -58,7 +58,7 @@ public class UserUI extends JPanel implements ActionListener {
 		btnBookRequest.setBounds(0, 110, 250, 45);
 		panel.add(btnBookRequest);
 		
-		btnHistory = new JButton("대출/반납 이력");
+		btnHistory = new JButton("도서 이력");
 		btnHistory.addActionListener(this);
 		btnHistory.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnHistory.setForeground(new Color(255, 255, 255));

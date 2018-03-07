@@ -40,9 +40,6 @@
 			<if test="bkname != null">
 				and bkname like #{bkname}
 			</if>
-			<if test="rentable != null">
-				and rentable = #{rentable}
-			</if>
 		</where>
 	</sql>
 	<sql id="whereDetailSql">
@@ -51,13 +48,13 @@
 				bkCode #{bkCode}
 			</if>
 			<if test="bkname != null">
-				and bkname = #{bkname}
+				and bkname like #{bkname}
 			</if>
 			<if test="author != null">
-				and author = #{author}
+				and author like #{author}
 			</if>
 			<if test="publish != null">
-				and publish = #{publish}
+				and publish like #{publish}
 			</if>
 			<if test="pubyear > 0">
 				and pubyear = #{pubyear}

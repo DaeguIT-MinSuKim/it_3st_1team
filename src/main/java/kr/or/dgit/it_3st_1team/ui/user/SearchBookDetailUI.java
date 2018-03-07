@@ -69,6 +69,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		panel.add(lblIsbn);
 		
 		tfBookcode = new JTextField();
+		tfBookcode.addActionListener(this);
 		tfBookcode.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfBookcode.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfBookcode.setBounds(355, 30, 404, 30);
@@ -76,6 +77,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		tfBookcode.setColumns(10);
 		
 		tfauthor = new JTextField();
+		tfauthor.addActionListener(this);
 		tfauthor.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfauthor.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfauthor.setBounds(355, 70, 404, 30);
@@ -83,6 +85,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		tfauthor.setColumns(10);
 		
 		tfpublish = new JTextField();
+		tfpublish.addActionListener(this);
 		tfpublish.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfpublish.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfpublish.setBounds(355, 110, 404, 30);
@@ -90,6 +93,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		tfpublish.setColumns(10);
 		
 		tfpubyear = new JTextField();
+		tfpubyear.addActionListener(this);
 		tfpubyear.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfpubyear.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfpubyear.setBounds(355, 150, 404, 30);
@@ -97,6 +101,7 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 		tfpubyear.setColumns(10);
 		
 		tfisbn = new JTextField();
+		tfisbn.addActionListener(this);
 		tfisbn.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfisbn.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfisbn.setBounds(355, 190, 404, 30);
@@ -130,6 +135,21 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == tfisbn) {
+			actionPerformedTfisbn(e);
+		}
+		if (e.getSource() == tfpubyear) {
+			actionPerformedTfpubyear(e);
+		}
+		if (e.getSource() == tfpublish) {
+			actionPerformedTfpublish(e);
+		}
+		if (e.getSource() == tfauthor) {
+			actionPerformedTfauthor(e);
+		}
+		if (e.getSource() == tfBookcode) {
+			actionPerformedTfBookcode(e);
+		}
 		if (e.getSource() == btnSearch) {
 			actionPerformedBtnSearch(e);
 		}
@@ -150,27 +170,39 @@ public class SearchBookDetailUI extends JPanel implements ActionListener {
 			book.setBkCode(tfBookcode.getText());
 		}
 		if(!tfauthor.getText().trim().isEmpty()){
-			book.setAuthor(tfauthor.getText());
+			book.setAuthor("%"+tfauthor.getText()+"%");
 		}
 		if(!tfisbn.getText().trim().isEmpty()){
 			book.setIsbn(tfisbn.getText());
 		}
 		if(!tfpublish.getText().trim().isEmpty()){
-			book.setPublish(tfpublish.getText());
+			book.setPublish("%"+tfpublish.getText()+"%");
 		}
 		if(!tfpubyear.getText().trim().isEmpty()){
 			book.setPubyear(Integer.parseInt(tfpubyear.getText()));
 		}
 		if(!bookui.tfbookname.getText().trim().isEmpty() && !bookui.tfbookname.getText().equals("책 제목을 입력해주세요.")){
-			book.setBkname(bookui.tfbookname.getText());
-			System.out.println(bookui.tfbookname.getText());
+			book.setBkname("%"+bookui.tfbookname.getText()+"%");
 		}
-		
 		
 		List<Book> list = BookService.getInstance().selectBookDetail(book);
 		bookui.loadDatas(list);
 		bookui.cellAlign(SwingConstants.CENTER,0,1,3,4,5,6);
 		bookui.cellAlign(SwingConstants.LEFT,1,2);
 		bookui.PreferredWidth(40,400,160,150,100,130,130);
+	}
+	protected void actionPerformedTfBookcode(ActionEvent e) {
+		actionPerformedBtnSearch(e);
+	}
+	protected void actionPerformedTfauthor(ActionEvent e) {
+		actionPerformedBtnSearch(e);
+	}
+	protected void actionPerformedTfpublish(ActionEvent e) {
+		actionPerformedBtnSearch(e);
+	}
+	protected void actionPerformedTfpubyear(ActionEvent e) {
+		actionPerformedBtnSearch(e);
+	}
+	protected void actionPerformedTfisbn(ActionEvent e) {		actionPerformedBtnSearch(e);
 	}
 }

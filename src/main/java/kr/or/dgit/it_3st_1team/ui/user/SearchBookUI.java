@@ -32,7 +32,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import kr.or.dgit.it_3st_1team.dao.LocationDao;
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.Location;
@@ -80,6 +79,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		add(cbbmid);
 
 		tfbookname = new JTextField();
+		tfbookname.addActionListener(this);
 		tfbookname.addMouseListener(this);
 		tfbookname
 				.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
@@ -126,7 +126,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		loadDatas(list);
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
 
@@ -241,6 +241,9 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == tfbookname) {
+			actionPerformedTfbookname(e);
+		}
 		if (e.getSource() == btnSearchDe) {
 			actionPerformedBtnSearchDe(e);
 		}
@@ -438,5 +441,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			
 			// info.tfreservenum.setText();
 		}
+	}
+	protected void actionPerformedTfbookname(ActionEvent e) {
+		actionPerformedBtnSearch(e);
 	}
 }
