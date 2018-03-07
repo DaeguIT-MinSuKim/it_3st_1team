@@ -52,9 +52,9 @@ public class TakeinoutServiceTest {
 	}	
 
 
-	@Test
+/*	@Test
 	public void test3selectOutNum() {
 		String Isbn = "9788962880069";
 		int res = service.selectOutNum(Isbn);
-	}	
+	}*/	
 }
