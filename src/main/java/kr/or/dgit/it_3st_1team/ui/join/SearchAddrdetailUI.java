@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -82,8 +83,8 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		
 		btnSearch = new JButton("검색");
 		btnSearch.addActionListener(this);
-		btnSearch.setForeground(Color.BLACK);
-		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		btnSearch.setForeground(Color.WHITE);
+		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		btnSearch.setBorder(null);
 		btnSearch.setBackground(new Color(52, 152, 219));
 		btnSearch.setBounds(615, 24, 129, 40);
@@ -105,9 +106,7 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setEnabled(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		table.getColumnModel().getColumn(0).setPreferredWidth(10);	//번호
-		table.getColumnModel().getColumn(1).setPreferredWidth(500); //주소
-		table.getColumnModel().getColumn(2).setPreferredWidth(30); //우편번호
+		tablealign();
 		
 		scrollPane.setViewportView(table);
 	}
@@ -167,20 +166,26 @@ public class SearchAddrdetailUI extends JFrame implements ActionListener, MouseL
 			/*post.setSigungu(tfAddrName.getText());
 			post.setDoro(tfAddrName.getText());*/
 			table.setModel(new NonEditableModel(getRow2(),getColunmNames()));
-			table.getColumnModel().getColumn(0).setPreferredWidth(10);	//번호
-			table.getColumnModel().getColumn(1).setPreferredWidth(500); //주소
-			table.getColumnModel().getColumn(2).setPreferredWidth(30); //우편번호
-			
+			tablealign();			
 			table.repaint();
 			table.revalidate();
 		}else if(box.equals("구 주소")){
 			table.setModel(new NonEditableModel(getRow(),getColunmNames()));
-			table.getColumnModel().getColumn(0).setPreferredWidth(10);	//번호
-			table.getColumnModel().getColumn(1).setPreferredWidth(500); //주소
-			table.getColumnModel().getColumn(2).setPreferredWidth(30); //우편번호
+			tablealign();
 			
 			table.repaint();
 			table.revalidate();
+		}
+	}
+	public void tablealign() {
+		cellAlign(SwingConstants.CENTER, 0, 2);
+		cellAlign(SwingConstants.LEFT, 1);
+		PreferredWidth(10, 450, 80);
+	}
+	public void PreferredWidth(int... width) {
+		TableColumnModel model1 = table.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model1.getColumn(i).setPreferredWidth(width[i]);
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
