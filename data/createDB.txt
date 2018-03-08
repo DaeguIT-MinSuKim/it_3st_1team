@@ -276,3 +276,6 @@ ALTER TABLE bookmanagement.request
 		REFERENCES bookmanagement.users ( -- 회원
 			code -- 회원코드
 		)on update cascade;
+		
+ALTER TABLE bookmanagement.request
+	ADD column (reqday date null);		
