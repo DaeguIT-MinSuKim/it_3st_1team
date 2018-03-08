@@ -165,6 +165,16 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		}
 	}
 	
+	public void changepanel(JPanel panel) {
+		contentPane.removeAll();
+		contentPane.add(panel);
+		contentPane.repaint();
+		contentPane.revalidate();
+		repaint();
+		revalidate();
+	}
+	
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == pwtf) {
 			actionPerformedPwtf(e);
@@ -202,7 +212,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 				revalidate();
 			}
 		}catch(NullPointerException er) {
-			er.printStackTrace();
+			/*er.printStackTrace();*/
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
 		}
 	}
@@ -238,6 +248,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	protected void actionPerformedBtnSearch(ActionEvent e) {
 		contentPane.removeAll();
 		VisitorUI vis = new VisitorUI();
+		vis.setStartUI(this);
 		vis.setBounds(0, 0, 1400, 800);
 		contentPane.add(vis);
 		contentPane.repaint();

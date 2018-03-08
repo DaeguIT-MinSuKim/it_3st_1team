@@ -23,7 +23,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.dgit.it_3st_1team.dto.Employee;
 import kr.or.dgit.it_3st_1team.dto.User;
+import kr.or.dgit.it_3st_1team.service.EmployeeService;
 import kr.or.dgit.it_3st_1team.service.UserService;
 import kr.or.dgit.it_3st_1team.ui.join.IDPWsearchUI;
 
@@ -39,8 +41,11 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 	private JButton btnUserLogin;
 	private JButton btnMngLogin;
 	public static User LOGINUSER;
+	public static Employee LOGINEMP;
+	private StartUI staui;
 
-	public LoginUI() {
+	public LoginUI(StartUI staui) {
+		this.staui = staui;
 		initComponents();
 	}
 	private void initComponents() {
@@ -154,28 +159,43 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 		}
 	}
 	protected void actionPerformedBtnUserLogin(ActionEvent e) {
+		char[] pwchar = pwtf.getPassword();
+		String pw = new String(pwchar);
 		UserService service = new UserService();
 		User user = new User();
 		user.setId(tfID.getText());
-		user.setPw(pwtf.getText());
+		user.setPw(pw);
 		User selectUser = service.selectIdPw(user);
 		if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
-			
 			LOGINUSER = selectUser;
-			StartUI start = new StartUI();
 			UserUI userui = new UserUI(selectUser);
 			userui.setBounds(0, 0, 1400, 800);
 			userui.lblname.setText((selectUser.getName()));
-			start.add(userui);
-			start.repaint();
-			start.revalidate();
+			staui.changepanel(userui);
 			dispose();
 		}else {
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
 		}
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
-		
+		char[] pwchar = pwtf.getPassword();
+		String pw = new String(pwchar);
+		JOptionPane.showMessageDialog(null, pw);
+		EmployeeService service = new EmployeeService();
+		Employee emp = new Employee();
+		emp.setId(tfID.getText());
+		emp.setPw(pw);
+		Employee selectEmp = service.selectIdPw(emp);
+		if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
+			LOGINEMP = selectEmp;
+			ManagerUI empui = new ManagerUI(selectEmp);
+			empui.setBounds(0, 0, 1400, 800);
+			empui.lblname.setText((selectEmp.getName()));
+			staui.changepanel(empui);
+			dispose();
+		}else {
+			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
+		}
 	}
 	protected void mouseClickedTfID(MouseEvent e) {
 		tfID.setText("");

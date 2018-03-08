@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import kr.or.dgit.it_3st_1team.ui.LoginUI;
+import kr.or.dgit.it_3st_1team.ui.StartUI;
 import kr.or.dgit.it_3st_1team.ui.join.JoinUI;
 
 import java.awt.event.ActionListener;
@@ -19,9 +20,14 @@ public class VisitorUI extends JPanel implements ActionListener {
 	private JButton btnBookRequest;
 	private JButton btnHistory;
 	private JButton btnNews;
+	private StartUI staui;
 
 	public VisitorUI() {
 		initComponents();
+	}
+	
+	public void setStartUI(StartUI staui) {
+		this.staui = staui;
 	}
 
 	private void initComponents() {
@@ -103,7 +109,7 @@ public class VisitorUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedbtnlogin(ActionEvent e) {
-		LoginUI login = new LoginUI();
+		LoginUI login = new LoginUI(staui);
 		login.setVisible(true);
 	}
 	protected void actionPerformedBtnJoin(ActionEvent e) {
