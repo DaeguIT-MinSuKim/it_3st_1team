@@ -20,4 +20,15 @@
 		select code, bkcode, isbn, resday 
 		from reserve
 	</select>
+	
+	<select id="selectReserveNum" parameterType="Reserve" resultType="int">
+		select count(isbn)
+		from reserve
+		where isbn = #{isbn}
+	</select>
+	
+	<insert id="insertReserve" parameterType="Reserve">
+		insert into reserve(code, bkcode, isbn, resday)
+		values(#{code}, #{bkcode}, #{isbn}, #{resday})
+	</insert>
 </mapper>

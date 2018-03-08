@@ -3,6 +3,9 @@ package kr.or.dgit.it_3st_1team.ui.join;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,13 +20,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import kr.or.dgit.it_3st_1team.dto.Phone;
-import kr.or.dgit.it_3st_1team.dto.Post;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.UserService;
-
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class JoinUI extends JFrame implements ActionListener {

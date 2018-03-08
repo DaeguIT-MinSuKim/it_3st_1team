@@ -41,4 +41,22 @@ public class ReserveServiceTest {
 		List<Reserve> list = service.selectAllReserve();
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void test3selectReserveNum() {
+		Reserve res = new Reserve();
+		res.setIsbn("9788971998014");
+		int num = service.selectReserveNum(res);
+	}
+	
+	@Test
+	public void test4insertReserve() {
+		Reserve res = new Reserve();
+		res.setCode("6");
+		res.setBkcode("122008EM0000222221");
+		res.setIsbn("9788955619317");
+		Date day = new Date();
+		res.setResday(day);
+		int num = service.insertReserve(res);
+	}
 }

@@ -35,9 +35,12 @@ import javax.swing.table.TableColumnModel;
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.Location;
+import kr.or.dgit.it_3st_1team.dto.Reserve;
 import kr.or.dgit.it_3st_1team.service.BookService;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.LocationService;
+import kr.or.dgit.it_3st_1team.service.ReserveService;
+import kr.or.dgit.it_3st_1team.service.TakeinoutService;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel implements ActionListener, ItemListener, MouseListener {
@@ -440,13 +443,19 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			info.tpinfo.setText(resultBook.getInfo());
 			info.tfisbn.setText(resultBook.getIsbn());
 			info.tfpubyear.setText(Integer.toString(resultBook.getPubyear()));
-			info.tfnum.setText(Integer.toString(BookService.getInstance().selectExistNum(isbn)));
+			int ExistNum = BookService.getInstance().selectExistNum(isbn);
+			TakeinoutService service = new TakeinoutService();
+			int Num = service.selectOutNum(isbn);
+			int inNum = ExistNum - Num;
+			info.tfnum.setText(String.format("%s / %s", inNum,ExistNum));
 			Location loca = new Location();
 			loca.setLoca_num(resultBook.getLocation().getLoca_num());
 			String section = LocationService.getInstance().selectSectionBynum(loca);
 			info.tfLocation.setText(String.format("%s%s", section, loca.getLoca_num()));
-			
-			// info.tfreservenum.setText();
+			Reserve res = new Reserve();
+			res.setIsbn(isbn);
+			int num = ReserveService.getInstance().selectReserveNum(res);
+			info.tfreservenum.setText(Integer.toString(num));
 		}
 	}
 	protected void actionPerformedTfbookname(ActionEvent e) {

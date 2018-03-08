@@ -36,4 +36,20 @@ public class ReserveService {
 		}
 	}
 	
+	public int selectReserveNum(Reserve res){
+		log.debug("selectReserveNum()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectReserveNum", res);
+		}
+	}
+	
+	public int insertReserve(Reserve res){
+		log.debug("insertReserve()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int num = sqlSession.insert(namespace + "insertReserve", res);
+			sqlSession.commit();
+			return num;
+		}
+	}
+	
 }

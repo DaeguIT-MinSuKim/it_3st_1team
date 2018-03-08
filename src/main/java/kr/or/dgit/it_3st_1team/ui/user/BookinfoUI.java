@@ -12,9 +12,11 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class BookinfoUI extends JFrame {
+public class BookinfoUI extends JFrame implements ActionListener {
 	public JTextField tfBookcode;
 	public JTextField tfauthor;
 	public JTextField tfpublish;
@@ -195,11 +197,20 @@ public class BookinfoUI extends JFrame {
 		panel.add(btnreserve);
 		
 		btnClose = new JButton("닫기");
+		btnClose.addActionListener(this);
 		btnClose.setForeground(Color.WHITE);
 		btnClose.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		btnClose.setBackground(new Color(52, 152, 219));
 		btnClose.setBounds(808, 420, 70, 30);
 		btnClose.setBorder(null);
 		panel.add(btnClose);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnClose) {
+			actionPerformedBtnClose(e);
+		}
+	}
+	protected void actionPerformedBtnClose(ActionEvent e) {
+		dispose();
 	}
 }
