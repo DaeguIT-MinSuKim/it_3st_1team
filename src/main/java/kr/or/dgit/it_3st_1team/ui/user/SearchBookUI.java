@@ -111,6 +111,13 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		add(panel_1);
 		panel_1.setLayout(null);
 
+		cblistview = new JCheckBox();
+		cblistview.addItemListener(this);
+		cblistview.setBounds(870, 0, 21, 21);
+		panel_1.add(cblistview);
+		cblistview.setBackground(Color.WHITE);
+		cblistview.setSelected(false);
+		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 30, 1110, 542);
 		panel_1.add(scrollPane);
@@ -130,30 +137,12 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
-
-		/*
-		 * table.getColumnModel().getColumn(0).setPreferredWidth(40); //번호
-		 * table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
-		 * table.getColumnModel().getColumn(2).setPreferredWidth(160); //저자
-		 * table.getColumnModel().getColumn(3).setPreferredWidth(150); //출판사
-		 * table.getColumnModel().getColumn(4).setPreferredWidth(100); //출판년도
-		 * table.getColumnModel().getColumn(5).setPreferredWidth(130); //비치수/보유수
-		 * table.getColumnModel().getColumn(6).setPreferredWidth(130); //대여가능여부
-		 */
-
 		scrollPane.setViewportView(table);
-
-		cblistview = new JCheckBox();
-		cblistview.addItemListener(this);
-		cblistview.setBounds(870, 0, 21, 21);
-		panel_1.add(cblistview);
-		cblistview.setBackground(Color.WHITE);
-		cblistview.setSelected(false);
+		
 		JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
 		lblListview.setBounds(900, 0, 178, 22);
 		panel_1.add(lblListview);
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		list = BookService.getInstance().selectBookStartAll();
 		for(Book b: list) {
 			if(b.getterRentable() == true) {
 				isList.add(b);
