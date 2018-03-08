@@ -279,3 +279,6 @@ ALTER TABLE bookmanagement.request
 		
 ALTER TABLE bookmanagement.request
 	ADD column (reqday date null);		
+	
+ALTER TABLE bookmanagement.reserve
+	ADD column (resday date null);
