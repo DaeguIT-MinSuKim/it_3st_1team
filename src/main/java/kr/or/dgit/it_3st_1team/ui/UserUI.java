@@ -28,6 +28,7 @@ public class UserUI extends JPanel implements ActionListener {
 	private JButton btnUserUpdate;
 	public JLabel lblname;
 	public User user;
+	private JButton btnlogout;
 	
 	public UserUI(User user) {
 		this.user = user;
@@ -82,7 +83,8 @@ public class UserUI extends JPanel implements ActionListener {
 		btnUserUpdate.setBounds(0, 290, 250, 45);
 		panel.add(btnUserUpdate);
 		
-		JButton btnlogout = new JButton("로그아웃");
+		btnlogout = new JButton("로그아웃");
+		btnlogout.addActionListener(this);
 		btnlogout.setBorder(null);
 		btnlogout.setBackground(new Color(224,224,224));
 		btnlogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -114,6 +116,9 @@ public class UserUI extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnlogout) {
+			actionPerformedBtnlogout(e);
+		}
 		if (e.getSource() == btnNews) {
 			actionPerformedBtnNews(e);
 		}
@@ -180,5 +185,10 @@ public class UserUI extends JPanel implements ActionListener {
 	protected void actionPerformedBtnNews(ActionEvent e) {
 		NoticeUI no = new NoticeUI();
 		changePanel(no);
+	}
+	protected void actionPerformedBtnlogout(ActionEvent e) {
+		((StartUI) getTopLevelAncestor()).dispose();
+		StartUI starui = new StartUI();
+		starui.setVisible(true);
 	}
 }
