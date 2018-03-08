@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -265,6 +267,10 @@ public class RequestBookUI extends JPanel implements ActionListener {
 		req.setAuthor(tfauthor.getText());
 		req.setBkname(tfBkname.getText());
 		req.setIsbn(tfisbn.getText());
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		sd.format(today);
+		req.setReqday(today);
 		
 		if(tfprice.getText().trim().isEmpty()) {
 			req.setPrice(0);
@@ -274,7 +280,7 @@ public class RequestBookUI extends JPanel implements ActionListener {
 		
 		req.setPubyear(Integer.parseInt(tfpubyear.getText()));
 		req.setPublish(tfpublish.getText());
-		req.setUser(user);
+		req.setCode(user.getCode());
 		RequestService sercive = new RequestService();
 		sercive.insertRequest(req);
 		JOptionPane.showMessageDialog(null, "도서신청이 완료되었습니다.");

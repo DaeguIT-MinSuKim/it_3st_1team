@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import kr.or.dgit.it_3st_1team.dto.History;
-import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.HistoryService;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

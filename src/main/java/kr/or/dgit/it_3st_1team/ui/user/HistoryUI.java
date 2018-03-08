@@ -21,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.History;
+import kr.or.dgit.it_3st_1team.dto.Request;
 import kr.or.dgit.it_3st_1team.service.HistoryService;
+import kr.or.dgit.it_3st_1team.service.RequestService;
 import kr.or.dgit.it_3st_1team.ui.StartUI;
 import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI.NonEditableModel;
 
@@ -32,6 +34,8 @@ public class HistoryUI extends JPanel implements ActionListener {
 	private JRadioButton rdbtnAll;
 	private JRadioButton rdbtnout;
 	private JRadioButton rdbtnin;
+	private JRadioButton rdbrequest;
+	private JRadioButton rdbreserve;
 
 	public HistoryUI() {
 		initComponents();
@@ -60,6 +64,7 @@ public class HistoryUI extends JPanel implements ActionListener {
 		rdbtnAll.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		rdbtnAll.setBackground(Color.WHITE);
 		rdbtnAll.setBounds(0, 0, 100, 30);
+		rdbtnAll.setSelected(true);
 		pTableHistory.add(rdbtnAll);
 		group.add(rdbtnAll);
 		
@@ -84,14 +89,15 @@ public class HistoryUI extends JPanel implements ActionListener {
 		label.setBounds(225, 0, 30, 30);
 		pTableHistory.add(label);
 		
-		JRadioButton rdbreserve = new JRadioButton("예약");
+		rdbreserve = new JRadioButton("예약");
 		rdbreserve.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		rdbreserve.setBackground(Color.WHITE);
 		rdbreserve.setBounds(240, 0, 60, 30);
 		group.add(rdbreserve);
 		pTableHistory.add(rdbreserve);
 		
-		JRadioButton rdbrequest = new JRadioButton("신청");
+		rdbrequest = new JRadioButton("신청");
+		rdbrequest.addActionListener(this);
 		rdbrequest.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		rdbrequest.setBackground(Color.WHITE);
 		rdbrequest.setBounds(300, 0, 58, 30);
@@ -112,18 +118,10 @@ public class HistoryUI extends JPanel implements ActionListener {
 		loadDatas(Collections.emptyList());
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		scrollPane.setViewportView(table);
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(50,410,200,150,150,150,100,120);
-		/*table.getColumnModel().getColumn(0).setPreferredWidth(40);	//번호
-		table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
-		table.getColumnModel().getColumn(2).setPreferredWidth(110); //저자
-		table.getColumnModel().getColumn(3).setPreferredWidth(130);  //대출일
-		table.getColumnModel().getColumn(4).setPreferredWidth(130);  //반납예정일
-		table.getColumnModel().getColumn(5).setPreferredWidth(100); //연체일수
-		table.getColumnModel().getColumn(6).setPreferredWidth(100); //상태
-*/		scrollPane.setViewportView(table);
-
 		rdbtnAll.setSelected(true);
 		selectStartAllrdb();
 	}
@@ -136,8 +134,25 @@ public class HistoryUI extends JPanel implements ActionListener {
 			}
 		return rows;
 	}
+	
+	private Object[][] getRow2(List<Request> list) {
+		Object[][] rows = null;
+		rows = new Object[list.size()][];
+			for (int i = 0; i < rows.length; i++) {
+				rows[i] = list.get(i).RequestToArray(i);
+			}
+		return rows;
+	}
 	private Object[] getColunmNames() {
-		return new String[] {"NO", "도서명", "저자", "대출일","반납예정일","실반납일", "연체일수","상태"};
+		String[] names = null;
+		if(rdbtnAll.isSelected()||rdbtnin.isSelected()||rdbtnout.isSelected()) {
+			names = new String[] {"NO", "도서명", "저자", "대출일","반납예정일","실반납일", "연체일수","상태"}; 
+		}else if(rdbreserve.isSelected()) {
+			names = new String[] {"NO", "도서명", "저자", "대출일","반납예정일","실반납일", "연체일수","상태"};
+		}else if(rdbrequest.isSelected()) {
+			names = new String[] {"NO", "도서명", "저자", "출판사", "출판년도", "isbn", "신청일"};
+		}
+		return names;
 	}
 	public void loadDatas(List<History> list) {
 		NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
@@ -145,6 +160,22 @@ public class HistoryUI extends JPanel implements ActionListener {
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(50,410,200,150,150,150,100,120);
+		invalidate();
+	}
+	public void loadDatasHistory(List<History> list) {
+		NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
+		table.setModel(model);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7);
+		cellAlign(SwingConstants.LEFT, 1, 2);
+		PreferredWidth(50,410,200,150,150,150,100,120);
+		invalidate();
+	}
+	public void loadDatasRequest(List<Request> list) {
+		NonEditableModel model = new NonEditableModel(getRow2(list), getColunmNames());
+		table.setModel(model);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+		cellAlign(SwingConstants.LEFT, 1, 2);
+		PreferredWidth(50,410,200,150,150,150,120);
 		invalidate();
 	}
 	class NonEditableModel extends DefaultTableModel {
@@ -174,6 +205,9 @@ public class HistoryUI extends JPanel implements ActionListener {
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == rdbrequest) {
+			actionPerformedRdbrequest(e);
+		}
 		if (e.getSource() == rdbtnin) {
 			actionPerformedRdbtnin(e);
 		}
@@ -192,18 +226,25 @@ public class HistoryUI extends JPanel implements ActionListener {
 		History his = new History();
 		his.setCode(StartUI.LOGINUSER.getCode());
 		List<History> list = HistoryService.getInstance().selectAllhistory(his);
-		loadDatas(list);
+		loadDatasHistory(list);
 	}
 	protected void actionPerformedRdbtnout(ActionEvent e) {
 		History his = new History();
 		his.setCode(StartUI.LOGINUSER.getCode());
 		List<History> list = HistoryService.getInstance().selectOuthistory(his);
-		loadDatas(list);
+		loadDatasHistory(list);
 	}
 	protected void actionPerformedRdbtnin(ActionEvent e) {
 		History his = new History();
 		his.setCode(StartUI.LOGINUSER.getCode());
 		List<History> list = HistoryService.getInstance().selectInhistory(his);
-		loadDatas(list);
+		loadDatasHistory(list);
+	}
+	protected void actionPerformedRdbrequest(ActionEvent e) {
+		Request req = new Request();
+		req.setCode(StartUI.LOGINUSER.getCode());
+		RequestService service = new RequestService();
+		List<Request> list = service.selectRequestByCode(req);
+		loadDatasRequest(list);
 	}
 }

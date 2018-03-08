@@ -1,5 +1,10 @@
 package kr.or.dgit.it_3st_1team;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -7,6 +12,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.dto.Request;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.RequestService;
@@ -29,24 +35,42 @@ public class RequestServiceTest {
 	public void test1insertRequest() {
 		Request request = new Request();
 		User user = new User("6");
-		request.setUser(user);
+		request.setCode(user.getCode());
 		request.setAuthor("S.L 그레이");
 		request.setBkname("아파트먼트");
 		request.setPublish("검은숲");
 		request.setPubyear(2018);
 		request.setIsbn("9788952790019");
-		request.setPrice(2018);
+		request.setPrice(19900);
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		sd.format(today);
+		request.setReqday(today);
 		
 		int res = service.insertRequest(request);
 		Assert.assertEquals(1, res);
 	}
 
-	@Test
+	/*@Test
 	public void test2deleteRequest() {
 		Request request = new Request();
 		request.setIsbn("9788952790019");
 		
 		int res = service.deleteRequest(request);
 		Assert.assertEquals(1, res);
+	}*/
+	
+	@Test
+	public void test3selectAllhistory() {
+		Request req = new Request();
+		req.setCode("6");
+		List<Request> list = service.selectRequestByCode(req);
+		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void test4selectAllRequest() {
+		List<Request> list = service.selectAllRequest();
+		Assert.assertNotNull(list);
 	}
 }

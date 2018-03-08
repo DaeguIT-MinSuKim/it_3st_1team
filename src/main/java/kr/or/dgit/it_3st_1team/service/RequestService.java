@@ -1,5 +1,7 @@
 package kr.or.dgit.it_3st_1team.service;
 
+import java.util.List;
+
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
@@ -30,6 +32,20 @@ public class RequestService {
 			sqlSession.commit();
 		}
 		return res;
+	}
+	
+	public List<Request> selectRequestByCode(Request req){
+		log.debug("selectRequestByCode()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectRequestByCode", req);
+		}
+	}
+	
+	public List<Request> selectAllRequest(){
+		log.debug("selectAllRequest()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectAllRequest");
+		}
 	}
 	
 }

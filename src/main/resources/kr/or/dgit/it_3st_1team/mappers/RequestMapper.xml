@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.it_3st_1team.dao.RequestDao">
+
+	<resultMap type="Request" id="RequestResult">
+		<id property="code" column="code"/> 
+		<result property="reqday" column="reqday"/>
+		<result property="price" column="price"/>
+		<result property="isbn" column="isbn"/>
+		<result property="pubyear" column="pubyear"/>
+		<result property="publish" column="publish"/>
+		<result property="author" column="author"/>
+	</resultMap>
+	
+	<select id="selectRequestByCode" parameterType="Request" resultMap="RequestResult">
+		select code, bkname, author, publish, pubyear, isbn, price, reqday from request where code = #{code}
+	</select>
+	
+	<select id="selectAllRequest" parameterType="Request" resultMap="RequestResult">
+		select code, bkname, author, publish, pubyear, isbn, price, reqday from request
+	</select>
 	
 	<insert id="insertRequest" parameterType="Request">
-		insert into request(code, bkname, author, publish, pubyear, isbn, price) 
-		values(#{user.code},#{bkname},#{author},#{publish},#{pubyear},#{isbn},#{price})
+		insert into request(code, bkname, author, publish, pubyear, isbn, price, reqday) 
+		values(#{code},#{bkname},#{author},#{publish},#{pubyear},#{isbn},#{price},#{reqday})
 	</insert>
 	
 	<delete id="deleteRequest" parameterType="Request">
