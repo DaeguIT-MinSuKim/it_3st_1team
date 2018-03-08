@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -22,10 +20,11 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.dto.Request;
+import kr.or.dgit.it_3st_1team.dto.Reserve;
 import kr.or.dgit.it_3st_1team.service.HistoryService;
 import kr.or.dgit.it_3st_1team.service.RequestService;
+import kr.or.dgit.it_3st_1team.service.ReserveService;
 import kr.or.dgit.it_3st_1team.ui.StartUI;
-import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI.NonEditableModel;
 
 @SuppressWarnings("serial")
 public class HistoryUI extends JPanel implements ActionListener {
@@ -90,6 +89,7 @@ public class HistoryUI extends JPanel implements ActionListener {
 		pTableHistory.add(label);
 		
 		rdbreserve = new JRadioButton("예약");
+		rdbreserve.addActionListener(this);
 		rdbreserve.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		rdbreserve.setBackground(Color.WHITE);
 		rdbreserve.setBounds(240, 0, 60, 30);
@@ -143,12 +143,21 @@ public class HistoryUI extends JPanel implements ActionListener {
 			}
 		return rows;
 	}
+	
+	private Object[][] getRow3(List<Reserve> list) {
+		Object[][] rows = null;
+		rows = new Object[list.size()][];
+			for (int i = 0; i < rows.length; i++) {
+				rows[i] = list.get(i).ReserveToArray(i);
+			}
+		return rows;
+	}
 	private Object[] getColunmNames() {
 		String[] names = null;
 		if(rdbtnAll.isSelected()||rdbtnin.isSelected()||rdbtnout.isSelected()) {
 			names = new String[] {"NO", "도서명", "저자", "대출일","반납예정일","실반납일", "연체일수","상태"}; 
 		}else if(rdbreserve.isSelected()) {
-			names = new String[] {"NO", "도서명", "저자", "대출일","반납예정일","실반납일", "연체일수","상태"};
+			names = new String[] {"NO", "도서명", "저자", "출판사", "출판년도", "isbn", "예약일"};
 		}else if(rdbrequest.isSelected()) {
 			names = new String[] {"NO", "도서명", "저자", "출판사", "출판년도", "isbn", "신청일"};
 		}
@@ -172,6 +181,14 @@ public class HistoryUI extends JPanel implements ActionListener {
 	}
 	public void loadDatasRequest(List<Request> list) {
 		NonEditableModel model = new NonEditableModel(getRow2(list), getColunmNames());
+		table.setModel(model);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+		cellAlign(SwingConstants.LEFT, 1, 2);
+		PreferredWidth(50,410,200,150,150,150,120);
+		invalidate();
+	}
+	public void loadDatasReserve(List<Reserve> list) {
+		NonEditableModel model = new NonEditableModel(getRow3(list), getColunmNames());
 		table.setModel(model);
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
@@ -205,6 +222,9 @@ public class HistoryUI extends JPanel implements ActionListener {
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == rdbreserve) {
+			actionPerformedRdbreserve(e);
+		}
 		if (e.getSource() == rdbrequest) {
 			actionPerformedRdbrequest(e);
 		}
@@ -246,5 +266,11 @@ public class HistoryUI extends JPanel implements ActionListener {
 		RequestService service = new RequestService();
 		List<Request> list = service.selectRequestByCode(req);
 		loadDatasRequest(list);
+	}
+	protected void actionPerformedRdbreserve(ActionEvent e) {
+		Reserve res = new Reserve();
+		res.setCode(StartUI.LOGINUSER.getCode());
+		List<Reserve> list = ReserveService.getInstance().selectReserveByCode(res);
+		loadDatasReserve(list);
 	}
 }

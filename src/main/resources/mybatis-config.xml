@@ -42,5 +42,6 @@
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/PostMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/TitleMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/HistoryMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/ReserveMapper.xml"/>
 	</mappers>
 </configuration>
