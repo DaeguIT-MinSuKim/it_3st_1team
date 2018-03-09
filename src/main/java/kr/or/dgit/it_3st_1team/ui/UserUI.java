@@ -24,7 +24,6 @@ public class UserUI extends JPanel implements ActionListener {
 	private JPanel show;
 	private JButton btnBookRequest;
 	private JButton btnHistory;
-	private JButton btnNews;
 	private JButton btnUserUpdate;
 	public JLabel lblname;
 	public User user;
@@ -68,20 +67,12 @@ public class UserUI extends JPanel implements ActionListener {
 		btnHistory.setBounds(0, 170, 250, 45);
 		panel.add(btnHistory);
 		
-		btnNews = new JButton("공지 사항");
-		btnNews.addActionListener(this);
-		btnNews.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnNews.setForeground(new Color(255, 255, 255));
-		btnNews.setBackground(new Color(158,158,158));
-		btnNews.setBounds(0, 230, 250, 45);
-		panel.add(btnNews);
-		
 		btnUserUpdate = new JButton("개인 정보 수정");
 		btnUserUpdate.addActionListener(this);
 		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUserUpdate.setForeground(new Color(255, 255, 255));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		btnUserUpdate.setBounds(0, 290, 250, 45);
+		btnUserUpdate.setBounds(0, 230, 250, 45);
 		panel.add(btnUserUpdate);
 		
 		btnlogout = new JButton("로그아웃");
@@ -120,9 +111,6 @@ public class UserUI extends JPanel implements ActionListener {
 		if (e.getSource() == btnlogout) {
 			actionPerformedBtnlogout(e);
 		}
-		if (e.getSource() == btnNews) {
-			actionPerformedBtnNews(e);
-		}
 		if (e.getSource() == btnHistory) {
 			actionPerformedBtnHistory(e);
 		}
@@ -140,7 +128,6 @@ public class UserUI extends JPanel implements ActionListener {
 		btnBookSearch.setBackground(new Color(127,127,127));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		SearchBookUI search = new SearchBookUI();
 		changePanel(search);
@@ -149,7 +136,6 @@ public class UserUI extends JPanel implements ActionListener {
 		btnBookRequest.setBackground(new Color(127,127,127));
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		RequestBookUI request = new RequestBookUI();
 		changePanel(request);
@@ -158,7 +144,6 @@ public class UserUI extends JPanel implements ActionListener {
 		btnUserUpdate.setBackground(new Color(127,127,127));
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
 		update.btnadd.setVisible(false);
@@ -170,7 +155,6 @@ public class UserUI extends JPanel implements ActionListener {
 		btnHistory.setBackground(new Color(127,127,127));
 		btnBookSearch.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnBookRequest.setBackground(new Color(158,158,158));
 		HistoryUI history = new HistoryUI();
 		changePanel(history);
@@ -182,10 +166,6 @@ public class UserUI extends JPanel implements ActionListener {
 		show.add(jpanel);
 		show.repaint();
 		revalidate();
-	}
-	protected void actionPerformedBtnNews(ActionEvent e) {
-		NoticeUI no = new NoticeUI();
-		changePanel(no);
 	}
 	protected void actionPerformedBtnlogout(ActionEvent e) {
 		((StartUI) getTopLevelAncestor()).dispose();
