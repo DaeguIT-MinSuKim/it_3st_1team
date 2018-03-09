@@ -32,13 +32,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import kr.or.dgit.it_3st_1team.dao.LocationDao;
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.Location;
+import kr.or.dgit.it_3st_1team.dto.Reserve;
 import kr.or.dgit.it_3st_1team.service.BookService;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.LocationService;
+import kr.or.dgit.it_3st_1team.service.ReserveService;
+import kr.or.dgit.it_3st_1team.service.TakeinoutService;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel implements ActionListener, ItemListener, MouseListener {
@@ -81,6 +83,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		add(cbbmid);
 
 		tfbookname = new JTextField();
+		tfbookname.addActionListener(this);
 		tfbookname.addMouseListener(this);
 		tfbookname
 				.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
@@ -111,6 +114,13 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		add(panel_1);
 		panel_1.setLayout(null);
 
+		cblistview = new JCheckBox();
+		cblistview.addItemListener(this);
+		cblistview.setBounds(870, 0, 21, 21);
+		panel_1.add(cblistview);
+		cblistview.setBackground(Color.WHITE);
+		cblistview.setSelected(false);
+		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 30, 1110, 542);
 		panel_1.add(scrollPane);
@@ -123,30 +133,19 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		table.getTableHeader().setBackground(new Color(245, 245, 245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
-		/*
-		 * table.getColumnModel().getColumn(0).setPreferredWidth(40); //번호
-		 * table.getColumnModel().getColumn(1).setPreferredWidth(400); //도서명
-		 * table.getColumnModel().getColumn(2).setPreferredWidth(160); //저자
-		 * table.getColumnModel().getColumn(3).setPreferredWidth(150); //출판사
-		 * table.getColumnModel().getColumn(4).setPreferredWidth(100); //출판년도
-		 * table.getColumnModel().getColumn(5).setPreferredWidth(130); //비치수/보유수
-		 * table.getColumnModel().getColumn(6).setPreferredWidth(130); //대여가능여부
-		 */
-
+		List<Book> list = BookService.getInstance().selectBookStartAll();
+		loadDatas(list);
+		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+		cellAlign(SwingConstants.LEFT, 1, 2);
+		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
 		scrollPane.setViewportView(table);
-
-		cblistview = new JCheckBox();
-		cblistview.addItemListener(this);
-		cblistview.setBounds(870, 0, 21, 21);
-		panel_1.add(cblistview);
-		cblistview.setBackground(Color.WHITE);
-		cblistview.setSelected(false);
+		
 		JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
 		lblListview.setBounds(900, 0, 178, 22);
 		panel_1.add(lblListview);
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		List<Book> list = BookService.getInstance().selectBookStartAll();
 		for(Book b: list) {
 			if(b.getterRentable() == true) {
 				isList.add(b);
@@ -257,6 +256,9 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == tfbookname) {
+			actionPerformedTfbookname(e);
+		}
 		if (e.getSource() == btnSearchDe) {
 			actionPerformedBtnSearchDe(e);
 		}
@@ -441,13 +443,22 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			info.tpinfo.setText(resultBook.getInfo());
 			info.tfisbn.setText(resultBook.getIsbn());
 			info.tfpubyear.setText(Integer.toString(resultBook.getPubyear()));
-			info.tfnum.setText(Integer.toString(BookService.getInstance().selectExistNum(isbn)));
+			int ExistNum = BookService.getInstance().selectExistNum(isbn);
+			TakeinoutService service = new TakeinoutService();
+			int Num = service.selectOutNum(isbn);
+			int inNum = ExistNum - Num;
+			info.tfnum.setText(String.format("%s / %s", inNum,ExistNum));
 			Location loca = new Location();
 			loca.setLoca_num(resultBook.getLocation().getLoca_num());
 			String section = LocationService.getInstance().selectSectionBynum(loca);
 			info.tfLocation.setText(String.format("%s%s", section, loca.getLoca_num()));
-			
-			// info.tfreservenum.setText();
+			Reserve res = new Reserve();
+			res.setIsbn(isbn);
+			int num = ReserveService.getInstance().selectReserveNum(res);
+			info.tfreservenum.setText(Integer.toString(num));
 		}
+	}
+	protected void actionPerformedTfbookname(ActionEvent e) {
+		actionPerformedBtnSearch(e);
 	}
 }

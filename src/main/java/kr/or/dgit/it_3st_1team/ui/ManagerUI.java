@@ -146,12 +146,15 @@ public class ManagerUI extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnlogout(ActionEvent arg0) {
-		StartUITest.contentPane.removeAll();
+		/*StartUITest.contentPane.removeAll();
 		MainUI mian = new MainUI();
 		mian.setPreferredSize(new Dimension(1400, 800));
 		StartUITest.contentPane.setVisible(true);
 		StartUITest.contentPane.repaint();
-		StartUITest.contentPane.revalidate();
+		StartUITest.contentPane.revalidate();*/
+		((StartUI) getTopLevelAncestor()).dispose();
+		StartUI starui = new StartUI();
+		starui.setVisible(true);
 	}
 	protected void actionPerformedbtnBookinout(ActionEvent arg0) {
 		btnBookinout.setBackground(new Color(94, 94, 94));

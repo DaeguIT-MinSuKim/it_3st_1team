@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.ReserveDao">
+
+	<resultMap type="Reserve" id="ReserveResult">
+		<id property="re_no" column="re_no"/> 
+		<result property="code" column="code"/>
+		<result property="bkcode" column="bkcode"/>
+		<result property="isbn" column="isbn"/>
+		<result property="resday" column="resday"/>
+	</resultMap>
+	
+	<select id="selectReserveByCode" parameterType="Reserve" resultMap="ReserveResult">
+		select code, bkcode, isbn, resday 
+		from reserve
+		where code = #{code};
+	</select>
+	
+	<select id="selectAllReserve" parameterType="Reserve" resultMap="ReserveResult">
+		select code, bkcode, isbn, resday 
+		from reserve
+	</select>
+	
+	<select id="selectReserveNum" parameterType="Reserve" resultType="int">
+		select count(isbn)
+		from reserve
+		where isbn = #{isbn}
+	</select>
+	
+	<insert id="insertReserve" parameterType="Reserve">
+		insert into reserve(code, bkcode, isbn, resday)
+		values(#{code}, #{bkcode}, #{isbn}, #{resday})
+	</insert>
+</mapper>

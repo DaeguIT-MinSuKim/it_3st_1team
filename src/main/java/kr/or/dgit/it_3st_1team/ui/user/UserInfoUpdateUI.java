@@ -192,6 +192,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfAddr_id.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfAddr_id.setBounds(294, 394, 400, 30);
 		panel.add(tfAddr_id);
+		tfAddr_id.setEditable(false);
 		tfAddr_id.setColumns(10);
 		
 		tfAddr_de = new JTextField();

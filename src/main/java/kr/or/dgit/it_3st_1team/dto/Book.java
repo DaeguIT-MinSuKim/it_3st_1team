@@ -60,6 +60,7 @@ public class Book {
 		}
 		return able;
 	}
+	
 	public boolean getterRentable() {
 		return rentable;
 	}
@@ -136,7 +137,7 @@ public class Book {
 		int inNum = ExistNum - Num;
 		return new Object[] {i+1, bkname, author, publish, pubyear, inNum+" / "+ExistNum, isRentable()};
 	}
-
+	
 	@Override
 	public String toString() {
 		return String.format(

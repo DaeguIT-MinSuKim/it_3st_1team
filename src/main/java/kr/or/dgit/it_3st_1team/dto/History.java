@@ -1,15 +1,33 @@
 package kr.or.dgit.it_3st_1team.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class History {
 	private int his_no;
-	private User code;
-	private Book bkcode;
+	private String code;
+	private String bkcode;
 	private Date realreturn;
+	private Date returnday;
+	private Date rentday;
 	private int delay;
+	private String bkname;
+	private String author;
+		
 	public History() {
 		// TODO Auto-generated constructor stub
+	}
+	public Date getReturnday() {
+		return returnday;
+	}
+	public void setReturnday(Date returnday) {
+		this.returnday = returnday;
+	}
+	public Date getRentday() {
+		return rentday;
+	}
+	public void setRentday(Date rentday) {
+		this.rentday = rentday;
 	}
 	public int getHis_no() {
 		return his_no;
@@ -17,16 +35,16 @@ public class History {
 	public void setHis_no(int his_no) {
 		this.his_no = his_no;
 	}
-	public User getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(User code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
-	public Book getBkcode() {
+	public String getBkcode() {
 		return bkcode;
 	}
-	public void setBkcode(Book bkcode) {
+	public void setBkcode(String bkcode) {
 		this.bkcode = bkcode;
 	}
 	public Date getRealreturn() {
@@ -47,5 +65,36 @@ public class History {
 				realreturn, delay);
 	}
 	
+	public Object[] historyAll(int i) {
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		String day;
+		if(realreturn==null) {
+			day = "";
+		}else{
+			day = sd.format(realreturn);
+		}
+		return new Object[] {i+1, bkname, author, sd.format(rentday), sd.format(returnday), day, delay, isState()};
+	}
+	private String isState() {
+		String state;
+		if(realreturn==null) {
+			state="대출중";
+		}else{
+			state="반납";
+		}
+		return state;
+	}
 	
+	public Object[] toHisAll(int i) {
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		String day;
+		if(realreturn==null) {
+			day = "";
+		}else{
+			day = sd.format(realreturn);
+		}
+		return new Object[] {
+				i+1, code, bkcode, bkname, author, sd.format(rentday), sd.format(returnday), day, delay
+		};
+	}
 }

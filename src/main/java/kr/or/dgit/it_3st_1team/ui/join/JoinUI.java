@@ -3,10 +3,14 @@ package kr.or.dgit.it_3st_1team.ui.join;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -15,9 +19,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kr.or.dgit.it_3st_1team.dto.Phone;
+import kr.or.dgit.it_3st_1team.dto.User;
+import kr.or.dgit.it_3st_1team.service.UserService;
 
 @SuppressWarnings("serial")
 public class JoinUI extends JFrame implements ActionListener {
@@ -40,6 +44,9 @@ public class JoinUI extends JFrame implements ActionListener {
 	private JLabel lblAddrDe;
 	private JTextField tfPhone2;
 	private JTextField tfPhone3;
+	private JLabel label;
+	private JLabel label_1;
+	private int checkID;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -129,6 +136,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		tfName.setColumns(10);
 		
 		tfId = new JTextField();
+		tfId.addActionListener(this);
 		tfId.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfId.setBounds(150, 70, 150, 30);
@@ -187,6 +195,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		tfone.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfone.setBounds(150, 310, 400, 30);
 		contentPane.add(tfone);
+		tfone.setEditable(false);
 		tfone.setColumns(10);
 		
 		tftwo = new JTextField();
@@ -197,6 +206,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		contentPane.add(tftwo);
 		
 		btnJoin = new JButton("회원가입");
+		btnJoin.addActionListener(this);
 		btnJoin.setBorder(null);
 		btnJoin.setForeground(new Color(64,64,64));
 		btnJoin.setBackground(new Color(190,190,190));
@@ -204,6 +214,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		contentPane.add(btnJoin);
 		
 		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		btnCancel.setBorder(null);
 		btnCancel.setForeground(new Color(64,64,64));
 		btnCancel.setBackground(new Color(190,190,190));
@@ -211,6 +222,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		contentPane.add(btnCancel);
 		
 		btnIdc = new JButton("중복확인");
+		btnIdc.addActionListener(this);
 		btnIdc.setBorder(null);
 		btnIdc.setForeground(new Color(64,64,64));
 		btnIdc.setBackground(new Color(190,190,190));
@@ -225,8 +237,32 @@ public class JoinUI extends JFrame implements ActionListener {
 		btnSearchAddr.setBounds(280, 270, 90, 30);
 		contentPane.add(btnSearchAddr);
 
+		
+		label = new JLabel("-");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		label.setBounds(200, 195, 20, 15);
+		contentPane.add(label);
+		
+		label_1 = new JLabel("-");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		label_1.setBounds(270, 195, 20, 15);
+		contentPane.add(label_1);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnJoin) {
+			actionPerformedBtnJoin(e);
+		}
+		if (e.getSource() == btnCancel) {
+			actionPerformedBtnCancel(e);
+		}
+		if (e.getSource() == tfId) {
+			actionPerformedTfId(e);
+		}
+		if (e.getSource() == btnIdc) {
+			actionPerformedBtnIdc(e);
+		}
 		if (e.getSource() == btnSearchAddr) {
 			actionPerformedBtnSearchAddr(e);
 		}
@@ -236,5 +272,72 @@ public class JoinUI extends JFrame implements ActionListener {
 		addr.setVisible(true);
 		addr.getTfPostAddr(tfone);
 		addr.getTfPostNum(tfpostnum);
+	}
+	protected void actionPerformedBtnIdc(ActionEvent e) {
+		User user = new User();
+		user.setId(tfId.getText());
+		UserService service = new UserService();
+		User selectUser = service.selectUserById(user);
+		if(tfId.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "사용하실 아이디를 입력하세요.");
+		}else if(selectUser==null) {
+			JOptionPane.showMessageDialog(null, "사용가능한 아이디입니다.");
+			checkID=1;
+		}else {
+			JOptionPane.showMessageDialog(null, "중복된 아이디입니다.");
+		}
+	}
+	protected void actionPerformedTfId(ActionEvent e) {		actionPerformedBtnIdc(e);
+	}
+	protected void actionPerformedBtnCancel(ActionEvent e) {		dispose();
+	}
+	protected void actionPerformedBtnJoin(ActionEvent e) {
+		String pw = new String(pwfPw.getPassword());
+		String pwc = new String(pwfPwc.getPassword());
+		
+		if(tfName.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "이름을 입력하세요.");
+			tfName.requestFocus();
+		}else if(tfId.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "사용하실 아이디를 입력하세요.");
+			tfId.requestFocus();
+		}else if(checkID!=1) {
+			JOptionPane.showMessageDialog(null, "아이디 중복체크를 해주세요.");
+		}else if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
+			JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요.");
+			pwfPw.requestFocus();
+		}else if(tfPhone1.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
+			tfPhone1.requestFocus();
+		}else if(tfPhone2.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
+			tfPhone2.requestFocus();
+		}else if(tfPhone3.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "전화번호를 입력해주세요.");
+			tfPhone3.requestFocus();
+		}else if(tfMail.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.");
+			tfMail.requestFocus();
+		}else {
+			User user = new User();
+			int randomNum = (int) System.currentTimeMillis();
+			user.setCode(Integer.toString(randomNum));
+			user.setName(tfName.getText());
+			user.setId(tfId.getText());
+			user.setPw(pw);
+			Phone phone = new Phone();
+			phone.setPhone1(tfPhone1.getText());
+			phone.setPhone2(tfPhone2.getText());
+			phone.setPhone3(tfPhone3.getText());
+			user.setEmail(tfMail.getText());
+			user.setZipcode(tfpostnum.getText());
+			user.setAddr_id(tfone.getText());
+			user.setAddr_de(tftwo.getText());
+			user.setEntryday(new Date());
+			UserService service = new UserService();
+			service.insertUser(user);
+			JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
+			dispose();
+		}
 	}
 }

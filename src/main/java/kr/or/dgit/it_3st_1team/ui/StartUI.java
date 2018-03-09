@@ -165,6 +165,16 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		}
 	}
 	
+	public void changepanel(JPanel panel) {
+		contentPane.removeAll();
+		contentPane.add(panel);
+		contentPane.repaint();
+		contentPane.revalidate();
+		repaint();
+		revalidate();
+	}
+	
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == pwtf) {
 			actionPerformedPwtf(e);
@@ -238,6 +248,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	protected void actionPerformedBtnSearch(ActionEvent e) {
 		contentPane.removeAll();
 		VisitorUI vis = new VisitorUI();
+		vis.setStartUI(this);
 		vis.setBounds(0, 0, 1400, 800);
 		contentPane.add(vis);
 		contentPane.repaint();
