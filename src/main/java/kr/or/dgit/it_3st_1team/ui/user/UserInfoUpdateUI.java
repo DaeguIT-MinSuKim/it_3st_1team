@@ -49,6 +49,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 	private JTextField tfcode;
 	public JButton btnadd;
 	public JButton btnsearch;
+	private JButton button;
 
 	public UserInfoUpdateUI() {
 		initComponents();
@@ -82,7 +83,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		lblId.setBounds(173, 149, 120, 40);
 		panel.add(lblId);
 		
-		JLabel lblPw = new JLabel("비밀번호 수정");
+		JLabel lblPw = new JLabel("비밀번호");
 		lblPw.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPw.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		lblPw.setBounds(173, 189, 120, 40);
@@ -266,6 +267,14 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		btnsearch.setBackground(new Color(190,190,190));
 		btnsearch.setBounds(460, 154, 97, 30);
 		panel.add(btnsearch);
+		
+		button = new JButton("비밀번호 수정");
+		button.addActionListener(this);
+		button.setForeground(Color.WHITE);
+		button.setBorder(null);
+		button.setBackground(new Color(52, 152, 219));
+		button.setBounds(460, 234, 97, 30);
+		panel.add(button);
 	}
 	
 	public void userinfo() {
@@ -284,6 +293,9 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfAddr_de.setText(user.getAddr_de());
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == button) {
+			actionPerformedButton(arg0);
+		}
 		if (arg0.getSource() == btnadd) {
 			actionPerformedBtnadd(arg0);
 		}
@@ -308,14 +320,11 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		addr.setVisible(true);
 	}
 	protected void actionPerformedBtnupdate(ActionEvent arg0) {
-		String pw = new String(pwfPw.getPassword());
-		String pwc = new String(pwfPwc.getPassword());
 		User user = StartUI.LOGINUSER;
 		if(user != null) {
 			UserService service = new UserService();
 			
 			user.setName(tfName.getText());
-			user.setPw(pw);
 			Phone phone = new Phone();
 			phone.setPhone1(tfPhone1.getText());
 			phone.setPhone2(tfPhone2.getText());
@@ -325,16 +334,12 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 			user.setZipcode(tfZipCode.getText());
 			user.setAddr_id(tfAddr_id.getText());
 			user.setAddr_de(tfAddr_de.getText());
-			
-			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
-				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
-			}else {
+		
 				service.updateUser(user);
 				JOptionPane.showMessageDialog(null, ("회원정보가 수정되었습니다."));	
 				userinfo();
 				pwfPw.setText("");
 				pwfPwc.setText("");
-			}
 		}else{
 			User searchuser = new User();
 			searchuser.setId(tfId.getText());
@@ -342,7 +347,6 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 			User selectUser = service.selectUserById(searchuser);
 			
 			selectUser.setName(tfName.getText());
-			selectUser.setPw(pw);
 			Phone phone = new Phone();
 			phone.setPhone1(tfPhone1.getText());
 			phone.setPhone2(tfPhone2.getText());
@@ -352,15 +356,11 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 			selectUser.setZipcode(tfZipCode.getText());
 			selectUser.setAddr_id(tfAddr_id.getText());
 			selectUser.setAddr_de(tfAddr_de.getText());
-
-			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
-				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
-			}else {
+			
 				service.updateUser(selectUser);
 				JOptionPane.showMessageDialog(null, ("회원정보가 수정되었습니다."));	
 				pwfPw.setText("");
 				pwfPwc.setText("");
-			}
 		}
 	}
 	protected void actionPerformedBtnCancel(ActionEvent arg0) {
@@ -414,6 +414,37 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		}else{
 			service.updateUser(user);
 			JOptionPane.showMessageDialog(null, "회원코드가 변경되었습니다.");
+		}
+	}
+	protected void actionPerformedButton(ActionEvent arg0) {		String pw = new String(pwfPw.getPassword());
+		String pwc = new String(pwfPwc.getPassword());
+		User user = StartUI.LOGINUSER;
+		if(user != null) {
+			UserService service = new UserService();
+			user.setPw(pw);
+			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
+				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
+			}else {
+				service.updateUser(user);
+				JOptionPane.showMessageDialog(null, ("비밀번호가 수정되었습니다."));	
+				userinfo();
+				pwfPw.setText("");
+				pwfPwc.setText("");
+			}
+		}else{
+			User searchuser = new User();
+			searchuser.setId(tfId.getText());
+			UserService service = new UserService();
+			User selectUser = service.selectUserById(searchuser);
+			selectUser.setPw(pw);			
+			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
+				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
+			}else {
+				service.updateUser(selectUser);
+				JOptionPane.showMessageDialog(null, ("비밀번호가 수정되었습니다."));	
+				pwfPw.setText("");
+				pwfPwc.setText("");
+			}
 		}
 	}
 }
