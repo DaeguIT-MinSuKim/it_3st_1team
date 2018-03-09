@@ -1,12 +1,15 @@
 ﻿-- 직책테이블 입력
 insert into title(titleno, name, power)
-values(1, '사장', 'all'),(2,'사서','관리'),(3,'알바','출납');
+values(1, '관장', 'all'),(2,'사서','사서'),(3,'알바','출납'),(4, '관리자', '관리자');
 
 -- 사원테이블 입력
 insert into employee(code, name, id, pw, tel, email, addr_id, titleno)
 values(1, '김남주', 'namju', 'namju', '010-1234-1234', 'namju@dgit.com', null, 1),
 (2, '한지민', 'jimin', 'jimin', '010-1234-1235', 'jimin@dgit.com', null, 2),
-(3, '차은우', 'eunwoo', 'eunwoo', '010-1234-4567', 'eunwoo@dgit.com', null, 3);
+(3, '차은우', 'eunwoo', 'eunwoo', '010-1234-4567', 'eunwoo@dgit.com', null, 3),
+(4,'공효진','hyojin','hyojin','010-9874-6541', null, null, 4);
+
+
 
 -- 회원테이블 입력
 insert into users(code, name, id, pw, tel, email, addr_id, entryday)
