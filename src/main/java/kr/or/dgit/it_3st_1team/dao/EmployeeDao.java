@@ -22,4 +22,6 @@ public interface EmployeeDao {
 	//비밀번호찾기 - 아이디, 이메일
 	Employee selectIdEmail(Employee emp);
 
+	//권한 찾기
+	Employee selectPowerBycode(Employee emp);
 }

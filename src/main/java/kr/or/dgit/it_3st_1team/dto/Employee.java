@@ -11,11 +11,21 @@ public class Employee {
 	private String addr_id;
 	private String addr_de;
 	private Title title;
+	private int titleno;
 
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public int getTitleno() {
+		return titleno;
+	}
+
+	public void setTitleno(int titleno) {
+		this.titleno = titleno;
+	}
+
 	public String getCode() {
 		return code;
 	}

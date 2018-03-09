@@ -76,4 +76,11 @@ public class EmployeeServiceTest {
 		Assert.assertEquals(emp.getEmail(), selectEmp.getEmail());
 		System.out.println(selectEmp);
 	}
+	
+	@Test
+	public void test6selectPowerBycode() {
+		Employee emp = new Employee();
+		emp.setCode("1");		
+		Employee selectEmp = service.selectPowerBycode(emp);
+	}
 }

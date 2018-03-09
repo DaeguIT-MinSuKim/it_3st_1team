@@ -193,11 +193,12 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		}
 	}
 	protected void actionPerformedBtnUserLogin(ActionEvent e) {
+		String pw = new String(pwtf.getPassword());
 		UserService service = new UserService();
 		User user = new User();
 		try {
 			user.setId(tfId.getText());
-			user.setPw(pwtf.getText());
+			user.setPw(pw);
 			User selectUser = service.selectIdPw(user);
 			if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
 				contentPane.removeAll();
@@ -217,16 +218,26 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		}
 	}
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
+		String pw = new String(pwtf.getPassword());
 		EmployeeService service = new EmployeeService();
 		Employee emp = new Employee();
 		try {
 			emp.setId(tfId.getText());
-			emp.setPw(pwtf.getText());
+			emp.setPw(pw);
 			Employee selectEmp = service.selectIdPw(emp);
 			if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
 				contentPane.removeAll();
 				LOGINEMP = selectEmp;
 				ManagerUI mngui = new ManagerUI(selectEmp);
+				EmployeeService serviceEmp = new EmployeeService();
+				Employee logemp =serviceEmp.selectPowerBycode(selectEmp);
+				if(logemp.getTitleno()==1 || logemp.getTitleno()==2) {
+					mngui.btnEmpManage.setVisible(false);
+				}else if(logemp.getTitleno()==3) {
+					mngui.btnEmpManage.setVisible(false);
+					mngui.btnHistory.setVisible(false);
+					mngui.btnUserUpdate.setVisible(false);
+				}
 				mngui.setBounds(0, 0, 1400, 800);
 				mngui.lblname.setText((selectEmp.getName()));
 				contentPane.add(mngui);

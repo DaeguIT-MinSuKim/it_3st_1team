@@ -22,10 +22,10 @@ import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnlogout;
 	private JButton btnBookinout;
-	private JButton btnUserUpdate;
+	public JButton btnUserUpdate;
 	private JButton btnBookmanager;
-	private JButton btnHistory;
-	private JButton btnEmpManage;
+	public JButton btnHistory;
+	public JButton btnEmpManage;
 	private InoutBookUI showpanel;
 	private ManagementBookUI manager;
 	public Employee emp;
@@ -75,7 +75,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUserUpdate.setForeground(new Color(255, 255, 255));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		btnUserUpdate.setBounds(0, 290, 250, 45);
+		btnUserUpdate.setBounds(0, 230, 250, 45);
 		panel.add(btnUserUpdate);
 		
 		btnEmpManage = new JButton("사원 관리");
@@ -83,7 +83,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnEmpManage.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnEmpManage.setForeground(new Color(255, 255, 255));
 		btnEmpManage.setBackground(new Color(158,158,158));
-		btnEmpManage.setBounds(0, 230, 250, 45);
+		btnEmpManage.setBounds(0, 290, 250, 45);
 		panel.add(btnEmpManage);
 		
 		btnlogout = new JButton("로그아웃");

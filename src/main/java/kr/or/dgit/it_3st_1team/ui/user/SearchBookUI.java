@@ -312,7 +312,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			if (cbbmid.getSelectedIndex() == 0) {
 				loca.setLoca_num("%" + num + "%");
 				book.setLocation(loca);
-				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
 				rentableList = list;
 				loadDatas(list);
@@ -326,7 +325,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				System.out.println(fullCate);
 				loca.setLoca_num(fullCate);
 				book.setLocation(loca);
-				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
 				rentableList = list;
 				loadDatas(list);
