@@ -27,6 +27,12 @@
 		where isbn = #{isbn}
 	</select>
 	
+	<select id="selectalreadyReserve" parameterType="Reserve" resultMap="ReserveResult">
+		select code, bkcode, isbn, resday 
+		from reserve
+		where code = #{code} and isbn=#{isbn};
+	</select>
+	
 	<insert id="insertReserve" parameterType="Reserve">
 		insert into reserve(code, bkcode, isbn, resday)
 		values(#{code}, #{bkcode}, #{isbn}, #{resday})

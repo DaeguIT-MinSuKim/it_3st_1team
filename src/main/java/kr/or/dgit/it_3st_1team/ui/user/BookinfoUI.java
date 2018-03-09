@@ -6,13 +6,25 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import kr.or.dgit.it_3st_1team.dto.Reserve;
+import kr.or.dgit.it_3st_1team.dto.User;
+import kr.or.dgit.it_3st_1team.service.BookService;
+import kr.or.dgit.it_3st_1team.service.ReserveService;
+import kr.or.dgit.it_3st_1team.service.TakeinoutService;
+import kr.or.dgit.it_3st_1team.ui.LoginUI;
+import kr.or.dgit.it_3st_1team.ui.StartUI;
+
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
@@ -36,9 +48,13 @@ public class BookinfoUI extends JFrame implements ActionListener {
 	private JButton btnClose;
 	private JLabel lblinfo;
 	public JTextPane tpinfo;
+	private StartUI staui;
 	
 	public BookinfoUI() {
 		initComponents();
+	}
+	public void setStartUI(StartUI staui) {
+		this.staui = staui;
 	}
 
 	private void initComponents() {
@@ -189,6 +205,7 @@ public class BookinfoUI extends JFrame implements ActionListener {
 		panel.add(btnPrint);
 		
 		btnreserve = new JButton("예약");
+		btnreserve.addActionListener(this);
 		btnreserve.setForeground(Color.WHITE);
 		btnreserve.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		btnreserve.setBackground(new Color(52, 152, 219));
@@ -206,11 +223,49 @@ public class BookinfoUI extends JFrame implements ActionListener {
 		panel.add(btnClose);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnreserve) {
+			actionPerformedBtnreserve(e);
+		}
 		if (e.getSource() == btnClose) {
 			actionPerformedBtnClose(e);
 		}
 	}
 	protected void actionPerformedBtnClose(ActionEvent e) {
 		dispose();
+	}
+	protected void actionPerformedBtnreserve(ActionEvent e) {
+		User user = StartUI.LOGINUSER;
+		String isbn = tfisbn.getText();
+		int ExistNum = BookService.getInstance().selectExistNum(isbn);
+		TakeinoutService service = new TakeinoutService();
+		int Num = service.selectOutNum(isbn);
+		int inNum = ExistNum - Num;	//비치수
+		
+		if(inNum==0) {
+			if(user!=null) {
+				Reserve res = new Reserve();
+				res.setCode(user.getCode());
+				res.setBkcode(tfBookcode.getText());
+				res.setIsbn(tfisbn.getText());
+				res.setResday(new Date());
+				List<Reserve> list = ReserveService.getInstance().selectalreadyReserve(res);
+				if(list.isEmpty()) {
+					ReserveService.getInstance().insertReserve(res);
+					JOptionPane.showMessageDialog(null, "도서가 예약되었습니다.");
+					int reservenum = Integer.parseInt(tfreservenum.getText());
+					tfreservenum.setText(Integer.toString(reservenum+1));
+				}else {
+					JOptionPane.showMessageDialog(null, "이미 예약한 도서입니다.");
+				}
+			}else {
+				LoginUI login = new LoginUI(staui);
+				login.setVisible(true);
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "도서관에 책이 있습니다.");
+		}
+		
+		
+		
 	}
 }

@@ -83,5 +83,12 @@ public class EmployeeService {
 		}
 		return res;
 	}
-
+	
+	// 사원 권한 찾기
+		public Employee selectPowerBycode(Employee emp) {
+			log.debug("selectPowerBycode()");
+			try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+				return sqlSession.selectOne(namespace + "selectPowerBycode", emp);
+			}
+		}
 }

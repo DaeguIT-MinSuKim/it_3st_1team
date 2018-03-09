@@ -49,8 +49,8 @@
 	
 	<!-- 현재 유저가 이 책을 대여중이 아니라면 대여하는 insert 문장 -->
 	<insert id="insertTakeinoutByBkcode" parameterType="Takeinout">
-		insert into takeinout (code, bkcode, rentday, returnday)
-		values (#{user.code}, #{book.bkCode}, curdate(), adddate(curdate(), 14))
+		insert into takeinout (code, bkcode, rentday, returnday, isbn)
+		values (#{user.code}, #{book.bkCode}, curdate(), adddate(curdate(), 14), #{book.isbn})
 	</insert>
 	
 	<!-- 현재 유저가 이 책을 대여중이라면 반납하는 delete 문장 -->

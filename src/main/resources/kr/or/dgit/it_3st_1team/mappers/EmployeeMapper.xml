@@ -12,6 +12,7 @@
 		<result property="zipcode" column="zipcode"/>
 		<result property="addr_id" column="addr_id"/>
 		<result property="addr_de" column="addr_de"/>
+		<result property="titleno" column="titleno"/>
 	</resultMap>
 	
 	<resultMap type="Employee" id="EmployeeWithTitleResult" extends="EmployeeResult">
@@ -74,6 +75,11 @@
 		select e.code, e.name, e.id, e.pw, e.tel, e.email, e.zipcode, e.addr_id, e.addr_de, t.name, e.titleno as ti
 		from employee e join title t on e.titleno = t.titleno 
 		where id = #{id} and email = #{email}
+	</select>
+	
+	<select id="selectPowerBycode" parameterType="User" resultMap="EmployeeWithTitleResult">
+		select code, name, id, pw, tel, email, addr_id, titleno from employee
+		where code = #{code}
 	</select>
 	
 </mapper>

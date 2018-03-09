@@ -22,11 +22,10 @@ import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
 public class ManagerUI extends JPanel implements ActionListener {
 	private JButton btnlogout;
 	private JButton btnBookinout;
-	private JButton btnUserUpdate;
+	public JButton btnUserUpdate;
 	private JButton btnBookmanager;
-	private JButton btnHistory;
-	private JButton btnEmpManage;
-	private JButton btnNews;
+	public JButton btnHistory;
+	public JButton btnEmpManage;
 	private InoutBookUI showpanel;
 	private ManagementBookUI manager;
 	public Employee emp;
@@ -71,20 +70,12 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnHistory.setBounds(0, 170, 250, 45);
 		panel.add(btnHistory);
 		
-		btnNews = new JButton("공지 사항");
-		btnNews.addActionListener(this);
-		btnNews.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnNews.setForeground(new Color(255, 255, 255));
-		btnNews.setBackground(new Color(158,158,158));
-		btnNews.setBounds(0, 230, 250, 45);
-		panel.add(btnNews);
-		
 		btnUserUpdate = new JButton("회원 정보 수정");
 		btnUserUpdate.addActionListener(this);
 		btnUserUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnUserUpdate.setForeground(new Color(255, 255, 255));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-		btnUserUpdate.setBounds(0, 290, 250, 45);
+		btnUserUpdate.setBounds(0, 230, 250, 45);
 		panel.add(btnUserUpdate);
 		
 		btnEmpManage = new JButton("사원 관리");
@@ -92,7 +83,7 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnEmpManage.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnEmpManage.setForeground(new Color(255, 255, 255));
 		btnEmpManage.setBackground(new Color(158,158,158));
-		btnEmpManage.setBounds(0, 350, 250, 45);
+		btnEmpManage.setBounds(0, 290, 250, 45);
 		panel.add(btnEmpManage);
 		
 		btnlogout = new JButton("로그아웃");
@@ -126,9 +117,6 @@ public class ManagerUI extends JPanel implements ActionListener {
 		if (arg0.getSource() == btnEmpManage) {
 			actionPerformedBtnEmpManage(arg0);
 		}
-		if (arg0.getSource() == btnNews) {
-			actionPerformedBtnNews(arg0);
-		}
 		if (arg0.getSource() == btnHistory) {
 			actionPerformedBtnHistory(arg0);
 		}
@@ -161,7 +149,6 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnBookmanager.setBackground(new Color(158,158,158));
 		btnEmpManage.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		InoutBookUI iob = new InoutBookUI();
 		changePanel(iob);
@@ -171,7 +158,6 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnBookmanager.setBackground(new Color(158,158,158));
 		btnEmpManage.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(94, 94, 94));
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
 		update.tfId.setEditable(true);
@@ -182,7 +168,6 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnBookmanager.setBackground(new Color(94, 94, 94));
 		btnEmpManage.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		manager = new ManagementBookUI();
 		changePanel(manager);
@@ -192,26 +177,14 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnBookmanager.setBackground(new Color(158,158,158));
 		btnEmpManage.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(94,94,94));
-		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 
-	}
-	protected void actionPerformedBtnNews(ActionEvent arg0) {
-		btnBookinout.setBackground(new Color(158,158,158));
-		btnBookmanager.setBackground(new Color(158,158,158));
-		btnEmpManage.setBackground(new Color(158,158,158));
-		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(94,94,94));
-		btnUserUpdate.setBackground(new Color(158,158,158));
-		NoticeUI no = new NoticeUI();
-		changePanel(no);
 	}
 	protected void actionPerformedBtnEmpManage(ActionEvent arg0) {
 		btnBookinout.setBackground(new Color(158,158,158));
 		btnBookmanager.setBackground(new Color(158,158,158));
 		btnEmpManage.setBackground(new Color(94,94,94));
 		btnHistory.setBackground(new Color(158,158,158));
-		btnNews.setBackground(new Color(158,158,158));
 		btnUserUpdate.setBackground(new Color(158,158,158));
 		EmployeeUI emp = new EmployeeUI();
 		changePanel(emp);

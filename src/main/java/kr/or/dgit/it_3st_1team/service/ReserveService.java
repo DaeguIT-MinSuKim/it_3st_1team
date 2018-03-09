@@ -36,6 +36,13 @@ public class ReserveService {
 		}
 	}
 	
+	public List<Reserve> selectalreadyReserve(Reserve res){
+		log.debug("selectalreadyReserve()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectalreadyReserve", res);
+		}
+	}
+	
 	public int selectReserveNum(Reserve res){
 		log.debug("selectReserveNum()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
