@@ -140,7 +140,17 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		table.getTableHeader().setBackground(new Color(245, 245, 245));
 		table.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
+		lblListview.setBounds(900, 0, 178, 22);
+		panel_1.add(lblListview);
+		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+
 		List<Book> list = BookService.getInstance().selectBookStartAll();
+		for(Book b : list) {
+			isList.add(b);
+			rentableList.add(b);
+		}
 		loadDatas(list);
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -148,16 +158,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
 		scrollPane.setViewportView(table);
-
-		JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
-		lblListview.setBounds(900, 0, 178, 22);
-		panel_1.add(lblListview);
-		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6);
-		cellAlign(SwingConstants.LEFT, 1, 2);
-		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
 
 		initcmb();
 	}
@@ -212,13 +212,15 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 
 	public void loadDatas(List<Book> list) {
+		List<Book> lists = new ArrayList<>();
 		for (Book b : list) {
 			if (b.getterRentable() == true) {
-				isList.add(b);
+				lists.add(b);
 			}
 		}
+
 		if (cblistview.isSelected()) {
-			NonEditableModel model = new NonEditableModel(getRow(isList), getColunmNames());
+			NonEditableModel model = new NonEditableModel(getRow(lists), getColunmNames());
 			table.setModel(model);
 		} else {
 			NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
@@ -294,6 +296,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			}
 			
 			if (cbbmid.getSelectedIndex() == 0) {	// 중분류 없음
+
 				loca.setLoca_num("%" + num + "%");
 				book.setLocation(loca);
 				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
@@ -350,6 +353,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				loadDatas(list);
 				return;
 			}
+
 		}
 	}
 
