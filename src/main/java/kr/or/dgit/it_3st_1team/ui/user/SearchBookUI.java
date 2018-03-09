@@ -276,8 +276,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		Category cate = (Category) cbbbig.getSelectedItem();
 		String num = "";
 
-		System.out.println(cbbbig.getSelectedItem());
-
 		if (cbbbig.getSelectedIndex() == 0 && !(tfbookname.getText().trim().isEmpty())
 				&& !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 			book.setBkname("%" + tfbookname.getText() + "%");
@@ -288,7 +286,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			return;
 		} else {
 			List<Category> biglist = CategoryService.getInstance().selectCategoryBig();
-			int cbnum = cbbbig.getSelectedIndex();
+			int cbnum = cbbbig.getSelectedIndex()-1;
 			biglist.get(cbnum).getCatename();
 			cate = biglist.get(cbnum);
 			num = CategoryService.getInstance().selectCateNum(cate);
