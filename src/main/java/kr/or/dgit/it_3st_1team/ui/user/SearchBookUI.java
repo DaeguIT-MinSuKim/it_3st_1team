@@ -296,43 +296,24 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			}
 			
 			if (cbbmid.getSelectedIndex() == 0) {	// 중분류 없음
-
 				loca.setLoca_num("%" + num + "%");
 				book.setLocation(loca);
 				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
-					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류+이름
-					loadDatas(list);
-					JOptionPane.showMessageDialog(null, "대분류+이름");
+					getFilterListData(book, "대분류+이름");
 					return;
 				}else {
-					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류만
-					JOptionPane.showMessageDialog(null, "대분류만");
-					rentableList = list;
-					loadDatas(list);
+					rentableList = getFilterListData(book, "대분류만");
 					return;
 				}
 			}else {	//중분류 있음
-				Category cate2 = new Category();
-				String num2 = "";
-				List<Category> midlist = CategoryService.getInstance().selectCategoryMid(cate);
-				int cbnum2 = cbbmid.getSelectedIndex() - 1;
-				cate2 = midlist.get(cbnum2);
-				num2 = CategoryService.getInstance().selectCateNum(cate2);
-				String fullCate = String.format("%s%s", num, num2);
-				loca.setLoca_num(fullCate);
-				book.setLocation(loca);
+				getCategory(book, loca, cate, num);
 				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
-					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류+중분류+이름
-					loadDatas(list);
-					JOptionPane.showMessageDialog(null, "대분류+중분류+이름");
+					getFilterListData(book, "대분류+중분류+이름");
 					return;
 				}else {
-					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류+중분류
-					JOptionPane.showMessageDialog(null, "대분류+중분류");
-					rentableList = list;
-					loadDatas(list);
+					rentableList = getFilterListData(book, "대분류+중분류");
 					return;
 				}
 			}
@@ -355,6 +336,25 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			}
 
 		}
+	}
+
+	private void getCategory(Book book, Location loca, Category cate, String num) {
+		Category cate2 = new Category();
+		String num2 = "";
+		List<Category> midlist = CategoryService.getInstance().selectCategoryMid(cate);
+		int cbnum2 = cbbmid.getSelectedIndex() - 1;
+		cate2 = midlist.get(cbnum2);
+		num2 = CategoryService.getInstance().selectCateNum(cate2);
+		String fullCate = String.format("%s%s", num, num2);
+		loca.setLoca_num(fullCate);
+		book.setLocation(loca);
+	}
+
+	private List<Book> getFilterListData(Book book, String msg) {
+		List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류만
+		JOptionPane.showMessageDialog(null, msg);
+		loadDatas(list);
+		return list;
 	}
 
 	protected void actionPerformedBtnSearchDe(ActionEvent e) {

@@ -13,6 +13,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Reserve;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.BookService;
@@ -56,7 +57,6 @@ public class BookinfoUI extends JFrame implements ActionListener {
 	public void setStartUI(StartUI staui) {
 		this.staui = staui;
 	}
-
 	private void initComponents() {
 		setTitle("상세 도서 보기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
