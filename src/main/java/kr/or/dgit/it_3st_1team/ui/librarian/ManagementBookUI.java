@@ -424,10 +424,16 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	protected void itemStateChangedRdbtnReserve(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
+			NonEditableModel model = new NonEditableModel(getResRow(), getResColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();
 		}
+	}
+	private Object[][] getResRow() {
+		return null;
+	}
+	private Object[] getResColunmNames() {
+		return new String[] {"NO","예약순서", "회원코드", "도서코드", "도서명", "저자", "isbn","예약날짜"};
 	}
 	private Object[] getHisColunmNames() {
 		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "대여일", "반납예정일", "반납일","연체일수"};
@@ -443,12 +449,10 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	protected void itemStateChangedRdbtnReQ(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getReRow(), getColunmNames()); 
+			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();
 		}
 	}
-	private Object[][] getReRow() {
-		return null;
-	}
+	
 }

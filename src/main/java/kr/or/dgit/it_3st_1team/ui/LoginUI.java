@@ -42,6 +42,7 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 	private JButton btnMngLogin;
 	
 	private StartUI staui;
+	private UserUI userui;
 
 	public LoginUI(StartUI staui) {
 		this.staui = staui;
@@ -167,12 +168,10 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 		user.setPw(pw);
 		User selectUser = service.selectIdPw(user);
 		if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
-			StartUI.LOGINUSER = selectUser;
-			UserUI userui = new UserUI(selectUser);
+			userui = new UserUI(selectUser);
 			userui.setBounds(0, 0, 1400, 800);
 			userui.lblname.setText((selectUser.getName()));
 			staui.changepanel(userui);
-			
 			dispose();
 		}else {
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");

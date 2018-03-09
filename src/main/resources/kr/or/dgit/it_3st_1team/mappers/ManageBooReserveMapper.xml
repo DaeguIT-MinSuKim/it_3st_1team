@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.ManageBookDao">
+
+	<!-- 예약 도서 목록 불러오기 -->
+	<resultMap type="Reserve" id="ReserveResult">
+		<id property="re_no" column="re_no"/> 
+		<result property="code" column="code"/>
+		<result property="bkcode" column="bkcode"/>
+		<result property="isbn" column="isbn"/>
+		<result property="resday" column="resday"/>
+	</resultMap>
+	
+</mapper>
+
+
+
