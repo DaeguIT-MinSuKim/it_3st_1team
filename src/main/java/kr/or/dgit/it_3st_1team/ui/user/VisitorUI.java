@@ -19,7 +19,6 @@ public class VisitorUI extends JPanel implements ActionListener {
 	private JButton btnJoin;
 	private JButton btnBookRequest;
 	private JButton btnHistory;
-	private JButton btnNews;
 	private StartUI staui;
 
 	public VisitorUI(StartUI staui) {
@@ -58,14 +57,6 @@ public class VisitorUI extends JPanel implements ActionListener {
 		btnHistory.setBounds(0, 170, 250, 45);
 		panel.add(btnHistory);
 		
-		btnNews = new JButton("공지 사항");
-		btnNews.addActionListener(this);
-		btnNews.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnNews.setForeground(new Color(255, 255, 255));
-		btnNews.setBackground(new Color(158,158,158));
-		btnNews.setBounds(0, 230, 250, 45);
-		panel.add(btnNews);
-		
 		btnlogin = new JButton("로그인");
 		btnlogin.addActionListener(this);
 		btnlogin.setBorder(null);
@@ -89,9 +80,6 @@ public class VisitorUI extends JPanel implements ActionListener {
 		add(showpanel);
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNews) {
-			actionPerformedBtnNews(e);
-		}
 		if (e.getSource() == btnHistory) {
 			actionPerformedBtnHistory(e);
 		}
@@ -117,9 +105,6 @@ public class VisitorUI extends JPanel implements ActionListener {
 		actionPerformedbtnlogin(e);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent e) {
-		actionPerformedbtnlogin(e);
-	}
-	protected void actionPerformedBtnNews(ActionEvent e) {
 		actionPerformedbtnlogin(e);
 	}
 }
