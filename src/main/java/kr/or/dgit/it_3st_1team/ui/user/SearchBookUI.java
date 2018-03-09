@@ -1,7 +1,6 @@
 package kr.or.dgit.it_3st_1team.ui.user;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -284,20 +283,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		Location loca = new Location();
 		Category cate = (Category) cbbbig.getSelectedItem();
 		String num = "";
-
-		if (cbbbig.getSelectedIndex() == 0 && !(tfbookname.getText().trim().isEmpty())
-				&& !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
-			book.setBkname("%" + tfbookname.getText() + "%");
-			book.setLocation(loca);
-			List<Book> list = BookService.getInstance().selectBookAll(book);
-			rentableList = list;
-			loadDatas(list);
-			return;
-		} else if (cbbbig.getSelectedIndex() == 0) {
-			List<Book> list = BookService.getInstance().selectBookStartAll();
-			loadDatas(list);
-			return;
-		} else if (cbbbig.getSelectedIndex() > 0) {
+		
+		if (cbbbig.getSelectedIndex() > 0) {	//대분류 있음
 			List<Category> biglist = CategoryService.getInstance().selectCategoryBig();
 			int cbnum = cbbbig.getSelectedIndex();
 			cate = biglist.get(cbnum-1);
@@ -306,47 +293,63 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				num="000";
 			}
 			
-			Category cate2 = new Category();
-			String num2 = "";
-
-			if (cbbmid.getSelectedIndex() == 0) {
+			if (cbbmid.getSelectedIndex() == 0) {	// 중분류 없음
 				loca.setLoca_num("%" + num + "%");
 				book.setLocation(loca);
-				List<Book> list = BookService.getInstance().selectBookAll(book);
-				rentableList = list;
-				loadDatas(list);
-				return;
-			} else if (cbbmid.getSelectedIndex() > 0) {
+				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
+					book.setBkname("%" + tfbookname.getText() + "%");
+					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류+이름
+					loadDatas(list);
+					JOptionPane.showMessageDialog(null, "대분류+이름");
+					return;
+				}else {
+					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류만
+					JOptionPane.showMessageDialog(null, "대분류만");
+					rentableList = list;
+					loadDatas(list);
+					return;
+				}
+			}else {	//중분류 있음
+				Category cate2 = new Category();
+				String num2 = "";
 				List<Category> midlist = CategoryService.getInstance().selectCategoryMid(cate);
 				int cbnum2 = cbbmid.getSelectedIndex() - 1;
 				cate2 = midlist.get(cbnum2);
 				num2 = CategoryService.getInstance().selectCateNum(cate2);
 				String fullCate = String.format("%s%s", num, num2);
-				System.out.println(fullCate);
 				loca.setLoca_num(fullCate);
 				book.setLocation(loca);
+				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
+					book.setBkname("%" + tfbookname.getText() + "%");
+					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류+중분류+이름
+					loadDatas(list);
+					JOptionPane.showMessageDialog(null, "대분류+중분류+이름");
+					return;
+				}else {
+					List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류+중분류
+					JOptionPane.showMessageDialog(null, "대분류+중분류");
+					rentableList = list;
+					loadDatas(list);
+					return;
+				}
+			}
+		}else {
+			if (!(tfbookname.getText().trim().isEmpty())&& !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {	// 책 제목만 검색했을 때
+				loca.setLoca_num(null);
+				book.setLocation(loca);
+				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
+				JOptionPane.showMessageDialog(null, "제목만");
+				rentableList = list;
+				loadDatas(list);
+				return;
+			}else {
+				JOptionPane.showMessageDialog(null, "없음");
+				List<Book> list = BookService.getInstance().selectBookStartAll();	//아무것도 입력안함
 				rentableList = list;
 				loadDatas(list);
 				return;
 			}
-			return;
-		}
-		
-		if (!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
-			book.setBkname("%" + tfbookname.getText() + "%");
-			List<Book> list = BookService.getInstance().selectBookAll(book);
-			rentableList = list;
-			loadDatas(list);
-			return;
-		}
-
-		if (cbbbig.getSelectedIndex() == 0 && tfbookname.getText().trim().isEmpty()
-				|| tfbookname.getText().equals("책 제목을 입력해주세요.")) {
-			List<Book> list = BookService.getInstance().selectBookStartAll();
-			rentableList = list;
-			loadDatas(list);
-			return;
 		}
 	}
 
