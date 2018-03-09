@@ -357,17 +357,28 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	
 	private void loadCategoryMid(Category selectedItem) {
-		List<Category> categoryMid = new ArrayList<>();
-		Category decate2 = new Category("중분류 전체");
-		categoryMid.add(decate2);
-		
-		midListCategory = CategoryService.getInstance().selectCategoryMid(selectedItem);
-		for(Category cate: midListCategory) {
-			categoryMid.add(cate);
+		if(selectedItem.getCatename().equals("대분류 전체")) {
+			List<Category> categoryMid = new ArrayList<>();
+			Category decate2 = new Category("중분류 전체");
+			categoryMid.add(decate2);
+			
+			DefaultComboBoxModel<Category> model = 
+					new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
+			cbkMiddle.setModel(model);
+		}else {
+			List<Category> categoryMid = new ArrayList<>();
+			Category decate2 = new Category("중분류 전체");
+			categoryMid.add(decate2);
+			
+			midListCategory = CategoryService.getInstance().selectCategoryMid(selectedItem);
+			for(Category cate: midListCategory) {
+				categoryMid.add(cate);
+			}
+			DefaultComboBoxModel<Category> model = 
+					new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
+			cbkMiddle.setModel(model);
 		}
-		DefaultComboBoxModel<Category> model = 
-				new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
-		cbkMiddle.setModel(model);
+		
 	}
 	
 	public void itemStateChanged(ItemEvent e) {
@@ -383,7 +394,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	protected void itemStateChangedCbkBig(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			loadCategoryMid((Category)cbkBig.getSelectedItem());
+			loadCategoryMid((Category)cbkBig.getSelectedItem());				
 		}
 	}
 	protected void actionPerformedBtnSearch(ActionEvent e) {
@@ -417,7 +428,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	protected void itemStateChangedRdbtnIn(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getRow(), getColunmNames()); 
+			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();
 		}
@@ -430,7 +441,13 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		}
 	}
 	private Object[][] getResRow() {
-		return null;
+		Object[][] rows = null;
+		List<History> list = HistoryService.getInstance().selectAllInhistory();
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++){
+			rows[i] = list.get(i).toHisAll(i);
+		}
+		return rows;
 	}
 	private Object[] getResColunmNames() {
 		return new String[] {"NO","예약순서", "회원코드", "도서코드", "도서명", "저자", "isbn","예약날짜"};
@@ -448,11 +465,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		return rows;
 	}
 	protected void itemStateChangedRdbtnReQ(ItemEvent e) {
-		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
-			table.setModel(model);
-			setAlignWidth();
-		}
+		
 	}
 	
 }
