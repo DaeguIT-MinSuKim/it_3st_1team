@@ -389,18 +389,21 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		User user = new User();
 		user.setId(tfId.getText());		UserService service = new UserService();
 		User selectUser = service.selectUserById(user);
-		System.out.println(selectUser);
-		tfcode.setText(selectUser.getCode());
-		tfId.setText(selectUser.getId());
-		tfName.setText(selectUser.getName());
-		tfZipCode.setText(selectUser.getZipcode());
-		tfAddr_id.setText(selectUser.getAddr_id());
-		tfAddr_de.setText(selectUser.getAddr_de());
-		tfMail.setText(selectUser.getEmail());
-		Phone phone = selectUser.getTel();
-		tfPhone1.setText(phone.getPhone1());
-		tfPhone2.setText(phone.getPhone2());
-		tfPhone3.setText(phone.getPhone3());
+		if(selectUser == null) {
+			JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.");
+		}else {
+			tfcode.setText(selectUser.getCode());
+			tfId.setText(selectUser.getId());
+			tfName.setText(selectUser.getName());
+			tfZipCode.setText(selectUser.getZipcode());
+			tfAddr_id.setText(selectUser.getAddr_id());
+			tfAddr_de.setText(selectUser.getAddr_de());
+			tfMail.setText(selectUser.getEmail());
+			Phone phone = selectUser.getTel();
+			tfPhone1.setText(phone.getPhone1());
+			tfPhone2.setText(phone.getPhone2());
+			tfPhone3.setText(phone.getPhone3());
+		}
 	}
 	protected void actionPerformedTfId(ActionEvent arg0) {		actionPerformedBtnsearch(arg0);
 	}
