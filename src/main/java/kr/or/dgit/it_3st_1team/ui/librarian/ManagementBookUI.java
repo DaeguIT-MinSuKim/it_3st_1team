@@ -28,8 +28,10 @@ import javax.swing.table.TableColumnModel;
 
 import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
+import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.dto.Location;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
+import kr.or.dgit.it_3st_1team.service.HistoryService;
 import kr.or.dgit.it_3st_1team.service.ManageBookService;
 
 @SuppressWarnings("serial")
@@ -121,7 +123,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		rdbtnAll.addItemListener(item);
 		rdbtnAll.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		rdbtnAll.setBackground(Color.WHITE);
-		rdbtnAll.setBounds(10, 30, 100, 30);
+		rdbtnAll.setBounds(10, 30, 90, 30);
 		group.add(rdbtnAll);
 		pState.add(rdbtnAll);
 		
@@ -129,7 +131,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		rdbtnOut.addItemListener(item);
 		rdbtnOut.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		rdbtnOut.setBackground(Color.WHITE);
-		rdbtnOut.setBounds(110, 30, 70, 30);
+		rdbtnOut.setBounds(104, 30, 70, 30);
 		group.add(rdbtnOut);
 		pState.add(rdbtnOut);
 		
@@ -137,12 +139,29 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		rdbtnIn.addItemListener(item);
 		rdbtnIn.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		rdbtnIn.setBackground(Color.WHITE);
-		rdbtnIn.setBounds(180, 30, 100, 30);
+		rdbtnIn.setBounds(178, 30, 60, 30);
 		group.add(rdbtnIn);
 		pState.add(rdbtnIn);
 		
 		btnAddbook = new JButton("도서추가");
 		btnAddbook.addActionListener(this);
+		
+		rdbtnReserve = new JRadioButton("예약");
+		rdbtnReserve.addItemListener(this);
+		rdbtnReserve.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		rdbtnReserve.setBackground(Color.WHITE);
+		rdbtnReserve.setBounds(251, 30, 60, 30);
+		group.add(rdbtnReserve);
+		pState.add(rdbtnReserve);
+		
+		rdbtnReQ = new JRadioButton("신청");
+		rdbtnReQ.addItemListener(this);
+		rdbtnReQ.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		rdbtnReQ.setBackground(Color.WHITE);
+		rdbtnReQ.setBounds(319, 30, 60, 30);
+		group.add(rdbtnReQ);
+		pState.add(rdbtnReQ);
+		
 		btnAddbook.setBorder(null);
 		btnAddbook.setBackground(new Color(94,94,94));
 		btnAddbook.setForeground(new Color(255, 255, 255));
@@ -199,6 +218,8 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		}
 		
 	};
+	private JRadioButton rdbtnReserve;
+	private JRadioButton rdbtnReQ;
 	
 	private Object[][] getRow() {
 		return new Object[][] {
@@ -350,6 +371,12 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	
 	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == rdbtnReQ) {
+			itemStateChangedRdbtnReQ(e);
+		}
+		if (e.getSource() == rdbtnReserve) {
+			itemStateChangedRdbtnReserve(e);
+		}
 		if (e.getSource() == cbkBig) {
 			itemStateChangedCbkBig(e);
 		}
@@ -395,5 +422,33 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			setAlignWidth();
 		}
 	}
-	
+	protected void itemStateChangedRdbtnReserve(ItemEvent e) {
+		if(e.getStateChange() == ItemEvent.SELECTED) {
+			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
+			table.setModel(model);
+			setAlignWidth();
+		}
+	}
+	private Object[] getHisColunmNames() {
+		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "대여일", "반납예정일", "반납일","연체일수"};
+	}
+	private Object[][] getHisRow() {
+		Object[][] rows = null;
+		List<History> list = HistoryService.getInstance().selectAllInhistory();
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++){
+			rows[i] = list.get(i).toHisAll(i);
+		}
+		return rows;
+	}
+	protected void itemStateChangedRdbtnReQ(ItemEvent e) {
+		if(e.getStateChange() == ItemEvent.SELECTED) {
+			NonEditableModel model = new NonEditableModel(getReRow(), getColunmNames()); 
+			table.setModel(model);
+			setAlignWidth();
+		}
+	}
+	private Object[][] getReRow() {
+		return null;
+	}
 }

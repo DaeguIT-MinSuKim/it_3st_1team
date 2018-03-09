@@ -9,4 +9,6 @@ public interface HistoryDao {
 	List<History> selectAllhistory(History his);	//모두보기
 	List<History> selectOuthistory(History his);	//대여중
 	List<History> selectInhistory(History his);	//반납
+	
+	List<History> selectAllInhistory();	// 반납된 모든 도서 목록
 }
