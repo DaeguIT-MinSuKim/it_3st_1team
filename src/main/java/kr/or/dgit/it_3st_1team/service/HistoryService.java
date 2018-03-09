@@ -42,4 +42,12 @@ public class HistoryService {
 			return sqlSession.selectList(namespace + "selectInhistory", his);
 		}
 	}
+	
+	public List<History> selectAllInhistory() {
+		log.debug("selectAllInhistory()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectAllInhistory");
+		}
+	}
+	
 }

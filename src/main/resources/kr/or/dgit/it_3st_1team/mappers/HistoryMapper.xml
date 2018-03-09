@@ -36,4 +36,13 @@
 		where code = #{code} and realreturn is not null
 		order by rentday desc;
 	</select>
+	
+	<!-- 자료관리에서 반납된 전체 도서 목록  -->
+	<select id="selectAllInhistory" parameterType="History" resultMap="HistoryResult">
+		select code, b.bkcode as bk, realreturn, delay, returnday, rentday, b.bkname as bn, b.author as ba
+		from history h join book b
+		on h.bkcode=b.bkcode
+		where realreturn is not null
+		order by rentday desc;
+	</select>
 </mapper>

@@ -84,4 +84,17 @@ public class History {
 		}
 		return state;
 	}
+	
+	public Object[] toHisAll(int i) {
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		String day;
+		if(realreturn==null) {
+			day = "";
+		}else{
+			day = sd.format(realreturn);
+		}
+		return new Object[] {
+				i+1, code, bkcode, bkname, author, sd.format(rentday), sd.format(returnday), day, delay
+		};
+	}
 }
