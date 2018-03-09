@@ -59,5 +59,5 @@ public class Reserve {
 		Book book = BookService.getInstance().selectByIsbn(isbn);
 		return new Object[] {i+1, book.getBkname(), book.getAuthor(),
 				book.getPublish(), book.getPubyear(), isbn, sd.format(resday)};
-	}	
+	}
 }

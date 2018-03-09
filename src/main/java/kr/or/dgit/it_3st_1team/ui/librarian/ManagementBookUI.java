@@ -30,9 +30,14 @@ import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.dto.Location;
+import kr.or.dgit.it_3st_1team.dto.Request;
+import kr.or.dgit.it_3st_1team.dto.Reserve;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.HistoryService;
 import kr.or.dgit.it_3st_1team.service.ManageBookService;
+import kr.or.dgit.it_3st_1team.service.RequestService;
+import kr.or.dgit.it_3st_1team.service.ReserveService;
+import kr.or.dgit.it_3st_1team.ui.StartUI;
 
 @SuppressWarnings("serial")
 public class ManagementBookUI extends JPanel implements ActionListener, ItemListener{
@@ -430,27 +435,57 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		if(e.getStateChange() == ItemEvent.SELECTED) {
 			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
 			table.setModel(model);
-			setAlignWidth();
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7,8);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,100,160,400,150,150,150,100,120);
+			invalidate();
 		}
 	}
 	protected void itemStateChangedRdbtnReserve(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
 			NonEditableModel model = new NonEditableModel(getResRow(), getResColunmNames()); 
 			table.setModel(model);
-			setAlignWidth();
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,410,200,150,150,150,120);
+			invalidate();
 		}
 	}
-	private Object[][] getResRow() {
+	protected void itemStateChangedRdbtnReQ(ItemEvent e) {
+		if(e.getStateChange() == ItemEvent.SELECTED) {
+			NonEditableModel model = new NonEditableModel(getReqRow(), getReqColunmNames()); 
+			table.setModel(model);
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,410,200,150,150,150,120);
+			invalidate();
+		}
+	}
+	
+	private Object[][] getReqRow() {
 		Object[][] rows = null;
-		List<History> list = HistoryService.getInstance().selectAllInhistory();
+		RequestService service = new RequestService();
+		List<Request> list = service.selectAllRequest();
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++){
-			rows[i] = list.get(i).toHisAll(i);
+			rows[i] = list.get(i).RequestToArray(i);
 		}
 		return rows;
 	}
+	private Object[][] getResRow() {
+		Object[][] rows = null;
+		List<Reserve> list = ReserveService.getInstance().selectAllReserve();
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++){
+			rows[i] = list.get(i).ReserveToArray(i);
+		}
+		return rows;
+	}
+	private Object[] getReqColunmNames() {
+		return new String[] {"NO","도서명", "저자", "출판사", "출판년도", "isbn","신청일"};
+	}
 	private Object[] getResColunmNames() {
-		return new String[] {"NO","예약순서", "회원코드", "도서코드", "도서명", "저자", "isbn","예약날짜"};
+		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "isbn","예약날짜"};
 	}
 	private Object[] getHisColunmNames() {
 		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "대여일", "반납예정일", "반납일","연체일수"};
@@ -464,8 +499,13 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		}
 		return rows;
 	}
-	protected void itemStateChangedRdbtnReQ(ItemEvent e) {
-		
+	
+	
+	public void PreferredWidth(int... width) {
+		TableColumnModel model1 = table.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model1.getColumn(i).setPreferredWidth(width[i]);
+		}
 	}
 	
 }
