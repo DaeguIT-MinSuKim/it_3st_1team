@@ -1,4 +1,4 @@
-insert into reserve(code,bkcode,isbn,reqday)
+insert into reserve(code,bkcode,isbn,resday)
 values
 ('1','122008EM0000222221','9788955619317','2018-01-05'),
 ('1','122008EM0000222234','9791196236212','2018-01-10'),

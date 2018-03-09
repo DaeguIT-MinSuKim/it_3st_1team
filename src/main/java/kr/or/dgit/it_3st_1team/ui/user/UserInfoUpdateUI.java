@@ -268,13 +268,14 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		panel.add(btnsearch);
 	}
 	
-	public void userinfo() {
-		User user = StartUI.LOGINUSER;
+	public void userinfo(User user) {
 		tfcode.setText(user.getCode());
 		tfcode.setEditable(false);
 		tfName.setText(user.getName());
 		tfId.setText(user.getId());
 		tfMail.setText(user.getEmail());
+		System.out.println("아아아");
+		System.out.println(user);
 		Phone tel = user.getTel();
 		tfPhone1.setText(tel.getPhone1());
 		tfPhone2.setText(tel.getPhone2());
@@ -331,7 +332,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 			}else {
 				service.updateUser(user);
 				JOptionPane.showMessageDialog(null, ("회원정보가 수정되었습니다."));	
-				userinfo();
+				userinfo(user);
 				pwfPw.setText("");
 				pwfPwc.setText("");
 			}
@@ -379,7 +380,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 			tfAddr_id.setText("");
 			tfAddr_de.setText("");
 		}else {
-			userinfo();
+			userinfo(user);
 			pwfPw.setText("");
 			pwfPwc.setText("");
 		}

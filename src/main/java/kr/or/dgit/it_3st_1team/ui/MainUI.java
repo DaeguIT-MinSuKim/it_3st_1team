@@ -192,7 +192,7 @@ public class MainUI extends JPanel implements ActionListener, MouseListener, Foc
 			if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
 				contentPane.removeAll();
 				LOGINUSER = selectUser;
-				UserUI userui = new UserUI(selectUser);
+				UserUI userui = new UserUI();
 				userui.setBounds(0, 0, 1400, 800);
 				userui.lblname.setText((selectUser.getName()));
 				contentPane.add(userui);

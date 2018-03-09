@@ -329,6 +329,7 @@ public class JoinUI extends JFrame implements ActionListener {
 			phone.setPhone1(tfPhone1.getText());
 			phone.setPhone2(tfPhone2.getText());
 			phone.setPhone3(tfPhone3.getText());
+			user.setTel(phone);
 			user.setEmail(tfMail.getText());
 			user.setZipcode(tfpostnum.getText());
 			user.setAddr_id(tfone.getText());
