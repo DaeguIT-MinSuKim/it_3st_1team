@@ -30,11 +30,15 @@ public class UserUI extends JPanel implements ActionListener {
 	public User user;
 	private JButton btnlogout;
 	
+	public UserUI() {
+		initComponents();
+	}
+	
 	public UserUI(User user) {
 		this.user = user;
 		initComponents();
 	}
-	
+
 	private void initComponents() {
 		setLayout(null);
 		
@@ -163,8 +167,8 @@ public class UserUI extends JPanel implements ActionListener {
 		UserInfoUpdateUI update = new UserInfoUpdateUI();
 		update.btnadd.setVisible(false);
 		update.btnsearch.setVisible(false);
-		update.userinfo();
 		changePanel(update);
+		update.userinfo(user);
 	}
 	protected void actionPerformedBtnHistory(ActionEvent e) {
 		btnHistory.setBackground(new Color(127,127,127));

@@ -333,9 +333,9 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 		tfName.setText(user.getName());
 		tfPhone.setText(user.getTel().toString());
 		tfEmail.setText(user.getEmail());
-//		tfZipCode.setText(user.getZipcode());
-//		tfAddress.setText(user.getAddr_id().getTotal());
-	
+		tfZipCode.setText(user.getZipcode());
+		tfAddress.setText(user.getAddr_id());
+		tfAddr_de.setText(user.getAddr_de());	
 	}
 	public void keyPressed(KeyEvent arg0) {
 	}
