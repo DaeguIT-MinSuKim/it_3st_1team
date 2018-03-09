@@ -61,13 +61,16 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	private List<Book> rentableList = new ArrayList<>();
 	private List<Book> isList = new ArrayList<>();
 	private StartUI staui;
+	private List<Book> listresult;
 
 	public SearchBookUI() {
 		initComponents();
 	}
+
 	public void setStartUI(StartUI staui) {
 		this.staui = staui;
 	}
+
 	private void initComponents() {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
@@ -125,7 +128,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		panel_1.add(cblistview);
 		cblistview.setBackground(Color.WHITE);
 		cblistview.setSelected(false);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 30, 1110, 570);
 		panel_1.add(scrollPane);
@@ -147,13 +150,13 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
 		scrollPane.setViewportView(table);
-		
+
 		JLabel lblListview = new JLabel("대출 가능한 도서만 보기");
 		lblListview.setBounds(900, 0, 178, 22);
 		panel_1.add(lblListview);
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		for(Book b: list) {
-			if(b.getterRentable() == true) {
+		for (Book b : list) {
+			if (b.getterRentable() == true) {
 				isList.add(b);
 			}
 			rentableList.add(b);
@@ -218,29 +221,29 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 
 	public void loadDatas(List<Book> list) {
-		for(Book b: list) {
-			if(b.getterRentable() == true) {
+		for (Book b : list) {
+			if (b.getterRentable() == true) {
 				isList.add(b);
 			}
 		}
-		if(cblistview.isSelected()) {
+		if (cblistview.isSelected()) {
 			NonEditableModel model = new NonEditableModel(getRow(isList), getColunmNames());
 			table.setModel(model);
-		}else {
+		} else {
 			NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
 			table.setModel(model);
 		}
-		
-		if(table.getRowCount()>18) {
+
+		if (table.getRowCount() > 18) {
 			panel_1.setBounds(panel_1.getX(), panel_1.getY(), 1110, 600);
 			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, 570);
-		}else {
+		} else {
 			int height = table.getRowHeight();
 			int count = table.getRowCount();
-			panel_1.setBounds(panel_1.getX(), panel_1.getY(), 1110, height*(count+2));
-			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, height*(count+1));
+			panel_1.setBounds(panel_1.getX(), panel_1.getY(), 1110, height * (count + 2));
+			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, height * (count + 1));
 		}
-		
+
 		cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
@@ -298,42 +301,46 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			rentableList = list;
 			loadDatas(list);
 			return;
-		} else {
+		} else if (cbbbig.getSelectedIndex() == 0) {
+			List<Book> list = BookService.getInstance().selectBookStartAll();
+			loadDatas(list);
+			return;
+		} else if (cbbbig.getSelectedIndex() > 0) {
 			List<Category> biglist = CategoryService.getInstance().selectCategoryBig();
-			int cbnum = cbbbig.getSelectedIndex()-1;
-			if(cbnum<0) {
-			}else {
-				biglist.get(cbnum).getCatename();
-				cate = biglist.get(cbnum);
-				num = CategoryService.getInstance().selectCateNum(cate);
+			int cbnum = cbbbig.getSelectedIndex();
+			cate = biglist.get(cbnum-1);
+			num = CategoryService.getInstance().selectCateNum(cate);
+			if(num.equals("0")) {
+				num="000";
 			}
-		}
+			
+			Category cate2 = new Category();
+			String num2 = "";
 
-		Category cate2 = new Category();
-		String num2 = "";
-
-		if (cbbmid.getSelectedIndex() == 0) {
-			loca.setLoca_num("%" + num + "%");
-			book.setLocation(loca);
-			List<Book> list = BookService.getInstance().selectBookAll(book);
-			rentableList = list;
-			loadDatas(list);
+			if (cbbmid.getSelectedIndex() == 0) {
+				loca.setLoca_num("%" + num + "%");
+				book.setLocation(loca);
+				List<Book> list = BookService.getInstance().selectBookAll(book);
+				rentableList = list;
+				loadDatas(list);
+				return;
+			} else if (cbbmid.getSelectedIndex() > 0) {
+				List<Category> midlist = CategoryService.getInstance().selectCategoryMid(cate);
+				int cbnum2 = cbbmid.getSelectedIndex() - 1;
+				cate2 = midlist.get(cbnum2);
+				num2 = CategoryService.getInstance().selectCateNum(cate2);
+				String fullCate = String.format("%s%s", num, num2);
+				System.out.println(fullCate);
+				loca.setLoca_num(fullCate);
+				book.setLocation(loca);
+				List<Book> list = BookService.getInstance().selectBookAll(book);
+				rentableList = list;
+				loadDatas(list);
+				return;
+			}
 			return;
-		} else if (cbbmid.getSelectedIndex() > 0) {
-			List<Category> midlist = CategoryService.getInstance().selectCategoryMid(cate);
-			int cbnum2 = cbbmid.getSelectedIndex()-1;
-			cate2 = midlist.get(cbnum2);
-			num2 = CategoryService.getInstance().selectCateNum(cate2);
-			String fullCate = String.format("%s%s", num, num2);
-			System.out.println(fullCate);
-			loca.setLoca_num(fullCate);
-			book.setLocation(loca);
-			List<Book> list = BookService.getInstance().selectBookAll(book);
-			rentableList = list;
-			loadDatas(list);
-			return;
 		}
-
+		
 		if (!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 			book.setBkname("%" + tfbookname.getText() + "%");
 			List<Book> list = BookService.getInstance().selectBookAll(book);
@@ -348,7 +355,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			rentableList = list;
 			loadDatas(list);
 			return;
-		}		
+		}
 	}
 
 	protected void actionPerformedBtnSearchDe(ActionEvent e) {
@@ -357,12 +364,14 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			search.setBounds(20, 120, 1080, 250);
 			search.setBookui(this);
 			add(search);
+			// loadDatas(listresult);
 			panel_1.setBounds(10, 380, 1110, 330);
 			scrollPane.setBounds(0, 30, 1110, 300);
 			flag = 0;
 			repaint();
 		} else {
 			remove(search);
+			// loadDatas(listresult);
 			panel_1.setBounds(10, 120, 1110, 600);
 			scrollPane.setBounds(0, 30, 1110, 570);
 			repaint();
@@ -432,9 +441,9 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 
 	protected void itemStateChangedCblistview(ItemEvent e) {
-		if(cblistview.isSelected()) {
+		if (cblistview.isSelected()) {
 			loadDatas(isList);
-		}else {
+		} else {
 			loadDatas(rentableList);
 		}
 	}
@@ -467,7 +476,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			TakeinoutService service = new TakeinoutService();
 			int Num = service.selectOutNum(isbn);
 			int inNum = ExistNum - Num;
-			info.tfnum.setText(String.format("%s / %s", inNum,ExistNum));
+			info.tfnum.setText(String.format("%s / %s", inNum, ExistNum));
 			Location loca = new Location();
 			loca.setLoca_num(resultBook.getLocation().getLoca_num());
 			String section = LocationService.getInstance().selectSectionBynum(loca);
@@ -478,6 +487,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			info.tfreservenum.setText(Integer.toString(num));
 		}
 	}
+
 	protected void actionPerformedTfbookname(ActionEvent e) {
 		actionPerformedBtnSearch(e);
 	}
