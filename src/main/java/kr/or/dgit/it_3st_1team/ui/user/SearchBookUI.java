@@ -1,6 +1,7 @@
 package kr.or.dgit.it_3st_1team.ui.user;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -19,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -113,7 +115,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
-		panel_1.setBounds(10, 120, 1110, 542);
+		panel_1.setBounds(10, 120, 1110, 600);
 		add(panel_1);
 		panel_1.setLayout(null);
 
@@ -125,12 +127,13 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		cblistview.setSelected(false);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 30, 1110, 542);
+		scrollPane.setBounds(0, 30, 1110, 570);
 		panel_1.add(scrollPane);
-		scrollPane.setBackground(new Color(255, 255, 255));
+		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 
 		table = new JTable();
+		table.setBackground(Color.WHITE);
 		table.addMouseListener(this);
 		table.setRowHeight(30);
 		table.getTableHeader().setBackground(new Color(245, 245, 245));
@@ -227,6 +230,17 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
 			table.setModel(model);
 		}
+		
+		if(table.getRowCount()>18) {
+			panel_1.setBounds(panel_1.getX(), panel_1.getY(), 1110, 600);
+			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, 570);
+		}else {
+			int height = table.getRowHeight();
+			int count = table.getRowCount();
+			panel_1.setBounds(panel_1.getX(), panel_1.getY(), 1110, height*(count+2));
+			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, height*(count+1));
+		}
+		
 		cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
@@ -287,10 +301,12 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		} else {
 			List<Category> biglist = CategoryService.getInstance().selectCategoryBig();
 			int cbnum = cbbbig.getSelectedIndex()-1;
-			biglist.get(cbnum).getCatename();
-			cate = biglist.get(cbnum);
-			num = CategoryService.getInstance().selectCateNum(cate);
-			System.out.println(num);
+			if(cbnum<0) {
+			}else {
+				biglist.get(cbnum).getCatename();
+				cate = biglist.get(cbnum);
+				num = CategoryService.getInstance().selectCateNum(cate);
+			}
 		}
 
 		Category cate2 = new Category();
@@ -332,7 +348,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			rentableList = list;
 			loadDatas(list);
 			return;
-		}
+		}		
 	}
 
 	protected void actionPerformedBtnSearchDe(ActionEvent e) {
@@ -341,12 +357,14 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			search.setBounds(20, 120, 1080, 250);
 			search.setBookui(this);
 			add(search);
-			panel_1.setBounds(10, 380, 1110, 542);
+			panel_1.setBounds(10, 380, 1110, 330);
+			scrollPane.setBounds(0, 30, 1110, 300);
 			flag = 0;
 			repaint();
 		} else {
 			remove(search);
-			panel_1.setBounds(10, 120, 1110, 542);
+			panel_1.setBounds(10, 120, 1110, 600);
+			scrollPane.setBounds(0, 30, 1110, 570);
 			repaint();
 			flag = 1;
 		}
