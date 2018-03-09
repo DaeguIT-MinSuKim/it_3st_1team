@@ -61,7 +61,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	private List<Book> rentableList = new ArrayList<>();
 	private List<Book> isList = new ArrayList<>();
 	private StartUI staui;
-	private List<Book> listresult;
 
 	public SearchBookUI() {
 		initComponents();
@@ -155,13 +154,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		lblListview.setBounds(900, 0, 178, 22);
 		panel_1.add(lblListview);
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		for (Book b : list) {
-			if (b.getterRentable() == true) {
-				isList.add(b);
-			}
-			rentableList.add(b);
-		}
-		loadDatas(list);
 		table.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6);
@@ -320,6 +312,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			if (cbbmid.getSelectedIndex() == 0) {
 				loca.setLoca_num("%" + num + "%");
 				book.setLocation(loca);
+				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
 				rentableList = list;
 				loadDatas(list);
@@ -333,6 +326,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				System.out.println(fullCate);
 				loca.setLoca_num(fullCate);
 				book.setLocation(loca);
+				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
 				rentableList = list;
 				loadDatas(list);
@@ -364,14 +358,12 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			search.setBounds(20, 120, 1080, 250);
 			search.setBookui(this);
 			add(search);
-			// loadDatas(listresult);
 			panel_1.setBounds(10, 380, 1110, 330);
 			scrollPane.setBounds(0, 30, 1110, 300);
 			flag = 0;
 			repaint();
 		} else {
 			remove(search);
-			// loadDatas(listresult);
 			panel_1.setBounds(10, 120, 1110, 600);
 			scrollPane.setBounds(0, 30, 1110, 570);
 			repaint();
