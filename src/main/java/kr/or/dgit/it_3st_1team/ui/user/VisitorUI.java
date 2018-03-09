@@ -22,14 +22,10 @@ public class VisitorUI extends JPanel implements ActionListener {
 	private JButton btnNews;
 	private StartUI staui;
 
-	public VisitorUI() {
+	public VisitorUI(StartUI staui) {
+		this.staui = staui;
 		initComponents();
 	}
-	
-	public void setStartUI(StartUI staui) {
-		this.staui = staui;
-	}
-
 	private void initComponents() {
 		setLayout(null);
 		
@@ -87,6 +83,7 @@ public class VisitorUI extends JPanel implements ActionListener {
 		panel.add(btnJoin);
 		
 		SearchBookUI showpanel = new SearchBookUI();
+		showpanel.setStartUI(staui);
 		showpanel.setBounds(250, 0, 1150, 800);
 		showpanel.setBackground(Color.WHITE);
 		add(showpanel);

@@ -34,6 +34,7 @@ public class UserUI extends JPanel implements ActionListener {
 		this.user = user;
 		initComponents();
 	}
+	
 	private void initComponents() {
 		setLayout(null);
 		

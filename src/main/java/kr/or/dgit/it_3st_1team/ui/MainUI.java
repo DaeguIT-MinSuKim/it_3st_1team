@@ -237,11 +237,11 @@ public class MainUI extends JPanel implements ActionListener, MouseListener, Foc
 	}
 	protected void actionPerformedBtnSearch(ActionEvent e) {
 		contentPane.removeAll();
-		VisitorUI vis = new VisitorUI();
+		/*VisitorUI vis = new VisitorUI();
 		vis.setBounds(0, 0, 1400, 800);
 		contentPane.add(vis);
 		contentPane.repaint();
-		contentPane.revalidate();
+		contentPane.revalidate();*/
 	}
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == tfId) {

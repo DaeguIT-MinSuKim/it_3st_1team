@@ -40,14 +40,14 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 	private JLabel label;
 	private JButton btnUserLogin;
 	private JButton btnMngLogin;
-	public static User LOGINUSER;
-	public static Employee LOGINEMP;
+	
 	private StartUI staui;
 
 	public LoginUI(StartUI staui) {
 		this.staui = staui;
 		initComponents();
 	}
+	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(600, 300, 450, 300);
@@ -167,11 +167,12 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 		user.setPw(pw);
 		User selectUser = service.selectIdPw(user);
 		if(user.getId().equals(selectUser.getId()) && user.getPw().equals(selectUser.getPw())) {
-			LOGINUSER = selectUser;
+			StartUI.LOGINUSER = selectUser;
 			UserUI userui = new UserUI(selectUser);
 			userui.setBounds(0, 0, 1400, 800);
 			userui.lblname.setText((selectUser.getName()));
 			staui.changepanel(userui);
+			
 			dispose();
 		}else {
 			JOptionPane.showMessageDialog(null, "아이디, 비밀번호가 올바르지 않습니다.");
@@ -187,7 +188,7 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 		emp.setPw(pw);
 		Employee selectEmp = service.selectIdPw(emp);
 		if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
-			LOGINEMP = selectEmp;
+			StartUI.LOGINEMP = selectEmp;
 			ManagerUI empui = new ManagerUI(selectEmp);
 			empui.setBounds(0, 0, 1400, 800);
 			empui.lblname.setText((selectEmp.getName()));

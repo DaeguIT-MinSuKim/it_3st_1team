@@ -1,6 +1,5 @@
 package kr.or.dgit.it_3st_1team;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -58,5 +57,14 @@ public class ReserveServiceTest {
 		Date day = new Date();
 		res.setResday(day);
 		int num = service.insertReserve(res);
+	}
+	
+	@Test
+	public void test5selectalreadyReserve() {
+		Reserve res = new Reserve();
+		res.setCode("6");
+		res.setIsbn("9791186588772");
+		List<Reserve>list = ReserveService.getInstance().selectalreadyReserve(res);
+		Assert.assertNotNull(list);
 	}
 }

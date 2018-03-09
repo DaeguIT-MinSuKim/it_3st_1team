@@ -41,6 +41,7 @@ import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.LocationService;
 import kr.or.dgit.it_3st_1team.service.ReserveService;
 import kr.or.dgit.it_3st_1team.service.TakeinoutService;
+import kr.or.dgit.it_3st_1team.ui.StartUI;
 
 @SuppressWarnings("serial")
 public class SearchBookUI extends JPanel implements ActionListener, ItemListener, MouseListener {
@@ -57,12 +58,14 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	private JCheckBox cblistview;
 	private List<Book> rentableList = new ArrayList<>();
 	private List<Book> isList = new ArrayList<>();
+	private StartUI staui;
 
 	public SearchBookUI() {
-
 		initComponents();
 	}
-
+	public void setStartUI(StartUI staui) {
+		this.staui = staui;
+	}
 	private void initComponents() {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
@@ -435,6 +438,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			String isbn = BookService.getInstance().selectIsbn(book);
 			Book resultBook = BookService.getInstance().selectByIsbn(isbn);
 			BookinfoUI info = new BookinfoUI();
+			info.setStartUI(staui);
 			info.setVisible(true);
 			info.tfBookcode.setText(resultBook.getBkCode());
 			info.tfauthor.setText(resultBook.getAuthor());
