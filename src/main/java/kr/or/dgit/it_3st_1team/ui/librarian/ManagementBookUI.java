@@ -37,7 +37,6 @@ import kr.or.dgit.it_3st_1team.service.HistoryService;
 import kr.or.dgit.it_3st_1team.service.ManageBookService;
 import kr.or.dgit.it_3st_1team.service.RequestService;
 import kr.or.dgit.it_3st_1team.service.ReserveService;
-import kr.or.dgit.it_3st_1team.ui.StartUI;
 
 @SuppressWarnings("serial")
 public class ManagementBookUI extends JPanel implements ActionListener, ItemListener{
