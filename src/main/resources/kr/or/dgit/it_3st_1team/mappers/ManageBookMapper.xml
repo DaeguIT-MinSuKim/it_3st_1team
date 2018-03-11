@@ -62,6 +62,10 @@
 		from book as b left outer join takeinout as t on b.bkcode = t.bkcode
 	</sql>
 	
+	<!-- code로 도서 목록 불러오기 -->
+	<select id="selectBookByCodeWithAPI" parameterType="Book" resultMap="BookWithTakeinoutResult">
+		select bkcode, isbn, bkname, author, publish, pubyear, info, loca_num from book where bkcode =#{bkCode};
+	</select>
 	
 	<!-- 도서 추가 sql -->
 	<sql id="insertBookSql">
@@ -84,7 +88,6 @@
 		from book b right outer join takeinout t on b.bkcode=t.bkcode
 		<include refid="whereAllSql" />
 	</select>
-	
 </mapper>
 
 

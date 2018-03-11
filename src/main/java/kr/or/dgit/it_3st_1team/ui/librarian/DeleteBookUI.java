@@ -27,9 +27,11 @@ import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.ManageBookService;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
-public class DeleteBookUI extends JFrame implements ActionListener, ItemListener {
+public class DeleteBookUI extends JFrame implements ActionListener, ItemListener, KeyListener {
 
 	private JPanel contentPane;
 	private JTextField tfcode;
@@ -108,6 +110,7 @@ public class DeleteBookUI extends JFrame implements ActionListener, ItemListener
 		contentPane.add(lblinfo);
 		
 		tfcode = new JTextField();
+		tfcode.addKeyListener(this);
 		tfcode.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfcode.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfcode.setBounds(150, 30, 150, 30);
@@ -245,6 +248,36 @@ public class DeleteBookUI extends JFrame implements ActionListener, ItemListener
 			ManageBookService service = new ManageBookService();
 			service.deleteBookWithAPI(book);
 			JOptionPane.showMessageDialog(null, "도서가 삭제되었습니다");
+		}
+	}
+	public void keyPressed(KeyEvent arg0) {
+	}
+	public void keyReleased(KeyEvent arg0) {
+		if (arg0.getSource() == tfcode) {
+			keyReleasedTfcode(arg0);
+		}
+	}
+	public void keyTyped(KeyEvent arg0) {
+	}
+	protected void keyReleasedTfcode(KeyEvent e) {
+		Book book = new Book();
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if(!(tfcode.getText().equals(""))) {
+				String str = tfcode.getText().substring(1, 19);
+				book.setBkCode(str);
+				ManageBookService service = new ManageBookService();
+				book = service.selectBookByCodeWithAPI(book);
+				tfname.setText(book.getBkname());
+				tfauthor.setText(book.getAuthor());
+				tfisbn.setText(book.getIsbn());
+				tfpublish.setText(book.getPublish());
+				int num = Integer.parseInt(book.getLocation().getLoca_num().substring(0, 1));
+				int num2 = Integer.parseInt(book.getLocation().getLoca_num().substring(4, 5));
+				cbkBig.setSelectedIndex(num+1);
+				cbkMiddle.setSelectedIndex(num2);
+				tfpubyear.setText(Integer.toString(book.getPubyear()));
+				tpinfo.setText(book.getInfo());
+			}
 		}
 	}
 }

@@ -37,4 +37,16 @@
 		insert into reserve(code, bkcode, isbn, resday)
 		values(#{code}, #{bkcode}, #{isbn}, #{resday})
 	</insert>
+	
+	<!-- 예약 도서 검색 -->
+	<select id="selectReserveBookByBkCode" parameterType="Reserve" resultMap="ReserveResult">
+		select re_no, code, bkcode, isbn, resday
+		from reserve
+		where bkcode=#{bkcode};
+	</select>
+	
+	<!-- 예약중인 도서 대여시 삭제 -->
+	<select id="deleteReserveBookWithAPI">
+		delete from Reserve where code=#{code} and bkcode=#{bkcode}
+	</select>	
 </mapper>

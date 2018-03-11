@@ -59,4 +59,21 @@ public class ReserveService {
 		}
 	}
 	
+	// 예약 도서 검색
+	public List<Reserve> selectReserveBookByBkCode(Reserve res){
+		log.debug("selectReserveBookByBkCode()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectReserveBookByBkCode", res);
+		}
+	}
+	
+	// 예약 도서 대여 후 삭제
+	public int deleteReserveBookWithAPI(Reserve res){
+		log.debug("deleteReserveBookWithAPI()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int num = sqlSession.delete(namespace + "deleteReserveBookWithAPI", res);
+			sqlSession.commit();
+			return num;
+		}
+	}
 }

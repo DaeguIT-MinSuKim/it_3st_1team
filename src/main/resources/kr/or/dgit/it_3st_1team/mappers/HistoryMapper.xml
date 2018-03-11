@@ -11,6 +11,7 @@
 		<result property="bkcode" column="bk"/>
 		<result property="bkname" column="bn"/>
 		<result property="author" column="ba"/>
+		<result property="loca_num" column="loca_num"/>
 	</resultMap>
 		
 	<select id="selectAllhistory" parameterType="History" resultMap="HistoryResult">
@@ -26,7 +27,7 @@
 		from history h join book b
 		on h.bkcode=b.bkcode
 		where code = #{code} and realreturn is null
-		order by rentday desc;
+		order by rentday desc
 	</select>
 	
 	<select id="selectInhistory" parameterType="History" resultMap="HistoryResult">
@@ -34,7 +35,7 @@
 		from history h join book b
 		on h.bkcode=b.bkcode
 		where code = #{code} and realreturn is not null
-		order by rentday desc;
+		order by rentday desc
 	</select>
 	
 	<!-- 자료관리에서 반납된 전체 도서 목록  -->
@@ -43,6 +44,28 @@
 		from history h join book b
 		on h.bkcode=b.bkcode
 		where realreturn is not null
-		order by rentday desc;
+		order by rentday desc
+	</select>
+	
+	<!-- 현재 반납된 도서 목록 -->
+	
+	<sql id="whereAllSql">
+		<where>
+			<if test="bkname != null">
+				bkname like #{bkname}
+			</if>
+			<if test="loca_num != null">
+				and loca_num like #{loca_num}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectCategoryByInhistory" parameterType="History" resultMap="HistoryResult">
+		select code, b.bkcode as bk, realreturn, delay, returnday, rentday, b.bkname as bn, b.author as ba, b.loca_num
+		from history h join book b
+		on h.bkcode=b.bkcode
+		<include refid="whereAllSql" />
+		and realreturn is not null
+		order by rentday desc
 	</select>
 </mapper>
