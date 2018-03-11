@@ -8,6 +8,8 @@
 		<result property="bkcode" column="bkcode"/>
 		<result property="isbn" column="isbn"/>
 		<result property="resday" column="resday"/>
+		<result property="bkName" column="bkname"/>
+		<result property="loca_num" column="loca_num"/>
 	</resultMap>
 	
 	<select id="selectReserveByCode" parameterType="Reserve" resultMap="ReserveResult">
@@ -48,5 +50,24 @@
 	<!-- 예약중인 도서 대여시 삭제 -->
 	<select id="deleteReserveBookWithAPI">
 		delete from Reserve where code=#{code} and bkcode=#{bkcode}
-	</select>	
+	</select>
+	
+	<!-- 분류별 예약 도서 검색 -->
+	<sql id="whereAllSql">
+		<where>
+			<if test="bkName != null">
+				bkname like #{bkName}
+			</if>
+			<if test="loca_num != null">
+				and loca_num like #{loca_num}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectCategoryByReserve" parameterType="Reserve" resultMap="ReserveResult">
+		select r.code, r.bkcode, r.isbn, r.resday, b.loca_num, b.bkname
+		from reserve r left outer join book b on r.isbn=b.isbn
+		<include refid="whereAllSql" />
+		order by resday
+	</select>
 </mapper>

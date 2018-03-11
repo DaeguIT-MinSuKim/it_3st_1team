@@ -418,6 +418,17 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			cellAlign(SwingConstants.LEFT, 1, 2);
 			PreferredWidth(50,100,160,400,150,150,150,100,120);
 			invalidate();
+		}else if(rdbtnReserve.isSelected()) {
+			NonEditableModel model = new NonEditableModel(getResRow(), getResColunmNames()); 
+			table.setModel(model);
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,410,200,150,150,150,120);
+			invalidate();
+		}else {
+			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
+			table.setModel(model);
+			setAlignWidth();
 		}
 	}
 	protected void itemStateChangedRdbtnOut(ItemEvent e) {
@@ -477,7 +488,23 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	private Object[][] getResRow() {
 		Object[][] rows = null;
-		List<Reserve> list = ReserveService.getInstance().selectAllReserve();
+		Reserve res = new Reserve();
+		if(tfSearch.getText().equals("")) {
+			res.setBkName(null);
+		}else {
+			res.setBkName("%"+tfSearch.getText()+"%");
+		}
+		
+		if(cbkBig.getSelectedIndex() > 0) {
+			int bigIdx = cbkBig.getSelectedIndex();
+			int midIdx = cbkMiddle.getSelectedIndex();
+			if(cbkMiddle.getSelectedIndex() > 0) {
+				res.setLoca_num(bigListCategory.get(bigIdx-1).getNum() + midListCategory.get(midIdx-1).getNum()+"%");				
+			}else {
+				res.setLoca_num(bigListCategory.get(bigIdx-1).getNum() + "%");
+			}
+		}
+		List<Reserve> list = ReserveService.getInstance().selectCategoryByReserve(res);
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++){
 			rows[i] = list.get(i).ReserveToArray(i);
