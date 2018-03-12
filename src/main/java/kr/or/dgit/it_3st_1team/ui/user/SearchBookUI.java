@@ -301,6 +301,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
 					getFilterListData(book);
+
 					return;
 				}else {
 					rentableList = getFilterListData(book);
@@ -324,7 +325,10 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
 				JOptionPane.showMessageDialog(null, "제목만");
-				rentableList = list;
+				for(Book b : list) {
+					isList.add(b);
+					rentableList.add(b);
+				}
 				loadDatas(list);
 				return;
 			}else {

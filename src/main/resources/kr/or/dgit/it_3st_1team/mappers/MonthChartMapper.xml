@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.it_3st_1team.dao.MonthChartDao">
+	<resultMap type="MonthChart" id="MonthChartResult">
+		<result property="month" column="month"/>
+		<result property="result" column="result"/>
+	</resultMap>
+	
+	<select id="selectByAllWithAPI" resultMap="MonthChartResult" parameterType="MonthChart">
+		SELECT MID(rentday,1,7) as 'month', COUNT(*) as 'result' FROM history GROUP BY month;
+	</select>
+	
+</mapper>
+
+
+
