@@ -53,7 +53,11 @@ public class Book {
 
 	public String isRentable() {
 		String able;
-		if(rentable==false) {
+		int ExistNum = BookService.getInstance().selectExistNum(isbn);
+		TakeinoutService service = new TakeinoutService();
+		int Num = service.selectOutNum(isbn);
+		int inNum = ExistNum - Num;
+		if(inNum==0) {
 			able = "대여불가";
 		}else {
 			able = "대여가능";
