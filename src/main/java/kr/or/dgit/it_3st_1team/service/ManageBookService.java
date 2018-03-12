@@ -8,38 +8,47 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.dgit.it_3st_1team.dao.ManageBookDao;
 import kr.or.dgit.it_3st_1team.dto.Book;
+import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 
 public class ManageBookService {
 	private static final Log log = LogFactory.getLog(ManageBookDao.class);
 	private String namespace = "kr.or.dgit.it_3st_1team.dao.ManageBookDao.";
-	
-	public List<Book> selectBookByAllForResultMapExtendsWithAPI(Book book){
+
+	public List<Book> selectBookByAllForResultMapExtendsWithAPI(Book book) {
 		log.debug("selectBookByAllForResultMapExtendsWithAPI()");
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + "selectBookByAllForResultMapExtendsWithAPI", book);
 		}
 	}
 
-	public List<Book> selectBookByNameForResultMapExtendsWithAPI(Book book){
+	public List<Book> selectBookByNameForResultMapExtendsWithAPI(Book book) {
 		log.debug("selectBookByNameForResultMapExtendsWithAPI()");
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + "selectBookByNameForResultMapExtendsWithAPI", book);
+		}
+	}
+
+	// code로 도서 목록 불러오기
+	public Book selectBookByCodeWithAPI(Book book) {
+		log.debug("selectBookByCodeWithAPI()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "selectBookByCodeWithAPI", book);
 		}
 	}
 
 	public List<Book> selectBookByBigCategoryWithAPI(Book book) {
 		log.debug("selectBookByBigCategoryWithAPI()");
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			ManageBookDao bookDao = sqlSession.getMapper(ManageBookDao.class);
 			return bookDao.selectBookByBigCategoryWithAPI(book);
 		}
 	}
-	
+
 	// 대여중인 도서 목록
-	public List<Book> selectBookForTakeinoutWithAPI(Book book){
+	public List<Book> selectBookForTakeinoutWithAPI(Book book) {
 		log.debug("selectBookForTakeinoutWithAPI()");
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectList(namespace + "selectBookForTakeinoutWithAPI", book);
 		}
 	}
@@ -54,7 +63,7 @@ public class ManageBookService {
 			return res;
 		}
 	}
-	
+
 	// 도서 삭제
 	public int deleteBookWithAPI(Book book) {
 		log.debug("deleteBookWithAPI()");
@@ -65,5 +74,4 @@ public class ManageBookService {
 			return res;
 		}
 	}
-
 }

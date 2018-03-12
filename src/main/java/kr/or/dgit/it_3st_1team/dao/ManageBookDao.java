@@ -13,6 +13,9 @@ public interface ManageBookDao {
 	
 	// 대여중인 도서 목록
 	List<Book> selectBookForTakeinoutWithAPI(Book book);
+	
+	// code로 도서
+	Book selectBookByCodeWithAPI(Book book);
 
 	// insert
 	int insertBookWithAPI(Book book);

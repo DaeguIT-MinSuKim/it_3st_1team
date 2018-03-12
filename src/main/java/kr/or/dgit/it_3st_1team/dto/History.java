@@ -13,6 +13,7 @@ public class History {
 	private int delay;
 	private String bkname;
 	private String author;
+	private String loca_num;
 		
 	public History() {
 		// TODO Auto-generated constructor stub
@@ -59,6 +60,20 @@ public class History {
 	public void setDelay(int delay) {
 		this.delay = delay;
 	}
+	public String getLoca_num() {
+		return loca_num;
+	}
+	public void setLoca_num(String loca_num) {
+		this.loca_num = loca_num;
+	}
+	
+	public String getBkname() {
+		return bkname;
+	}
+	public void setBkname(String bkname) {
+		this.bkname = bkname;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("History [his_no=%s, code=%s, bkcode=%s, realreturn=%s, delay=%s]", his_no, code, bkcode,

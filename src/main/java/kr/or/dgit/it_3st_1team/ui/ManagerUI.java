@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.it_3st_1team.dto.Employee;
+import kr.or.dgit.it_3st_1team.ui.chart.PanelChart;
 import kr.or.dgit.it_3st_1team.ui.librarian.EmployeeUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.InoutBookUI;
 import kr.or.dgit.it_3st_1team.ui.librarian.ManagementBookUI;
@@ -178,7 +179,8 @@ public class ManagerUI extends JPanel implements ActionListener {
 		btnEmpManage.setBackground(new Color(158,158,158));
 		btnHistory.setBackground(new Color(94,94,94));
 		btnUserUpdate.setBackground(new Color(158,158,158));
-
+		PanelChart pchart = new PanelChart();
+		changePanel(pchart);
 	}
 	protected void actionPerformedBtnEmpManage(ActionEvent arg0) {
 		btnBookinout.setBackground(new Color(158,158,158));

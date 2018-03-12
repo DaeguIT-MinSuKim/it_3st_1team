@@ -30,9 +30,13 @@ import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Category;
 import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.dto.Location;
+import kr.or.dgit.it_3st_1team.dto.Request;
+import kr.or.dgit.it_3st_1team.dto.Reserve;
 import kr.or.dgit.it_3st_1team.service.CategoryService;
 import kr.or.dgit.it_3st_1team.service.HistoryService;
 import kr.or.dgit.it_3st_1team.service.ManageBookService;
+import kr.or.dgit.it_3st_1team.service.RequestService;
+import kr.or.dgit.it_3st_1team.service.ReserveService;
 
 @SuppressWarnings("serial")
 public class ManagementBookUI extends JPanel implements ActionListener, ItemListener{
@@ -357,17 +361,28 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	
 	private void loadCategoryMid(Category selectedItem) {
-		List<Category> categoryMid = new ArrayList<>();
-		Category decate2 = new Category("중분류 전체");
-		categoryMid.add(decate2);
-		
-		midListCategory = CategoryService.getInstance().selectCategoryMid(selectedItem);
-		for(Category cate: midListCategory) {
-			categoryMid.add(cate);
+		if(selectedItem.getCatename().equals("대분류 전체")) {
+			List<Category> categoryMid = new ArrayList<>();
+			Category decate2 = new Category("중분류 전체");
+			categoryMid.add(decate2);
+			
+			DefaultComboBoxModel<Category> model = 
+					new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
+			cbkMiddle.setModel(model);
+		}else {
+			List<Category> categoryMid = new ArrayList<>();
+			Category decate2 = new Category("중분류 전체");
+			categoryMid.add(decate2);
+			
+			midListCategory = CategoryService.getInstance().selectCategoryMid(selectedItem);
+			for(Category cate: midListCategory) {
+				categoryMid.add(cate);
+			}
+			DefaultComboBoxModel<Category> model = 
+					new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
+			cbkMiddle.setModel(model);
 		}
-		DefaultComboBoxModel<Category> model = 
-				new DefaultComboBoxModel<>(categoryMid.toArray(new Category[categoryMid.size()]));
-		cbkMiddle.setModel(model);
+		
 	}
 	
 	public void itemStateChanged(ItemEvent e) {
@@ -383,7 +398,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	protected void itemStateChangedCbkBig(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			loadCategoryMid((Category)cbkBig.getSelectedItem());
+			loadCategoryMid((Category)cbkBig.getSelectedItem());				
 		}
 	}
 	protected void actionPerformedBtnSearch(ActionEvent e) {
@@ -395,6 +410,20 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();			
+		}else if(rdbtnIn.isSelected()) {
+			NonEditableModel model = new NonEditableModel(getHisRow(),getHisColunmNames()); 
+			table.setModel(model);
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7,8);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,100,160,400,150,150,150,100,120);
+			invalidate();
+		}else if(rdbtnReserve.isSelected()) {
+			NonEditableModel model = new NonEditableModel(getResRow(), getResColunmNames()); 
+			table.setModel(model);
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,410,200,150,150,150,120);
+			invalidate();
 		}else {
 			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
 			table.setModel(model);
@@ -417,41 +446,110 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 	}
 	protected void itemStateChangedRdbtnIn(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getRow(), getColunmNames()); 
+			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
 			table.setModel(model);
-			setAlignWidth();
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7,8);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,100,160,400,150,150,150,100,120);
+			invalidate();
 		}
 	}
 	protected void itemStateChangedRdbtnReserve(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
 			NonEditableModel model = new NonEditableModel(getResRow(), getResColunmNames()); 
 			table.setModel(model);
-			setAlignWidth();
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,410,200,150,150,150,120);
+			invalidate();
 		}
 	}
+	protected void itemStateChangedRdbtnReQ(ItemEvent e) {
+		if(e.getStateChange() == ItemEvent.SELECTED) {
+			NonEditableModel model = new NonEditableModel(getReqRow(), getReqColunmNames()); 
+			table.setModel(model);
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,410,200,150,150,150,120);
+			invalidate();
+		}
+	}
+	
+	private Object[][] getReqRow() {
+		Object[][] rows = null;
+		RequestService service = new RequestService();
+		List<Request> list = service.selectAllRequest();
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++){
+			rows[i] = list.get(i).RequestToArray(i);
+		}
+		return rows;
+	}
 	private Object[][] getResRow() {
-		return null;
+		Object[][] rows = null;
+		Reserve res = new Reserve();
+		if(tfSearch.getText().equals("")) {
+			res.setBkName(null);
+		}else {
+			res.setBkName("%"+tfSearch.getText()+"%");
+		}
+		
+		if(cbkBig.getSelectedIndex() > 0) {
+			int bigIdx = cbkBig.getSelectedIndex();
+			int midIdx = cbkMiddle.getSelectedIndex();
+			if(cbkMiddle.getSelectedIndex() > 0) {
+				res.setLoca_num(bigListCategory.get(bigIdx-1).getNum() + midListCategory.get(midIdx-1).getNum()+"%");				
+			}else {
+				res.setLoca_num(bigListCategory.get(bigIdx-1).getNum() + "%");
+			}
+		}
+		List<Reserve> list = ReserveService.getInstance().selectCategoryByReserve(res);
+		rows = new Object[list.size()][];
+		for(int i=0;i<rows.length;i++){
+			rows[i] = list.get(i).ReserveToArray(i);
+		}
+		return rows;
+	}
+	private Object[] getReqColunmNames() {
+		return new String[] {"NO","도서명", "저자", "출판사", "출판년도", "isbn","신청일"};
 	}
 	private Object[] getResColunmNames() {
-		return new String[] {"NO","예약순서", "회원코드", "도서코드", "도서명", "저자", "isbn","예약날짜"};
+		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "isbn","예약날짜"};
 	}
 	private Object[] getHisColunmNames() {
 		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "대여일", "반납예정일", "반납일","연체일수"};
 	}
 	private Object[][] getHisRow() {
 		Object[][] rows = null;
-		List<History> list = HistoryService.getInstance().selectAllInhistory();
+		History his = new History();
+		if(tfSearch.getText().equals("")) {
+			his.setBkname(null);
+		}else {
+			his.setBkname("%"+tfSearch.getText()+"%");
+		}
+		
+		if(cbkBig.getSelectedIndex() > 0) {
+			int bigIdx = cbkBig.getSelectedIndex();
+			int midIdx = cbkMiddle.getSelectedIndex();
+			if(cbkMiddle.getSelectedIndex() > 0) {
+				his.setLoca_num(bigListCategory.get(bigIdx-1).getNum() + midListCategory.get(midIdx-1).getNum()+"%");				
+			}else {
+				his.setLoca_num(bigListCategory.get(bigIdx-1).getNum() + "%");
+			}
+		}
+		List<History> list = HistoryService.getInstance().selectCategoryByInhistory(his);
 		rows = new Object[list.size()][];
 		for(int i=0;i<rows.length;i++){
 			rows[i] = list.get(i).toHisAll(i);
 		}
 		return rows;
 	}
-	protected void itemStateChangedRdbtnReQ(ItemEvent e) {
-		if(e.getStateChange() == ItemEvent.SELECTED) {
-			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
-			table.setModel(model);
-			setAlignWidth();
+	
+	
+	public void PreferredWidth(int... width) {
+		TableColumnModel model1 = table.getColumnModel();
+		for (int i = 0; i < width.length; i++) {
+			model1.getColumn(i).setPreferredWidth(width[i]);
 		}
 	}
 	

@@ -11,6 +11,8 @@ public class Reserve {
 	private String bkcode;
 	private String isbn;
 	private Date resday;
+	private String bkName;
+	private String loca_num;
 	
 	public Reserve() {
 		// TODO Auto-generated constructor stub
@@ -49,6 +51,23 @@ public class Reserve {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+	
+	public String getBkName() {
+		return bkName;
+	}
+
+	public void setBkName(String bkName) {
+		this.bkName = bkName;
+	}
+
+	public String getLoca_num() {
+		return loca_num;
+	}
+
+	public void setLoca_num(String loca_num) {
+		this.loca_num = loca_num;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Reserve [re_no=%s, code=%s, bkcode=%s, isbn=%s]", re_no, code, bkcode, isbn);
@@ -59,5 +78,5 @@ public class Reserve {
 		Book book = BookService.getInstance().selectByIsbn(isbn);
 		return new Object[] {i+1, book.getBkname(), book.getAuthor(),
 				book.getPublish(), book.getPubyear(), isbn, sd.format(resday)};
-	}	
+	}
 }

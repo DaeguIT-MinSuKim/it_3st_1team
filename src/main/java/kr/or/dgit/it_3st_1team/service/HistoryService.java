@@ -6,6 +6,7 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.History;
 import kr.or.dgit.it_3st_1team.util.MyBatisSqlSessionFactory;
 
@@ -42,7 +43,7 @@ public class HistoryService {
 			return sqlSession.selectList(namespace + "selectInhistory", his);
 		}
 	}
-	
+	// 모든 반납 도서 목록 불러오기
 	public List<History> selectAllInhistory() {
 		log.debug("selectAllInhistory()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -50,4 +51,11 @@ public class HistoryService {
 		}
 	}
 	
+	// 분류별 반납 목록 불러오기
+	public List<History> selectCategoryByInhistory(History his) {
+		log.debug("selectCategoryByInhistory()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectCategoryByInhistory", his);
+		}
+	}	
 }
