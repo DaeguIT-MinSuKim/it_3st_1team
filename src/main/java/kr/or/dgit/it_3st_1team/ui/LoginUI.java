@@ -180,7 +180,6 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 	protected void actionPerformedBtnMngLogin(ActionEvent e) {
 		char[] pwchar = pwtf.getPassword();
 		String pw = new String(pwchar);
-		JOptionPane.showMessageDialog(null, pw);
 		EmployeeService service = new EmployeeService();
 		Employee emp = new Employee();
 		emp.setId(tfID.getText());

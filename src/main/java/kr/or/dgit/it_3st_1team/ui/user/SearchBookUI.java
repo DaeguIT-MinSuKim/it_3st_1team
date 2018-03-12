@@ -323,12 +323,10 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				book.setLocation(loca);
 				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
-				JOptionPane.showMessageDialog(null, "제목만");
 				rentableList = list;
 				loadDatas(list);
 				return;
 			}else {
-				JOptionPane.showMessageDialog(null, "없음");
 				List<Book> list = BookService.getInstance().selectBookStartAll();	//아무것도 입력안함
 				rentableList = list;
 				loadDatas(list);

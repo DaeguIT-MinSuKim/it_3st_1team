@@ -54,7 +54,8 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	private void initComponents() {
 		setTitle("도서 관리 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1420, 800);
+		setBounds(100, 100, 1400, 800);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
