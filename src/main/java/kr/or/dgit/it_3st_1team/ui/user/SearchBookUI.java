@@ -208,15 +208,15 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		return new String[] { "NO", "도서명", "저자", "출판사", "출판년도", "비치수/보유수", "대여가능여부" };
 	}
 
+
 	public void loadDatas(List<Book> list) {
 		List<Book> lists = new ArrayList<>();
-		for (Book b : list) {
-			if (b.getterRentable() == true) {
-				lists.add(b);
-			}
-		}
-
 		if (cblistview.isSelected()) {
+			for (Book b : list) {
+				if (b.isRentable().equals("대여가능")) {
+					lists.add(b);
+				}
+			}
 			NonEditableModel model = new NonEditableModel(getRow(lists), getColunmNames());
 			table.setModel(model);
 		} else {
@@ -357,8 +357,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			search = new SearchBookDetailUI();
 			search.setBounds(20, 120, 1080, 250);
 			search.setBookui(this);
-			panel_1.setBounds(10, 380, 1110, 600);
-			scrollPane.setBounds(0, 30, 1110, 570);
+			panel_1.setBounds(10, 380, 1110, 330);
+			scrollPane.setBounds(0, 30, 1110, 300);
 			add(search);
 			loadDatas(rentableList);
 			flag = 0;
