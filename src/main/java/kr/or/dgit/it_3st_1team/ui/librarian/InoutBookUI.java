@@ -496,9 +496,11 @@ public class InoutBookUI extends JPanel implements ActionListener, KeyListener {
 			tfBkCode.setText("");
 			setTakeinoutTable();
 			pTable.repaint();
-			if (list != null) {
+			try {
 				System.out.println(list);
 				JOptionPane.showMessageDialog(null, "회원코드" + list.get(0).getCode() + " 님께서 예약한 도서 입니다.");
+			}catch(IndexOutOfBoundsException e) {
+				e.getStackTrace();
 			}
 		}
 	}
