@@ -300,20 +300,20 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				book.setLocation(loca);
 				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
-					getFilterListData(book, "대분류+이름");
+					getFilterListData(book);
 					return;
 				}else {
-					rentableList = getFilterListData(book, "대분류만");
+					rentableList = getFilterListData(book);
 					return;
 				}
 			}else {	//중분류 있음
 				getCategory(book, loca, cate, num);
 				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
-					getFilterListData(book, "대분류+중분류+이름");
+					getFilterListData(book);
 					return;
 				}else {
-					rentableList = getFilterListData(book, "대분류+중분류");
+					rentableList = getFilterListData(book);
 					return;
 				}
 			}
@@ -350,9 +350,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		book.setLocation(loca);
 	}
 
-	private List<Book> getFilterListData(Book book, String msg) {
+	private List<Book> getFilterListData(Book book) {
 		List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류만
-		JOptionPane.showMessageDialog(null, msg);
 		loadDatas(list);
 		return list;
 	}
