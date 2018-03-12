@@ -359,8 +359,17 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			search.setBookui(this);
 			panel_1.setBounds(10, 380, 1110, 330);
 			scrollPane.setBounds(0, 30, 1110, 300);
-			add(search);
 			loadDatas(rentableList);
+			if (table.getRowCount() > 9) {
+				panel_1.setBounds(10, 380, 1110, 330);
+				scrollPane.setBounds(0, 30, 1110, 300);
+			} else {
+				int height = table.getRowHeight();
+				int count = table.getRowCount();
+				panel_1.setBounds(10, 380, 1140, height * (count + 2)+5);
+				scrollPane.setBounds(0, 30, 1110, height * (count + 1)+5);
+			}
+			add(search);
 			flag = 0;
 			repaint();
 		} else {
