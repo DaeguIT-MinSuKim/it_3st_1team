@@ -244,7 +244,6 @@ public class RequestBookUI extends JPanel implements ActionListener {
 	}
 
 	protected void actionPerformedBtnSave(ActionEvent e) {
-		System.out.println("actionPerformedBtnSave()");
 		if (tfBkname.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "도서명을 입력해주세요.");
 			tfBkname.requestFocus();
@@ -281,9 +280,13 @@ public class RequestBookUI extends JPanel implements ActionListener {
 		req.setPubyear(Integer.parseInt(tfpubyear.getText()));
 		req.setPublish(tfpublish.getText());
 		req.setCode(user.getCode());
-		RequestService sercive = new RequestService();
-		sercive.insertRequest(req);
-		JOptionPane.showMessageDialog(null, "도서신청이 완료되었습니다.");
+		RequestService service = new RequestService();
+		if(service.selectRequestByCodeIsbn(req)==null) {
+			service.insertRequest(req);
+			JOptionPane.showMessageDialog(null, "도서신청이 완료되었습니다.");
+		}else {
+			JOptionPane.showMessageDialog(null, "이미 신청한 도서입니다.");
+		}
 		resetfield();
 	}
 

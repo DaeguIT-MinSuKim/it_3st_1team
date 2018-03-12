@@ -20,6 +20,11 @@
 		select code, bkname, author, publish, pubyear, isbn, price, reqday from request
 	</select>
 	
+	<select id="selectRequestByCodeIsbn" parameterType="Request" resultMap="RequestResult">
+		select code, bkname, author, publish, pubyear, isbn, price, reqday from request 
+		where code = #{code} and isbn = #{isbn}
+	</select>
+	
 	<insert id="insertRequest" parameterType="Request">
 		insert into request(code, bkname, author, publish, pubyear, isbn, price, reqday) 
 		values(#{code},#{bkname},#{author},#{publish},#{pubyear},#{isbn},#{price},#{reqday})
