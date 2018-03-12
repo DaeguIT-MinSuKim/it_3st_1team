@@ -213,7 +213,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		List<Book> lists = new ArrayList<>();
 		if (cblistview.isSelected()) {
 			for (Book b : list) {
-				if (b.getterRentable() == true) {
+				if (b.isRentable().equals("대여가능")) {
 					lists.add(b);
 				}
 			}
@@ -358,12 +358,14 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			add(search);
 			panel_1.setBounds(10, 380, 1110, 330);
 			scrollPane.setBounds(0, 30, 1110, 300);
+			loadDatas(rentableList);
 			flag = 0;
 			repaint();
 		} else {
 			remove(search);
 			panel_1.setBounds(10, 120, 1110, 600);
 			scrollPane.setBounds(0, 30, 1110, 570);
+			loadDatas(rentableList);
 			repaint();
 			flag = 1;
 		}
