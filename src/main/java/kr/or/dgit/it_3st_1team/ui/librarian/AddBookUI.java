@@ -242,7 +242,11 @@ public class AddBookUI extends JFrame implements ActionListener, ItemListener {
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		Book book = new Book();
 		if(isEmpty()) {
-			book.setBkCode(tfcode.getText().substring(1, 19));	// 도서코드
+			if(tfcode.getText().length()>=19) {
+				book.setBkCode(tfcode.getText().substring(1, 19));	// 도서코드				
+			}else {
+				book.setBkCode(tfcode.getText());
+			}
 			System.out.println(book.getBkCode());
 			book.setBkname(tfname.getText());	// 도서명
 			book.setAuthor(tfauthor.getText());	// 저자

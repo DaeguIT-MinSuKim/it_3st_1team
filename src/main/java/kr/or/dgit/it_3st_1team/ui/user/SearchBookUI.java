@@ -91,8 +91,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		tfbookname = new JTextField();
 		tfbookname.addActionListener(this);
 		tfbookname.addMouseListener(this);
-		tfbookname
-				.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfbookname.setBorder(new CompoundBorder
+				(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfbookname.setText("책 제목을 입력해주세요.");
 		tfbookname.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfbookname.setBounds(370, 50, 500, 50);
@@ -147,8 +147,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 
 		List<Book> list = BookService.getInstance().selectBookStartAll();
+		isList = list;
 		for(Book b : list) {
-			isList.add(b);
 			rentableList.add(b);
 		}
 		loadDatas(list);
@@ -236,7 +236,6 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			panel_1.setBounds(panel_1.getX(), panel_1.getY(), 1110, height * (count + 2));
 			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, height * (count + 1));
 		}
-
 		cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(40, 400, 160, 150, 100, 130, 130);
@@ -300,10 +299,11 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				book.setLocation(loca);
 				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
-					getFilterListData(book);
+					isList = getFilterListData(book);
 					return;
 				}else {
 					rentableList = getFilterListData(book);
+					isList = rentableList;
 					return;
 				}
 			}else {	//중분류 있음
@@ -313,7 +313,9 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 					getFilterListData(book);
 					return;
 				}else {
+					
 					rentableList = getFilterListData(book);
+					isList = rentableList;
 					return;
 				}
 			}
@@ -324,15 +326,16 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				book.setBkname("%" + tfbookname.getText() + "%");
 				List<Book> list = BookService.getInstance().selectBookAll(book);
 				rentableList = list;
+				isList = rentableList;
 				loadDatas(list);
 				return;
 			}else {
 				List<Book> list = BookService.getInstance().selectBookStartAll();	//아무것도 입력안함
 				rentableList = list;
+				isList = rentableList;
 				loadDatas(list);
 				return;
 			}
-
 		}
 	}
 
@@ -350,6 +353,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 
 	private List<Book> getFilterListData(Book book) {
 		List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류만
+		rentableList = list;
+		isList = rentableList;
 		loadDatas(list);
 		return list;
 	}
@@ -371,6 +376,10 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			repaint();
 			flag = 1;
 		}
+		repaint();
+		revalidate();
+		scrollPane.repaint();
+		table.repaint();
 	}
 
 	public void itemStateChanged(ItemEvent e) {

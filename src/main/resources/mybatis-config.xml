@@ -43,5 +43,7 @@
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/TitleMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/HistoryMapper.xml"/>
 		<mapper resource="kr/or/dgit/it_3st_1team/mappers/ReserveMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/MonthChartMapper.xml"/>
+		<mapper resource="kr/or/dgit/it_3st_1team/mappers/CategoryChartMapper.xml"/>
 	</mappers>
 </configuration>
