@@ -318,6 +318,10 @@ public class JoinUI extends JFrame implements ActionListener {
 		}else if(tfMail.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.");
 			tfMail.requestFocus();
+		}else if(pw.length()<6) {
+			JOptionPane.showMessageDialog(null, ("6자리 이상 입력해주세요."));
+		}else if(tfId.getText().length()<4) {
+			JOptionPane.showMessageDialog(null, ("4자리 이상 입력해주세요."));
 		}else {
 			User user = new User();
 			int randomNum = (int) System.currentTimeMillis();
