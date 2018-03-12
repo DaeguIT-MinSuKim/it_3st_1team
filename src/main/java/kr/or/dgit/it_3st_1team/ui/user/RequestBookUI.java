@@ -244,7 +244,6 @@ public class RequestBookUI extends JPanel implements ActionListener {
 	}
 
 	protected void actionPerformedBtnSave(ActionEvent e) {
-		System.out.println("actionPerformedBtnSave()");
 		if (tfBkname.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "도서명을 입력해주세요.");
 			tfBkname.requestFocus();
@@ -261,35 +260,45 @@ public class RequestBookUI extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "출판년도를 입력해주세요.");
 			tfpubyear.requestFocus();
 			return;
+		} else if (isNumber(tfpubyear.getText()) == false) {
+			JOptionPane.showMessageDialog(null, "출판년도의 형식이 올바르지 않습니다. 예)2018");
+			tfpubyear.requestFocus();
+			return;
+		} else if (tfprice.getText().trim().isEmpty()) {
+			tfprice.setText("0");
+		} else if (isNumber(tfprice.getText()) == false) {
+			JOptionPane.showMessageDialog(null, "가격의 형식이 올바르지 않습니다. 예)19000");
+			tfprice.requestFocus();
+			return;
 		}
+
 		User user = StartUI.LOGINUSER;
 		Request req = new Request();
 		req.setAuthor(tfauthor.getText());
 		req.setBkname(tfBkname.getText());
 		req.setIsbn(tfisbn.getText());
+		req.setPrice(Integer.parseInt(tfprice.getText()));
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
 		sd.format(today);
 		req.setReqday(today);
-		
-		if(tfprice.getText().trim().isEmpty()) {
-			req.setPrice(0);
-		}else {
-			req.setPrice(Integer.parseInt(tfprice.getText()));
-		}
-		
 		req.setPubyear(Integer.parseInt(tfpubyear.getText()));
 		req.setPublish(tfpublish.getText());
 		req.setCode(user.getCode());
-		RequestService sercive = new RequestService();
-		sercive.insertRequest(req);
-		JOptionPane.showMessageDialog(null, "도서신청이 완료되었습니다.");
+		RequestService service = new RequestService();
+		if (service.selectRequestByCodeIsbn(req) == null) {
+			service.insertRequest(req);
+			JOptionPane.showMessageDialog(null, "도서신청이 완료되었습니다.");
+		} else {
+			JOptionPane.showMessageDialog(null, "이미 신청한 도서입니다.");
+		}
 		resetfield();
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		resetfield();
 	}
+
 	private void resetfield() {
 		tfBkname.setText("");
 		tfauthor.setText("");
@@ -299,4 +308,17 @@ public class RequestBookUI extends JPanel implements ActionListener {
 		tfprice.setText("");
 	}
 
+	public static boolean isNumber(String str) {
+		if (str == null || str.equals(""))
+			return false;
+
+		for (int i = 0; i < str.length(); i++) {
+			char ch = str.charAt(i);
+
+			if (ch < '0' || ch > '9') {
+				return false;
+			}
+		}
+		return true;
+	}
 }

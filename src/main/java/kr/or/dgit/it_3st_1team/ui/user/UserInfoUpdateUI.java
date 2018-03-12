@@ -430,7 +430,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
 				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
 			}else if(pw.length()<6) {
-				JOptionPane.showMessageDialog(null, ("6자리 이상 입력해주세요."));
+				JOptionPane.showMessageDialog(null, ("비밀번호 6자리 이상 입력해주세요."));
 			}else {
 				service.updateUser(user);
 				JOptionPane.showMessageDialog(null, ("비밀번호가 수정되었습니다."));	
@@ -447,7 +447,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 			if(pw.equals("") || pwc.equals("") || !(pw.equals(pwc))) {
 				JOptionPane.showMessageDialog(null, ("비밀번호를 확인해주세요."));
 			}else if(pw.length()<6) {
-				JOptionPane.showMessageDialog(null, ("6자리 이상 입력해주세요."));
+				JOptionPane.showMessageDialog(null, ("비밀번호 6자리 이상 입력해주세요."));
 			}else {
 				service.updateUser(selectUser);
 				JOptionPane.showMessageDialog(null, ("비밀번호가 수정되었습니다."));	

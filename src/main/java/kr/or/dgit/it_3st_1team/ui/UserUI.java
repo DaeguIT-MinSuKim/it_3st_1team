@@ -17,6 +17,8 @@ import kr.or.dgit.it_3st_1team.ui.user.HistoryUI;
 import kr.or.dgit.it_3st_1team.ui.user.RequestBookUI;
 import kr.or.dgit.it_3st_1team.ui.user.SearchBookUI;
 import kr.or.dgit.it_3st_1team.ui.user.UserInfoUpdateUI;
+import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class UserUI extends JPanel implements ActionListener {
@@ -101,11 +103,16 @@ public class UserUI extends JPanel implements ActionListener {
 		panel.add(label);
 		
 		show = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) show.getLayout();
+		flowLayout.setVgap(0);
+		flowLayout.setHgap(0);
+		show.setBorder(new EmptyBorder(0, 0, 0, 0));
 		show.setBackground(Color.WHITE);
 		show.setBounds(250, 0, 1150, 800);
 		add(show);
 		
 		SearchBookUI showpanel = new SearchBookUI();
+		showpanel.setBorder(new EmptyBorder(-5, 0, 0, 0));
 		showpanel.setBounds(250, 0, 1150, 800);
 		showpanel.setBackground(Color.WHITE);
 		changePanel(showpanel);

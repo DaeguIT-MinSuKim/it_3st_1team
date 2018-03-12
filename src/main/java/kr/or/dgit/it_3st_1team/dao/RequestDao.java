@@ -12,4 +12,5 @@ public interface RequestDao {
 	//select
 	List<Request> selectRequestByCode(Request req);	//회원당 신청도서리스트
 	List<Request> selectAllRequest();	//모든 회원의 신청도서리스트
+	List<Request> selectRequestByCodeIsbn(Request req);
 }

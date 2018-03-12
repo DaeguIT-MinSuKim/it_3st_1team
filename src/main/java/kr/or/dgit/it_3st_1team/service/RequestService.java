@@ -41,6 +41,13 @@ public class RequestService {
 		}
 	}
 	
+	public List<Request> selectRequestByCodeIsbn(Request req){
+		log.debug("selectRequestByCodeIsbn()");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectRequestByCodeIsbn", req);
+		}
+	}
+	
 	public List<Request> selectAllRequest(){
 		log.debug("selectAllRequest()");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {

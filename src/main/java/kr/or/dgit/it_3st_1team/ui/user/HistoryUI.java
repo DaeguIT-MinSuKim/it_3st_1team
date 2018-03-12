@@ -35,6 +35,7 @@ public class HistoryUI extends JPanel implements ActionListener {
 	private JRadioButton rdbtnin;
 	private JRadioButton rdbrequest;
 	private JRadioButton rdbreserve;
+	private JPanel pTableHistory;
 
 	public HistoryUI() {
 		initComponents();
@@ -44,17 +45,11 @@ public class HistoryUI extends JPanel implements ActionListener {
 		setBackground(Color.white);
 		setLayout(null);
 		
-		JPanel pTableHistory = new JPanel();
+		pTableHistory = new JPanel();
 		pTableHistory.setBackground(Color.WHITE);
-		pTableHistory.setBounds(20, 10, 1140, 542);
+		pTableHistory.setBounds(10, 10, 1140, 700);
 		add(pTableHistory);
 		pTableHistory.setLayout(null);
-				
-		JPanel pPage = new JPanel();
-		pPage.setBackground(Color.WHITE);
-		pPage.setBounds(5, 611, 1150, 80);
-		add(pPage);
-		pPage.setLayout(null);
 		
 		ButtonGroup group = new ButtonGroup();
 		
@@ -106,7 +101,7 @@ public class HistoryUI extends JPanel implements ActionListener {
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBackground(Color.WHITE);
-		scrollPane.setBounds(0, 35, 1110, 542);
+		scrollPane.setBounds(0, 35, 1100, 665);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		pTableHistory.add(scrollPane);
 		
@@ -166,14 +161,28 @@ public class HistoryUI extends JPanel implements ActionListener {
 	public void loadDatas(List<History> list) {
 		NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
 		table.setModel(model);
+		cutDownTableRow();
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(50,410,200,150,150,150,100,120);
 		invalidate();
 	}
+
+	private void cutDownTableRow() {
+		if (table.getRowCount() > 20) {
+			pTableHistory.setBounds(pTableHistory.getX(), pTableHistory.getY(), 1140, 700);
+			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, 655);
+		} else {
+			int height = table.getRowHeight();
+			int count = table.getRowCount();
+			pTableHistory.setBounds(pTableHistory.getX(), pTableHistory.getY(), 1140, height * (count + 2)+5);
+			scrollPane.setBounds(scrollPane.getX(), scrollPane.getY(), 1110, height * (count + 1)+5);
+		}
+	}
 	public void loadDatasHistory(List<History> list) {
 		NonEditableModel model = new NonEditableModel(getRow(list), getColunmNames());
 		table.setModel(model);
+		cutDownTableRow();
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(50,410,200,150,150,150,100,120);
@@ -182,6 +191,7 @@ public class HistoryUI extends JPanel implements ActionListener {
 	public void loadDatasRequest(List<Request> list) {
 		NonEditableModel model = new NonEditableModel(getRow2(list), getColunmNames());
 		table.setModel(model);
+		cutDownTableRow();
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(50,410,200,150,150,150,120);
@@ -190,6 +200,7 @@ public class HistoryUI extends JPanel implements ActionListener {
 	public void loadDatasReserve(List<Reserve> list) {
 		NonEditableModel model = new NonEditableModel(getRow3(list), getColunmNames());
 		table.setModel(model);
+		cutDownTableRow();
 		cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 		cellAlign(SwingConstants.LEFT, 1, 2);
 		PreferredWidth(50,410,200,150,150,150,120);
