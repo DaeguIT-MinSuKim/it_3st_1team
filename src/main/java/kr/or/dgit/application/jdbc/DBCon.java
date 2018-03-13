@@ -11,6 +11,7 @@ public class DBCon {
 	private static final DBCon instance = new DBCon(); // singletone pattern
 
 	private Connection connection;
+	private Properties properties;
 
 	public static DBCon getInstance() {
 		return instance;
@@ -34,6 +35,9 @@ public class DBCon {
 
 	public Connection getConnection() {
 		return connection;
+	}
+	public Properties getProperties() {
+		return properties;
 	}
 	
 	public void connectionClose() {
