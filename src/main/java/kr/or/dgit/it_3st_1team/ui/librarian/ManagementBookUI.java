@@ -402,27 +402,34 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		}
 	}
 	protected void actionPerformedBtnSearch(ActionEvent e) {
-		if(rdbtnOut.isSelected()) {
+		if(rdbtnOut.isSelected()) {	// 대여
 			NonEditableModel model = new NonEditableModel(getRow3(), getColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();
-		}else if(rdbtnAll.isSelected()) {
+		}else if(rdbtnAll.isSelected()) {	//모두 보기
 			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
 			table.setModel(model);
 			setAlignWidth();			
-		}else if(rdbtnIn.isSelected()) {
+		}else if(rdbtnIn.isSelected()) {	// 반납
 			NonEditableModel model = new NonEditableModel(getHisRow(),getHisColunmNames()); 
 			table.setModel(model);
-			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7,8);
-			cellAlign(SwingConstants.LEFT, 1, 2);
-			PreferredWidth(50,100,160,400,150,150,150,100,120);
+			cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6,7,8);
+			cellAlign(SwingConstants.LEFT, 2);
+			PreferredWidth(50,100,170,400,170,130,130,110,100);
 			invalidate();
-		}else if(rdbtnReserve.isSelected()) {
+		}else if(rdbtnReserve.isSelected()) {	// 예약
 			NonEditableModel model = new NonEditableModel(getResRow(), getResColunmNames()); 
 			table.setModel(model);
 			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 			cellAlign(SwingConstants.LEFT, 1, 2);
-			PreferredWidth(50,410,200,150,150,150,120);
+			PreferredWidth(50,410,200,150,150,150,100,120);
+			invalidate();
+		}else if(rdbtnReQ.isSelected()){
+			NonEditableModel model = new NonEditableModel(getReqRow(), getReqColunmNames()); 
+			table.setModel(model);
+			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
+			cellAlign(SwingConstants.LEFT, 1, 2);
+			PreferredWidth(50,410,200,150,150,150,100,120);
 			invalidate();
 		}else {
 			NonEditableModel model = new NonEditableModel(getRow2(), getColunmNames()); 
@@ -448,9 +455,9 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		if(e.getStateChange() == ItemEvent.SELECTED) {
 			NonEditableModel model = new NonEditableModel(getHisRow(), getHisColunmNames()); 
 			table.setModel(model);
-			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6,7,8);
-			cellAlign(SwingConstants.LEFT, 1, 2);
-			PreferredWidth(50,100,160,400,150,150,150,100,120);
+			cellAlign(SwingConstants.CENTER, 0, 1, 3, 4, 5, 6,7,8);
+			cellAlign(SwingConstants.LEFT, 2);
+			PreferredWidth(50,100,170,400,170,130,130,110,100);
 			invalidate();
 		}
 	}
@@ -460,7 +467,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			table.setModel(model);
 			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 			cellAlign(SwingConstants.LEFT, 1, 2);
-			PreferredWidth(50,410,200,150,150,150,120);
+			PreferredWidth(50,410,200,150,150,150,100);
 			invalidate();
 		}
 	}
@@ -470,7 +477,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 			table.setModel(model);
 			cellAlign(SwingConstants.CENTER, 0, 3, 4, 5, 6);
 			cellAlign(SwingConstants.LEFT, 1, 2);
-			PreferredWidth(50,410,200,150,150,150,120);
+			PreferredWidth(50,410,200,150,150,150,100);
 			invalidate();
 		}
 	}
@@ -514,7 +521,7 @@ public class ManagementBookUI extends JPanel implements ActionListener, ItemList
 		return new String[] {"NO","도서명", "저자", "출판사", "출판년도", "isbn","신청일"};
 	}
 	private Object[] getResColunmNames() {
-		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "isbn","예약날짜"};
+		return new String[] {"NO", "도서명", "저자", "출판사", "출판년도", "isbn","예약일"};
 	}
 	private Object[] getHisColunmNames() {
 		return new String[] {"NO", "회원코드", "도서코드", "도서명", "저자", "대여일", "반납예정일", "반납일","연체일수"};
