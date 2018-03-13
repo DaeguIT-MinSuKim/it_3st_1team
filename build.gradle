@@ -46,6 +46,9 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/org.jfree/jfreechart
 	compile group: 'org.jfree', name: 'jfreechart', version: '1.0.19'
+	
+	compile files('libs/db_book-1.0.0.jar')
+	compile files('libs/db_setting.jar')
     
 
     // Use JUnit test framework
@@ -64,3 +67,5 @@ jar {
     }
     dependsOn configurations.runtime// 실행 가능한jar 파일설정
 }
+
+

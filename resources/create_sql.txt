@@ -1,0 +1,167 @@
+-- 내 스키마
+DROP SCHEMA IF EXISTS bookmanagement;
+
+-- 내 스키마
+CREATE SCHEMA bookmanagement;
+
+USE bookmanagement;
+
+-- 회원
+CREATE TABLE users (
+	code     VARCHAR(20)  NOT NULL COMMENT '회원코드',
+	name     VARCHAR(20)  NOT NULL COMMENT '이름',
+	id       VARCHAR(20)  NOT NULL COMMENT '아이디',
+	pw       VARCHAR(50)  NOT NULL COMMENT '비밀번호',
+	tel      VARCHAR(20)  NULL     COMMENT '연락처',
+	email    VARCHAR(50)  NULL     COMMENT '메일',
+	zipcode  varchar(6)   null,
+	addr_id  VARCHAR(100) NULL     COMMENT '주소',
+	addr_de  VARCHAR(100) NULL     COMMENT '상세주소',
+	blacktf  BOOLEAN      NULL     COMMENT '블랙여부',
+	entryday DATE         NULL     COMMENT '가입일자',
+	freeday  DATE         NULL     COMMENT '대여가능날짜',
+	PRIMARY KEY (code)
+)
+COMMENT '회원';
+
+-- 직책
+CREATE TABLE title (
+	titleno INT(10)     NOT NULL COMMENT '직책코드',
+	name    VARCHAR(20) NULL     COMMENT '직책명',
+	power   VARCHAR(20) NULL     COMMENT '권한',
+	PRIMARY KEY (titleno)
+)
+COMMENT '직책';
+
+-- 사원
+CREATE TABLE employee (
+	code    VARCHAR(20)  NOT NULL COMMENT '사원코드',
+	name    VARCHAR(20)  NOT NULL COMMENT '이름',
+	id      VARCHAR(20)  NOT NULL COMMENT '아이디',
+	pw      VARCHAR(50)  NOT NULL COMMENT '비밀번호',
+	tel     VARCHAR(20)  NULL     COMMENT '연락처',
+	email   VARCHAR(50)  NULL     COMMENT '메일',
+	zipcode CHAR(6)      NULL     COMMENT '우편번호',
+	addr_id VARCHAR(100) NULL     COMMENT '주소',
+	addr_de VARCHAR(100) NULL     COMMENT '상세주소',
+	titleno INT(10)      NOT NULL COMMENT '직책코드',
+	PRIMARY KEY (code),
+	FOREIGN KEY (titleno) references title(titleno)
+)
+COMMENT '사원';
+
+-- 위치
+CREATE TABLE location (
+	loca_num     VARCHAR(6) NOT NULL COMMENT '분류번호',
+	loca_section VARCHAR(2) NOT NULL COMMENT '구역',
+	PRIMARY KEY (loca_num)
+)
+COMMENT '위치';
+
+-- 도서
+CREATE TABLE book (
+	bkcode   VARCHAR(20)  NOT NULL COMMENT '도서코드',
+	isbn     VARCHAR(20)  NULL     COMMENT 'ISBN',
+	rentable BOOLEAN      NULL     COMMENT '대여가능여부',
+	bkname   VARCHAR(100) NOT NULL COMMENT '도서명',
+	author   VARCHAR(50)  NOT NULL COMMENT '저자',
+	publish  VARCHAR(50)  NOT NULL COMMENT '출판사',
+	pubyear  INT(4)       NOT NULL COMMENT '출판년도',
+	info     LONGTEXT     NULL     COMMENT '도서정보',
+	loca_num VARCHAR(6)   NULL     COMMENT '분류번호',
+	PRIMARY KEY (bkcode),
+	FOREIGN KEY (loca_num) references location(loca_num)
+)
+COMMENT '도서';
+
+
+-- 출납
+CREATE TABLE takeinout (
+	inout_no  INT(10)     NOT NULL auto_increment COMMENT '번호',
+	code      VARCHAR(20) NOT NULL COMMENT '회원코드',
+	bkcode    VARCHAR(20) NOT NULL COMMENT '도서코드',
+	rentday   DATE        NULL     COMMENT '대여일',
+	isbn      VARCHAR(20) NULL     COMMENT 'isbn',
+	returnday DATE        NULL     COMMENT '반납예정일',
+	PRIMARY KEY (inout_no),
+	FOREIGN KEY (code) references users(code),
+	FOREIGN KEY (bkcode) references book(bkcode)
+)
+COMMENT '출납';
+
+
+
+-- 예약
+CREATE TABLE reserve (
+	re_no  INT(10)     NOT NULL auto_increment COMMENT '예약순서',
+	code   VARCHAR(20) NOT NULL COMMENT '회원코드',
+	bkcode VARCHAR(20) NOT NULL COMMENT '도서코드',
+	isbn   VARCHAR(20) NULL     COMMENT 'ISBN',
+	resday DATE        NULL  	COMMENT '예약일',
+	PRIMARY KEY (re_no),
+	FOREIGN KEY (code) references users(code),
+	FOREIGN KEY (bkcode) references book(bkcode)
+)
+COMMENT '예약';
+
+
+-- 도서분류
+CREATE TABLE category (
+	num       INT(3)      NOT NULL COMMENT '분류번호',
+	catename  VARCHAR(10) NULL     COMMENT '분류명',
+	catesize  CHAR(1)     NULL     COMMENT '크기',
+	parentnum INT(10)     NULL     COMMENT '상위카테고리',
+	PRIMARY KEY (num)
+)
+COMMENT '도서분류';
+
+
+
+
+
+-- 출납history
+CREATE TABLE history (
+	his_no     INT(100)    NOT NULL auto_increment COMMENT '번호',
+	code       VARCHAR(20) NOT NULL COMMENT '회원코드',
+	bkcode     VARCHAR(20) NOT NULL COMMENT '도서코드',
+	returnday  DATE        NULL     COMMENT '반납예정일',
+	rentday    DATE        NULL     COMMENT '대여일',
+	realreturn DATE        NULL     COMMENT '실반납일',
+	delay      INT(10)     NULL     COMMENT '연체일수',
+	PRIMARY KEY (his_no),
+	FOREIGN KEY (code) references users(code),
+	FOREIGN KEY (bkcode) references book(bkcode)	
+)
+COMMENT '출납history';
+
+
+-- 신청
+CREATE TABLE request (
+	code    VARCHAR(20)  NOT NULL COMMENT '회원코드',
+	bkname  VARCHAR(100) NOT NULL COMMENT '도서명',
+	author  VARCHAR(50)  NOT NULL COMMENT '저자',
+	publish VARCHAR(50)  NOT NULL COMMENT '출판사',
+	pubyear INT(4)       NOT NULL COMMENT '출판년도',
+	isbn    VARCHAR(20)  NULL     COMMENT 'ISBN',
+	price   INT(10)      NULL     COMMENT '가격',
+	reqday  DATE         NULL     COMMENT '신청일',
+	FOREIGN KEY (code) references users(code)
+)
+COMMENT '신청';
+
+
+-- 우편번호
+CREATE TABLE post (
+	zipcode         CHAR(5)     NULL COMMENT '우편번호',
+	sido            VARCHAR(20) NULL COMMENT '시도', 
+	sigungu         VARCHAR(20) NULL COMMENT '시군구',
+	doro            VARCHAR(80) NULL COMMENT '도로', 
+	build_num1      INT(5)      NULL COMMENT '건물번호1', 
+	build_num2      INT(5)      NULL COMMENT '건물번호2', 
+	bubjung_name    VARCHAR(20) NULL COMMENT '법정동',
+	ri              VARCHAR(20) NULL COMMENT '리', 
+	heangjeong_name VARCHAR(20) NULL COMMENT '행정이름', 
+	bunji_num1      INT(5)      NULL COMMENT '번지1', 
+	bunji_num2      INT(5)      NULL COMMENT '번지2'	
+)
+COMMENT '우편번호';

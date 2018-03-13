@@ -21,6 +21,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.dgit.db_setting.service.BackupService;
+import kr.or.dgit.db_setting.service.InitService;
+import kr.or.dgit.db_setting.service.LoadService;
 import kr.or.dgit.it_3st_1team.dto.Employee;
 import kr.or.dgit.it_3st_1team.dto.Phone;
 import kr.or.dgit.it_3st_1team.dto.Title;
@@ -52,6 +55,9 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private JScrollPane scrollPane;
 	private JButton btnUpdate;
 	private JButton btnCancel;
+	private JButton btnInit;
+	private JButton btnBackup;
+	private JButton btnLoad;
 
 	public EmployeeUI() {
 
@@ -223,26 +229,29 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnCancel.setBackground(new Color(94,94,94));
 		pNorth.add(btnCancel);
 		
-		JButton button = new JButton("초 기 화");
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		button.setBackground(new Color(94, 94, 94));
-		button.setBounds(60, 23, 310, 100);
-		pNorth.add(button);
+		btnInit = new JButton("초 기 화");
+		btnInit.addActionListener(this);
+		btnInit.setForeground(Color.WHITE);
+		btnInit.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnInit.setBackground(new Color(94, 94, 94));
+		btnInit.setBounds(60, 23, 310, 100);
+		pNorth.add(btnInit);
 		
-		JButton button_1 = new JButton("백 업");
-		button_1.setForeground(Color.WHITE);
-		button_1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		button_1.setBackground(new Color(94, 94, 94));
-		button_1.setBounds(60, 170, 310, 100);
-		pNorth.add(button_1);
+		btnBackup = new JButton("백 업");
+		btnBackup.addActionListener(this);
+		btnBackup.setForeground(Color.WHITE);
+		btnBackup.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnBackup.setBackground(new Color(94, 94, 94));
+		btnBackup.setBounds(60, 170, 310, 100);
+		pNorth.add(btnBackup);
 		
-		JButton button_2 = new JButton("복 원");
-		button_2.setForeground(Color.WHITE);
-		button_2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		button_2.setBackground(new Color(94, 94, 94));
-		button_2.setBounds(60, 309, 310, 100);
-		pNorth.add(button_2);
+		btnLoad = new JButton("복 원");
+		btnLoad.addActionListener(this);
+		btnLoad.setForeground(Color.WHITE);
+		btnLoad.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btnLoad.setBackground(new Color(94, 94, 94));
+		btnLoad.setBounds(60, 309, 310, 100);
+		pNorth.add(btnLoad);
 		
 		pTable = new JPanel();
 		pTable.setBackground(Color.WHITE);
@@ -304,6 +313,15 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnLoad) {
+			actionPerformedBtnLoad(e);
+		}
+		if (e.getSource() == btnBackup) {
+			actionPerformedBtnBackup(e);
+		}
+		if (e.getSource() == btnInit) {
+			actionPerformedBtnInit(e);
+		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
@@ -428,5 +446,15 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		tfZipCode.setText("");
 		tfAddr_de.setText("");
 		cbkTitle.setSelectedIndex(0);
+	}
+	protected void actionPerformedBtnInit(ActionEvent e) {		InitService.getInstance().service();
+		JOptionPane.showMessageDialog(null, "초기화 완료");
+	}
+	protected void actionPerformedBtnBackup(ActionEvent e) {
+		BackupService.getInstance().service();
+		JOptionPane.showMessageDialog(null, "백업 완료");
+	}
+	protected void actionPerformedBtnLoad(ActionEvent e) {		LoadService.getInstance().service();
+		JOptionPane.showMessageDialog(null, "복원 완료");
 	}
 }
