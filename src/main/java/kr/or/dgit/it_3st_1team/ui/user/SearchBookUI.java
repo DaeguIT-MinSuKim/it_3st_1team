@@ -89,8 +89,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		tfbookname = new JTextField();
 		tfbookname.addActionListener(this);
 		tfbookname.addMouseListener(this);
-		tfbookname.setBorder(new CompoundBorder
-				(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
+		tfbookname
+				.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tfbookname.setText("책 제목을 입력해주세요.");
 		tfbookname.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		tfbookname.setBounds(370, 50, 500, 50);
@@ -145,7 +145,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		lblListview.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 
 		List<Book> list = BookService.getInstance().selectBookStartAll();
-		for(Book b : list) {
+		for (Book b : list) {
 			rentableList.add(b);
 		}
 		loadDatas(list);
@@ -207,6 +207,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	public Object[] getColunmNames() {
 		return new String[] { "NO", "도서명", "저자", "출판사", "출판년도", "비치수/보유수", "대여가능여부" };
 	}
+
 
 	public void loadDatas(List<Book> list) {
 		List<Book> lists = new ArrayList<>();
@@ -280,40 +281,42 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 		Location loca = new Location();
 		Category cate = (Category) cbbbig.getSelectedItem();
 		String num = "";
-		
-		if (cbbbig.getSelectedIndex() > 0) {	//대분류 있음
+
+		if (cbbbig.getSelectedIndex() > 0) { // 대분류 있음
 			List<Category> biglist = CategoryService.getInstance().selectCategoryBig();
 			int cbnum = cbbbig.getSelectedIndex();
-			cate = biglist.get(cbnum-1);
+			cate = biglist.get(cbnum - 1);
 			num = CategoryService.getInstance().selectCateNum(cate);
-			if(num.equals("0")) {
-				num="000";
+			if (num.equals("0")) {
+				num = "000";
 			}
-			
-			if (cbbmid.getSelectedIndex() == 0) {	// 중분류 없음
+
+			if (cbbmid.getSelectedIndex() == 0) { // 중분류 없음
 				loca.setLoca_num("%" + num + "%");
 				book.setLocation(loca);
-				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
+				if (!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
-					getFilterListData(book);
 					return;
-				}else {
+				} else {
 					rentableList = getFilterListData(book);
 					return;
 				}
-			}else {	//중분류 있음
+			} else { // 중분류 있음
 				getCategory(book, loca, cate, num);
-				if(!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
+				if (!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {
 					book.setBkname("%" + tfbookname.getText() + "%");
 					getFilterListData(book);
 					return;
-				}else {
+				} else {
+
 					rentableList = getFilterListData(book);
 					return;
 				}
 			}
-		}else {
-			if (!(tfbookname.getText().trim().isEmpty())&& !(tfbookname.getText().equals("책 제목을 입력해주세요."))) {	// 책 제목만 검색했을 때
+		} else {
+			if (!(tfbookname.getText().trim().isEmpty()) && !(tfbookname.getText().equals("책 제목을 입력해주세요."))) { // 책 제목만
+																												// 검색했을
+																												// 때
 				loca.setLoca_num(null);
 				book.setLocation(loca);
 				book.setBkname("%" + tfbookname.getText() + "%");
@@ -321,8 +324,8 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 				rentableList = list;
 				loadDatas(list);
 				return;
-			}else {
-				List<Book> list = BookService.getInstance().selectBookStartAll();	//아무것도 입력안함
+			} else {
+				List<Book> list = BookService.getInstance().selectBookStartAll(); // 아무것도 입력안함
 				rentableList = list;
 				loadDatas(list);
 				return;
@@ -343,7 +346,7 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 
 	private List<Book> getFilterListData(Book book) {
-		List<Book> list = BookService.getInstance().selectBookAll(book);	//대분류만
+		List<Book> list = BookService.getInstance().selectBookAll(book); // 대분류만
 		rentableList = list;
 		loadDatas(list);
 		return list;
@@ -354,10 +357,19 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 			search = new SearchBookDetailUI();
 			search.setBounds(20, 120, 1080, 250);
 			search.setBookui(this);
-			add(search);
 			panel_1.setBounds(10, 380, 1110, 330);
 			scrollPane.setBounds(0, 30, 1110, 300);
 			loadDatas(rentableList);
+			if (table.getRowCount() > 9) {
+				panel_1.setBounds(10, 380, 1110, 330);
+				scrollPane.setBounds(0, 30, 1110, 300);
+			} else {
+				int height = table.getRowHeight();
+				int count = table.getRowCount();
+				panel_1.setBounds(10, 380, 1140, height * (count + 2)+5);
+				scrollPane.setBounds(0, 30, 1110, height * (count + 1)+5);
+			}
+			add(search);
 			flag = 0;
 			repaint();
 		} else {
@@ -436,7 +448,11 @@ public class SearchBookUI extends JPanel implements ActionListener, ItemListener
 	}
 
 	protected void itemStateChangedCblistview(ItemEvent e) {
-		loadDatas(rentableList);
+		if (cblistview.isSelected()) {
+			loadDatas(rentableList);
+		} else {
+			loadDatas(rentableList);
+		}
 	}
 
 	protected void mouseClickedTable(MouseEvent e) {
