@@ -1,167 +1,167 @@
--- ³» ½ºÅ°¸¶
+-- ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½
 DROP SCHEMA IF EXISTS bookmanagement;
 
--- ³» ½ºÅ°¸¶
+-- ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½
 CREATE SCHEMA bookmanagement;
 
 USE bookmanagement;
 
--- È¸¿ø
+-- È¸ï¿½ï¿½
 CREATE TABLE users (
-	code     VARCHAR(20)  NOT NULL COMMENT 'È¸¿øÄÚµå',
-	name     VARCHAR(20)  NOT NULL COMMENT 'ÀÌ¸§',
-	id       VARCHAR(20)  NOT NULL COMMENT '¾ÆÀÌµð',
-	pw       VARCHAR(50)  NOT NULL COMMENT 'ºñ¹Ð¹øÈ£',
-	tel      VARCHAR(20)  NULL     COMMENT '¿¬¶ôÃ³',
-	email    VARCHAR(50)  NULL     COMMENT '¸ÞÀÏ',
+	code     VARCHAR(20)  NOT NULL COMMENT 'È¸ï¿½ï¿½ï¿½Úµï¿½',
+	name     VARCHAR(20)  NOT NULL COMMENT 'ï¿½Ì¸ï¿½',
+	id       VARCHAR(20)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½Ìµï¿½',
+	pw       VARCHAR(50)  NOT NULL COMMENT 'ï¿½ï¿½Ð¹ï¿½È£',
+	tel      VARCHAR(20)  NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½Ã³',
+	email    VARCHAR(50)  NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½',
 	zipcode  varchar(6)   null,
-	addr_id  VARCHAR(100) NULL     COMMENT 'ÁÖ¼Ò',
-	addr_de  VARCHAR(100) NULL     COMMENT '»ó¼¼ÁÖ¼Ò',
-	blacktf  BOOLEAN      NULL     COMMENT 'ºí·¢¿©ºÎ',
-	entryday DATE         NULL     COMMENT '°¡ÀÔÀÏÀÚ',
-	freeday  DATE         NULL     COMMENT '´ë¿©°¡´É³¯Â¥',
+	addr_id  VARCHAR(100) NULL     COMMENT 'ï¿½Ö¼ï¿½',
+	addr_de  VARCHAR(100) NULL     COMMENT 'ï¿½ï¿½ï¿½Ö¼ï¿½',
+	blacktf  BOOLEAN      NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	entryday DATE         NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	freeday  DATE         NULL     COMMENT 'ï¿½ë¿©ï¿½ï¿½ï¿½É³ï¿½Â¥',
 	PRIMARY KEY (code)
 )
-COMMENT 'È¸¿ø';
+COMMENT 'È¸ï¿½ï¿½';
 
--- Á÷Ã¥
+-- ï¿½ï¿½Ã¥
 CREATE TABLE title (
-	titleno INT(10)     NOT NULL COMMENT 'Á÷Ã¥ÄÚµå',
-	name    VARCHAR(20) NULL     COMMENT 'Á÷Ã¥¸í',
-	power   VARCHAR(20) NULL     COMMENT '±ÇÇÑ',
+	titleno INT(10)     NOT NULL COMMENT 'ï¿½ï¿½Ã¥ï¿½Úµï¿½',
+	name    VARCHAR(20) NULL     COMMENT 'ï¿½ï¿½Ã¥ï¿½ï¿½',
+	power   VARCHAR(20) NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½',
 	PRIMARY KEY (titleno)
 )
-COMMENT 'Á÷Ã¥';
+COMMENT 'ï¿½ï¿½Ã¥';
 
--- »ç¿ø
+-- ï¿½ï¿½ï¿½
 CREATE TABLE employee (
-	code    VARCHAR(20)  NOT NULL COMMENT '»ç¿øÄÚµå',
-	name    VARCHAR(20)  NOT NULL COMMENT 'ÀÌ¸§',
-	id      VARCHAR(20)  NOT NULL COMMENT '¾ÆÀÌµð',
-	pw      VARCHAR(50)  NOT NULL COMMENT 'ºñ¹Ð¹øÈ£',
-	tel     VARCHAR(20)  NULL     COMMENT '¿¬¶ôÃ³',
-	email   VARCHAR(50)  NULL     COMMENT '¸ÞÀÏ',
-	zipcode CHAR(6)      NULL     COMMENT '¿ìÆí¹øÈ£',
-	addr_id VARCHAR(100) NULL     COMMENT 'ÁÖ¼Ò',
-	addr_de VARCHAR(100) NULL     COMMENT '»ó¼¼ÁÖ¼Ò',
-	titleno INT(10)      NOT NULL COMMENT 'Á÷Ã¥ÄÚµå',
+	code    VARCHAR(20)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½Úµï¿½',
+	name    VARCHAR(20)  NOT NULL COMMENT 'ï¿½Ì¸ï¿½',
+	id      VARCHAR(20)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½Ìµï¿½',
+	pw      VARCHAR(50)  NOT NULL COMMENT 'ï¿½ï¿½Ð¹ï¿½È£',
+	tel     VARCHAR(20)  NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½Ã³',
+	email   VARCHAR(50)  NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½',
+	zipcode CHAR(6)      NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½È£',
+	addr_id VARCHAR(100) NULL     COMMENT 'ï¿½Ö¼ï¿½',
+	addr_de VARCHAR(100) NULL     COMMENT 'ï¿½ï¿½ï¿½Ö¼ï¿½',
+	titleno INT(10)      NOT NULL COMMENT 'ï¿½ï¿½Ã¥ï¿½Úµï¿½',
 	PRIMARY KEY (code),
 	FOREIGN KEY (titleno) references title(titleno)
 )
-COMMENT '»ç¿ø';
+COMMENT 'ï¿½ï¿½ï¿½';
 
--- À§Ä¡
+-- ï¿½ï¿½Ä¡
 CREATE TABLE location (
-	loca_num     VARCHAR(6) NOT NULL COMMENT 'ºÐ·ù¹øÈ£',
-	loca_section VARCHAR(2) NOT NULL COMMENT '±¸¿ª',
+	loca_num     VARCHAR(6) NOT NULL COMMENT 'ï¿½Ð·ï¿½ï¿½ï¿½È£',
+	loca_section VARCHAR(2) NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½',
 	PRIMARY KEY (loca_num)
 )
-COMMENT 'À§Ä¡';
+COMMENT 'ï¿½ï¿½Ä¡';
 
--- µµ¼­
+-- ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE book (
-	bkcode   VARCHAR(20)  NOT NULL COMMENT 'µµ¼­ÄÚµå',
+	bkcode   VARCHAR(20)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½',
 	isbn     VARCHAR(20)  NULL     COMMENT 'ISBN',
-	rentable BOOLEAN      NULL     COMMENT '´ë¿©°¡´É¿©ºÎ',
-	bkname   VARCHAR(100) NOT NULL COMMENT 'µµ¼­¸í',
-	author   VARCHAR(50)  NOT NULL COMMENT 'ÀúÀÚ',
-	publish  VARCHAR(50)  NOT NULL COMMENT 'ÃâÆÇ»ç',
-	pubyear  INT(4)       NOT NULL COMMENT 'ÃâÆÇ³âµµ',
-	info     LONGTEXT     NULL     COMMENT 'µµ¼­Á¤º¸',
-	loca_num VARCHAR(6)   NULL     COMMENT 'ºÐ·ù¹øÈ£',
+	rentable BOOLEAN      NULL     COMMENT 'ï¿½ë¿©ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½',
+	bkname   VARCHAR(100) NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	author   VARCHAR(50)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½',
+	publish  VARCHAR(50)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½Ç»ï¿½',
+	pubyear  INT(4)       NOT NULL COMMENT 'ï¿½ï¿½ï¿½Ç³âµµ',
+	info     LONGTEXT     NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	loca_num VARCHAR(6)   NULL     COMMENT 'ï¿½Ð·ï¿½ï¿½ï¿½È£',
 	PRIMARY KEY (bkcode),
 	FOREIGN KEY (loca_num) references location(loca_num)
 )
-COMMENT 'µµ¼­';
+COMMENT 'ï¿½ï¿½ï¿½ï¿½';
 
 
--- Ãâ³³
+-- ï¿½â³³
 CREATE TABLE takeinout (
-	inout_no  INT(10)     NOT NULL auto_increment COMMENT '¹øÈ£',
-	code      VARCHAR(20) NOT NULL COMMENT 'È¸¿øÄÚµå',
-	bkcode    VARCHAR(20) NOT NULL COMMENT 'µµ¼­ÄÚµå',
-	rentday   DATE        NULL     COMMENT '´ë¿©ÀÏ',
+	inout_no  INT(10)     NOT NULL auto_increment COMMENT 'ï¿½ï¿½È£',
+	code      VARCHAR(20) NOT NULL COMMENT 'È¸ï¿½ï¿½ï¿½Úµï¿½',
+	bkcode    VARCHAR(20) NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½',
+	rentday   DATE        NULL     COMMENT 'ï¿½ë¿©ï¿½ï¿½',
 	isbn      VARCHAR(20) NULL     COMMENT 'isbn',
-	returnday DATE        NULL     COMMENT '¹Ý³³¿¹Á¤ÀÏ',
+	returnday DATE        NULL     COMMENT 'ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
 	PRIMARY KEY (inout_no),
 	FOREIGN KEY (code) references users(code),
 	FOREIGN KEY (bkcode) references book(bkcode)
 )
-COMMENT 'Ãâ³³';
+COMMENT 'ï¿½â³³';
 
 
 
--- ¿¹¾à
+-- ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE reserve (
-	re_no  INT(10)     NOT NULL auto_increment COMMENT '¿¹¾à¼ø¼­',
-	code   VARCHAR(20) NOT NULL COMMENT 'È¸¿øÄÚµå',
-	bkcode VARCHAR(20) NOT NULL COMMENT 'µµ¼­ÄÚµå',
+	re_no  INT(10)     NOT NULL auto_increment COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	code   VARCHAR(20) NOT NULL COMMENT 'È¸ï¿½ï¿½ï¿½Úµï¿½',
+	bkcode VARCHAR(20) NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½',
 	isbn   VARCHAR(20) NULL     COMMENT 'ISBN',
-	resday DATE        NULL  	COMMENT '¿¹¾àÀÏ',
+	resday DATE        NULL  	COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
 	PRIMARY KEY (re_no),
 	FOREIGN KEY (code) references users(code),
 	FOREIGN KEY (bkcode) references book(bkcode)
 )
-COMMENT '¿¹¾à';
+COMMENT 'ï¿½ï¿½ï¿½ï¿½';
 
 
--- µµ¼­ºÐ·ù
+-- ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½
 CREATE TABLE category (
-	num       INT(3)      NOT NULL COMMENT 'ºÐ·ù¹øÈ£',
-	catename  VARCHAR(10) NULL     COMMENT 'ºÐ·ù¸í',
-	catesize  CHAR(1)     NULL     COMMENT 'Å©±â',
-	parentnum INT(10)     NULL     COMMENT '»óÀ§Ä«Å×°í¸®',
+	num       INT(3)      NOT NULL COMMENT 'ï¿½Ð·ï¿½ï¿½ï¿½È£',
+	catename  VARCHAR(10) NULL     COMMENT 'ï¿½Ð·ï¿½ï¿½ï¿½',
+	catesize  CHAR(1)     NULL     COMMENT 'Å©ï¿½ï¿½',
+	parentnum INT(10)     NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½Ä«ï¿½×°ï¿½',
 	PRIMARY KEY (num)
 )
-COMMENT 'µµ¼­ºÐ·ù';
+COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½';
 
 
 
 
 
--- Ãâ³³history
+-- ï¿½â³³history
 CREATE TABLE history (
-	his_no     INT(100)    NOT NULL auto_increment COMMENT '¹øÈ£',
-	code       VARCHAR(20) NOT NULL COMMENT 'È¸¿øÄÚµå',
-	bkcode     VARCHAR(20) NOT NULL COMMENT 'µµ¼­ÄÚµå',
-	returnday  DATE        NULL     COMMENT '¹Ý³³¿¹Á¤ÀÏ',
-	rentday    DATE        NULL     COMMENT '´ë¿©ÀÏ',
-	realreturn DATE        NULL     COMMENT '½Ç¹Ý³³ÀÏ',
-	delay      INT(10)     NULL     COMMENT '¿¬Ã¼ÀÏ¼ö',
+	his_no     INT(100)    NOT NULL auto_increment COMMENT 'ï¿½ï¿½È£',
+	code       VARCHAR(20) NOT NULL COMMENT 'È¸ï¿½ï¿½ï¿½Úµï¿½',
+	bkcode     VARCHAR(20) NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½',
+	returnday  DATE        NULL     COMMENT 'ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	rentday    DATE        NULL     COMMENT 'ï¿½ë¿©ï¿½ï¿½',
+	realreturn DATE        NULL     COMMENT 'ï¿½Ç¹Ý³ï¿½ï¿½ï¿½',
+	delay      INT(10)     NULL     COMMENT 'ï¿½ï¿½Ã¼ï¿½Ï¼ï¿½',
 	PRIMARY KEY (his_no),
 	FOREIGN KEY (code) references users(code),
 	FOREIGN KEY (bkcode) references book(bkcode)	
 )
-COMMENT 'Ãâ³³history';
+COMMENT 'ï¿½â³³history';
 
 
--- ½ÅÃ»
+-- ï¿½ï¿½Ã»
 CREATE TABLE request (
-	code    VARCHAR(20)  NOT NULL COMMENT 'È¸¿øÄÚµå',
-	bkname  VARCHAR(100) NOT NULL COMMENT 'µµ¼­¸í',
-	author  VARCHAR(50)  NOT NULL COMMENT 'ÀúÀÚ',
-	publish VARCHAR(50)  NOT NULL COMMENT 'ÃâÆÇ»ç',
-	pubyear INT(4)       NOT NULL COMMENT 'ÃâÆÇ³âµµ',
+	code    VARCHAR(20)  NOT NULL COMMENT 'È¸ï¿½ï¿½ï¿½Úµï¿½',
+	bkname  VARCHAR(100) NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	author  VARCHAR(50)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½',
+	publish VARCHAR(50)  NOT NULL COMMENT 'ï¿½ï¿½ï¿½Ç»ï¿½',
+	pubyear INT(4)       NOT NULL COMMENT 'ï¿½ï¿½ï¿½Ç³âµµ',
 	isbn    VARCHAR(20)  NULL     COMMENT 'ISBN',
-	price   INT(10)      NULL     COMMENT '°¡°Ý',
-	reqday  DATE         NULL     COMMENT '½ÅÃ»ÀÏ',
+	price   INT(10)      NULL     COMMENT 'ï¿½ï¿½ï¿½ï¿½',
+	reqday  DATE         NULL     COMMENT 'ï¿½ï¿½Ã»ï¿½ï¿½',
 	FOREIGN KEY (code) references users(code)
 )
-COMMENT '½ÅÃ»';
+COMMENT 'ï¿½ï¿½Ã»';
 
 
--- ¿ìÆí¹øÈ£
+-- ï¿½ï¿½ï¿½ï¿½ï¿½È£
 CREATE TABLE post (
-	zipcode         CHAR(5)     NULL COMMENT '¿ìÆí¹øÈ£',
-	sido            VARCHAR(20) NULL COMMENT '½Ãµµ', 
-	sigungu         VARCHAR(20) NULL COMMENT '½Ã±º±¸',
-	doro            VARCHAR(80) NULL COMMENT 'µµ·Î', 
-	build_num1      INT(5)      NULL COMMENT '°Ç¹°¹øÈ£1', 
-	build_num2      INT(5)      NULL COMMENT '°Ç¹°¹øÈ£2', 
-	bubjung_name    VARCHAR(20) NULL COMMENT '¹ýÁ¤µ¿',
-	ri              VARCHAR(20) NULL COMMENT '¸®', 
-	heangjeong_name VARCHAR(20) NULL COMMENT 'ÇàÁ¤ÀÌ¸§', 
-	bunji_num1      INT(5)      NULL COMMENT '¹øÁö1', 
-	bunji_num2      INT(5)      NULL COMMENT '¹øÁö2'	
+	zipcode         CHAR(5)     NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½È£',
+	sido            VARCHAR(20) NULL COMMENT 'ï¿½Ãµï¿½', 
+	sigungu         VARCHAR(20) NULL COMMENT 'ï¿½Ã±ï¿½ï¿½ï¿½',
+	doro            VARCHAR(80) NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½', 
+	build_num1      INT(5)      NULL COMMENT 'ï¿½Ç¹ï¿½ï¿½ï¿½È£1', 
+	build_num2      INT(5)      NULL COMMENT 'ï¿½Ç¹ï¿½ï¿½ï¿½È£2', 
+	bubjung_name    VARCHAR(20) NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+	ri              VARCHAR(20) NULL COMMENT 'ï¿½ï¿½', 
+	heangjeong_name VARCHAR(20) NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½', 
+	bunji_num1      INT(5)      NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½1', 
+	bunji_num2      INT(5)      NULL COMMENT 'ï¿½ï¿½ï¿½ï¿½2'	
 )
-COMMENT '¿ìÆí¹øÈ£';
+COMMENT 'ï¿½ï¿½ï¿½ï¿½ï¿½È£';
