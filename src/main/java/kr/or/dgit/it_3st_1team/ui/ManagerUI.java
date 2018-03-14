@@ -32,6 +32,10 @@ public class ManagerUI extends JPanel implements ActionListener {
 	public Employee emp;
 	public JLabel lblname;
 	
+	public ManagerUI() {
+		initComponents();
+	}
+	
 	public ManagerUI(Employee emp) {
 		this.emp = emp;
 		initComponents();
