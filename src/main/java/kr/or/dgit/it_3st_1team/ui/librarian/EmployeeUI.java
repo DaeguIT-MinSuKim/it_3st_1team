@@ -185,10 +185,15 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		
 		cbkTitle = new JComboBox<>();
 		TitleService service = new TitleService();
-		List<Title> list = service.selectAllTitle();
-		list.add(0, new Title("직책"));
-		DefaultComboBoxModel<Title> model = new DefaultComboBoxModel<>(list.toArray(new Title[list.size()]));
-		cbkTitle.setModel(model);
+		try {
+			List<Title> list = service.selectAllTitle();
+			list.add(0, new Title("직책"));
+			DefaultComboBoxModel<Title> model = new DefaultComboBoxModel<>(list.toArray(new Title[list.size()]));
+			cbkTitle.setModel(model);
+			
+		}catch(Exception e) {
+			e.getStackTrace();
+		}
 		cbkTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		cbkTitle.setBounds(562, 337, 515, 30);
 		pNorth.add(cbkTitle);
@@ -292,11 +297,15 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	
 	private Object[][] getRow() {
 		Object[][] rows = null;
-		EmployeeService empService= new EmployeeService();
-		list = empService.selectEmployeeByAll();
-		rows = new Object[list.size()][];
-		for(int i=0;i<rows.length;i++){
-			rows[i] = list.get(i).toArray();
+		try {
+			EmployeeService empService= new EmployeeService();
+			list = empService.selectEmployeeByAll();
+			rows = new Object[list.size()][];
+			for(int i=0;i<rows.length;i++){
+				rows[i] = list.get(i).toArray();
+			}
+		}catch(Exception e) {
+			e.getStackTrace();
 		}
 		return rows;
 	}

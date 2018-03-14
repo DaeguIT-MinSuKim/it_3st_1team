@@ -27,6 +27,8 @@ public class InitService implements DaoService {
 
 	private void createTriggerOrProcedure() {
 		File f = new File(System.getProperty("user.dir") + "\\resources\\create_trigger_procedure.txt");
+		String dbName = (String) DBCon.getInstance().getProperties().get("dbname");
+		ExecuteSql.getInstance().execSQL("use " + dbName);
 		try (BufferedReader br = new BufferedReader(new FileReader(f));) {
 			StringBuilder sb = new StringBuilder();
 			String line = null;
@@ -56,6 +58,7 @@ public class InitService implements DaoService {
 					sb.append(line);
 				}
 				if (line.endsWith(";")) {
+					System.out.println(line+"아아아");
 					ExecuteSql.getInstance().execSQL(sb.toString());
 					sb.setLength(0);
 				}
