@@ -1,8 +1,0 @@
-1|배주현|juhyun|juhyun|011-1234-1234|juhyun@dgit.com|null|null|null|null|2018-02-13|null
-2|손나은|naeun|naeun|011-1234-1235|naeun@dgit.com|null|null|null|null|2018-02-13|null
-3|최수종|sujong|sujong|011-1234-1236|sujong@dgit.com|null|null|null|null|2018-02-10|null
-4|윤보미|bomi|bomi|011-1234-1114|bomi@dgit.com|null|null|null|null|2018-02-10|null
-5|조인성|insung|insung|011-1234-1846|insung@dgit.com|null|null|null|null|2018-02-12|null
-6|오세훈|sehun|sehun|011-1234-0915|sehun@dgit.com|null|null|null|null|2018-02-12|null
-7|김연아|yuna|yuna|011-1234-1236|yuna@dgit.com|null|null|null|null|2018-02-10|null
-8|박보검|bogum|bogum|011-1234-1123|bogum@dgit.com|null|null|null|null|2018-02-11|null

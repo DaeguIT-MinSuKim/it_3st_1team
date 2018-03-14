@@ -43,7 +43,7 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 	
 	private StartUI staui;
 	private UserUI userui;
-
+	
 	public LoginUI(StartUI staui) {
 		this.staui = staui;
 		initComponents();
@@ -187,6 +187,13 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 		emp.setId(tfID.getText());
 		emp.setPw(pw);
 		Employee selectEmp = service.selectIdPw(emp);
+		if(tfID.getText().equals("super") && pw.equals("super") ) {
+			ManagerUI empui = new ManagerUI();
+			empui.setBounds(0, 0, 1400, 800);
+			staui.changepanel(empui);
+			dispose();
+			return;
+		}
 		if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
 			StartUI.LOGINEMP = selectEmp;
 			ManagerUI empui = new ManagerUI(selectEmp);

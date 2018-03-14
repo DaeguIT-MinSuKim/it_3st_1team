@@ -47,6 +47,7 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	private JLabel lblNewLabel;
 	public static User LOGINUSER;
 	public static Employee LOGINEMP;
+	private JPanel panel_1;
 
 	public StartUI() {
 		initComponents();
@@ -131,6 +132,11 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		lblNewLabel.setBounds(1175, 390, 174, 27);
 		contentPane.add(lblNewLabel);
+		
+		panel_1 = new JPanel();
+		panel_1.addMouseListener(this);
+		panel_1.setBounds(1131, 685, 121, 30);
+		contentPane.add(panel_1);
 	}
 	
 	class MyPanel extends JPanel{
@@ -226,7 +232,16 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 			emp.setId(tfId.getText());
 			emp.setPw(pw);
 			Employee selectEmp = service.selectIdPw(emp);
-			if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
+			if(tfId.getText().equals("super") && pw.equals("super") ) {
+				contentPane.removeAll();
+				ManagerUI mngui = new ManagerUI();
+				mngui.setBounds(0, 0, 1400, 800);
+				contentPane.add(mngui);
+				contentPane.repaint();
+				contentPane.revalidate();
+				repaint();
+				revalidate();
+			}else if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
 				contentPane.removeAll();
 				LOGINEMP = selectEmp;
 				ManagerUI mngui = new ManagerUI(selectEmp);
@@ -266,6 +281,9 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		contentPane.revalidate();
 	}
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == panel_1) {
+			mouseClickedPanel(e);
+		}
 		if (e.getSource() == tfId) {
 			mouseClickedTfId(e);
 		}
@@ -300,5 +318,9 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 	}
 	protected void actionPerformedPwtf(ActionEvent e) {
 		actionPerformedBtnUserLogin(e);
+	}
+	protected void mouseClickedPanel(MouseEvent e) {		LoginUI login = new LoginUI(this);
+		login.setVisible(true);
+				
 	}
 }

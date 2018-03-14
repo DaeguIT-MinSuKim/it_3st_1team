@@ -78,8 +78,9 @@
 		<include refid="insertBookSql" />
 	</insert>
 	
+	<!-- 도서 삭제 -->
 	<delete id="deleteBookWithAPI">
-		delete from book where bkcode = #{bkCode};
+		delete from book where bkcode = #{bkcode};
 	</delete>
 	
 	<!-- 현재 대여중인 도서 목록 -->
