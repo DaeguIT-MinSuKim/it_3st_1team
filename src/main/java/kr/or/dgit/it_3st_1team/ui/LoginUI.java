@@ -50,6 +50,7 @@ public class LoginUI extends JFrame implements MouseListener, ActionListener, Fo
 	}
 	
 	private void initComponents() {
+		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(600, 300, 450, 300);
 		contentPane = new JPanel();
