@@ -2,6 +2,10 @@ package kr.or.dgit.it_3st_1team.ui.user;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,11 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import kr.or.dgit.it_3st_1team.dto.Book;
 import kr.or.dgit.it_3st_1team.dto.Reserve;
 import kr.or.dgit.it_3st_1team.dto.User;
 import kr.or.dgit.it_3st_1team.service.BookService;
@@ -22,12 +26,6 @@ import kr.or.dgit.it_3st_1team.service.TakeinoutService;
 import kr.or.dgit.it_3st_1team.ui.LoginUI;
 import kr.or.dgit.it_3st_1team.ui.StartUI;
 
-import javax.swing.JTextPane;
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
-
 @SuppressWarnings("serial")
 public class BookinfoUI extends JFrame implements ActionListener {
 	public JTextField tfBookcode;
@@ -35,7 +33,6 @@ public class BookinfoUI extends JFrame implements ActionListener {
 	public JTextField tfpublish;
 	public JTextField tfpubyear;
 	public JTextField tfisbn;
-	private JButton btnPrint;
 	private JPanel panel;
 	private JLabel lblbookname;
 	public JTextField tfBookname;
@@ -195,14 +192,6 @@ public class BookinfoUI extends JFrame implements ActionListener {
 		tpinfo.setBorder(new CompoundBorder(new LineBorder(new Color(192, 192, 192)), new EmptyBorder(0, 10, 0, 0)));
 		tpinfo.setBounds(115, 310, 668, 140);
 		panel.add(tpinfo);
-		
-		btnPrint = new JButton("출력");
-		btnPrint.setBackground(new Color(52,152,219));
-		btnPrint.setForeground(Color.WHITE);
-		btnPrint.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
-		btnPrint.setBounds(531, 270, 70, 30);
-		btnPrint.setBorder(null);
-		panel.add(btnPrint);
 		
 		btnreserve = new JButton("예약");
 		btnreserve.addActionListener(this);
