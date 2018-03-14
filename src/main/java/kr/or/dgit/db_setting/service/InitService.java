@@ -27,26 +27,22 @@ public class InitService implements DaoService {
 
 	private void createTriggerOrProcedure() {
 		File f = new File(System.getProperty("user.dir") + "\\resources\\create_trigger_procedure.txt");
-		String dbName = (String) DBCon.getInstance().getProperties().get("dbname");
-		ExecuteSql.getInstance().execSQL("use " + dbName);
-		if (!f.exists()) {
-			return;
-		}
 		try (BufferedReader br = new BufferedReader(new FileReader(f));) {
-			StringBuilder statement = new StringBuilder();
-			for (String line; (line = br.readLine()) != null;) {
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = br.readLine()) != null) {
 				if (!line.isEmpty() && !line.startsWith("--")) {
-					statement.append(line);
+					sb.append(line);
 				}
-				if (line.endsWith("END;")) {
-					ExecuteSql.getInstance().execSQL(statement.toString());
-					statement.setLength(0);
+				if (line.endsWith("end;")) {
+					ExecuteSql.getInstance().execSQL(sb.toString());
+					sb.setLength(0);
 				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 

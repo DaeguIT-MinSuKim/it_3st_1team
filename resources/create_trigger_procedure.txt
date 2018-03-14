@@ -1,22 +1,20 @@
 -- 출납 테이블 delete 시 history 에 update trigger
 
-create trigger tri_takeinout_after_delete_history
-after delete
-on bookmanagement.takeinout
-for each row
-begin
+create trigger bookmanagement.tri_takeinout_after_delete_history
+ after delete
+ on takeinout
+ for each row
+ begin
 	update history set realreturn = curdate(), delay = curdate() - realreturn where bkcode = old.bkcode and realreturn is null;  
-end;
-
+ end;
 
 -- 출납 테이블 insert 시 history 에 insert trigger
 
-create trigger tri_takeinout_after_insert_history
-after insert
-on bookmanagement.takeinout
-for each row
-begin
+ create trigger bookmanagement.tri_takeinout_after_insert_history
+ after insert
+ on takeinout
+ for each row
+ begin
 	insert into history(code,realreturn,delay,bkcode,returnday, rentday)
 	values(new.code,null,null,new.bkcode,new.returnday,new.rentday);
-end;
-
+ end;
