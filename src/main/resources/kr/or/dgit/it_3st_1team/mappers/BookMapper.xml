@@ -73,6 +73,7 @@
 	<select id="selectBookAll" parameterType="Book" resultMap="BookWithTakeinoutResult">
 		select bkcode, isbn, rentable, bkname, author, publish, pubyear, info, loca_num from book 
 		<include refid="whereSql"/>
+		GROUP BY isbn
 	</select>
 	
 	<!-- 보유수 찾기 -->
