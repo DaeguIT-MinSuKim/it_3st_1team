@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -30,9 +33,6 @@ import kr.or.dgit.it_3st_1team.dto.Title;
 import kr.or.dgit.it_3st_1team.service.EmployeeService;
 import kr.or.dgit.it_3st_1team.service.TitleService;
 import kr.or.dgit.it_3st_1team.ui.join.SearchAddrdetailUI;
-import javax.swing.ListSelectionModel;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class EmployeeUI extends JPanel implements ActionListener, MouseListener {
