@@ -69,7 +69,8 @@ public class ManageBookService {
 		log.debug("deleteBookWithAPI()");
 		int res = -1;
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			res = sqlSession.delete(namespace + "deleteBookWithAPI", book);
+			ManageBookDao bookDao = sqlSession.getMapper(ManageBookDao.class);
+			res = bookDao.deleteBookWithAPI(book);
 			sqlSession.commit();
 			return res;
 		}
