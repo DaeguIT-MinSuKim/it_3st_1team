@@ -263,6 +263,8 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		table.getColumnModel().getColumn(4).setPreferredWidth(150); //메일
 		table.getColumnModel().getColumn(5).setPreferredWidth(400); //주소
 		table.getColumnModel().getColumn(6).setPreferredWidth(100); //직책명
+		cellAlign(SwingConstants.CENTER, 0, 1, 6);
+		cellAlign(SwingConstants.LEFT, 2, 3, 4, 5);
 		scrollPane.setViewportView(table);
 	}
 	
