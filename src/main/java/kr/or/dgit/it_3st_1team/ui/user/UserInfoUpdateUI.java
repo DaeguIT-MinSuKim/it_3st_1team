@@ -252,7 +252,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		tfcode.setBounds(294, 75, 150, 30);
 		panel.add(tfcode);
 		
-		btnadd = new JButton("추가");
+		btnadd = new JButton("변  경");
 		btnadd.addActionListener(this);
 		btnadd.setForeground(new Color(64,64,64));
 		btnadd.setBorder(null);
@@ -260,7 +260,7 @@ public class UserInfoUpdateUI extends JPanel implements ActionListener {
 		btnadd.setBounds(460, 75, 97, 30);
 		panel.add(btnadd);
 		
-		btnsearch = new JButton("검색");
+		btnsearch = new JButton("검  색");
 		btnsearch.addActionListener(this);
 		btnsearch.setForeground(new Color(64,64,64));
 		btnsearch.setBorder(null);

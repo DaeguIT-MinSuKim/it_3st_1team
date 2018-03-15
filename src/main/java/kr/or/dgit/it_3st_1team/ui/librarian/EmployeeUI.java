@@ -72,42 +72,42 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		pNorth.setLayout(null);
 		
 		JLabel lblEmpNo = new JLabel("사 원 번 호");
-		lblEmpNo.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpNo.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblEmpNo.setBounds(246, 24, 105, 30);
 		pNorth.add(lblEmpNo);
 		
 		JLabel lblEmpName = new JLabel("이         름");
-		lblEmpName.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpName.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblEmpName.setBounds(246, 61, 105, 30);
 		pNorth.add(lblEmpName);
 		
 		JLabel lblEmpID = new JLabel("아   이   디");
-		lblEmpID.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpID.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblEmpID.setBounds(246, 100, 105, 30);
 		pNorth.add(lblEmpID);
 		
 		JLabel lblEmpTel = new JLabel("연   락   처");
-		lblEmpTel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpTel.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblEmpTel.setBounds(246, 141, 105, 30);
 		pNorth.add(lblEmpTel);
 		
 		JLabel lblEmpEmail = new JLabel("메         일");
-		lblEmpEmail.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpEmail.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblEmpEmail.setBounds(246, 181, 105, 30);
 		pNorth.add(lblEmpEmail);
 		
 		JLabel lblEmpAddr = new JLabel("주         소");
-		lblEmpAddr.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpAddr.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblEmpAddr.setBounds(246, 259, 105, 30);
 		pNorth.add(lblEmpAddr);
 		
 		JLabel lblEmpTitle = new JLabel("직         책");
-		lblEmpTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lblEmpTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		lblEmpTitle.setBounds(246, 341, 105, 30);
 		pNorth.add(lblEmpTitle);
 		
 		JLabel label = new JLabel("우 편 번 호");
-		label.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		label.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		label.setBounds(246, 219, 105, 30);
 		pNorth.add(label);
 		
@@ -238,7 +238,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		pTable.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 0, 1130, 390);
+		scrollPane.setBounds(0, 0, 1130, 390);
 		pTable.add(scrollPane);
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setFont(new Font("맑은 고딕", Font.BOLD, 16));
