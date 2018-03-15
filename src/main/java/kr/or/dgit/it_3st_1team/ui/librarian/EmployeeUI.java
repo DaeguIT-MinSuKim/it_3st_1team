@@ -55,8 +55,6 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private JScrollPane scrollPane;
 	private JButton btnUpdate;
 	private JButton btnCancel;
-	private JButton btnBackup;
-	private JButton btnLoad;
 
 	public EmployeeUI() {
 
@@ -75,102 +73,102 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		
 		JLabel lblEmpNo = new JLabel("사 원 번 호");
 		lblEmpNo.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblEmpNo.setBounds(432, 23, 105, 30);
+		lblEmpNo.setBounds(246, 24, 105, 30);
 		pNorth.add(lblEmpNo);
 		
 		JLabel lblEmpName = new JLabel("이         름");
 		lblEmpName.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblEmpName.setBounds(432, 60, 105, 30);
+		lblEmpName.setBounds(246, 61, 105, 30);
 		pNorth.add(lblEmpName);
 		
 		JLabel lblEmpID = new JLabel("아   이   디");
 		lblEmpID.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblEmpID.setBounds(432, 99, 105, 30);
+		lblEmpID.setBounds(246, 100, 105, 30);
 		pNorth.add(lblEmpID);
 		
 		JLabel lblEmpTel = new JLabel("연   락   처");
 		lblEmpTel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblEmpTel.setBounds(432, 140, 105, 30);
+		lblEmpTel.setBounds(246, 141, 105, 30);
 		pNorth.add(lblEmpTel);
 		
 		JLabel lblEmpEmail = new JLabel("메         일");
 		lblEmpEmail.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblEmpEmail.setBounds(432, 180, 105, 30);
+		lblEmpEmail.setBounds(246, 181, 105, 30);
 		pNorth.add(lblEmpEmail);
 		
 		JLabel lblEmpAddr = new JLabel("주         소");
 		lblEmpAddr.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblEmpAddr.setBounds(432, 258, 105, 30);
+		lblEmpAddr.setBounds(246, 259, 105, 30);
 		pNorth.add(lblEmpAddr);
 		
 		JLabel lblEmpTitle = new JLabel("직         책");
 		lblEmpTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		lblEmpTitle.setBounds(432, 340, 105, 30);
+		lblEmpTitle.setBounds(246, 341, 105, 30);
 		pNorth.add(lblEmpTitle);
 		
 		JLabel label = new JLabel("우 편 번 호");
 		label.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		label.setBounds(432, 218, 105, 30);
+		label.setBounds(246, 219, 105, 30);
 		pNorth.add(label);
 		
 		tfEmpNo = new JTextField();
 		tfEmpNo.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpNo.setBounds(562, 20, 515, 30);
+		tfEmpNo.setBounds(376, 21, 515, 30);
 		pNorth.add(tfEmpNo);
 		tfEmpNo.setColumns(10);
 		
 		tfEmpName = new JTextField();
 		tfEmpName.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpName.setBounds(562, 57, 515, 30);
+		tfEmpName.setBounds(376, 58, 515, 30);
 		pNorth.add(tfEmpName);
 		tfEmpName.setColumns(10);
 		
 		tfEmpID = new JTextField();
 		tfEmpID.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpID.setBounds(562, 96, 515, 30);
+		tfEmpID.setBounds(376, 97, 515, 30);
 		pNorth.add(tfEmpID);
 		tfEmpID.setColumns(10);
 		
 		tfEmpTel1 = new JTextField();
 		tfEmpTel1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpTel1.setBounds(562, 137, 90, 30);
+		tfEmpTel1.setBounds(376, 138, 90, 30);
 		pNorth.add(tfEmpTel1);
 		tfEmpTel1.setColumns(10);
 		
 		tfEmpTel2 = new JTextField();
 		tfEmpTel2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		tfEmpTel2.setColumns(10);
-		tfEmpTel2.setBounds(701, 137, 90, 30);
+		tfEmpTel2.setBounds(515, 138, 90, 30);
 		pNorth.add(tfEmpTel2);
 		
 		tfEmpTel3 = new JTextField();
 		tfEmpTel3.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		tfEmpTel3.setColumns(10);
-		tfEmpTel3.setBounds(843, 137, 90, 30);
+		tfEmpTel3.setBounds(657, 138, 90, 30);
 		pNorth.add(tfEmpTel3);
 		
 		tfEmpEmail = new JTextField();
 		tfEmpEmail.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfEmpEmail.setBounds(562, 177, 515, 30);
+		tfEmpEmail.setBounds(376, 178, 515, 30);
 		pNorth.add(tfEmpEmail);
 		tfEmpEmail.setColumns(10);
 		
 		tfZipCode = new JTextField();
 		tfZipCode.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		tfZipCode.setColumns(10);
-		tfZipCode.setBounds(562, 215, 370, 30);
+		tfZipCode.setBounds(376, 216, 370, 30);
 		pNorth.add(tfZipCode);
 		
 		tfAddr_id = new JTextField();
 		tfAddr_id.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		tfAddr_id.setBounds(562, 255, 515, 30);
+		tfAddr_id.setBounds(376, 256, 515, 30);
 		pNorth.add(tfAddr_id);
 		tfAddr_id.setColumns(10);
 		
 		tfAddr_de = new JTextField();
 		tfAddr_de.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		tfAddr_de.setColumns(10);
-		tfAddr_de.setBounds(562, 297, 515, 30);
+		tfAddr_de.setBounds(376, 298, 515, 30);
 		pNorth.add(tfAddr_de);
 		
 		btnSearchAddr = new JButton("주소찾기");
@@ -178,7 +176,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnSearchAddr.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnSearchAddr.setForeground(new Color(64,64,64));
 		btnSearchAddr.setBackground(new Color(190, 190, 190));
-		btnSearchAddr.setBounds(944, 215, 133, 30);
+		btnSearchAddr.setBounds(758, 216, 133, 30);
 		
 		pNorth.add(btnSearchAddr);
 		
@@ -194,25 +192,25 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 			e.getStackTrace();
 		}
 		cbkTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		cbkTitle.setBounds(562, 337, 515, 30);
+		cbkTitle.setBounds(376, 338, 515, 30);
 		pNorth.add(cbkTitle);
 		
 		JLabel lblBar1 = new JLabel("-");
 		lblBar1.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lblBar1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBar1.setBounds(649, 137, 57, 30);
+		lblBar1.setBounds(463, 138, 57, 30);
 		pNorth.add(lblBar1);
 		
 		JLabel lblBar2 = new JLabel("-");
 		lblBar2.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lblBar2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBar2.setBounds(789, 137, 57, 30);
+		lblBar2.setBounds(603, 138, 57, 30);
 		pNorth.add(lblBar2);
 		
 		btnAdd = new JButton("추  가");
 		btnAdd.addActionListener(this);
 		btnAdd.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnAdd.setBounds(594, 388, 90, 40);
+		btnAdd.setBounds(408, 389, 90, 40);
 		btnAdd.setForeground(Color.WHITE);
 		btnAdd.setBackground(new Color(94,94,94));
 		pNorth.add(btnAdd);
@@ -220,7 +218,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnUpdate = new JButton("수  정");
 		btnUpdate.addActionListener(this);
 		btnUpdate.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnUpdate.setBounds(774, 388, 90, 40);
+		btnUpdate.setBounds(588, 389, 90, 40);
 		btnUpdate.setForeground(Color.WHITE);
 		btnUpdate.setBackground(new Color(94,94,94));
 		pNorth.add(btnUpdate);
@@ -228,26 +226,10 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnCancel = new JButton("취  소");
 		btnCancel.addActionListener(this);
 		btnCancel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnCancel.setBounds(951, 388, 90, 40);
+		btnCancel.setBounds(765, 389, 90, 40);
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setBackground(new Color(94,94,94));
 		pNorth.add(btnCancel);
-		
-		btnBackup = new JButton("백 업");
-		btnBackup.addActionListener(this);
-		btnBackup.setForeground(Color.WHITE);
-		btnBackup.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnBackup.setBackground(new Color(94, 94, 94));
-		btnBackup.setBounds(60, 60, 310, 100);
-		pNorth.add(btnBackup);
-		
-		btnLoad = new JButton("복 원");
-		btnLoad.addActionListener(this);
-		btnLoad.setForeground(Color.WHITE);
-		btnLoad.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnLoad.setBackground(new Color(94, 94, 94));
-		btnLoad.setBounds(60, 258, 310, 100);
-		pNorth.add(btnLoad);
 		
 		pTable = new JPanel();
 		pTable.setBackground(Color.WHITE);
@@ -313,12 +295,6 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnLoad) {
-			actionPerformedBtnLoad(e);
-		}
-		if (e.getSource() == btnBackup) {
-			actionPerformedBtnBackup(e);
-		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
@@ -443,12 +419,5 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		tfZipCode.setText("");
 		tfAddr_de.setText("");
 		cbkTitle.setSelectedIndex(0);
-	}
-	protected void actionPerformedBtnBackup(ActionEvent e) {
-		BackupService.getInstance().service();
-		JOptionPane.showMessageDialog(null, "백업 완료");
-	}
-	protected void actionPerformedBtnLoad(ActionEvent e) {		LoadService.getInstance().service();
-		JOptionPane.showMessageDialog(null, "복원 완료");
 	}
 }
