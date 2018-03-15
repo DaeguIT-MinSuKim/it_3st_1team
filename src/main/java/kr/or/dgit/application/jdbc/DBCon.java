@@ -17,15 +17,11 @@ public class DBCon {
 		return instance;
 	}
 
-	private DBCon() { // singletone 패턴시 생성자 private 외부에서 접근금지
-		// String url = "jdbc:mysql://localhost:3306/erp_project";
-		// String user = "root";
-		// String password = "rootroot";
-
+	private DBCon() {
 		try {
-			// connection = DriverManager.getConnection(url, user, password);
 			LoadProperties pro = new LoadProperties();
 			properties = pro.getProperties();
+			System.out.println(properties+"dfdfadf");
 			connection = DriverManager.getConnection(properties.getProperty("url"), properties);
 		} catch (SQLException e) {
 			System.err.printf("%s = %s%n", e.getMessage(), e.getErrorCode());

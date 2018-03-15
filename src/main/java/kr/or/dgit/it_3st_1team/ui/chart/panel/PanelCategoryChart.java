@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.text.AttributedString;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -12,18 +11,10 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.labels.CategoryItemLabelGenerator;
-import org.jfree.chart.labels.ItemLabelAnchor;
-import org.jfree.chart.labels.ItemLabelPosition;
-import org.jfree.chart.labels.PieSectionLabelGenerator;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.TextAnchor;
 import org.jfree.util.Rotation;
 
 import kr.or.dgit.it_3st_1team.dto.CategoryChart;
@@ -73,7 +64,6 @@ public class PanelCategoryChart extends JPanel {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		CategoryChartService service = new CategoryChartService();
 		List<CategoryChart> list = service.selectCategoryByAllWithAPI();
-		
 		for(CategoryChart ca : list) {
 			switch(ca.getCate()) {
 			case "000":
