@@ -18,6 +18,7 @@ public class ExecuteSql {
 	
 	public void execSQL(String sql) {
 		Connection con = DBCon.getInstance().getConnection();
+		System.out.println(con);
 		try (PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

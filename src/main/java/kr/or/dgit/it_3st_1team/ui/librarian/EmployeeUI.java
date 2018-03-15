@@ -55,7 +55,6 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 	private JScrollPane scrollPane;
 	private JButton btnUpdate;
 	private JButton btnCancel;
-	private JButton btnInit;
 	private JButton btnBackup;
 	private JButton btnLoad;
 
@@ -234,20 +233,12 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnCancel.setBackground(new Color(94,94,94));
 		pNorth.add(btnCancel);
 		
-		btnInit = new JButton("초 기 화");
-		btnInit.addActionListener(this);
-		btnInit.setForeground(Color.WHITE);
-		btnInit.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btnInit.setBackground(new Color(94, 94, 94));
-		btnInit.setBounds(60, 23, 310, 100);
-		pNorth.add(btnInit);
-		
 		btnBackup = new JButton("백 업");
 		btnBackup.addActionListener(this);
 		btnBackup.setForeground(Color.WHITE);
 		btnBackup.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnBackup.setBackground(new Color(94, 94, 94));
-		btnBackup.setBounds(60, 170, 310, 100);
+		btnBackup.setBounds(60, 60, 310, 100);
 		pNorth.add(btnBackup);
 		
 		btnLoad = new JButton("복 원");
@@ -255,7 +246,7 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		btnLoad.setForeground(Color.WHITE);
 		btnLoad.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		btnLoad.setBackground(new Color(94, 94, 94));
-		btnLoad.setBounds(60, 309, 310, 100);
+		btnLoad.setBounds(60, 258, 310, 100);
 		pNorth.add(btnLoad);
 		
 		pTable = new JPanel();
@@ -327,9 +318,6 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		}
 		if (e.getSource() == btnBackup) {
 			actionPerformedBtnBackup(e);
-		}
-		if (e.getSource() == btnInit) {
-			actionPerformedBtnInit(e);
 		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
@@ -455,9 +443,6 @@ public class EmployeeUI extends JPanel implements ActionListener, MouseListener 
 		tfZipCode.setText("");
 		tfAddr_de.setText("");
 		cbkTitle.setSelectedIndex(0);
-	}
-	protected void actionPerformedBtnInit(ActionEvent e) {		InitService.getInstance().service();
-		JOptionPane.showMessageDialog(null, "초기화 완료");
 	}
 	protected void actionPerformedBtnBackup(ActionEvent e) {
 		BackupService.getInstance().service();
