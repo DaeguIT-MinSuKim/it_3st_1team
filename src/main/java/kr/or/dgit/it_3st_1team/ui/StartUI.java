@@ -229,9 +229,6 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 		EmployeeService service = new EmployeeService();
 		Employee emp = new Employee();
 		try {
-			emp.setId(tfId.getText());
-			emp.setPw(pw);
-			Employee selectEmp = service.selectIdPw(emp);
 			if(tfId.getText().equals("super") && pw.equals("super") ) {
 				contentPane.removeAll();
 				ManagerUI mngui = new ManagerUI();
@@ -241,7 +238,12 @@ public class StartUI extends JFrame implements ActionListener, MouseListener, Fo
 				contentPane.revalidate();
 				repaint();
 				revalidate();
-			}else if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
+				return;
+			}
+			emp.setId(tfId.getText());
+			emp.setPw(pw);
+			Employee selectEmp = service.selectIdPw(emp);
+			if(emp.getId().equals(selectEmp.getId()) && emp.getPw().equals(selectEmp.getPw())) {
 				contentPane.removeAll();
 				LOGINEMP = selectEmp;
 				ManagerUI mngui = new ManagerUI(selectEmp);
