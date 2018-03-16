@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -70,5 +72,17 @@ public class RequestServiceTest {
 	public void test4selectAllRequest() {
 		List<Request> list = service.selectAllRequest();
 		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void test5selectRequestByCodeIsbn() {
+		Request req = new Request();
+		req.setCode("6");
+		req.setIsbn("9788972838785");
+		if (service.selectRequestByCodeIsbn(req).size() == 0) {
+			System.out.println("도서신청이 완료되었습니다.");
+		} else {
+			System.out.println("이미 신청한 도서입니다.");
+		}
 	}
 }

@@ -286,7 +286,7 @@ public class RequestBookUI extends JPanel implements ActionListener {
 		req.setPublish(tfpublish.getText());
 		req.setCode(user.getCode());
 		RequestService service = new RequestService();
-		if (service.selectRequestByCodeIsbn(req) == null) {
+		if (service.selectRequestByCodeIsbn(req).size() == 0) {
 			service.insertRequest(req);
 			JOptionPane.showMessageDialog(null, "도서신청이 완료되었습니다.");
 		} else {
