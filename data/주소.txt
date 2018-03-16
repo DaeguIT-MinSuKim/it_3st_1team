@@ -1,4 +1,4 @@
-load data local infile 'D:/DataFiles/대구광역시.txt'
+load data local infile 'D:/DataFiles/daegu.txt'
 into table post
 character set 'utf8'
 fields terminated by'|'
